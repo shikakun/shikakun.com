@@ -1,0 +1,181 @@
+@use './variables';
+@use './functions';
+
+html {
+  color: variables.$color-text;
+  font-size: 100%;
+  font-family: variables.$font-stack-sans;
+  -webkit-tap-highlight-color: transparent;
+}
+
+$font-size-xxs: functions.font(xxs) !default;
+$font-size-xs: functions.font(xs) !default;
+$font-size-s: functions.font(s) !default;
+$font-size-m: functions.font(m) !default;
+$font-size-l: functions.font(l) !default;
+$font-size-xl: functions.font(xl) !default;
+$font-size-xxl: functions.font(xxl) !default;
+$font-size-xxxl: functions.font(xxxl) !default;
+
+$font-line-height-comfort-xxs: functions.line-height(comfort, xxs) !default;
+$font-line-height-comfort-xs: functions.line-height(comfort, xs) !default;
+$font-line-height-comfort-s: functions.line-height(comfort, s) !default;
+$font-line-height-comfort-m: functions.line-height(comfort, m) !default;
+$font-line-height-comfort-l: functions.line-height(comfort, l) !default;
+$font-line-height-comfort-xl: functions.line-height(comfort, xl) !default;
+$font-line-height-comfort-xxl: functions.line-height(comfort, xxl) !default;
+$font-line-height-comfort-xxxl: functions.line-height(comfort, xxxl) !default;
+
+$font-line-height-normal-xxs: functions.line-height(normal, xxs) !default;
+$font-line-height-normal-xs: functions.line-height(normal, xs) !default;
+$font-line-height-normal-s: functions.line-height(normal, s) !default;
+$font-line-height-normal-m: functions.line-height(normal, m) !default;
+$font-line-height-normal-l: functions.line-height(normal, l) !default;
+$font-line-height-normal-xl: functions.line-height(normal, xl) !default;
+$font-line-height-normal-xxl: functions.line-height(normal, xxl) !default;
+$font-line-height-normal-xxxl: functions.line-height(normal, xxxl) !default;
+
+$font-line-height-dense-xxs: functions.line-height(dense, xxs) !default;
+$font-line-height-dense-xs: functions.line-height(dense, xs) !default;
+$font-line-height-dense-s: functions.line-height(dense, s) !default;
+$font-line-height-dense-m: functions.line-height(dense, m) !default;
+$font-line-height-dense-l: functions.line-height(dense, l) !default;
+$font-line-height-dense-xl: functions.line-height(dense, xl) !default;
+$font-line-height-dense-xxl: functions.line-height(dense, xxl) !default;
+$font-line-height-dense-xxxl: functions.line-height(dense, xxxl) !default;
+
+@mixin text-style($size: m, $spacing: null) {
+  @if $size == xxs {
+    font-size: $font-size-xxs;
+  }
+
+  @else if $size == xs {
+    font-size: $font-size-xs;
+  }
+
+  @else if $size == s {
+    font-size: $font-size-s;
+  }
+
+  @else if $size == m {
+    font-size: $font-size-m;
+  }
+
+  @else if $size == l {
+    font-size: $font-size-l;
+  }
+
+  @else if $size == xl {
+    font-size: $font-size-xl;
+  }
+
+  @else if $size == xxl {
+    font-size: $font-size-xxl;
+  }
+
+  @else if $size == xxxl {
+    font-size: $font-size-xxxl;
+  }
+
+  @if $spacing == comfort {
+    @if $size == xxs {
+      line-height: $font-line-height-comfort-xxs;
+    }
+
+    @else if $size == xs {
+      line-height: $font-line-height-comfort-xs;
+    }
+
+    @else if $size == s {
+      line-height: $font-line-height-comfort-s;
+    }
+
+    @else if $size == m {
+      line-height: $font-line-height-comfort-m;
+    }
+
+    @else if $size == l {
+      line-height: $font-line-height-comfort-l;
+    }
+
+    @else if $size == xl {
+      line-height: $font-line-height-comfort-xl;
+    }
+
+    @else if $size == xxl {
+      line-height: $font-line-height-comfort-xxl;
+    }
+
+    @else if $size == xxxl {
+      line-height: $font-line-height-comfort-xxxl;
+    }
+  }
+
+  @else if $spacing == normal {
+    @if $size == xxs {
+      line-height: $font-line-height-normal-xxs;
+    }
+
+    @else if $size == xs {
+      line-height: $font-line-height-normal-xs;
+    }
+
+    @else if $size == s {
+      line-height: $font-line-height-normal-s;
+    }
+
+    @else if $size == m {
+      line-height: $font-line-height-normal-m;
+    }
+
+    @else if $size == l {
+      line-height: $font-line-height-normal-l;
+    }
+
+    @else if $size == xl {
+      line-height: $font-line-height-normal-xl;
+    }
+
+    @else if $size == xxl {
+      line-height: $font-line-height-normal-xxl;
+    }
+
+    @else if $size == xxxl {
+      line-height: $font-line-height-normal-xxxl;
+    }
+  }
+
+  @else if $spacing == dense {
+    @if $size == xxs {
+      line-height: $font-line-height-dense-xxs;
+    }
+
+    @else if $size == xs {
+      line-height: $font-line-height-dense-xs;
+    }
+
+    @else if $size == s {
+      line-height: $font-line-height-dense-s;
+    }
+
+    @else if $size == m {
+      line-height: $font-line-height-dense-m;
+    }
+
+    @else if $size == l {
+      line-height: $font-line-height-dense-l;
+    }
+
+    @else if $size == xl {
+      line-height: $font-line-height-dense-xl;
+    }
+
+    @else if $size == xxl {
+      line-height: $font-line-height-dense-xxl;
+    }
+
+    @else if $size == xxxl {
+      line-height: $font-line-height-dense-xxxl;
+    }
+  }
+}

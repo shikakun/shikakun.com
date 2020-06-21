@@ -1,0 +1,52 @@
+@use './variables';
+
+// Responsive setting
+// Based on this
+// https://medium.freecodecamp.org/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862
+@mixin mq($range) {
+  @if $range == xxs {
+    @media (max-width: #{variables.$mq-boundary-xs - 1px}) {
+      @content;
+    }
+  } @else if $range == s-up {
+    @media (min-width: variables.$mq-boundary-xs) {
+      @content;
+    }
+  } @else if $range == m-up {
+    @media (min-width: variables.$mq-boundary-s) {
+      @content;
+    }
+  } @else if $range == m-down {
+    @media (max-width: variables.$mq-boundary-s - 1px) {
+      @content;
+    }
+  } @else if $range == l-up {
+    @media (min-width: variables.$mq-boundary-m) {
+      @content;
+    }
+  } @else if $range == l-down {
+    @media (max-width: variables.$mq-boundary-m - 1px) {
+      @content;
+    }
+  } @else if $range == xl-up {
+    @media (min-width: variables.$mq-boundary-l) {
+      @content;
+    }
+  } @else if $range == xxl-up {
+    @media (min-width: variables.$mq-boundary-xl) {
+      @content;
+    }
+  } @else if $range == xxxl-up {
+    @media (min-width: variables.$mq-boundary-xxl) {
+      @content;
+    }
+  } @else if $range == xxxxl-up {
+    @media (min-width: variables.$mq-boundary-xxxl) {
+      @content;
+    }
+  } @else if $range == xxxxxl-up {
+    @media (min-width: variables.$mq-boundary-xxxxl) {
+      @content;
+    }
+  }
+}

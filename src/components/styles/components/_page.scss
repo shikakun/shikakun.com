@@ -1,0 +1,63 @@
+@use '../variables';
+@use '../mixins';
+@use '../functions';
+@use '../typography';
+
+.page__header {
+  margin-bottom: functions.spacing(xxxxl);
+}
+
+.page__title {
+  margin: 0;
+  font-weight: normal;
+  @include typography.text-style(m, normal);
+}
+
+.page__date {
+  display: block;
+  margin-top: functions.spacing(s);
+  color: variables.$color-text-secondary;
+  @include typography.text-style(m, normal);
+}
+
+.page__content {
+  @include typography.text-style(m, comfort);
+
+  a {
+    color: inherit;
+    text-decoration: none;
+
+    &:hover {
+      border-bottom: 2px solid currentColor;
+    }
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 2em;
+    font-weight: normal;
+
+    &:first-child {
+      margin-top: 1em;
+    }
+  }
+
+  p {
+    text-align: justify;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
+    margin: functions.spacing(xl) 0;
+    border: variables.$border-size solid variables.$color-border;
+  }
+}
+
+.page__tag {
+  margin-top: functions.spacing(xxl);
+}

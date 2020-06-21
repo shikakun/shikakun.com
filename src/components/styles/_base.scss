@@ -1,0 +1,8 @@
+@use './variables';
+@use './mixins';
+@use './functions';
+
+body {
+  margin: 0;
+  background: variables.$color-background;
+}

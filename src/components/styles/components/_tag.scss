@@ -1,0 +1,31 @@
+@use '../variables';
+@use '../mixins';
+@use '../functions';
+@use '../typography';
+
+.tag__list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0;
+  margin: 0 - functions.spacing(s);
+  list-style: none;
+}
+
+.tag__item {
+  display: block;
+  white-space: nowrap;
+  padding: functions.spacing(s);
+  margin: 0;
+}
+
+.tag__link {
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  @include typography.text-style(m, normal);
+
+  &:hover {
+    border-color: currentColor;
+  }
+}
+

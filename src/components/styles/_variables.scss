@@ -1,0 +1,110 @@
+@use './colors';
+@use './constants';
+
+$color-text: colors.palette(black, 1000) !default;
+$color-text-secondary: colors.palette(gray, 600) !default;
+$color-text-placeholder: colors.palette(gray, 400) !default;
+
+$color-background: colors.palette(white, 1000);
+
+$color-border: colors.palette(gray, 400) !default;
+
+// Break points
+// https://medium.freecodecamp.org/the-100-correct-way-to-do-css-breakpoints-88d6a5ba1862
+$mq-boundary-xxs: 330px !default; // Mobile S
+$mq-boundary-xs: 370px !default; // Mobile M
+$mq-boundary-s: 600px !default; // Mobile L
+$mq-boundary-m: 800px !default; // Tablet
+$mq-boundary-l: 1100px !default; // Laptop
+$mq-boundary-xl: 1400px !default; // Laptop L
+$mq-boundary-xxl: 1700px !default;
+$mq-boundary-xxxl: 2000px !default;
+$mq-boundary-xxxxl: 2300px !default;
+
+// Spacing sizes
+$spacing-unit: 0.5rem !default;
+$spacing-size: (
+  xs: ($spacing-unit / 2),
+  s: ($spacing-unit * nth(constants.$fibonacci-numbers, 1)),
+  m: ($spacing-unit * nth(constants.$fibonacci-numbers, 2)),
+  l: ($spacing-unit * nth(constants.$fibonacci-numbers, 3)),
+  xl: ($spacing-unit * nth(constants.$fibonacci-numbers, 4)),
+  xxl: ($spacing-unit * nth(constants.$fibonacci-numbers, 5)),
+  xxxl: ($spacing-unit * nth(constants.$fibonacci-numbers, 6)),
+  xxxxl: ($spacing-unit * nth(constants.$fibonacci-numbers, 7))
+);
+
+// Element sizes
+$button-unit: 1rem !default;
+$button-size: (
+  s: ($button-unit * nth(constants.$fibonacci-numbers, 2)),
+  m: ($button-unit * nth(constants.$fibonacci-numbers, 3)),
+  l: ($button-unit * nth(constants.$fibonacci-numbers, 4))
+);
+
+// Border radius sizes
+$radius-unit: 0.125rem !default;
+$radius-size: (
+  s: ($radius-unit * nth(constants.$fibonacci-numbers, 1)),
+  m: ($radius-unit * nth(constants.$fibonacci-numbers, 2)),
+  l: ($radius-unit * nth(constants.$fibonacci-numbers, 3)),
+  xl: ($radius-unit * nth(constants.$fibonacci-numbers, 4))
+);
+
+// Font and line height sizes
+// https://pages.git.pepabo.com/design/typographic-scale/
+$font-size: (
+  xxs: 11,
+  xs: 12,
+  s: 14,
+  m: 16,
+  l: 18,
+  xl: 21,
+  xxl: 26,
+  xxxl: 32
+);
+$line-height-size: (
+  comfort: (
+    xxs: 20,
+    xs: 24,
+    s: 28,
+    m: 28,
+    l: 32,
+    xl: 40,
+    xxl: 48,
+    xxxl: 56
+  ),
+  normal: (
+    xxs: 20,
+    xs: 20,
+    s: 24,
+    m: 24,
+    l: 28,
+    xl: 32,
+    xxl: 40,
+    xxxl: 40
+  ),
+  dense: (
+    xxs: 16,
+    xs: 16,
+    s: 20,
+    m: 20,
+    l: 24,
+    xl: 28,
+    xxl: 36,
+    xxxl: 40
+  )
+);
+
+// Border size
+$border-size: 0.0625rem !default;// 0.0625rem = 1px
+
+// Transition durations
+$transition-duration-short: 0.15s;
+$transition-duration-long: 0.3s;
+
+// Typography
+$font-family-sans-latin: roboto;
+$font-family-sans-ja: ryo-gothic-plusn;
+$font-family-ui: -apple-system, BlinkMacSystemFont, 'Lucida Grande', Helvetica, Arial;
+$font-stack-sans: $font-family-sans-latin, $font-family-sans-ja, $font-family-ui, sans-serif;

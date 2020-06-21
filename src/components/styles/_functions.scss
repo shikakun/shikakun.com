@@ -1,0 +1,27 @@
+@use './variables';
+
+@function px2rem($px) {
+  $base-size: 16;
+
+  @return ($px / $base-size) * 1rem;
+}
+
+@function spacing($level: m) {
+  @return map-get(variables.$spacing-size, $level);
+}
+
+@function button($level: m) {
+  @return map-get(variables.$button-size, $level);
+}
+
+@function radius($level: m) {
+  @return map-get(variables.$radius-size, $level);
+}
+
+@function font($level: m) {
+  @return px2rem(map-get(variables.$font-size, $level));
+}
+
+@function line-height($spacing, $level: m) {
+  @return px2rem(map-get(map-get(variables.$line-height-size, $spacing), $level));
+}

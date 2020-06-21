@@ -1,0 +1,30 @@
+@use '../variables';
+@use '../mixins';
+@use '../functions';
+@use '../typography';
+
+.footer {
+  padding: functions.spacing(l) 0;
+  margin-top: functions.spacing(xxxxl);
+}
+
+.footer__content {
+  display: flex;
+  align-items: center;
+}
+
+.footer__shikakun {
+  width: 3rem;
+  margin-right: functions.spacing(m);
+
+  img {
+    display: block;
+    width: 100%;
+    border-radius: 100%;
+  }
+}
+
+.footer__nav {
+  flex: 1;
+  min-width: 0;
+}

@@ -1,0 +1,50 @@
+@use '../variables';
+@use '../mixins';
+@use '../functions';
+@use '../typography';
+
+.entry__link {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+}
+
+.entry__media {
+  margin-bottom: functions.spacing(xs);
+}
+
+.entry__title {
+  @include typography.text-style(m, normal);
+}
+
+.entry__date {
+  color: variables.$color-text-secondary;
+  @include typography.text-style(m, normal);
+}
+
+.entry-list {
+  display: grid;
+  gap: functions.spacing(l);
+  grid-template-columns: 1fr;
+  @include mixins.mq(m-up) {
+    grid-template-columns: 1fr 1fr;
+  }
+  @include mixins.mq(l-up) {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  @include mixins.mq(xl-up) {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  @include mixins.mq(xxl-up) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+  }
+  @include mixins.mq(xxxl-up) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  @include mixins.mq(xxxxl-up) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+  @include mixins.mq(xxxxxl-up) {
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+  }
+}

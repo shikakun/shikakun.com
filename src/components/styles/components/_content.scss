@@ -1,0 +1,16 @@
+@use '../variables';
+@use '../mixins';
+@use '../functions';
+
+.content {
+  padding: 0 functions.spacing(m);
+  margin: 0 auto 0 0;
+  max-width: 60rem;
+  @include mixins.mq(l-up) {
+    padding: 0 functions.spacing(l);
+  }
+
+  &.-full {
+    max-width: 100%;
+  }
+}
