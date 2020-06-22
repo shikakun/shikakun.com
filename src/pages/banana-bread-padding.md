@@ -28,3 +28,27 @@ tags:
 
 詩を朗読する動画をYouTubeへアップロードしています。  
 https://www.youtube.com/channel/UCvZE7S5ORGmsV3PuAkrgg2w
+
+月300円でスポンサーを募集し、動画の最後で名前を読み上げました。  
+
+バナナブレッドのパディングは、  
+メーン会場  
+hitode909  
+shirtskirt  
+にゃんこ  
+@tanibeta  
+amacou  
+じょ  
+あずま  
+ujikawa  
+大切なものを、もっと大切に。あなたのマイスター  
+アラサーエンジニアのウキウキスキャンダル暴き  
+sizucca  
+せんとくん  
+moxus  
+katooonline  
+DJ薄着  
+june29  
+ナガタビデオ  
+akwkm  
+の提供で、お送りしました。（2020年3月時点）

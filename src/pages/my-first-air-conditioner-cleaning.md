@@ -3,7 +3,7 @@ templateKey: entry-post
 title: はじめてのエアコンクリーニング
 date: 2018-12-14T00:00:00.000Z
 featuredpost: false
-featuredimage: /images/my-first-air-conditioner-cleaning.png
+featuredimage: /images/my-first-air-conditioner-cleaning.jpg
 description: ふつう、呼吸しているだけで、自分が生きていると実感することはむずかしい。すごくおいしいものを食べたとか、大好きな人と手をつないだとか、生きていることがすばらしいと思えたとき、あるいは、その反対に生きていることが脅かされたとき、輪郭があらわれる。それ以外の時間だって、というよりも生きているほとんどの時間は、事件なんか起こらないのに、あるいは、事件が起こっていたとしても気がつかないのに、それでも、おなじように息を吸って、吐いているのに。
 tags:
   - text
@@ -18,9 +18,9 @@ tags:
 
 ぜんぜんちがう仕事をしていたとしても、家族がいてもいなくても、恋人がいてもいなくても、男でも女でも、あるいはそうでなくても。そのことを、エアコンクリーニングは教えてくれる。
 
-![](/images/my-first-air-conditioner-cleaning-002.jpg)
+![](/images/my-first-air-conditioner-cleaning.jpg)
 
-![](/images/my-first-air-conditioner-cleaning-003.jpg)
+![](/images/my-first-air-conditioner-cleaning-002.jpg)
 
 YOURMYSTARのメディア「YOURMYSTAR STYLE」の記事の取材で自宅のエアコンをクリーニングしていただき、その様子を動画に収めてYouTubeで公開したほか、エアコンクリーニングの詩を書きました。  
 https://yourmystar.jp/c0_1/c1_2/articles/shikasan-air-conditioning-cleaning/
