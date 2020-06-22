@@ -40,10 +40,6 @@
   h6 {
     margin-top: 2em;
     font-weight: normal;
-
-    &:first-child {
-      margin-top: 1em;
-    }
   }
 
   p {
@@ -53,6 +49,20 @@
   img {
     display: block;
     max-width: 100%;
+    margin: functions.spacing(xl) 0;
+  }
+
+  div {
+    margin: functions.spacing(xl) 0;
+  }
+
+  hr {
+    border-width: 1px 0 0;
+    border-style: solid;
+    border-color: #ff009a;
+  }
+
+  blockquote {
     margin: functions.spacing(xl) 0;
   }
 }
