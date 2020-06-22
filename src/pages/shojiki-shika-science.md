@@ -7,6 +7,7 @@ featuredimage: /images/shojiki-shika-science.jpg
 description: 2019/10/27に開催されたBasic Function Festivalに、正直と鹿とすずえりさんで「正直鹿サイエンス」として出演しました。
 tags:
   - video
+  - performance
 ---
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/O-M22UuV5-w" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>

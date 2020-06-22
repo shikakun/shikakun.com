@@ -4,7 +4,7 @@ title: バナナブレッドのパディング
 date: 2018-05-16T00:00:00.000Z
 featuredpost: false
 featuredimage: /images/banana-bread-padding.jpg
-description: 詩を朗読する動画をYouTubeへアップロードしています。
+description: 詩を朗読する動画をYouTubeへアップロードしています。月300円でスポンサーを募集し、動画の最後で名前を読み上げました。
 tags:
   - project
   - video
@@ -29,7 +29,7 @@ tags:
 詩を朗読する動画をYouTubeへアップロードしています。  
 https://www.youtube.com/channel/UCvZE7S5ORGmsV3PuAkrgg2w
 
-月300円でスポンサーを募集し、動画の最後で名前を読み上げました。  
+月300円でスポンサーを募集し、動画の最後で名前を読み上げました。
 
 バナナブレッドのパディングは、  
 メーン会場  
