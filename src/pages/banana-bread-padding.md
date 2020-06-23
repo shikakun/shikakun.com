@@ -3,7 +3,7 @@ templateKey: entry-post
 title: バナナブレッドのパディング
 date: 2018-05-16T00:00:00.000Z
 featuredpost: false
-featuredimage: /images/banana-bread-padding.jpg
+featuredimage: /images/banana-bread-padding-006.jpg
 description: 詩を朗読する動画をYouTubeへアップロードしています。月300円でスポンサーを募集し、動画の最後で名前を読み上げました。
 tags:
   - project

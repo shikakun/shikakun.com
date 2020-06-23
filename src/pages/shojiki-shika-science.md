@@ -32,3 +32,7 @@ https://basicfunction-releases.bandcamp.com/
 ![](/images/shojiki-shika-science-003.jpg)
 
 ![](/images/shojiki-shika-science-004.jpg)
+
+![](/images/shojiki-shika-science-005.jpg)
+
+![](/images/shojiki-shika-science-006.jpg)

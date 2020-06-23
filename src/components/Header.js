@@ -25,7 +25,7 @@ const Header = class extends React.Component {
           <div className="content">
             <div className="header__brand">
               <Link to="/">
-                shikakun.com
+                shikakun
               </Link>
             </div>
           </div>
