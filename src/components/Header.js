@@ -7,7 +7,7 @@ const Header = class extends React.Component {
   }
 
   render() {
-    if (window.location.pathname == '/') {
+    if (typeof window !== 'undefined' && window.location.pathname == '/') {
       return (
         <header className="header">
           <div className="content">
