@@ -5,6 +5,7 @@ import { Helmet } from 'react-helmet'
 import { graphql, Link } from 'gatsby'
 import Layout from '../components/Layout'
 import Content, { HTMLContent } from '../components/Content'
+import SEO from '../components/SEO'
 
 export const EntryPostTemplate = ({
   content,
@@ -60,13 +61,11 @@ const EntryPost = ({ data }) => {
         description={post.frontmatter.description}
         date={post.frontmatter.date}
         helmet={
-          <Helmet titleTemplate={`%s (${post.frontmatter.date}) — shikakun`}>
-            <title>{`${post.frontmatter.title}`}</title>
-            <meta
-              name="description"
-              content={`${post.frontmatter.description}`}
-            />
-          </Helmet>
+          <SEO
+            title={`${post.frontmatter.title} (${post.frontmatter.date})`}
+            description={`${post.frontmatter.description}`}
+            image={`${post.frontmatter.featuredimage.relativePath}`}
+          />
         }
         tags={post.frontmatter.tags}
         title={post.frontmatter.title}
@@ -92,6 +91,9 @@ export const pageQuery = graphql`
         date(formatString: "YYYY")
         title
         description
+        featuredimage {
+          relativePath
+        }
         tags
       }
     }

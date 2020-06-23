@@ -2,6 +2,9 @@ module.exports = {
   siteMetadata: {
     title: 'shikakun',
     description: '並盛と中盛と大盛が同じ料金なんて絶対におかしいよ',
+    author: 'shikakun',
+    siteUrl: 'https://shikakun.com',
+    image: '/images/ogimage.png'
   },
   plugins: [
     'gatsby-plugin-react-helmet',
