@@ -58,14 +58,25 @@
     margin: functions.spacing(xl) 0;
   }
 
-  hr {
-    border-width: 1px 0 0;
-    border-style: solid;
-    border-color: #ff009a;
+  .form-control {
+    display: block;
+    margin: functions.spacing(m) 0;
   }
 
-  blockquote {
-    margin: functions.spacing(xl) 0;
+  input[type=text],
+  input[type=email] {
+    display: block;
+    width: 100%;
+    max-width: 12rem;
+    font-family: inherit;
+  }
+
+  textarea {
+    display: block;
+    width: 100%;
+    max-width: 24rem;
+    height: 8em;
+    font-family: inherit;
   }
 }
 
