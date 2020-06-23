@@ -7,17 +7,31 @@ const Header = class extends React.Component {
   }
 
   render() {
-    return (
-      <header className="header">
-        <div className="content">
-          <div className="header__brand">
-            <Link to="/">
-              shikakun
-            </Link>
+    if (window.location.pathname == '/') {
+      return (
+        <header className="header">
+          <div className="content">
+            <h1 className="header__brand">
+              <Link to="/">
+                shikakun
+              </Link>
+            </h1>
           </div>
-        </div>
-      </header>
-    )
+        </header>
+      )
+    } else {
+      return (
+        <header className="header">
+          <div className="content">
+            <div className="header__brand">
+              <Link to="/">
+                shikakun.com
+              </Link>
+            </div>
+          </div>
+        </header>
+      )
+    }
   }
 }
 

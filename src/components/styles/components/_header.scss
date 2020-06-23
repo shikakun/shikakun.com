@@ -9,6 +9,10 @@
 }
 
 .header__brand {
+  margin: 0;
+  font-weight: normal;
+  font-size: inherit;
+
   a {
     color: inherit;
     text-decoration: none;
