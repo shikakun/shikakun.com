@@ -31,6 +31,11 @@ const Footer = class extends React.Component {
                       direct message
                     </Link>
                   </li>
+                  <li className="nav__item">
+                    <a className="nav__link" href="https://open.spotify.com/show/4uHjhnzdrB18oHveGbqXxJ" target="_blank">
+                      radio
+                    </a>
+                  </li>
                 </ul>
               </div>
             </nav>
