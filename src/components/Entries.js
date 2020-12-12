@@ -11,39 +11,41 @@ class Entries extends React.Component {
     return (
       <div className="entry-list">
         {posts && posts.map(({ node: post }) => (
-          <div className="entry-item" key={post.id}>
-            <div
-              className={`entry ${
-                post.frontmatter.featuredpost ? 'is-featured' : ''
-              }`}
-            >
-              <Link
-                className="entry__link"
-                to={post.fields.slug}
+          post.frontmatter.hidden ? null : (
+            <div className="entry-item" key={post.id}>
+              <div
+                className={`entry ${
+                  post.frontmatter.featuredpost ? 'is-featured' : ''
+                }`}
               >
-                {post.frontmatter.featuredimage ? (
-                  <div className="entry__media">
-                    <PreviewCompatibleImage
-                      imageInfo={{
-                        image: post.frontmatter.featuredimage,
-                        alt: `featured image thumbnail for post ${post.frontmatter.title}`,
-                      }}
-                    />
-                  </div>
-                ) : null}
+                <Link
+                  className="entry__link"
+                  to={post.fields.slug}
+                >
+                  {post.frontmatter.featuredimage ? (
+                    <div className="entry__media">
+                      <PreviewCompatibleImage
+                        imageInfo={{
+                          image: post.frontmatter.featuredimage,
+                          alt: `featured image thumbnail for post ${post.frontmatter.title}`,
+                        }}
+                      />
+                    </div>
+                  ) : null}
 
-                <div className="entry__body">
-                  <div className="entry__title">
-                    {post.frontmatter.title}
-                  </div>
+                  <div className="entry__body">
+                    <div className="entry__title">
+                      {post.frontmatter.title}
+                    </div>
 
-                  <time className="entry__date">
-                    {post.frontmatter.date}
-                  </time>
-                </div>
-              </Link>
+                    <time className="entry__date">
+                      {post.frontmatter.date}
+                    </time>
+                  </div>
+                </Link>
+              </div>
             </div>
-          </div>
+          )
         ))}
       </div>
     )
@@ -85,6 +87,7 @@ export default () => (
                     }
                   }
                 }
+                hidden
               }
             }
           }
