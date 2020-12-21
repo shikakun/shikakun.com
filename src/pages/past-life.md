@@ -29,6 +29,4 @@ hidden: false
 <div class="credit">
 この詩は、<a href="https://adventar.org/calendars/5361" target="_blank">2020 Advent Calendar 2020</a>の13日目の記事として書かれました。<br>
 きのうは<a href="https://marrmsak.wordpress.com/2020/12/12/%e7%94%b2%e5%ba%9c%e3%83%a4%e3%83%b3%e3%82%b0%e3%82%ac%e3%83%b3%e3%82%ba2020/" target="_blank">marrさん</a>でした。あしたはyamanokuさんです。
-
-宣伝ですが、緊急事態宣言が発令されていたころに書いた「<a href="https://shikakun.com/virtual-background/">バーチャル背景</a>」という詩を出力して、本をつくりました。12月20日までの金・土・日曜だけ開催されているイベント「<a href="https://transbooks.center/downloads/exhibition/" target="_blank">TRANS BOOKS DOWNLOADs EXHIBITION</a>」で展示しています。
 </div>
