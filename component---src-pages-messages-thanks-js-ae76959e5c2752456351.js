@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[8],{HNwc:function(e,a,t){"use strict";t.r(a);var n=t("q1tI"),c=t.n(n),s=t("7oih");a.default=function(){return c.a.createElement(s.a,null,c.a.createElement("div",{className:"page"},c.a.createElement("div",{className:"content"},c.a.createElement("div",{className:"page__body"},c.a.createElement("div",{className:"page__content"},"メッセージを送信しました。ありがとう！")))))}}}]);
+//# sourceMappingURL=component---src-pages-messages-thanks-js-ae76959e5c2752456351.js.map
