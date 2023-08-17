@@ -3,6 +3,7 @@ import { Article, mapContentToArticle } from '@utils/articles';
 import { fetchContentsApi } from '@utils/fetch-contents-api';
 import Layout from '@layouts/Layout.astro';
 import ArticleList from '@components/ArticleList.astro';
+import Button from '@components/Button.astro';
 
 const articles: Article[] = await fetchContentsApi('/articles', {
   populate: '*',
@@ -52,6 +53,16 @@ const articles: Article[] = await fetchContentsApi('/articles', {
                 </tr>
               </tbody>
             </table>
+          </div>
+          <div class='buttons'>
+            <Button
+              element='a'
+              href='/link/'
+              appearance='filled'
+              trailingIcon='arrow_right'
+            >
+              Follow
+            </Button>
           </div>
         </div>
       </div>

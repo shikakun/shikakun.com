@@ -43,7 +43,12 @@ const isFilteringByTag = filter && currentUrl.startsWith('/articles/tags/');
           <ArticleFilter />
           {filter && (
             <div class='filter-reset'>
-              <Button element='a' href='/articles/' trailingIcon='arrow_right'>
+              <Button
+                element='a'
+                href='/articles/'
+                appearance='filled'
+                trailingIcon='arrow_right'
+              >
                 <span>すべての記事</span>
               </Button>
             </div>

@@ -1,0 +1,150 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Button from '@components/Button.astro';
+
+const links = [
+  {
+    label: 'Website',
+    url: 'https://shikakun.com/',
+    leadingIcon: 'web',
+  },
+  {
+    label: 'Podcast',
+    url: 'https://listen.style/p/shikakun',
+    leadingIcon: 'radio',
+  },
+  {
+    label: 'Blog',
+    url: 'https://yo.shikakun.com/',
+    leadingIcon: 'sticky_note',
+  },
+  {
+    label: 'GitHub',
+    url: 'https://github.com/shikakun/',
+    leadingIcon: 'github',
+  },
+  {
+    label: 'Instagram',
+    url: 'https://instagram.com/shikakun/',
+    leadingIcon: 'instagram',
+  },
+  {
+    label: 'Threads',
+    url: 'https://threads.net/shikakun/',
+    leadingIcon: 'threads',
+  },
+  {
+    label: 'YouTube',
+    url: 'https://youtube.com/@shikakun1989',
+    leadingIcon: 'youtube',
+  },
+  {
+    label: 'Bandcamp',
+    url: 'https://shikakun.bandcamp.com/',
+    leadingIcon: 'bandcamp',
+  },
+  {
+    label: 'X',
+    url: 'https://twitter.com/shikakun',
+    leadingIcon: 'x',
+  },
+];
+---
+
+<Layout
+  title='Link'
+  openGraph={{
+    basic: {
+      title: 'Link',
+      type: 'website',
+      image: 'https://shikakun.com/ogimage.png',
+    },
+  }}
+>
+  <main class='page'>
+    <div class='container'>
+      <h1 class='visually-hidden'>Link</h1>
+      <div class='body'>
+        <div class='spacer'></div>
+        <ul class='list'>
+          {
+            links.map((link) => (
+              <li class='item'>
+                <Button
+                  element='a'
+                  href={link.url}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  appearance='filled'
+                  width='full'
+                  leadingIcon={link.leadingIcon}
+                >
+                  {link.label}
+                </Button>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <style lang='scss'>
+      @use '@styles/variables';
+      @use '@styles/functions';
+      @use '@styles/mixins';
+      @use 'sass:math';
+      @use 'sass:map';
+
+      .page {
+        @include mixins.page;
+      }
+
+      .container {
+        @include mixins.container;
+      }
+
+      .body {
+        padding: functions.get-sizing-scale-size(192) 0;
+        @include mixins.grid;
+        @include mixins.mq-boundary(up, m) {
+          padding-right: 7rem;
+        }
+      }
+
+      .spacer {
+        display: none;
+        @include mixins.mq-boundary(up, s) {
+          display: block;
+          @include mixins.grid-column(2);
+        }
+        @include mixins.mq-boundary(up, l) {
+          @include mixins.grid-column(3);
+        }
+        @include mixins.mq-boundary(up, xl) {
+          @include mixins.grid-column(4);
+        }
+      }
+
+      .list {
+        @include mixins.initialize(ul);
+        display: flex;
+        flex-direction: column;
+        gap: functions.get-spacing-size(m);
+        @include mixins.grid-column(12);
+        @include mixins.mq-boundary(up, s) {
+          @include mixins.grid-column(8);
+        }
+        @include mixins.mq-boundary(up, l) {
+          @include mixins.grid-column(6);
+        }
+        @include mixins.mq-boundary(up, xl) {
+          @include mixins.grid-column(4);
+        }
+      }
+
+      .item {
+        @include mixins.initialize(li);
+      }
+    </style>
+  </main>
+</Layout>
