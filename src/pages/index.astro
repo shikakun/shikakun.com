@@ -1,0 +1,203 @@
+---
+import { Article, mapContentToArticle } from '@utils/articles';
+import { fetchContentsApi } from '@utils/fetch-contents-api';
+import Layout from '@layouts/Layout.astro';
+import ArticleList from '@components/ArticleList.astro';
+
+const articles: Article[] = await fetchContentsApi('/articles', {
+  populate: '*',
+  'sort[date]': 'desc',
+}).then((contents) => contents.data.map(mapContentToArticle));
+---
+
+<Layout>
+  <main class='page'>
+    <div class='profile'>
+      <div class='container'>
+        <header class='header'>
+          <h1 class='name'>
+            <span
+              class='handle-name js-text-effect'
+              data-replace-text='Takashi Nakao'>shikakun</span
+            >
+            <span class='divider'>&nbsp;/&nbsp;</span>
+            <span class='real-name'>Takashi Nakao</span>
+          </h1>
+          <div class='title'>Designer</div>
+        </header>
+        <div class='body'>
+          <h2 class='visually-hidden'>プロフィール</h2>
+          <p class='description'>
+            ユーザーの体験を設計して、フロントエンドのコードで実装するデザイナーです。<br
+            />
+            写真の撮影や動画の編集、音楽の制作が趣味で、詩を書いて朗読する活動をしています。
+          </p>
+          <div class='experience'>
+            <h3 class='visually-hidden'>学歴・経歴</h3>
+            <table>
+              <thead class='visually-hidden'>
+                <tr>
+                  <th>期間</th>
+                  <th>内容</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><time>2012.4</time> -</td>
+                  <td>GMOペパボ株式会社</td>
+                </tr>
+                <tr>
+                  <td><time>2008.4</time> - <time>2012.3</time></td>
+                  <td>東京造形大学 デザイン学部 映画専攻領域</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <section>
+      <h2 class='visually-hidden'>すべての記事</h2>
+      <ArticleList articles={articles} nav={false} />
+    </section>
+  </main>
+</Layout>
+
+<script>
+  window.addEventListener('load', () => {
+    const texts = document.querySelectorAll('.js-text-effect');
+    const tempChars = 'abcdefhiklmnorstuvwxz';
+
+    texts.forEach((text) => {
+      const originalText = text.textContent;
+      const replacementText = text.getAttribute('data-replace-text') || '';
+      let timer;
+
+      const replaceText = (fromText, toText) => {
+        const maxLength = Math.max(fromText.length, toText.length);
+        let i = 0;
+        timer = setInterval(() => {
+          const tempChar = tempChars.charAt(
+            Math.floor(Math.random() * tempChars.length)
+          );
+
+          const currentChar = i < toText.length ? tempChar : '';
+          text.textContent =
+            toText.slice(0, i) + currentChar + fromText.slice(i + 1, maxLength);
+          if (i < maxLength) i++;
+          setTimeout(() => {
+            text.textContent =
+              toText.slice(0, i) + fromText.slice(i, maxLength);
+          }, 25);
+          if (i >= maxLength) clearInterval(timer);
+        }, 50);
+      };
+
+      text.addEventListener('mouseover', () => {
+        clearInterval(timer);
+        replaceText(originalText, replacementText);
+      });
+
+      text.addEventListener('mouseout', () => {
+        clearInterval(timer);
+        replaceText(replacementText, originalText);
+      });
+    });
+  });
+</script>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .page {
+    @include mixins.page;
+  }
+
+  .container {
+    @include mixins.container;
+  }
+
+  .profile {
+    padding: functions.get-sizing-scale-size(192) 0;
+  }
+
+  .header {
+    display: flex;
+    flex-direction: column;
+    gap: functions.get-spacing-size(l);
+  }
+
+  .name {
+    @include mixins.initialize(heading);
+    display: flex;
+  }
+
+  .handle-name {
+    display: block;
+    @include mixins.text(3xl, dense);
+    @include mixins.kerning;
+    @include mixins.mq-boundary(up, s) {
+      @include mixins.text(4xl, dense);
+    }
+  }
+
+  .divider,
+  .real-name {
+    @include mixins.visually-hidden;
+  }
+
+  .title {
+    display: block;
+    color: functions.get-text-color(light, secondary);
+    @include mixins.text(xl, dense);
+    @include mixins.kerning;
+    @include mixins.mq-boundary(up, s) {
+      @include mixins.text(2xl, dense);
+    }
+  }
+
+  .body {
+    display: flex;
+    flex-direction: column;
+    gap: functions.get-spacing-size(xl);
+    margin-top: functions.get-spacing-size(7xl);
+  }
+
+  .description {
+    @include mixins.initialize(p);
+    @include mixins.typography-role(body);
+  }
+
+  .experience {
+    table {
+      border-collapse: collapse;
+      border-spacing: 0;
+    }
+
+    td {
+      padding: functions.get-spacing-size(2xs) 0;
+      vertical-align: top;
+      @include mixins.text(s, normal);
+      @include mixins.mq-boundary(up, s) {
+        @include mixins.text(m, normal);
+      }
+
+      &:first-child {
+        white-space: nowrap;
+        padding-right: functions.get-spacing-size(m);
+        @include mixins.mq-boundary(up, s) {
+          padding-right: functions.get-spacing-size(xl);
+        }
+      }
+    }
+
+    time {
+      display: inline-block;
+      white-space: nowrap;
+    }
+  }
+</style>

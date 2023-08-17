@@ -1,0 +1,160 @@
+---
+import { getFormattedDate } from '@utils/view-helpers';
+import ArticleFilter from '@components/ArticleFilter.astro';
+import Button from '@components/Button.astro';
+
+const { articles, filter, nav } = Astro.props;
+const currentUrl = Astro.url.pathname;
+const isFilteringByTag = filter && currentUrl.startsWith('/articles/tags/');
+---
+
+<div class='wrapper'>
+  <div class='container'>
+    <div class='article'>
+      {
+        filter && (
+          <div class='filtering-by'>
+            {isFilteringByTag && '# '}
+            {filter.name}
+          </div>
+        )
+      }
+      {
+        articles.length > 0 && (
+          <ul class='article-list'>
+            {articles.map((article) => (
+              <li class='article-item'>
+                <a class='link' href={`/articles/${article.slug}/`}>
+                  <div class='title'>{article.title}</div>
+                  <time class='date'>
+                    <span>{getFormattedDate(article.date, 'yyyy')}</span>
+                  </time>
+                </a>
+              </li>
+            ))}
+          </ul>
+        )
+      }
+      {!articles.length && <div>ただいま編集中です…</div>}
+    </div>
+    {
+      nav && (
+        <div class='filter'>
+          <ArticleFilter />
+          {filter && (
+            <div class='filter-reset'>
+              <Button element='a' href='/articles/' trailingIcon='arrow_right'>
+                <span>すべての記事</span>
+              </Button>
+            </div>
+          )}
+        </div>
+      )
+    }
+  </div>
+</div>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  $side-spacing: math.div(functions.get-interactive-component-size(m), 4);
+
+  .container {
+    @include mixins.container;
+    @include mixins.grid(12);
+  }
+
+  .article {
+    @include mixins.grid-column(12);
+    @include mixins.mq-boundary(up, l) {
+      @include mixins.grid-column(8);
+    }
+    @include mixins.mq-boundary(up, xl) {
+      @include mixins.grid-column(6);
+    }
+  }
+
+  .filter {
+    @include mixins.grid-column(12);
+    @include mixins.mq-boundary(up, l) {
+      @include mixins.grid-column(4);
+    }
+    @include mixins.mq-boundary(up, xl) {
+      @include mixins.grid-column(6);
+    }
+  }
+
+  .filtering-by {
+    @include mixins.text(3xl, dense);
+    margin: -0.125em 0 functions.get-spacing-size(7xl);
+  }
+
+  .filter-reset {
+    margin-top: functions.get-spacing-size(2xl);
+  }
+
+  .article-list {
+    @include mixins.initialize(ul);
+    display: flex;
+    flex-direction: column;
+    gap: functions.get-spacing-size(l);
+    margin-left: 0 - $side-spacing;
+    @include mixins.mq-boundary(up, s) {
+      gap: functions.get-spacing-size(m);
+    }
+  }
+
+  .article-item {
+    @include mixins.initialize(li);
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .link {
+    @include mixins.initialize(a);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: functions.get-spacing-size(2xs);
+    min-height: functions.get-interactive-component-size(m);
+    padding: 0 $side-spacing;
+    color: inherit;
+    @include mixins.interactive-overlay;
+    @include mixins.focus-ring;
+    @include mixins.mq-boundary(up, s) {
+      flex-direction: row;
+      align-items: center;
+      gap: $side-spacing;
+    }
+  }
+
+  .title {
+    @include mixins.text(l, dense);
+    @include mixins.mq-boundary(up, m) {
+      @include mixins.text(xl, dense);
+    }
+  }
+
+  .date {
+    display: block;
+    height: 100%;
+    color: functions.get-text-color(light, secondary);
+    @include mixins.text(s, dense);
+    @include mixins.mq-boundary(up, m) {
+      @include mixins.text(m, dense);
+    }
+
+    span {
+      display: block;
+      white-space: nowrap;
+      @include mixins.mq-boundary(up, s) {
+        margin-top: 0.2em;
+      }
+    }
+  }
+</style>

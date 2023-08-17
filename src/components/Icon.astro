@@ -1,0 +1,67 @@
+---
+const { name } = Astro.props;
+---
+
+<div class='icon' data-icon={name}></div>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  $icon-font-name: "icons";
+
+  @font-face {
+    font-family: $icon-font-name;
+    src: url("/icons/icons.ttf?432313e7f722b3b0aac4de2c90306eca") format("truetype"),
+url("/icons/icons.woff?432313e7f722b3b0aac4de2c90306eca") format("woff"),
+url("/icons/icons.woff2?432313e7f722b3b0aac4de2c90306eca") format("woff2");
+  }
+
+  .icon {
+    display: inline-block;
+    font-family: $icon-font-name;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    direction: ltr;
+    letter-spacing: normal;
+    white-space: nowrap;
+    text-transform: none;
+    word-wrap: normal;
+  }
+
+  $icon-font-codepoints: (
+    "arrow_right": "\f101",
+    "check": "\f102",
+    "chevron_right": "\f103",
+    "cross": "\f104",
+    "menu": "\f105",
+    "open_in_new": "\f106",
+    "sharp": "\f107",
+  );
+
+  .icon[data-icon="arrow_right"]::after {
+    content: map.get($icon-font-codepoints, "arrow_right");
+  }
+  .icon[data-icon="check"]::after {
+    content: map.get($icon-font-codepoints, "check");
+  }
+  .icon[data-icon="chevron_right"]::after {
+    content: map.get($icon-font-codepoints, "chevron_right");
+  }
+  .icon[data-icon="cross"]::after {
+    content: map.get($icon-font-codepoints, "cross");
+  }
+  .icon[data-icon="menu"]::after {
+    content: map.get($icon-font-codepoints, "menu");
+  }
+  .icon[data-icon="open_in_new"]::after {
+    content: map.get($icon-font-codepoints, "open_in_new");
+  }
+  .icon[data-icon="sharp"]::after {
+    content: map.get($icon-font-codepoints, "sharp");
+  }
+</style>

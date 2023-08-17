@@ -1,0 +1,27 @@
+---
+import { getRenderedMarkdownContent } from '@utils/view-helpers';
+
+const { content } = Astro.props;
+---
+
+<div class="markdown" set:html={getRenderedMarkdownContent(content)}></div>
+
+<style lang="scss" is:global>
+@use "@styles/variables";
+@use "@styles/functions";
+@use "@styles/mixins";
+@use "sass:math";
+@use "sass:map";
+
+.markdown {
+  p {
+    @include mixins.initialize(p);
+    @include mixins.typography-role(body);
+    margin: 1em 0;
+  }
+
+  a {
+    @include mixins.text-link;
+  }
+}
+</style>

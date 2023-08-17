@@ -1,0 +1,99 @@
+---
+import { fetchContentsApi } from '@utils/fetch-contents-api';
+import { getFormattedDate } from '@utils/view-helpers';
+import Layout from '@layouts/Layout.astro';
+
+const response = await fetchContentsApi('/manzai', {
+  populate: '*',
+  'sort[publishedAt]': 'desc',
+});
+
+const manzaiList = response.data.attributes.list.split('\n');
+const lastUpdate = response.data.attributes.updatedAt;
+---
+
+<Layout
+  title='もし漫才コンビを突然組むことになってもコンビ名に困らないように思いついたらスマホにメモしてる'
+  description='ドリンクバー、シンバル、アイスピック、オードブル、罰ゲーム、サプライチェーン、コンパニオン、フレンチクルーラー、'
+  openGraph={{
+    basic: {
+      title:
+        'もし漫才コンビを突然組むことになってもコンビ名に困らないように思いついたらスマホにメモしてる',
+      type: 'website',
+      image: 'https://shikakun.com/ogimage.png',
+    },
+  }}
+>
+  <main class='page'>
+    <div class='container'>
+      <header class='header'>
+        <h1 class='title'>
+          もし漫才コンビを突然組むことになってもコンビ名に困らないように思いついたらスマホにメモしてる
+        </h1>
+      </header>
+      <ul class='list'>
+        {
+          manzaiList.map((manzaiName) => {
+            return <li class='item'>{manzaiName}</li>;
+          })
+        }
+      </ul>
+      <div class='update'>
+        最終更新：<time datetime={lastUpdate}
+          >{getFormattedDate(lastUpdate, 'yyyy-mm-dd')}</time
+        >
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .page {
+    @include mixins.page;
+  }
+
+  .container {
+    @include mixins.container;
+  }
+
+  .header {
+    padding: functions.get-sizing-scale-size(192) 0;
+  }
+
+  .title {
+    @include mixins.initialize(heading);
+    @include mixins.text(m, comfort);
+    @include mixins.mq-boundary(up, m) {
+      @include mixins.text(l, comfort);
+    }
+  }
+
+  .list {
+    @include mixins.initialize(ul);
+    display: flex;
+    flex-direction: column;
+    gap: functions.get-spacing-size(xs);
+  }
+
+  .item {
+    @include mixins.initialize(li);
+    @include mixins.text(m, comfort);
+    @include mixins.mq-boundary(up, m) {
+      @include mixins.text(l, comfort);
+    }
+  }
+
+  .update {
+    margin-top: functions.get-sizing-scale-size(192);
+    @include mixins.text(m, comfort);
+    @include mixins.mq-boundary(up, m) {
+      @include mixins.text(l, comfort);
+    }
+  }
+</style>

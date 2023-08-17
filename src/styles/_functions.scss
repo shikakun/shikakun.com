@@ -1,0 +1,146 @@
+@use './variables';
+@use 'sass:list';
+@use 'sass:map';
+@use 'sass:string';
+@use 'sass:math';
+
+// Color
+@function get-primitive-color($name, $level: 1000) {
+  @return map.get(map.get(variables.$primitive-color, $name), $level);
+}
+
+@function get-semantic-color($intention, $level: 1000) {
+  @return get-primitive-color(
+    map.get(variables.$semantic-color, $intention),
+    $level
+  );
+}
+
+@function get-semantic-intentions() {
+  @return variables.$semantic-intentions;
+}
+
+@function get-base-color($brightness: light, $name) {
+  @return map.get(map.get(variables.$base-color, $brightness), $name);
+}
+
+@function get-text-color($brightness: light, $name) {
+  @return map.get(map.get(variables.$text-color, $brightness), $name);
+}
+
+@function get-background-overlay-color($brightness: light, $state: enabled) {
+  @return map.get(
+    map.get(variables.$background-overlay-color, $brightness),
+    $state
+  );
+}
+
+// Elevation
+@function get-elevation-shadow($level: 1, $color: #000) {
+  $list: map.get(variables.$elevation-shadow, $level);
+  $out: 0 0 0 0 transparent;
+
+  @each $set in $list {
+    $out: $out + ',';
+
+    @if $level < 0 {
+      $out: inset + ' ';
+    }
+
+    @for $i from 1 through 4 {
+      $out: $out + list.nth($set, $i) * 1px + ' ';
+    }
+    $out: $out + rgba($color, list.nth($set, 5));
+  }
+
+  @return string.unquote($out);
+}
+
+// Sizing
+@function get-sizing-scale-size($level: 16) {
+  @return map.get(variables.$sizing-scale, $level);
+}
+
+@function get-spacing-size($level: m) {
+  @return map.get(variables.$spacing-sizes, $level);
+}
+
+@function get-interactive-component-size($level: m) {
+  @return map.get(variables.$interactive-component-sizes, $level);
+}
+
+@function get-radius-size($level: m) {
+  @return map.get(variables.$radius-sizes, $level);
+}
+
+@function get-line-width-size($level: m) {
+  @return map.get(variables.$line-width-sizes, $level);
+}
+
+@function get-content-size($level: m) {
+  @return map.get(variables.$content-sizes, $level);
+}
+
+@function get-boundary-size($level: m) {
+  @return map.get(variables.$boundary-sizes, $level);
+}
+
+@function get-minimum-boundary-size() {
+  @return variables.$minimum-boundary-size;
+}
+
+@function get-option-width-value($width: auto) {
+  @if $width == full {
+    @return 100%;
+  } @else if $width == half {
+    @return math.div(100%, 2);
+  } @else if $width == third {
+    @return math.div(100%, 3);
+  } @else if $width == auto {
+    @return auto;
+  } @else {
+    @return auto;
+  }
+}
+
+@function get-leading-trailing-icon-size($level: m) {
+  @return map.get(variables.$leading-trailing-icon-sizes, $level);
+}
+
+// Typography
+@function get-font-family($name) {
+  @return unquote(map.get(variables.$font-family-values, $name));
+}
+
+@function get-font-stack($name) {
+  @return unquote(map.get(variables.$font-stack-values, $name));
+}
+
+@function get-font-size($level: m) {
+  @return map.get(variables.$font-sizes, $level);
+}
+
+@function get-line-height($level: m, $density: normal) {
+  @return map.get(map.get(variables.$line-height-sizes, $density), $level);
+}
+
+@function get-text-style($level: m, $density: normal) {
+  @return (
+    font-size: get-font-size($level),
+    line-height: get-line-height($level, $density)
+  );
+}
+
+// Animation
+@function get-animation-duration() {
+  @return variables.$animation-duration;
+}
+
+@function compose-transition(
+  $property: all,
+  $duration: get-animation-duration(),
+  $timing-function: ease,
+  $delay: 0s
+) {
+  @return unquote('#{$property} #{$duration} #{$timing-function} #{$delay}');
+}

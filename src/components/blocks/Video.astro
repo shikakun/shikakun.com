@@ -1,0 +1,45 @@
+---
+const { videoUrl } = Astro.props;
+
+function getEmbedUrl(videoUrl: string): string {
+  const url = new URL(videoUrl);
+  const hostName = url.hostname;
+
+  if (hostName === 'www.youtube.com' || hostName === 'youtube.com') {
+    const videoId = url.searchParams.get('v');
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+  } else if (hostName === 'youtu.be') {
+    const videoId = url.pathname.split('/')[1];
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+  }
+
+  throw new Error('Invalid YouTube URL');
+}
+---
+
+<div class='video'>
+  <iframe class='iframe' src={getEmbedUrl(videoUrl)}></iframe>
+</div>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .video {
+    margin: functions.get-spacing-size(xl) 0;
+    @include mixins.figure-border;
+  }
+
+  .iframe {
+    @include mixins.initialize(iframe);
+    width: 100%;
+    aspect-ratio: 16 / 9;
+  }
+</style>

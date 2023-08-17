@@ -1,0 +1,477 @@
+@use './variables';
+@use './functions';
+@use 'sass:map';
+
+@mixin text($level: m, $density: normal, $weight: null) {
+  font-size: functions.get-font-size($level: $level);
+  @if $density == dense or $density == normal or $density == comfort {
+    line-height: functions.get-line-height($level: $level, $density: $density);
+  } @else if $density {
+    line-height: $density;
+  }
+  @if $weight {
+    font-weight: $weight;
+  }
+}
+
+@mixin elevation($level: 1, $color: #000) {
+  box-shadow: functions.get-elevation-shadow($level: $level, $color: $color);
+}
+
+@mixin mq-boundary($name, $level: null) {
+  @if $name == up {
+    @media screen and (min-width: functions.get-boundary-size($level)) {
+      @content;
+    }
+  } @else if $name == down {
+    $max-width: functions.get-boundary-size($level) -
+      functions.get-minimum-boundary-size();
+
+    @media screen and (max-width: $max-width) {
+      @content;
+    }
+  } @else if $name == mobile {
+    @include mq-boundary(down, m) {
+      @content;
+    }
+  } @else if $name == desktop {
+    @include mq-boundary(up, m) {
+      @content;
+    }
+  }
+}
+
+@mixin page {
+  min-height: calc(100vh - 5rem);
+  @include mq-boundary(up, l) {
+    min-height: calc(100vh - 7rem);
+  }
+}
+
+@mixin container($max-width: auto, $side-padding: true) {
+  max-width: $max-width;
+  margin-right: auto;
+  margin-left: 0;
+  @if $side-padding {
+    padding-right: functions.get-spacing-size(m);
+    padding-left: functions.get-spacing-size(m);
+  }
+  @include mq-boundary(up, m) {
+    @if $side-padding {
+      padding-right: functions.get-spacing-size(l);
+      padding-left: 7rem;
+    }
+  }
+  @include mq-boundary(up, l) {
+    @if $side-padding {
+      padding-right: functions.get-spacing-size(xl);
+    }
+  }
+}
+
+@mixin grid($columns: 12) {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: functions.get-spacing-size(m);
+  @include mq-boundary(up, m) {
+    grid-template-columns: repeat($columns, 1fr);
+    gap: functions.get-spacing-size(l);
+  }
+  @include mq-boundary(up, l) {
+    gap: functions.get-spacing-size(xl);
+  }
+
+  > * {
+    grid-column: 1 / -1;
+  }
+}
+
+@mixin grid-column($span: 1) {
+  grid-column: span $span;
+}
+
+@mixin typography-role($name) {
+  @if $name == body {
+    @include text(m, comfort);
+    @include mq-boundary(up, m) {
+      @include text(l, comfort);
+    }
+  }
+}
+
+@mixin border-left {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    width: 2px;
+    background-color: currentColor;
+  }
+}
+
+// スクリーンリーダーのみに情報を伝える
+// オリジナル: Bootstrap
+// https://github.com/twbs/bootstrap/blob/eae52b1cb0af18c5bf3fddd660f53d58d689cd63/scss/mixins/_visually-hidden.scss
+@mixin visually-hidden() {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important;
+}
+
+@mixin visually-hidden-focusable() {
+  &:not(:focus):not(:focus-within) {
+    @include visually-hidden();
+  }
+}
+
+// 最大行数以降の文字列を省略する
+@mixin text-truncate($max-lines: 1) {
+  overflow: hidden;
+
+  @if $max-lines > 1 {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: $max-lines;
+  } @else {
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+// 文字列を隠す
+@mixin text-hidden {
+  overflow: hidden;
+  text-indent: 101%;
+  white-space: nowrap;
+}
+
+// CSSアニメーションのプロパティの指定を揃える
+@mixin animation(
+  $name: none,
+  $duration: variables.$animation-duration,
+  $timing-function: ease,
+  $delay: 0s,
+  $iteration-count: 1,
+  $direction: normal,
+  $fill-mode: none,
+  $play-state: running
+) {
+  animation-name: $name;
+  animation-duration: $duration;
+  animation-timing-function: $timing-function;
+  animation-delay: $delay;
+  animation-iteration-count: $iteration-count;
+  animation-direction: $direction;
+  animation-fill-mode: $fill-mode;
+  animation-play-state: $play-state;
+}
+
+@mixin transition(
+  $property: all,
+  $duration: functions.get-animation-duration(),
+  $timing-function: ease,
+  $delay: 0s
+) {
+  transition: functions.compose-transition(
+    $property: $property,
+    $duration: $duration,
+    $timing-function: $timing-function,
+    $delay: $delay
+  );
+}
+
+// 画像の周囲に境界線を表示する
+@mixin figure-border {
+  position: relative;
+  display: block;
+
+  // 画像の周囲に薄いグレーの境界線を重ねる
+  // https://twitter.com/hakimel/status/1270366140330631168
+  &::after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1) inset;
+    pointer-events: none;
+  }
+
+  img {
+    display: block;
+    width: 100%;
+  }
+}
+
+// クリックできる要素にマウスカーソルを重ねたときのスタイルを指定する
+@mixin interactive-overlay($border-radius: inherit) {
+  position: relative;
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: block;
+    background-color: functions.get-background-overlay-color(light, enabled);
+    border-radius: $border-radius;
+    pointer-events: none;
+    transition: background-color 0.2s ease;
+  }
+
+  &:focus::after,
+  &:hover::after,
+  &:active::after {
+    background-color: functions.get-background-overlay-color(light, hover);
+  }
+}
+
+// テキストリンクのスタイルを指定する
+@mixin text-link($color: currentColor) {
+  @include initialize(a);
+  color: $color;
+  @include underline;
+  @include interactive-overlay;
+  @include focus-ring;
+}
+
+// フォーカスリングのスタイルを指定する
+@mixin focus-ring($color: currentColor) {
+  &:focus {
+    outline: functions.get-line-width-size(l) solid $color;
+    outline-offset: 0.1rem;
+  }
+}
+
+// カーニングを調整する
+@mixin kerning {
+  font-feature-settings: 'palt' 1;
+  font-kerning: normal;
+}
+
+// テキストに下線を表示する
+@mixin underline($color: currentColor) {
+  text-decoration: underline;
+  text-decoration-thickness: 0.05em;
+  text-underline-offset: 0.25em;
+  text-decoration-color: $color;
+}
+
+// 等幅フォントで表示する
+@mixin monospace {
+  font-family: functions.get-font-stack(monospace);
+}
+
+// 要素セレクタに指定された user agent stylesheet を無効にする
+@mixin initialize($element) {
+  // a {
+  //   color: inherit;
+  //   text-decoration: none;
+  // }
+  @if $element == a {
+    color: inherit;
+    text-decoration: none;
+  }
+
+  // b {
+  //   font-weight: normal;
+  // }
+  @else if $element == b {
+    font-weight: normal;
+  }
+
+  // blockquote {
+  //   margin: 0;
+  // }
+  @else if $element == blockquote {
+    margin: 0;
+  }
+
+  // body {
+  //   margin: 0;
+  // }
+  @else if $element == body {
+    margin: 0;
+  }
+
+  // cite {
+  //   fonr-style: normal;
+  // }
+  @else if $element == cite {
+    fonr-style: normal;
+  }
+
+  // code, kbd, pre, samp {
+  //   font-family: inherit;
+  //   font-size: 100%;
+  // }
+  @else if $element == code-block {
+    font-family: inherit;
+    font-size: 100%;
+  } @else if $element == code {
+    @include initialize(code-block);
+  } @else if $element == kbd {
+    @include initialize(code-block);
+  } @else if $element == pre {
+    @include initialize(code-block);
+  } @else if $element == samp {
+    @include initialize(code-block);
+  }
+
+  // dd, dl {
+  //   margin: 0;
+  // }
+  @else if $element == dd {
+    margin: 0;
+  } @else if $element == dl {
+    margin: 0;
+  }
+
+  // em {
+  //   font-style: normal;
+  //   font-weight: normal;
+  // }
+  @else if $element == em {
+    font-style: normal;
+    font-weight: normal;
+  }
+
+  // fieldset {
+  //   padding: 0;
+  //   margin: 0;
+  //   border: none;
+  // }
+  @else if $element == fieldset {
+    padding: 0;
+    margin: 0;
+    border: none;
+  }
+
+  // figure {
+  //   margin: 0;
+  // }
+  @else if $element == figure {
+    margin: 0;
+  }
+
+  // button, input, optgroup, select, textarea {
+  //   appearance: none;
+  //   background: none;
+  //   border: none;
+  //   border-radius: 0;
+  //   font-family: inherit;
+  //   margin: 0;
+  // }
+  @else if $element == form-input {
+    appearance: none;
+    background: none;
+    border: none;
+    border-radius: 0;
+    font-family: inherit;
+    margin: 0;
+  } @else if $element == button {
+    @include initialize(form-input);
+  } @else if $element == input {
+    @include initialize(form-input);
+  } @else if $element == optgroup {
+    @include initialize(form-input);
+  } @else if $element == select {
+    @include initialize(form-input);
+  } @else if $element == textarea {
+    @include initialize(form-input);
+  }
+
+  // h1, h2, h3, h4, h5, h6 {
+  //   font-size: 100%;
+  //   font-weight: normal;
+  //   margin: 0;
+  // }
+  @else if $element == heading {
+    font-size: 100%;
+    font-weight: normal;
+    margin: 0;
+  } @else if $element == h1 {
+    @include initialize(heading);
+  } @else if $element == h2 {
+    @include initialize(heading);
+  } @else if $element == h3 {
+    @include initialize(heading);
+  } @else if $element == h4 {
+    @include initialize(heading);
+  } @else if $element == h5 {
+    @include initialize(heading);
+  } @else if $element == h6 {
+    @include initialize(heading);
+  }
+
+  // i {
+  //   font-style: normal;
+  // }
+  @else if $element == i {
+    font-style: normal;
+  }
+
+  // iframe {
+  //   border: none;
+  // }
+  @else if $element == iframe {
+    border: none;
+  }
+
+  // legend {
+  //   padding: 0;
+  // }
+  @else if $element == legend {
+    padding: 0;
+  }
+
+  // ul, ol {
+  //   list-style: none;
+  //   margin: 0;
+  //   padding: 0;
+  // }
+  @else if $element == list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  } @else if $element == ul {
+    @include initialize(list);
+  } @else if $element == ol {
+    @include initialize(list);
+  }
+
+  // p {
+  //   margin: 0;
+  // }
+  @else if $element == p {
+    margin: 0;
+  }
+
+  // small {
+  //   font-size: 100%;
+  // }
+  @else if $element == small {
+    font-size: 100%;
+  }
+
+  // strong {
+  //   font-weight: normal;
+  // }
+  @else if $element == strong {
+    font-weight: normal;
+  }
+}

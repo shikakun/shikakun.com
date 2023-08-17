@@ -1,0 +1,112 @@
+---
+import ArticleFilter from '@components/ArticleFilter.astro';
+
+const { avatar } = Astro.props;
+---
+
+<nav id='drawer' class='drawer' aria-hidden='true'>
+  <div
+    class='background js-drawer-switch'
+    aria-expanded='true'
+    aria-controls='drawer'
+  >
+  </div>
+  <div class='container'>
+    <div class='menu'>
+      <ul>
+        <li><a href='/' rel='home'>Profile</a></li>
+        <li><a href='/articles/'>Articles</a></li>
+        <li><a href='/manzai/'>Manzai</a></li>
+      </ul>
+    </div>
+
+    <div class='filter'>
+      <ArticleFilter />
+    </div>
+  </div>
+</nav>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .drawer {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    overflow-x: hidden;
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
+
+    &[aria-hidden='true'] {
+      visibility: hidden;
+      opacity: 0;
+    }
+  }
+
+  .background {
+    position: fixed;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(functions.get-primitive-color(blue, 600), 0.8);
+    backdrop-filter: blur(0.25rem);
+  }
+
+  .container {
+    position: relative;
+    margin-top: 50vh;
+    min-height: 50vh;
+    width: 100%;
+    background-color: functions.get-primitive-color(white);
+  }
+
+  .drawer[aria-hidden='true'] .container {
+    opacity: 0;
+  }
+
+  .menu {
+    padding: functions.get-spacing-size(m);
+
+    ul {
+      @include mixins.initialize(ul);
+      display: flex;
+      flex-direction: column;
+      gap: functions.get-spacing-size(xs);
+    }
+
+    li {
+      @include mixins.initialize(li);
+    }
+
+    a {
+      $side-spacing: math.div(functions.get-interactive-component-size(m), 4);
+
+      @include mixins.initialize(a);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: functions.get-interactive-component-size(m);
+      padding: 0 $side-spacing;
+      color: inherit;
+      @include mixins.text(xl, dense);
+      @include mixins.interactive-overlay;
+      @include mixins.focus-ring;
+    }
+  }
+
+  .filter {
+    padding: functions.get-spacing-size(l);
+  }
+
+  body[data-drawer-opened='true'] {
+    overflow: hidden;
+  }
+</style>

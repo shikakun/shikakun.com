@@ -1,0 +1,383 @@
+@use 'sass:map';
+
+// color
+$primitive-color: (
+  black: (
+    1000: #000000,
+  ),
+  white: (
+    1000: #ffffff,
+  ),
+  gray: (
+    0: #ffffff,
+    50: #f3f3f3,
+    100: #dddddd,
+    200: #c6c6c6,
+    300: #b0b0b0,
+    400: #9b9b9b,
+    500: #868686,
+    600: #727272,
+    700: #5e5e5e,
+    800: #4b4b4b,
+    900: #393939,
+    1000: #000000,
+  ),
+  blue: (
+    0: #ffffff,
+    50: #ebfbff,
+    100: #c2e2f1,
+    200: #99cee6,
+    300: #6fbad9,
+    400: #42a6c9,
+    500: #0399bf,
+    600: #027a97,
+    700: #00698b,
+    800: #005471,
+    900: #004057,
+    1000: #000000,
+  ),
+  green: (
+    0: #ffffff,
+    50: #e7fdf6,
+    100: #bde6d0,
+    200: #91d5b3,
+    300: #67c297,
+    400: #3cae7e,
+    500: #02a16d,
+    600: #008055,
+    700: #006f42,
+    800: #005933,
+    900: #004426,
+    1000: #000000,
+  ),
+  orange: (
+    0: #ffffff,
+    50: #fff5ec,
+    100: #ffcfb6,
+    200: #ffb089,
+    300: #ff9262,
+    400: #f6763f,
+    500: #ec6227,
+    600: #c93f0d,
+    700: #ad3300,
+    800: #8e2500,
+    900: #6e1c00,
+    1000: #000000,
+  ),
+  red: (
+    0: #ffffff,
+    50: #fff2f2,
+    100: #ffccc3,
+    200: #ffa99e,
+    300: #ff887e,
+    400: #ff6761,
+    500: #fa4d4d,
+    600: #d92c36,
+    700: #bc1327,
+    800: #9b041c,
+    900: #770614,
+    1000: #000000,
+  ),
+) !default;
+
+$semantic-color: (
+  neutral: gray,
+  informative: blue,
+  positive: green,
+  notice: orange,
+  negative: red,
+) !default;
+
+$semantic-intentions: (
+  neutral,
+  informative,
+  positive,
+  notice,
+  negative
+) !default;
+
+$base-color: (
+  light: (
+    background: map.get(map.get($primitive-color, blue), 0),
+    border: map.get(map.get($primitive-color, blue), 900),
+  ),
+  dark: (
+    background: map.get(map.get($primitive-color, blue), 900),
+    border: map.get(map.get($primitive-color, blue), 50),
+  ),
+) !default;
+
+$text-color: (
+  light: (
+    primary: map.get(map.get($primitive-color, blue), 900),
+    secondary: rgba(map.get(map.get($primitive-color, blue), 900), 0.6),
+  ),
+  dark: (
+    primary: map.get(map.get($primitive-color, blue), 50),
+    secondary: map.get(map.get($primitive-color, blue), 300),
+  ),
+) !default;
+
+$background-overlay-color: (
+  light: (
+    enabled: rgba(#000, 0),
+    hover: rgba(#000, 0.04),
+    focused: rgba(#000, 0.12),
+    selected: rgba(#000, 0.08),
+    mixed: rgba(#000, 0.08),
+    activated: rgba(#000, 0.12),
+    dragged: rgba(#000, 0.08),
+    disabled: rgba(#000, 0),
+  ),
+  dark: (
+    enabled: rgba(#fff, 0),
+    hover: rgba(#fff, 0.08),
+    focused: rgba(#fff, 0.24),
+    selected: rgba(#fff, 0.16),
+    mixed: rgba(#fff, 0.16),
+    activated: rgba(#fff, 0.24),
+    dragged: rgba(#fff, 0.16),
+    disabled: rgba(#fff, 0),
+  ),
+) !default;
+
+// Elevation
+$elevation-shadow: (
+  -1: [0 1.5 3 0 0.12,
+  ],
+  0: [0 0 0 0 0,
+  ],
+  1: [0 -0.1 1 0 0.12,
+  0 1 2 0 0.12],
+  2: [0 0 1 0 0.12,
+  0 2 4 0 0.12],
+  3: [0 0 3 0 0.08,
+  0 5 4 -4 0.12,
+  0 5 10 0 0.12],
+  4: [0 2 5 0 0.08,
+  0 7 8 -5 0.12,
+  0 10 25 0 0.12]
+) !default;
+
+// Sizing
+$sizing-scale: (
+  1: 0.0625rem,
+  2: 0.125rem,
+  4: 0.25rem,
+  8: 0.5rem,
+  12: 0.75rem,
+  16: 1rem,
+  20: 1.25rem,
+  24: 1.5rem,
+  28: 1.75rem,
+  32: 2rem,
+  40: 2.5rem,
+  48: 3rem,
+  56: 3.5rem,
+  64: 4rem,
+  72: 4.5rem,
+  80: 5rem,
+  96: 6rem,
+  112: 7rem,
+  120: 7.5rem,
+  128: 8rem,
+  144: 9rem,
+  160: 10rem,
+  168: 10.5rem,
+  176: 11rem,
+  192: 12rem,
+  216: 13.5rem,
+  240: 15rem,
+  264: 16.5rem,
+  288: 18rem,
+  312: 19.5rem,
+) !default;
+
+$spacing-sizes: (
+  //  4
+  2xs: 0.25rem,
+  //  8
+  xs: 0.5rem,
+  // 24
+  s: 0.75rem,
+  // 12
+  m: 1rem,
+  // 16
+  l: 1.5rem,
+  // 32
+  xl: 2rem,
+  // 48
+  2xl: 3rem,
+  // 56
+  3xl: 3.5rem,
+  // 64
+  4xl: 4rem,
+  // 80
+  5xl: 4.5rem,
+  // 72
+  6xl: 5rem,
+  // 96
+  7xl: 6rem
+) !default;
+
+$interactive-component-sizes: (
+  // 24
+  xs: 1.5rem,
+  // 32
+  s: 2rem,
+  // 40
+  m: 2.5rem,
+  // 48
+  l: 3rem,
+  // 56
+  xl: 3.5rem
+) !default;
+
+$radius-sizes: (
+  //  4
+  m: 0.25rem,
+  //  8
+  l: 0.5rem,
+  // 12
+  xl: 0.75rem
+) !default;
+
+$line-width-sizes: (
+  //  4
+  m: 0.0625rem,
+  //  8
+  l: 0.125rem,
+  // 16
+  xl: 0.25rem
+) !default;
+
+$content-sizes: (
+  xs: 480px,
+  s: 640px,
+  m: 960px,
+  l: 1200px,
+  xl: 1440px,
+) !default;
+
+$boundary-sizes: (
+  2xs: 330px,
+  xs: 370px,
+  s: 600px,
+  m: 800px,
+  l: 1100px,
+  xl: 1400px,
+) !default;
+
+$minimum-boundary-size: 1px;
+
+$leading-trailing-icon-sizes: (
+  s: 1.25rem,
+  m: 1.5rem,
+  l: 1.75rem,
+  xl: 2rem,
+) !default;
+
+// Typography
+$font-family-values: (
+  latin-sans: 'Inter',
+  //'soleil',
+  //'Inter',
+  latin-monospace: 'Roboto Mono',
+  japanese: 'ryo-gothic-plusn',
+  fallback: 'apple-system, BlinkMacSystemFont, Roboto, Helvetica, Arial',
+) !default;
+
+$font-stack-values: (
+  latin:
+    '#{map.get($font-family-values, latin-sans)}, #{map.get($font-family-values, fallback)}, sans-serif',
+  japanese:
+    '#{map.get($font-family-values, latin-sans)}, #{map.get($font-family-values, japanese)}, #{map.get($font-family-values, fallback)}, sans-serif',
+  monospace: '#{map.get($font-family-values, latin-monospace)}, monospace',
+) !default;
+
+$font-sizes: (
+  // 11px
+  2xs: 0.6875rem,
+  // 12px
+  xs: 0.75rem,
+  // 14px
+  s: 0.875rem,
+  // 16px
+  m: 1rem,
+  // 18px
+  l: 1.125rem,
+  // 21px
+  xl: 1.3125rem,
+  // 26px
+  2xl: 1.625rem,
+  // 32px
+  3xl: 2rem,
+  // 43px
+  4xl: 2.6875rem
+) !default;
+
+$line-height-sizes: (
+  comfort: (
+    // 20px
+    2xs: 1.25rem,
+    // 24px
+    xs: 1.5rem,
+    // 28px
+    s: 1.75rem,
+    // 28px
+    m: 1.75rem,
+    // 32px
+    l: 2rem,
+    // 40px
+    xl: 2.5rem,
+    // 48px
+    2xl: 3rem,
+    // 56px
+    3xl: 3.5rem,
+    // 76px
+    4xl: 4.75rem,
+  ),
+  normal: (
+    // 20px
+    2xs: 1.25rem,
+    // 20px
+    xs: 1.25rem,
+    // 24px
+    s: 1.5rem,
+    // 24px
+    m: 1.5rem,
+    // 28px
+    l: 1.75rem,
+    // 32px
+    xl: 2rem,
+    // 40px
+    2xl: 2.5rem,
+    // 40px
+    3xl: 2.5rem,
+    // 68px
+    4xl: 4.25rem,
+  ),
+  dense: (
+    // 16px
+    2xs: 1rem,
+    // 16px
+    xs: 1rem,
+    // 20px
+    s: 1.25rem,
+    // 20px
+    m: 1.25rem,
+    // 24px
+    l: 1.5rem,
+    // 28px
+    xl: 1.75rem,
+    // 36px
+    2xl: 2.25rem,
+    // 40px
+    3xl: 2.5rem,
+    // 56px
+    4xl: 3.5rem,
+  ),
+) !default;
+
+// Animation
+$animation-duration: 0.2s;

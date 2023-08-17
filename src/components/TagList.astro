@@ -1,0 +1,35 @@
+---
+import Button from '@components/Button.astro';
+
+const { tags } = Astro.props;
+---
+
+<ul class='list'>
+  {
+    tags.map((tag) => (
+      <li class='item'>
+        <Button element='a' href={`/articles/tags/${tag.attributes.slug}/`}>
+          # {tag.attributes.name}
+        </Button>
+      </li>
+    ))
+  }
+</ul>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .list {
+    @include mixins.initialize(ul);
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .item {
+    @include mixins.initialize(li);
+  }
+</style>

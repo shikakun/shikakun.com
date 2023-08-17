@@ -1,0 +1,21 @@
+---
+import Markdown from '@components/Markdown.astro';
+
+const { text } = Astro.props;
+---
+
+<div class="text">
+  <Markdown content={text} />
+</div>
+
+<style lang="scss">
+@use "@styles/variables";
+@use "@styles/functions";
+@use "@styles/mixins";
+@use "sass:math";
+@use "sass:map";
+
+.text {
+  @include mixins.typography-role(body);
+}
+</style>

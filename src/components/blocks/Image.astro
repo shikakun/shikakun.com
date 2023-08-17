@@ -1,0 +1,41 @@
+---
+const { image } = Astro.props;
+---
+
+<figure class='figure'>
+  <div class='image'>
+    <img
+      src={image.url}
+      alt={image.alternativeText}
+      width={image.width}
+      height={image.height}
+    />
+  </div>
+  {image.caption && <figcaption class='figcaption'>{image.caption}</figcaption>}
+</figure>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .figure {
+    @include mixins.initialize(figure);
+    margin: functions.get-spacing-size(xl) 0;
+  }
+
+  .image {
+    @include mixins.figure-border;
+
+    > img {
+      display: block;
+      max-width: 100%;
+    }
+  }
+
+  .figcaption {
+    @include mixins.initialize(figcaption);
+  }
+</style>

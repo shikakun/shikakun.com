@@ -1,0 +1,71 @@
+---
+import { Tag, mapContentToTag } from '@utils/tags';
+import { Article, mapContentToArticle } from '@utils/articles';
+import { fetchContentsApi } from '@utils/fetch-contents-api';
+import Layout from '@layouts/Layout.astro';
+import ArticleList from '@components/ArticleList.astro';
+
+export async function getStaticPaths() {
+  const tags: Tag[] = await fetchContentsApi('/tags', {
+    populate: '*',
+    'sort[slug]': 'desc',
+  }).then((contents) => contents.data.map(mapContentToTag));
+
+  return tags.map((tag) => {
+    return {
+      params: {
+        slug: tag.slug,
+      },
+      props: {
+        tag,
+      },
+    };
+  });
+}
+
+const articles: Article[] = await fetchContentsApi('/articles', {
+  populate: '*',
+  'sort[date]': 'desc',
+  'filters[tags][slug]': Astro.params.slug,
+}).then((contents) => contents.data.map(mapContentToArticle));
+
+const { tag } = Astro.props;
+---
+
+<Layout
+  title={`Articles: # ${tag.name}`}
+  openGraph={{
+    basic: {
+      title: `# ${tag.name}`,
+      type: 'website',
+      image: 'https://shikakun.com/ogimage.png',
+    },
+  }}
+>
+  <main class='page'>
+    <div class='article'>
+      <h1 class='visually-hidden'>タグ「# {tag.name}」の記事</h1>
+      <ArticleList articles={articles} filter={tag} nav={true} />
+    </div>
+  </main>
+</Layout>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .page {
+    @include mixins.page;
+  }
+
+  .container {
+    @include mixins.container;
+  }
+
+  .article {
+    padding: functions.get-sizing-scale-size(192) 0;
+  }
+</style>

@@ -1,0 +1,102 @@
+---
+import { Category, mapContentToCategory } from '@utils/categories';
+import { Tag, mapContentToTag } from '@utils/tags';
+import { fetchContentsApi } from '@utils/fetch-contents-api';
+import Button from '@components/Button.astro';
+
+const categories: Category[] = await fetchContentsApi('/categories', {
+  populate: '*',
+  'sort[order]': 'asc',
+}).then((contents) => contents.data.map(mapContentToCategory));
+
+const tags: Tag[] = await fetchContentsApi('/tags', {
+  populate: '*',
+  'sort[order]': 'asc',
+}).then((contents) => contents.data.map(mapContentToTag));
+---
+
+<div class='filter'>
+  {
+    categories && (
+      <div class='filter-section'>
+        <h2 class='filter-title'>Category</h2>
+        <ul class='filter-list'>
+          {categories.map((category) => (
+            <li class='filter-item'>
+              {Astro.url.pathname ===
+              `/articles/categories/${category.slug}/` ? (
+                <Button element='a' href='/articles/' trailingIcon='check'>
+                  {category.name}
+                </Button>
+              ) : (
+                <Button
+                  element='a'
+                  href={`/articles/categories/${category.slug}/`}
+                >
+                  {category.name}
+                </Button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+
+  {
+    tags && (
+      <div class='filter-section'>
+        <h2 class='filter-title'>Tag</h2>
+        <ul class='filter-list'>
+          {tags.map((tag) => (
+            <li class='filter-item'>
+              {Astro.url.pathname === `/articles/tags/${tag.slug}/` ? (
+                <Button element='a' href='/articles/' trailingIcon='check'>
+                  # {tag.name}
+                </Button>
+              ) : (
+                <Button element='a' href={`/articles/tags/${tag.slug}/`}>
+                  # {tag.name}
+                </Button>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    )
+  }
+</div>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .filter {
+    display: flex;
+    flex-direction: column;
+    gap: functions.get-spacing-size(2xl);
+    @include mixins.mq-boundary(down, l) {
+      margin-top: functions.get-spacing-size(7xl);
+    }
+  }
+
+  .filter-title {
+    @include mixins.initialize(heading);
+    margin-bottom: functions.get-spacing-size(s);
+    text-transform: uppercase;
+    letter-spacing: 0.025em;
+    @include mixins.text(m, dense);
+    @include mixins.kerning;
+  }
+
+  .filter-list {
+    @include mixins.initialize(ul);
+  }
+
+  .filter-item {
+    @include mixins.initialize(li);
+  }
+</style>

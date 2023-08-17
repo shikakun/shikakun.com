@@ -1,0 +1,289 @@
+---
+import Button from '@components/Button.astro';
+
+const { avatar } = Astro.props;
+---
+
+<div class='wrapper'>
+  <div class='avatar' data-show-avatar={avatar}>
+    <a href='/' rel='home' tabindex='-1'>
+      <img src='/images/brand/shikakun_square.png' alt='' />
+    </a>
+  </div>
+  <div class='body'>
+    <div class='container'>
+      <div class='shikakun'>
+        <a
+          class='js-text-effect-link'
+          href='/'
+          rel='home'
+          data-replace-text='Takashi Nakao'>shikakun</a
+        >
+      </div>
+      <div class='menu'>
+        <ul>
+          <li><a href='/articles/'>Articles</a></li>
+          <li><a href='/manzai/'>Manzai</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  <div class='launcher'>
+    <Button
+      element='button'
+      className='js-drawer-switch'
+      leadingIcon='menu'
+      iconOnly='true'
+      ariaLabel='メニュー'
+      ariaExpanded='false'
+      ariacontrols='drawer'
+    >
+      メニュー
+    </Button>
+  </div>
+</div>
+
+<script>
+  window.addEventListener('load', () => {
+    const drawerSwitches = document.querySelectorAll('.js-drawer-switch');
+
+    drawerSwitches.forEach(function (switchElement) {
+      switchElement.addEventListener('click', function () {
+        const controlledElementId = this.getAttribute('aria-controls');
+        const controlledElement = document.getElementById(controlledElementId);
+        const isHidden =
+          controlledElement.getAttribute('aria-hidden') === 'true';
+
+        controlledElement.setAttribute('aria-hidden', !isHidden);
+        document.body.setAttribute('data-drawer-opened', isHidden);
+      });
+    });
+  });
+
+  window.addEventListener('load', () => {
+    const links = document.querySelectorAll('.js-text-effect-link');
+    const tempChars = 'abcdefhiklmnorstuvwxz';
+
+    links.forEach((link) => {
+      const originalText = link.textContent;
+      const replacementText = link.getAttribute('data-replace-text') || '';
+      let timer;
+
+      const replaceText = (fromText, toText) => {
+        const maxLength = Math.max(fromText.length, toText.length);
+        let i = 0;
+        timer = setInterval(() => {
+          const tempChar = tempChars.charAt(
+            Math.floor(Math.random() * tempChars.length)
+          );
+
+          const currentChar = i < toText.length ? tempChar : '';
+          link.textContent =
+            toText.slice(0, i) + currentChar + fromText.slice(i + 1, maxLength);
+          if (i < maxLength) i++;
+          setTimeout(() => {
+            link.textContent =
+              toText.slice(0, i) + fromText.slice(i, maxLength);
+          }, 25);
+          if (i >= maxLength) clearInterval(timer);
+        }, 50);
+      };
+
+      link.addEventListener('mouseover', () => {
+        clearInterval(timer);
+        replaceText(originalText, replacementText);
+      });
+
+      link.addEventListener('mouseout', () => {
+        clearInterval(timer);
+        replaceText(replacementText, originalText);
+      });
+    });
+  });
+</script>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .avatar {
+    padding: 1rem;
+    @include mixins.mq-boundary(up, m) {
+      padding: 2rem;
+    }
+
+    &[data-show-avatar='false'] {
+      opacity: 0;
+      pointer-events: none;
+      @include mixins.mq-boundary(down, m) {
+        width: 0;
+      }
+    }
+
+    a {
+      @include mixins.initialize(a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 3rem;
+      height: 3rem;
+      color: inherit;
+      border-radius: 100%;
+      @include mixins.interactive-overlay;
+      @include mixins.focus-ring;
+    }
+
+    img {
+      $size: (
+        mobile: 2.5rem,
+        desktop: 3rem,
+      );
+
+      display: block;
+      width: map.get($size, mobile);
+      height: map.get($size, mobile);
+      border-radius: inherit;
+      @include mixins.mq-boundary(up, m) {
+        width: map.get($size, desktop);
+        height: map.get($size, desktop);
+      }
+    }
+  }
+
+  .body {
+    flex: 1;
+    min-width: 0;
+    @include mixins.mq-boundary(up, l) {
+      padding-right: functions.get-spacing-size(xl);
+    }
+  }
+
+  .container {
+    @include mixins.mq-boundary(down, m) {
+      display: flex;
+      align-center: center;
+      justify-content: flex-start;
+    }
+    @include mixins.mq-boundary(up, m) {
+      @include mixins.grid(12);
+    }
+  }
+
+  .shikakun {
+    $side-spacing: math.div(functions.get-interactive-component-size(m), 4);
+
+    margin-left: 0 - $side-spacing;
+    @include mixins.mq-boundary(up, m) {
+      margin-left: 0;
+      padding-left: functions.get-spacing-size(l);
+      @include mixins.grid-column(5);
+      @include mixins.border-left;
+    }
+    @include mixins.mq-boundary(up, l) {
+      padding-left: functions.get-spacing-size(xl);
+      @include mixins.grid-column(3);
+    }
+
+    a {
+      @include mixins.initialize(a);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: functions.get-interactive-component-size(m);
+      padding: 0 $side-spacing;
+      color: inherit;
+      @include mixins.text(xl, dense);
+      @include mixins.interactive-overlay;
+      @include mixins.focus-ring;
+    }
+  }
+
+  .title {
+    @include mixins.mq-boundary(down, m) {
+      display: none;
+    }
+    @include mixins.mq-boundary(up, m) {
+      padding-left: functions.get-spacing-size(l);
+      @include mixins.grid-column(7);
+      @include mixins.border-left;
+    }
+    @include mixins.mq-boundary(up, l) {
+      padding-left: functions.get-spacing-size(xl);
+      @include mixins.grid-column(3);
+    }
+
+    a,
+    span {
+      $side-spacing: math.div(functions.get-interactive-component-size(m), 4);
+
+      @include mixins.initialize(a);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: functions.get-interactive-component-size(m);
+      padding: 0 $side-spacing;
+      color: inherit;
+      @include mixins.text(xl, dense);
+    }
+
+    a {
+      @include mixins.interactive-overlay;
+      @include mixins.focus-ring;
+    }
+  }
+
+  .menu {
+    @include mixins.mq-boundary(down, m) {
+      display: none;
+    }
+    @include mixins.mq-boundary(up, m) {
+      padding-left: functions.get-spacing-size(xl);
+      @include mixins.grid-column(6);
+      @include mixins.border-left;
+    }
+
+    ul {
+      @include mixins.initialize(ul);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      flex-wrap: wrap;
+      gap: functions.get-spacing-size(xs);
+    }
+
+    li {
+      @include mixins.initialize(li);
+    }
+
+    a {
+      $side-spacing: math.div(functions.get-interactive-component-size(m), 4);
+
+      @include mixins.initialize(a);
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      height: functions.get-interactive-component-size(m);
+      padding: 0 $side-spacing;
+      color: inherit;
+      @include mixins.text(xl, dense);
+      @include mixins.interactive-overlay;
+      @include mixins.focus-ring;
+    }
+  }
+
+  .launcher {
+    padding: 1rem;
+    @include mixins.mq-boundary(up, m) {
+      display: none;
+    }
+  }
+</style>

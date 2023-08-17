@@ -1,0 +1,35 @@
+{
+  "name": "shikakun.com",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "packageManager": "yarn@3.6.1",
+  "scripts": {
+    "astro": "astro",
+    "build:astro": "astro build",
+    "build:icon": "rimraf ./public/icons/* && fantasticon ./src/icons/assets -o ./public/icons",
+    "build": "yarn build:icon && yarn build:astro",
+    "deploy": "npm run build && wrangler pages deploy dist",
+    "dev": "astro dev",
+    "preview": "astro preview",
+    "start": "astro dev"
+  },
+  "devDependencies": {
+    "@astrojs/react": "^2.2.1",
+    "@types/react": "^18.2.20",
+    "@types/react-dom": "^18.2.7",
+    "astro": "^2.10.7",
+    "astro-compress": "^2.0.8",
+    "astro-seo": "^0.7.5",
+    "axios": "^1.4.0",
+    "dayjs": "^1.11.9",
+    "fantasticon": "^2.0.0",
+    "marked": "^7.0.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "rimraf": "^5.0.1",
+    "sanitize-html": "^2.11.0",
+    "sass": "^1.65.1",
+    "xml2js": "^0.6.2"
+  }
+}

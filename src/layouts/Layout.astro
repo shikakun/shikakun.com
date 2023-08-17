@@ -1,0 +1,156 @@
+---
+import { SEO } from 'astro-seo';
+import GoogleTagManager from '@components/GoogleTagManager.astro';
+import Navbar from '@components/Navbar.astro';
+import Drawer from '@components/Drawer.astro';
+
+export interface Props {
+  title?: string;
+  description?: string;
+  openGraph?: object;
+}
+
+const { title, description, openGraph } = Astro.props;
+---
+
+<!DOCTYPE html>
+<html lang='ja'>
+  <head>
+    <meta charset='UTF-8' />
+    <meta name='viewport' content='width=device-width' />
+    <SEO
+      title={title}
+      titleTemplate='%s — shikakun'
+      titleDefault='shikakun'
+      description={description ||
+        'shikakun (Takashi Nakao) のウェブサイト。プロフィールや、これまでの活動を紹介しています。'}
+      openGraph={openGraph || {
+        basic: {
+          title: 'shikakun',
+          type: 'website',
+          image: 'https://shikakun.com/ogimage.png',
+        },
+      }}
+      extend={{
+        link: [{ rel: 'icon', href: '/favicon.ico' }],
+      }}
+    />
+    <link rel='apple-touch-icon' sizes='180x180' href='/apple-touch-icon.png' />
+    <link
+      rel='icon'
+      type='image/png'
+      sizes='512x512'
+      href='/android-chrome-512x512.png'
+    />
+    <link
+      rel='icon'
+      type='image/png'
+      sizes='192x192'
+      href='/android-chrome-192x192.png'
+    />
+    <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
+    <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
+    <meta name='theme-color' content='#ffffff' />
+    <GoogleTagManager position='head' />
+  </head>
+  <body>
+    <GoogleTagManager position='body' />
+    <header class='header'>
+      <Navbar avatar='true' />
+    </header>
+    <slot />
+    <footer class='footer'>
+      <Navbar avatar='false' />
+    </footer>
+    <Drawer />
+    <script>
+      (function (d) {
+        var config = {
+            kitId: 'bjw4txy',
+            scriptTimeout: 3000,
+            async: true,
+          },
+          h = d.documentElement,
+          t = setTimeout(function () {
+            h.className =
+              h.className.replace(/\bwf-loading\b/g, '') + ' wf-inactive';
+          }, config.scriptTimeout),
+          tk = d.createElement('script'),
+          f = false,
+          s = d.getElementsByTagName('script')[0],
+          a;
+        h.className += ' wf-loading';
+        tk.src = 'https://use.typekit.net/' + config.kitId + '.js';
+        tk.async = true;
+        tk.onload = tk.onreadystatechange = function () {
+          a = this.readyState;
+          if (f || (a && a != 'complete' && a != 'loaded')) return;
+          f = true;
+          clearTimeout(t);
+          try {
+            Typekit.load(config);
+          } catch (e) {}
+        };
+        s.parentNode.insertBefore(tk, s);
+      })(document);
+    </script>
+
+    <style lang='scss' is:global>
+      @use '@styles/variables';
+      @use '@styles/functions';
+      @use '@styles/mixins';
+      @use 'sass:math';
+      @use 'sass:map';
+
+      @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+
+      html {
+        color: functions.get-text-color(light, primary);
+        background-color: functions.get-base-color(light, background);
+        font-family: functions.get-font-stack(latin);
+        font-size: 100%;
+        font-kerning: normal;
+        word-break: break-all;
+        line-break: normal;
+        hanging-punctuation: allow-end;
+        text-underline-offset: 0.1em;
+
+        &:lang(ja) {
+          font-family: functions.get-font-stack(japanese);
+          font-feature-settings: 'palt' 0;
+          font-kerning: none;
+        }
+      }
+
+      body {
+        @include mixins.initialize(body);
+      }
+
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+
+      .visually-hidden {
+        @include mixins.visually-hidden;
+      }
+
+      ::selection {
+        color: functions.get-base-color(light, background);
+        background-color: functions.get-text-color(light, primary);
+      }
+    </style>
+
+    <style lang='scss'>
+      @use '@styles/variables';
+      @use '@styles/functions';
+      @use '@styles/mixins';
+      @use 'sass:math';
+      @use 'sass:map';
+
+      .footer {
+        margin-top: functions.get-sizing-scale-size(192);
+      }
+    </style>
+  </body>
+</html>

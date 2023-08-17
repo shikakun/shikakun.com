@@ -1,0 +1,45 @@
+---
+const { name } = Astro.props;
+---
+
+<div class='icon' data-icon={name}></div>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  $icon-font-name: "{{ name }}";
+
+  @font-face {
+    font-family: $icon-font-name;
+    src: {{{ fontSrc }}};
+  }
+
+  .icon {
+    display: inline-block;
+    font-family: $icon-font-name;
+    font-weight: normal;
+    font-style: normal;
+    line-height: 1;
+    direction: ltr;
+    letter-spacing: normal;
+    white-space: nowrap;
+    text-transform: none;
+    word-wrap: normal;
+  }
+
+  $icon-font-codepoints: (
+  {{# each codepoints }}
+    "{{ @key }}": "\\{{ codepoint this }}",
+  {{/ each }}
+  );
+
+  {{# each codepoints }}
+  .icon[data-icon="{{ @key }}"]::after {
+    content: map.get($icon-font-codepoints, "{{ @key }}");
+  }
+  {{/ each }}
+</style>
