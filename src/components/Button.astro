@@ -13,6 +13,7 @@ const {
   ariaExpanded,
   ariacontrols,
   appearance,
+  width,
   leadingIcon,
   trailingIcon,
   iconOnly,
@@ -30,6 +31,14 @@ if (iconOnly) {
 
 if (appearance == 'outlined') {
   classes += ' -appearance-outlined';
+}
+
+if (appearance == 'filled') {
+  classes += ' -appearance-filled';
+}
+
+if (width == 'full') {
+  classes += ' -width-full';
 }
 ---
 
@@ -125,8 +134,17 @@ if (appearance == 'outlined') {
       box-shadow: inset 0 0 0 2px currentColor;
     }
 
+    &.-appearance-filled {
+      background-color: functions.get-primitive-color(blue, 50);
+    }
+
     &.-icon-only {
       width: functions.get-interactive-component-size(l);
+    }
+
+    &.-width-full {
+      width: 100%;
+      justify-content: flex-start;
     }
 
     .body {
