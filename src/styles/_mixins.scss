@@ -80,10 +80,6 @@
   @include mq-boundary(up, l) {
     gap: functions.get-spacing-size(xl);
   }
-
-  > * {
-    grid-column: 1 / -1;
-  }
 }
 
 @mixin grid-column($span: 1) {
