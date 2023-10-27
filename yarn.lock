@@ -62,7 +62,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@astrojs/react@npm:latest":
+"@astrojs/react@npm:^3.0.4":
   version: 3.0.4
   resolution: "@astrojs/react@npm:3.0.4"
   dependencies:
@@ -1337,7 +1337,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"astro@npm:latest":
+"astro@npm:^3.4.0":
   version: 3.4.0
   resolution: "astro@npm:3.4.0"
   dependencies:
@@ -5682,10 +5682,10 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "shikakun.com@workspace:."
   dependencies:
-    "@astrojs/react": latest
+    "@astrojs/react": ^3.0.4
     "@types/react": ^18.2.20
     "@types/react-dom": ^18.2.7
-    astro: latest
+    astro: ^3.4.0
     astro-compress: ^2.0.8
     astro-seo: ^0.7.5
     axios: ^1.4.0
