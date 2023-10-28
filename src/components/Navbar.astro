@@ -1,11 +1,9 @@
 ---
 import Button from '@components/Button.astro';
-
-const { avatar } = Astro.props;
 ---
 
 <div class='wrapper'>
-  <div class='avatar' data-show-avatar={avatar}>
+  <div class='avatar'>
     <a href='/' rel='home' tabindex='-1'>
       <img src='/images/brand/shikakun_square.png' alt='' />
     </a>
@@ -120,14 +118,6 @@ const { avatar } = Astro.props;
     padding: 1rem;
     @include mixins.mq-boundary(up, m) {
       padding: 2rem;
-    }
-
-    &[data-show-avatar='false'] {
-      opacity: 0;
-      pointer-events: none;
-      @include mixins.mq-boundary(down, m) {
-        width: 0;
-      }
     }
 
     a {
