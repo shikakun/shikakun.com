@@ -30,12 +30,10 @@ import Button from '@components/Button.astro';
   <div class='launcher'>
     <Button
       element='button'
-      className='js-drawer-switch'
       leadingIcon='menu'
       iconOnly='true'
       ariaLabel='メニュー'
-      ariaExpanded='false'
-      ariacontrols='drawer'
+      popovertarget='drawer'
     >
       メニュー
     </Button>
@@ -43,22 +41,6 @@ import Button from '@components/Button.astro';
 </div>
 
 <script>
-  window.addEventListener('load', () => {
-    const drawerSwitches = document.querySelectorAll('.js-drawer-switch');
-
-    drawerSwitches.forEach(function (switchElement) {
-      switchElement.addEventListener('click', function () {
-        const controlledElementId = this.getAttribute('aria-controls');
-        const controlledElement = document.getElementById(controlledElementId);
-        const isHidden =
-          controlledElement.getAttribute('aria-hidden') === 'true';
-
-        controlledElement.setAttribute('aria-hidden', !isHidden);
-        document.body.setAttribute('data-drawer-opened', isHidden);
-      });
-    });
-  });
-
   window.addEventListener('load', () => {
     const links = document.querySelectorAll('.js-text-effect-link');
     const tempChars = 'abcdefhiklmnorstuvwxz';

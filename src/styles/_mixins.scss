@@ -457,6 +457,15 @@
     margin: 0;
   }
 
+  // popover {
+  //
+  // }
+  @else if $element == popover {
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
   // small {
   //   font-size: 100%;
   // }

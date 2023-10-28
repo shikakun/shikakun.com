@@ -2,17 +2,11 @@
 import ArticleFilter from '@components/ArticleFilter.astro';
 ---
 
-<nav id='drawer' class='drawer' aria-hidden='true'>
-  <div
-    class='background js-drawer-switch'
-    aria-expanded='true'
-    aria-controls='drawer'
-  >
-  </div>
+<nav id='drawer' class='drawer' popover>
   <div class='container'>
     <div class='menu'>
       <ul>
-        <li><a href='/' rel='home'>Profile</a></li>
+        <li><a href='/' rel='home' autofocus>Profile</a></li>
         <li><a href='/articles/'>Articles</a></li>
         <li><a href='/link/'>Link</a></li>
         <li><a href='/manzai/'>Manzai</a></li>
@@ -25,6 +19,20 @@ import ArticleFilter from '@components/ArticleFilter.astro';
   </div>
 </nav>
 
+<script>
+  window.addEventListener('load', () => {
+    const drawer = document.getElementById('drawer');
+
+    drawer.addEventListener("toggle", (event) => {
+      if (event.newState === 'open') {
+        document.body.style.overflow = 'hidden';
+      } else {
+        document.body.style.overflow = 'auto';
+      }
+    });
+  });
+</script>
+
 <style lang='scss'>
   @use '@styles/variables';
   @use '@styles/functions';
@@ -33,30 +41,30 @@ import ArticleFilter from '@components/ArticleFilter.astro';
   @use 'sass:map';
 
   .drawer {
+    @include mixins.initialize(popover);
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    background: transparent;
     z-index: 1000;
     overflow-x: hidden;
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    pointer-events: none;
 
-    &[aria-hidden='true'] {
-      visibility: hidden;
-      opacity: 0;
+    &::backdrop {
+      position: fixed;
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      background-color: rgba(functions.get-primitive-color(blue, 600), 0.8);
+      backdrop-filter: blur(0.25rem);
     }
-  }
-
-  .background {
-    position: fixed;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    background-color: rgba(functions.get-primitive-color(blue, 600), 0.8);
-    backdrop-filter: blur(0.25rem);
   }
 
   .container {
@@ -65,10 +73,7 @@ import ArticleFilter from '@components/ArticleFilter.astro';
     min-height: 50vh;
     width: 100%;
     background-color: functions.get-primitive-color(white);
-  }
-
-  .drawer[aria-hidden='true'] .container {
-    opacity: 0;
+    pointer-events: auto;
   }
 
   .menu {
@@ -103,9 +108,5 @@ import ArticleFilter from '@components/ArticleFilter.astro';
 
   .filter {
     padding: functions.get-spacing-size(l);
-  }
-
-  body[data-drawer-opened='true'] {
-    overflow: hidden;
   }
 </style>
