@@ -21,13 +21,20 @@ import ArticleFilter from '@components/ArticleFilter.astro';
 
 <script>
   window.addEventListener('load', () => {
+    const body = document.body;
     const drawer = document.getElementById('drawer');
+    const contents = document.getElementById('contents');
 
     drawer.addEventListener("toggle", (event) => {
       if (event.newState === 'open') {
-        document.body.style.overflow = 'hidden';
+        body.style.overflow = 'hidden';
+        contents.setAttribute('aria-hidden', 'true');
+        contents.setAttribute('inert', 'inert');
+
       } else {
-        document.body.style.overflow = 'auto';
+        body.style.overflow = 'auto';
+        contents.setAttribute('aria-hidden', 'false');
+        contents.removeAttribute('inert');
       }
     });
   });
