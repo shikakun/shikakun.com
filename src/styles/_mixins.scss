@@ -457,6 +457,19 @@
     margin: 0;
   }
 
+  // popover {
+  //   color: inherit;
+  //   border: 0;
+  //   margin: 0;
+  //   padding: 0;
+  // }
+  @else if $element == popover {
+    color: inherit;
+    border: 0;
+    margin: 0;
+    padding: 0;
+  }
+
   // small {
   //   font-size: 100%;
   // }

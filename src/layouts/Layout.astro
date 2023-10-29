@@ -55,14 +55,21 @@ const { title, description, openGraph } = Astro.props;
   </head>
   <body>
     <GoogleTagManager position='body' />
-    <header class='header'>
-      <Navbar avatar='true' />
-    </header>
-    <slot />
-    <footer class='footer'>
-      <Navbar avatar='false' />
-    </footer>
+
+    <div id="contents">
+      <header class='header'>
+        <Navbar />
+      </header>
+
+      <slot />
+
+      <footer class='footer'>
+        <Navbar />
+      </footer>
+    </div>
+
     <Drawer />
+
     <script>
       (function (d) {
         var config = {
