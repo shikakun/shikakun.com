@@ -20,10 +20,16 @@ import ArticleFilter from '@components/ArticleFilter.astro';
 </nav>
 
 <script>
+  import { isSupported, apply } from 'node_modules/@oddbird/popover-polyfill/dist/popover-fn.js';
+
   window.addEventListener('load', () => {
     const body = document.body;
     const drawer = document.getElementById('drawer');
     const contents = document.getElementById('contents');
+
+    if (!isSupported()) {
+      apply();
+    }
 
     drawer.addEventListener("toggle", (event) => {
       if (event.newState === 'open') {

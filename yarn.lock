@@ -906,6 +906,13 @@ __metadata:
   languageName: node
   linkType: hard
 
+"@oddbird/popover-polyfill@npm:^0.3.1":
+  version: 0.3.1
+  resolution: "@oddbird/popover-polyfill@npm:0.3.1"
+  checksum: d242c13ea7776b0afdc2bce6815406c9152bc92825bcf53e12d21012b10d315bd822d364f48af1365ccee8e57bc89bd356171febedfa6cfa19f36e75d8c08354
+  languageName: node
+  linkType: hard
+
 "@pkgjs/parseargs@npm:^0.11.0":
   version: 0.11.0
   resolution: "@pkgjs/parseargs@npm:0.11.0"
@@ -5683,6 +5690,7 @@ __metadata:
   resolution: "shikakun.com@workspace:."
   dependencies:
     "@astrojs/react": ^3.0.4
+    "@oddbird/popover-polyfill": ^0.3.1
     "@types/react": ^18.2.20
     "@types/react-dom": ^18.2.7
     astro: ^3.4.0
