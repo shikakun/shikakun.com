@@ -1,0 +1,185 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Button from '@components/Button.astro';
+import { Image } from 'astro:assets';
+import coverImage from '@assets/images/releases/just_that/cover.jpg';
+import platformBrandImageAppleMusic from '@assets/images/releases/apple_music.svg';
+import platformBrandImageBandcamp from '@assets/images/releases/bandcamp.svg';
+import platformBrandImageSpotify from '@assets/images/releases/spotify.svg';
+
+const links = [
+  {
+    slug: 'apple-music',
+    label: 'Listen',
+    url: 'https://music.apple.com/jp/album/%E3%81%9D%E3%82%8C%E3%81%A0%E3%81%91-single/1719784058',
+    platform_brand_name: 'Apple Music',
+    platform_brand_image: platformBrandImageAppleMusic,
+  },
+  {
+    slug: 'bandcamp',
+    label: 'Listen',
+    url: 'https://shikakun.bandcamp.com/track/--15',
+    platform_brand_name: 'Bandcamp',
+    platform_brand_image: platformBrandImageBandcamp,
+  },
+];
+---
+
+<Layout
+  title='それだけ'
+  description='「それだけ」という曲をつくって、Apple MusicとBandcampで配信しました。'
+  openGraph={{
+    basic: {
+      title: 'shikakun / それだけ',
+      type: 'website',
+      image: 'https://shikakun.com/images/releases/just_that/ogimage.jpg',
+    },
+  }}
+>
+  <main class='page'>
+    <div class='container'>
+      <div class='body'>
+        <div class='cover'>
+          <Image
+            src={coverImage}
+            alt='写真：透明な花瓶に生けられた、赤、オレンジ、黄色、そして水色のさまざまな花。部屋の床に置かれた花瓶を、背景の窓から差し込む光が照らしている。'
+          />
+        </div>
+        <header class='header'>
+          <h1 class='title'>shikakun / それだけ</h1>
+        </header>
+        <ul class='list'>
+          {
+            links.map((link) => (
+              <li class='item'>
+                <div class='platform-brand'>
+                  <img
+                    class='platform-brand-image'
+                    src={link.platform_brand_image.src}
+                    alt={link.platform_brand_name}
+                    width={link.platform_brand_image.width}
+                    height={link.platform_brand_image.height}
+                  />
+                </div>
+
+                <div class='action'>
+                  <div class='action-container'>
+                    <Button
+                      element='a'
+                      href={link.url}
+                      target='_blank'
+                      rel='noopener noreferrer'
+                      appearance='filled'
+                      trailingIcon='arrow_right'
+                    >
+                      {link.label}
+                    </Button>
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <style lang='scss'>
+      @use '@styles/variables';
+      @use '@styles/functions';
+      @use '@styles/mixins';
+      @use 'sass:math';
+      @use 'sass:map';
+
+      .page {
+        @include mixins.page;
+      }
+
+      .container {
+        @include mixins.container;
+      }
+
+      .body {
+        padding: functions.get-sizing-scale-size(192) 0;
+        display: flex;
+        flex-direction: column;
+        gap: functions.get-spacing-size(2xl);
+        max-width: functions.get-content-size(xs);
+      }
+
+      .header {
+        @include mixins.initialize(header);
+        display: flex;
+        flex-direction: column;
+        gap: functions.get-spacing-size(m);
+      }
+
+      .title {
+        @include mixins.initialize(heading);
+        letter-spacing: 0.025em;
+        @include mixins.text(xl, dense);
+        @include mixins.kerning;
+        @include mixins.mq-boundary(up, m) {
+          @include mixins.text(2xl, dense);
+        }
+      }
+
+      .list {
+        @include mixins.initialize(ul);
+        display: flex;
+        flex-direction: column;
+        gap: functions.get-spacing-size(m);
+      }
+
+      .item {
+        @include mixins.initialize(li);
+        position: relative;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+
+        &::after {
+          $line-width-size: functions.get-line-width-size(l);
+
+          content: '';
+          display: block;
+          position: absolute;
+          bottom: math.div(functions.get-interactive-component-size(m), 2);
+          width: 100%;
+          height: functions.get-line-width-size(l);
+          background-color: currentColor;
+          z-index: -1;
+        }
+      }
+
+      .platform-brand {
+        padding-right: functions.get-spacing-size(m);
+        background-color: functions.get-primitive-color(white);
+        @include mixins.mq-boundary(down, xs) {
+          box-sizing: border-box;
+          width: 100%;
+        }
+      }
+
+      .platform-brand-image {
+        display: block;
+        height: functions.get-interactive-component-size(m);
+        width: auto;
+      }
+
+      .action {
+        display: flex;
+        justify-content: flex-end;
+        @include mixins.mq-boundary(down, xs) {
+          box-sizing: border-box;
+          width: 100%;
+        }
+      }
+
+      .action-container {
+        padding-left: functions.get-spacing-size(m);
+        background-color: functions.get-primitive-color(white);
+      }
+    </style>
+  </main>
+</Layout>
