@@ -31,29 +31,8 @@ const articles: Article[] = await fetchContentsApi('/articles', {
           <p class='description'>
             ユーザーの体験を設計して、フロントエンドのコードで実装するデザイナーです。<br
             />
-            写真の撮影や動画の編集、音楽の制作が趣味で、詩を書いて朗読する活動をしています。
+             写真の撮影や動画の編集、音楽の制作が趣味で、詩を書いて朗読する活動をしています。
           </p>
-          <div class='experience'>
-            <h3 class='visually-hidden'>学歴・経歴</h3>
-            <table>
-              <thead class='visually-hidden'>
-                <tr>
-                  <th>期間</th>
-                  <th>内容</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td><time>2012.4</time> -</td>
-                  <td>GMOペパボ株式会社</td>
-                </tr>
-                <tr>
-                  <td><time>2008.4</time> - <time>2012.3</time></td>
-                  <td>東京造形大学 デザイン学部 映画専攻領域</td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
           <div class='buttons'>
             <Button
               element='a'
@@ -181,34 +160,5 @@ const articles: Article[] = await fetchContentsApi('/articles', {
   .description {
     @include mixins.initialize(p);
     @include mixins.typography-role(body);
-  }
-
-  .experience {
-    table {
-      border-collapse: collapse;
-      border-spacing: 0;
-    }
-
-    td {
-      padding: functions.get-spacing-size(2xs) 0;
-      vertical-align: top;
-      @include mixins.text(s, normal);
-      @include mixins.mq-boundary(up, s) {
-        @include mixins.text(m, normal);
-      }
-
-      &:first-child {
-        white-space: nowrap;
-        padding-right: functions.get-spacing-size(m);
-        @include mixins.mq-boundary(up, s) {
-          padding-right: functions.get-spacing-size(xl);
-        }
-      }
-    }
-
-    time {
-      display: inline-block;
-      white-space: nowrap;
-    }
   }
 </style>
