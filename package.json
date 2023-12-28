@@ -3,12 +3,11 @@
   "version": "1.6.0",
   "private": true,
   "type": "module",
-  "packageManager": "yarn@3.6.1",
   "scripts": {
     "astro": "astro",
     "build:astro": "astro build",
     "build:icon": "rimraf ./public/icons/* && fantasticon ./src/icons/assets -o ./public/icons",
-    "build": "yarn build:icon && yarn build:astro",
+    "build": "npm run build:icon && npm run build:astro",
     "deploy": "npm run build && wrangler pages deploy dist",
     "dev": "astro dev",
     "preview": "astro preview",
