@@ -38,6 +38,10 @@ jobs:
             echo "{RELEASE_VERSION}=''" >> $GITHUB_OUTPUT
           fi
 
+      - name: DEBUG
+        run: |
+          echo "RELEASE_VERSION: ${{ steps.version_check.outputs.RELEASE_VERSION }}"
+
       - name: Create and Push Tag
         if: steps.version_check.outputs.RELEASE_VERSION != ''
         run: |
