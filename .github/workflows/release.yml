@@ -1,0 +1,55 @@
+name: Release Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+
+      - name: Install Dependencies
+        run: npm install
+
+      - name: Check for version changes
+        id: version_check
+        run: |
+          : # Get the current version of package.json
+          PACKAGE_VERSION=$(node -p "require('./package.json').version")
+          echo "Package version: $PACKAGE_VERSION"
+          : # Get the latest git tag
+          GIT_TAG=$(git describe --tags `git rev-list --tags --max-count=1`)
+          echo "Git tag: $GIT_TAG"
+          : # Compare current version of package.json and latest git tag
+          if [ "$PACKAGE_VERSION" != "$GIT_TAG" ]; then
+            echo "::set-output name=TAG_VERSION::$PACKAGE_VERSION"
+          else
+            echo "::set-output name=TAG_VERSION::"
+          fi
+
+      - name: Create and Push Tag
+        if: steps.version_check.outputs.TAG_VERSION != ''
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git tag ${{ steps.version_check.outputs.TAG_VERSION }}
+          git push origin ${{ steps.version_check.outputs.TAG_VERSION }}
+
+      - name: Deploy to Cloudflare Pages
+        if: steps.version_check.outputs.TAG_VERSION != ''
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          projectName: ${{ secrets.CLOUDFLARE_PROJECT_NAME }}
+          directory: dist
