@@ -47,6 +47,7 @@ jobs:
           git push origin ${{ steps.version_check.outputs.RELEASE_VERSION }}
 
       - name: Build
+        if: steps.version_check.outputs.RELEASE_VERSION != ''
         run: npm run build
         env:
           CONTENTS_API_URL: ${{ secrets.CONTENTS_API_URL }}
@@ -54,6 +55,7 @@ jobs:
           GTM_CONTAINER_ID: ${{ secrets.GTM_CONTAINER_ID }}
 
       - name: Deploy to Cloudflare Pages
+        if: steps.version_check.outputs.RELEASE_VERSION != ''
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
