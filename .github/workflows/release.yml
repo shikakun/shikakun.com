@@ -46,6 +46,9 @@ jobs:
           git tag ${{ steps.version_check.outputs.RELEASE_VERSION }}
           git push origin ${{ steps.version_check.outputs.RELEASE_VERSION }}
 
+      - name: Build
+        run: npm run build
+
       - name: Deploy to Cloudflare Pages
         uses: cloudflare/pages-action@v1
         with:
