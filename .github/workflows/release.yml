@@ -28,7 +28,7 @@ jobs:
           PACKAGE_VERSION=$(node -p "require('./package.json').version")
           echo "Package version: $PACKAGE_VERSION"
           : # Get the latest git tag
-          GIT_TAG=${GITHUB_REF##*/}
+          GIT_TAG=${GITHUB_REF#refs/*/}
           echo "Git tag: $GIT_TAG"
           : # Compare current version of package.json and latest git tag
           if [ "$PACKAGE_VERSION" != "$GIT_TAG" ]; then
