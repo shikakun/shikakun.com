@@ -38,12 +38,8 @@ jobs:
             echo "RELEASE_VERSION=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: DEBUG
-        run: |
-          echo "RELEASE_VERSION: ${{ steps.version_check.outputs.RELEASE_VERSION }}"
-
       - name: Create and Push Tag
-        if: fromJSON(steps.version_check.outputs.RELEASE_VERSION)
+        if: steps.version_check.outputs.RELEASE_VERSION != 'false'
         run: |
           git config --local user.email "action@github.com"
           git config --local user.name "GitHub Action"
@@ -51,7 +47,7 @@ jobs:
           git push origin ${{ steps.version_check.outputs.RELEASE_VERSION }}
 
       - name: Deploy to Cloudflare Pages
-        if: fromJSON(steps.version_check.outputs.RELEASE_VERSION)
+        if: steps.version_check.outputs.RELEASE_VERSION != 'false'
         uses: cloudflare/pages-action@v1
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
