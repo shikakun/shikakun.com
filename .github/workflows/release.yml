@@ -32,9 +32,9 @@ jobs:
           echo "Git tag: $GIT_TAG"
           : # Compare current version of package.json and latest git tag
           if [ "$PACKAGE_VERSION" != "$GIT_TAG" ]; then
-            echo "::set-output name=TAG_VERSION::$PACKAGE_VERSION"
+            echo "{TAG_VERSION}={$PACKAGE_VERSION}" >> $GITHUB_OUTPUT
           else
-            echo "::set-output name=TAG_VERSION::"
+            echo "{TAG_VERSION}=''" >> $GITHUB_OUTPUT
           fi
 
       - name: Create and Push Tag
