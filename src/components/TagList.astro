@@ -8,7 +8,7 @@ const { tags } = Astro.props;
   {
     tags.map((tag) => (
       <li class='item'>
-        <Button element='a' href={`/articles/tags/${tag.attributes.slug}/`}>
+        <Button element='a' href={`/projects/tags/${tag.attributes.slug}/`}>
           # {tag.attributes.name}
         </Button>
       </li>

@@ -5,7 +5,7 @@ import Button from '@components/Button.astro';
 
 const { articles, filter, nav } = Astro.props;
 const currentUrl = Astro.url.pathname;
-const isFilteringByTag = filter && currentUrl.startsWith('/articles/tags/');
+const isFilteringByTag = filter && currentUrl.startsWith('/projects/tags/');
 ---
 
 <div class='wrapper'>
@@ -13,10 +13,10 @@ const isFilteringByTag = filter && currentUrl.startsWith('/articles/tags/');
     <div class='article'>
       {
         filter && (
-          <div class='filtering-by'>
+          <h1 class='filtering-by'>
             {isFilteringByTag && '# '}
             {filter.name}
-          </div>
+          </h1>
         )
       }
       {
@@ -24,7 +24,7 @@ const isFilteringByTag = filter && currentUrl.startsWith('/articles/tags/');
           <ul class='article-list'>
             {articles.map((article) => (
               <li class='article-item'>
-                <a class='link' href={`/articles/${article.slug}/`}>
+                <a class='link' href={`/projects/${article.slug}/`}>
                   <div class='title'>{article.title}</div>
                   <time class='date'>
                     <span>{getFormattedDate(article.date, 'yyyy')}</span>
@@ -45,11 +45,11 @@ const isFilteringByTag = filter && currentUrl.startsWith('/articles/tags/');
             <div class='filter-reset'>
               <Button
                 element='a'
-                href='/articles/'
-                appearance='filled'
+                href='/projects/'
+                appearance='outlined'
                 trailingIcon='arrow_right'
               >
-                <span>すべての記事</span>
+                <span>All projects</span>
               </Button>
             </div>
           )}
@@ -94,6 +94,7 @@ const isFilteringByTag = filter && currentUrl.startsWith('/articles/tags/');
   }
 
   .filtering-by {
+    @include mixins.initialize(heading);
     @include mixins.text(3xl, dense);
     margin: -0.125em 0 functions.get-spacing-size(7xl);
   }

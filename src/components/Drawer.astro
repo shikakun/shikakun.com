@@ -4,15 +4,19 @@ import Button from '@components/Button.astro';
 ---
 
 <nav id='drawer' class='drawer' popover>
-  <button class='backdrop' popovertarget='drawer' tabindex="-1" aria-hidden="true">
+  <button
+    class='backdrop'
+    popovertarget='drawer'
+    tabindex='-1'
+    aria-hidden='true'
+  >
     <span class='visually-hidden'>閉じる</span>
   </button>
   <div class='container'>
     <div class='menu'>
       <ul>
         <li><a href='/' rel='home' autofocus>Profile</a></li>
-        <li><a href='/articles/'>Articles</a></li>
-        <li><a href='/link/'>Link</a></li>
+        <li><a href='/projects/'>Projects</a></li>
         <li><a href='/manzai/'>Manzai</a></li>
       </ul>
     </div>
@@ -22,11 +26,7 @@ import Button from '@components/Button.astro';
     </div>
 
     <div class='close'>
-      <Button
-        element='button'
-        leadingIcon='cross'
-        popovertarget='drawer'
-      >
+      <Button element='button' leadingIcon='cross' popovertarget='drawer'>
         メニューを閉じる
       </Button>
     </div>
@@ -34,7 +34,10 @@ import Button from '@components/Button.astro';
 </nav>
 
 <script>
-  import { isSupported, apply } from 'node_modules/@oddbird/popover-polyfill/dist/popover-fn.js';
+  import {
+    isSupported,
+    apply,
+  } from 'node_modules/@oddbird/popover-polyfill/dist/popover-fn.js';
 
   window.addEventListener('load', () => {
     const body = document.body;
@@ -45,12 +48,11 @@ import Button from '@components/Button.astro';
       apply();
     }
 
-    drawer.addEventListener("toggle", (event) => {
+    drawer.addEventListener('toggle', (event) => {
       if (event.newState === 'open') {
         body.style.overflow = 'hidden';
         contents.setAttribute('aria-hidden', 'true');
         contents.setAttribute('inert', 'inert');
-
       } else {
         body.style.overflow = 'auto';
         contents.setAttribute('aria-hidden', 'false');

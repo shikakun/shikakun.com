@@ -24,14 +24,14 @@ const tags: Tag[] = await fetchContentsApi('/tags', {
           {categories.map((category) => (
             <li class='filter-item'>
               {Astro.url.pathname ===
-              `/articles/categories/${category.slug}/` ? (
-                <Button element='a' href='/articles/' trailingIcon='check'>
+              `/projects/categories/${category.slug}/` ? (
+                <Button element='a' href='/projects/' trailingIcon='check'>
                   {category.name}
                 </Button>
               ) : (
                 <Button
                   element='a'
-                  href={`/articles/categories/${category.slug}/`}
+                  href={`/projects/categories/${category.slug}/`}
                 >
                   {category.name}
                 </Button>
@@ -50,12 +50,12 @@ const tags: Tag[] = await fetchContentsApi('/tags', {
         <ul class='filter-list'>
           {tags.map((tag) => (
             <li class='filter-item'>
-              {Astro.url.pathname === `/articles/tags/${tag.slug}/` ? (
-                <Button element='a' href='/articles/' trailingIcon='check'>
+              {Astro.url.pathname === `/projects/tags/${tag.slug}/` ? (
+                <Button element='a' href='/projects/' trailingIcon='check'>
                   # {tag.name}
                 </Button>
               ) : (
-                <Button element='a' href={`/articles/tags/${tag.slug}/`}>
+                <Button element='a' href={`/projects/tags/${tag.slug}/`}>
                   # {tag.name}
                 </Button>
               )}

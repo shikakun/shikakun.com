@@ -33,7 +33,7 @@ const { tag } = Astro.props;
 ---
 
 <Layout
-  title={`Articles: # ${tag.name}`}
+  title={`Projects: # ${tag.name}`}
   openGraph={{
     basic: {
       title: `# ${tag.name}`,
@@ -44,7 +44,6 @@ const { tag } = Astro.props;
 >
   <main class='page'>
     <div class='article'>
-      <h1 class='visually-hidden'>タグ「# {tag.name}」の記事</h1>
       <ArticleList articles={articles} filter={tag} nav={true} />
     </div>
   </main>

@@ -11,10 +11,10 @@ const articles: Article[] = await fetchContentsApi('/articles', {
 ---
 
 <Layout
-  title='Articles'
+  title='Projects'
   openGraph={{
     basic: {
-      title: 'Articles',
+      title: 'Projects',
       type: 'website',
       image: 'https://shikakun.com/ogimage.png',
     },
@@ -22,7 +22,7 @@ const articles: Article[] = await fetchContentsApi('/articles', {
 >
   <main class='page'>
     <div class='article'>
-      <h1 class='visually-hidden'>すべての記事</h1>
+      <h1 class='visually-hidden'>All projects</h1>
       <ArticleList articles={articles} nav={true} />
     </div>
   </main>
