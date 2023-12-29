@@ -9,13 +9,9 @@ date: 2023-12-29
 
 さて、そんな新しいパソコンを買ってウキウキな気分でやるのが開発環境の構築ということで、今回やったことをまとめておこうと思います。
 
-[:contents]
-
-# シェルの設定
+## シェルの設定
 
 シェルはZshを使っています。理由はmacOSのデフォルトだから…。Zshの設定のフレームワークにはずっとPreztoを使っていたのだけど、ちょっとばかし起動が遅いのが気になっていて、この機会に[Zim](https://zimfw.sh/)を試してみることに。起動がちょ〜はやい。テーマの設定は `.zimrc` ファイルに `zmodule eriner` と書くだけでいい感じの見た目に。フォントはRicty for PowerlineをインストールしてiTerm 2のプロファイルで設定（でも、[Rictyは「サポート終了」した](https://qiita.com/sounisi5011/items/62e4da71458ca7ce73c7)そうなので、代替のフォントを選んだほうがいいのかもしれません）。
-
-[https://blog.nishimu.land/entry/2022/03/21/003009:embed]
 
 Sixeightさんの記事を参考に、設定ファイルもホームディレクトリ直下ではなく `~/.config` ディレクトリにまとめてみました。[XDG Base Directory Specification](https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html)なんてディレクトリ構造の仕様があるって知らなかったなあ。
 
@@ -67,7 +63,9 @@ git-checkout-default-branch() {
 
 こだわりポイントとしては、 `mm` って打つと、Gitのどのブランチにいてもmasterやmainブランチへ移動して最新版をpullしてくれるコマンドをよく使ってます。あと `pwd` ならぬ `pwdd` って打つと、いま自分がいるディレクトリを新しいiTermのタブで開いてくれるコマンドも便利。もっといい書き方やツールがあるのかもしれませんが…。
 
-# プログラミング言語のインストール
+## プログラミング言語のインストール
+
+### はじめに
 
 複数の言語やプロジェクトごとに異なるバージョンを管理しやすくするために、[anyenv](https://github.com/anyenv/anyenv)を利用してます。ということで、まずanyenvとanyenv-updateをインストール。
 
@@ -103,7 +101,7 @@ $ rbenv install 3.2.2 #記事公開時の安定版の最新バージョンです
 $ rbenv global 3.2.2
 ```
 
-# グラフィックツールの設定
+### グラフィックツールの設定
 
 Adobe Creative Cloudにも毎月お金を払ってるので料金の高額さに怒りながらインストールします（[1ライセンスで2台までOK](https://helpx.adobe.com/jp/creative-cloud/kb/install-cc-2nd-pc-jp.html)とのこと）。よく忘れるので設定をメモしておきます。なお、僕は印刷物をまったく作りません。
 

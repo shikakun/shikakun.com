@@ -125,6 +125,27 @@ const { Content } = await article.render();
   @use '@styles/mixins';
 
   .markdown {
+    h1,
+    h2 {
+      @include mixins.initialize(heading);
+      @include mixins.typography-role(heading-1);
+      margin-top: functions.get-spacing-size(6xl);
+      margin-bottom: functions.get-spacing-size(xl);
+      @include mixins.mq-boundary(up, m) {
+        margin-top: functions.get-spacing-size(4xl);
+      }
+    }
+
+    h3,
+    h4,
+    h5,
+    h6 {
+      @include mixins.initialize(heading);
+      @include mixins.typography-role(heading-2);
+      margin-top: functions.get-spacing-size(4xl);
+      margin-bottom: functions.get-spacing-size(l);
+    }
+
     p {
       @include mixins.initialize(p);
       @include mixins.typography-role(body);
@@ -134,32 +155,32 @@ const { Content } = await article.render();
     a {
       @include mixins.text-link;
     }
-  }
 
-  .astro-code {
-    font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace,
-      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
-      'Noto Color Emoji';
+    .astro-code {
+      font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace,
+        'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+        'Noto Color Emoji';
 
-    * {
-      font-family: inherit;
-    }
-
-    > * {
-      $line-height-gap: functions.get-line-height(m, normal) - functions.get-font-size(
-          m
-        );
-      counter-reset: line;
-      counter-increment: line 0;
-      display: flex;
-      flex-direction: column;
-      padding: (functions.get-spacing-size(l) - $line-height-gap)
-        functions.get-spacing-size(l);
+      * {
+        font-family: inherit;
+      }
 
       > * {
-        position: relative;
-        min-height: functions.get-line-height(m, normal);
-        @include mixins.text(m, normal);
+        $line-height-gap: functions.get-line-height(m, normal) - functions.get-font-size(
+            m
+          );
+        counter-reset: line;
+        counter-increment: line 0;
+        display: flex;
+        flex-direction: column;
+        padding: (functions.get-spacing-size(l) - $line-height-gap)
+          functions.get-spacing-size(l);
+
+        > * {
+          position: relative;
+          min-height: functions.get-line-height(m, normal);
+          @include mixins.text(m, normal);
+        }
       }
     }
   }
