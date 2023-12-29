@@ -1,5 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
+import { getFormattedDate } from '@utils/view-helpers';
 import Layout from '@layouts/Layout.astro';
 
 const articles = (await getCollection('blog')).sort(
@@ -20,18 +21,24 @@ const articles = (await getCollection('blog')).sort(
   <main class='page'>
     <div class='blog'>
       <div class='container'>
-        <ul>
-          {
-            articles.map((article) => (
-              <li>
-                <a href={`/blog/${article.slug}/`}>
-                  <div class='title'>{article.data.title}</div>
-                  <p class='date'>{article.data.date}</p>
-                </a>
-              </li>
-            ))
-          }
-        </ul>
+        {
+          articles.length > 0 && (
+            <ul class='article-list'>
+              {articles.map((article) => (
+                <li class='article-item'>
+                  <a class='link' href={`/blog/${article.slug}/`}>
+                    <div class='title'>{article.data.title}</div>
+                    <time class='date'>
+                      <span>
+                        {getFormattedDate(article.data.date, 'yyyy-mm-dd')}
+                      </span>
+                    </time>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          )
+        }
       </div>
     </div>
   </main>
@@ -44,6 +51,8 @@ const articles = (await getCollection('blog')).sort(
   @use 'sass:math';
   @use 'sass:map';
 
+  $side-spacing: math.div(functions.get-interactive-component-size(m), 4);
+
   .page {
     @include mixins.page;
   }
@@ -54,5 +63,66 @@ const articles = (await getCollection('blog')).sort(
 
   .blog {
     padding: functions.get-sizing-scale-size(192) 0;
+  }
+
+  .article-list {
+    @include mixins.initialize(ul);
+    display: flex;
+    flex-direction: column;
+    gap: functions.get-spacing-size(l);
+    margin-left: 0 - $side-spacing;
+    @include mixins.mq-boundary(up, s) {
+      gap: functions.get-spacing-size(m);
+    }
+  }
+
+  .article-item {
+    @include mixins.initialize(li);
+    display: flex;
+    justify-content: flex-start;
+  }
+
+  .link {
+    @include mixins.initialize(a);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: functions.get-spacing-size(2xs);
+    min-height: functions.get-interactive-component-size(m);
+    padding: 0 $side-spacing;
+    color: inherit;
+    @include mixins.interactive-overlay;
+    @include mixins.focus-ring;
+    @include mixins.mq-boundary(up, s) {
+      flex-direction: row;
+      align-items: center;
+      gap: $side-spacing;
+    }
+  }
+
+  .title {
+    @include mixins.text(l, dense);
+    @include mixins.mq-boundary(up, m) {
+      @include mixins.text(xl, dense);
+    }
+  }
+
+  .date {
+    display: block;
+    height: 100%;
+    color: functions.get-text-color(light, secondary);
+    @include mixins.text(s, dense);
+    @include mixins.mq-boundary(up, m) {
+      @include mixins.text(m, dense);
+    }
+
+    span {
+      display: block;
+      white-space: nowrap;
+      @include mixins.mq-boundary(up, s) {
+        margin-top: 0.2em;
+      }
+    }
   }
 </style>
