@@ -32,12 +32,12 @@ const articles = (await getCollection('blog')).sort(
                     <time
                       class='date'
                       datetime={getFormattedDate(
-                        article.data.date,
+                        article.data.datetime,
                         'yyyy-mm-dd'
                       )}
                     >
                       <span>
-                        {getFormattedDate(article.data.date, 'yyyy-mm-dd')}
+                        {getFormattedDate(article.data.datetime, 'yyyy-mm-dd')}
                       </span>
                     </time>
                   </a>
