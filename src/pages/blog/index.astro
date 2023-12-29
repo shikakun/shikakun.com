@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import Layout from '@layouts/Layout.astro';
+
+const articles = (await getCollection('blog')).sort(
+  (a, b) => a.data.date.valueOf() - b.data.date.valueOf()
+);
+---
+
+<Layout
+  title='Blog'
+  openGraph={{
+    basic: {
+      title: 'Blog',
+      type: 'website',
+      image: 'https://shikakun.com/ogimage.png',
+    },
+  }}
+>
+  <main class='page'>
+    <div class='blog'>
+      <div class='container'>
+        <ul>
+          {
+            articles.map((article) => (
+              <li>
+                <a href={`/blog/${article.slug}/`}>
+                  <div class='title'>{article.data.title}</div>
+                  <p class='date'>{article.data.date}</p>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .page {
+    @include mixins.page;
+  }
+
+  .container {
+    @include mixins.container;
+  }
+
+  .blog {
+    padding: functions.get-sizing-scale-size(192) 0;
+  }
+</style>

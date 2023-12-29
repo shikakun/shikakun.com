@@ -1,0 +1,166 @@
+---
+import { type CollectionEntry, getCollection } from 'astro:content';
+import { getFormattedDate } from '@utils/view-helpers';
+import Layout from '@layouts/Layout.astro';
+
+export async function getStaticPaths() {
+  const articles = await getCollection('blog');
+  return articles.map((article) => ({
+    params: { slug: article.slug, title: article.title },
+    props: article,
+  }));
+}
+type Props = CollectionEntry<'blog'>;
+
+const article = Astro.props;
+const { Content } = await article.render();
+---
+
+<Layout
+  title={article.data.title}
+  openGraph={{
+    basic: {
+      title: article.data.title,
+      type: 'website',
+      image: article.data.cover
+        ? article.data.cover
+        : 'https://shikakun.com/ogimage.png',
+    },
+  }}
+>
+  <main class='page'>
+    <header class='header'>
+      <div class='container'>
+        <div class='header-column'>
+          <h1 class='title'>
+            {article.data.title}
+          </h1>
+          <div class='date'>
+            <span class='date-start'
+              >{getFormattedDate(article.date, 'yyyy-mm-dd')}</span
+            >
+          </div>
+        </div>
+      </div>
+    </header>
+    <div class='body'>
+      <div class='container'>
+        <div class='body-column'>
+          <div class='markdown'>
+            <Content />
+          </div>
+        </div>
+      </div>
+    </div>
+    <footer class='footer'>
+      <div class='container'>
+        <div class='body-column'>
+          {getFormattedDate(article.data.date, 'yyyy-mm-dd')}
+        </div>
+      </div>
+    </footer>
+  </main>
+</Layout>
+
+<style lang='scss'>
+  @use '@styles/variables';
+  @use '@styles/functions';
+  @use '@styles/mixins';
+  @use 'sass:math';
+  @use 'sass:map';
+
+  .page {
+    @include mixins.page;
+  }
+
+  .container {
+    @include mixins.container;
+    @include mixins.grid;
+  }
+
+  .header {
+    padding: functions.get-sizing-scale-size(192) 0;
+  }
+
+  .header-column {
+    display: flex;
+    flex-direction: column;
+    gap: functions.get-spacing-size(l);
+    @include mixins.grid-column(12);
+  }
+
+  .title {
+    @include mixins.initialize(heading);
+    letter-spacing: 0.025em;
+    @include mixins.text(xl, dense);
+    @include mixins.kerning;
+    @include mixins.mq-boundary(up, m) {
+      @include mixins.text(3xl, dense);
+    }
+  }
+
+  .date {
+    color: functions.get-text-color(light, secondary);
+    @include mixins.text(xl, dense);
+    @include mixins.kerning;
+  }
+
+  .body-column {
+    @include mixins.grid-column(12);
+    @include mixins.mq-boundary(up, l) {
+      @include mixins.grid-column(10);
+    }
+    @include mixins.mq-boundary(up, xl) {
+      @include mixins.grid-column(8);
+    }
+  }
+
+  .footer {
+    padding: functions.get-spacing-size(7xl) 0;
+  }
+</style>
+
+<style is:global lang='scss'>
+  @use '@styles/functions';
+  @use '@styles/mixins';
+
+  .markdown {
+    p {
+      @include mixins.initialize(p);
+      @include mixins.typography-role(body);
+      margin: 1em 0;
+    }
+
+    a {
+      @include mixins.text-link;
+    }
+  }
+
+  .astro-code {
+    font-family: SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace,
+      'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol',
+      'Noto Color Emoji';
+
+    * {
+      font-family: inherit;
+    }
+
+    > * {
+      $line-height-gap: functions.get-line-height(m, normal) - functions.get-font-size(
+          m
+        );
+      counter-reset: line;
+      counter-increment: line 0;
+      display: flex;
+      flex-direction: column;
+      padding: (functions.get-spacing-size(l) - $line-height-gap)
+        functions.get-spacing-size(l);
+
+      > * {
+        position: relative;
+        min-height: functions.get-line-height(m, normal);
+        @include mixins.text(m, normal);
+      }
+    }
+  }
+</style>

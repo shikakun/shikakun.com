@@ -6,6 +6,15 @@ export default defineConfig({
   integrations: [react(), compress()],
   site: 'https://shikakun.com',
   trailingSlash: 'always',
+  markdown: {
+    shikiConfig: {
+      // https://github.com/shikijs/shiki/blob/main/docs/themes.md
+      theme: 'nord',
+      // https://github.com/shikijs/shiki/blob/main/docs/languages.md
+      langs: [],
+      wrap: true,
+    },
+  },
   redirects: {
     '/articles/banana-bread-padding/': '/projects/banana-bread-padding/',
     '/articles/benri/': '/projects/benri/',
