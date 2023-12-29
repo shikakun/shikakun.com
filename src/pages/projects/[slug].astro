@@ -52,11 +52,9 @@ const { article } = Astro.props;
           <h1 class='title'>
             {article.title}
           </h1>
-          <div class='date'>
-            <span class='date-start'
-              >{getFormattedDate(article.date, 'yyyy')}</span
-            >
-          </div>
+          <time class='date' datetime={getFormattedDate(article.date, 'yyyy')}>
+            {getFormattedDate(article.date, 'yyyy')}
+          </time>
         </div>
       </div>
     </header>

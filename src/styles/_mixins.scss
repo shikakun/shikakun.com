@@ -92,6 +92,19 @@
     @include mq-boundary(up, m) {
       @include text(l, comfort);
     }
+  } @else if $name == heading-1 {
+    letter-spacing: 0.025em;
+    @include text(xl, dense);
+    @include kerning;
+    @include mq-boundary(up, m) {
+      @include text(3xl, dense);
+    }
+  } @else if $name == heading-2 {
+    @include text(l, dense, bold);
+    @include kerning;
+    @include mq-boundary(up, m) {
+      @include text(xl, dense, bold);
+    }
   }
 }
 
