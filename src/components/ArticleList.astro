@@ -26,7 +26,10 @@ const isFilteringByTag = filter && currentUrl.startsWith('/projects/tags/');
               <li class='article-item'>
                 <a class='link' href={`/projects/${article.slug}/`}>
                   <div class='title'>{article.title}</div>
-                  <time class='date'>
+                  <time
+                    class='date'
+                    datetime={getFormattedDate(article.date, 'yyyy')}
+                  >
                     <span>{getFormattedDate(article.date, 'yyyy')}</span>
                   </time>
                 </a>

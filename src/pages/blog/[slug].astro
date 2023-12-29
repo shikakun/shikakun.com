@@ -35,11 +35,12 @@ const { Content } = await article.render();
           <h1 class='title'>
             {article.data.title}
           </h1>
-          <div class='date'>
-            <span class='date-start'
-              >{getFormattedDate(article.data.date, 'yyyy-mm-dd')}</span
-            >
-          </div>
+          <time
+            class='date'
+            datetime={getFormattedDate(article.data.date, 'yyyy-mm-dd')}
+          >
+            {getFormattedDate(article.data.date, 'yyyy-mm-dd')}
+          </time>
         </div>
       </div>
     </header>

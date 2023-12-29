@@ -21,6 +21,7 @@ const articles = (await getCollection('blog')).sort(
   <main class='page'>
     <div class='blog'>
       <div class='container'>
+        <h1 class='visually-hidden'>Blog</h1>
         {
           articles.length > 0 && (
             <ul class='article-list'>
@@ -28,7 +29,13 @@ const articles = (await getCollection('blog')).sort(
                 <li class='article-item'>
                   <a class='link' href={`/blog/${article.slug}/`}>
                     <div class='title'>{article.data.title}</div>
-                    <time class='date'>
+                    <time
+                      class='date'
+                      datetime={getFormattedDate(
+                        article.data.date,
+                        'yyyy-mm-dd'
+                      )}
+                    >
                       <span>
                         {getFormattedDate(article.data.date, 'yyyy-mm-dd')}
                       </span>
