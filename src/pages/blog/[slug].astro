@@ -6,7 +6,7 @@ import Layout from '@layouts/Layout.astro';
 export async function getStaticPaths() {
   const articles = await getCollection('blog');
   return articles.map((article) => ({
-    params: { slug: article.slug, title: article.title },
+    params: { slug: article.data.slug, title: article.data.title },
     props: article,
   }));
 }
@@ -52,13 +52,6 @@ const { Content } = await article.render();
         </div>
       </div>
     </div>
-    <footer class='footer'>
-      <div class='container'>
-        <div class='body-column'>
-          {getFormattedDate(article.data.date, 'yyyy-mm-dd')}
-        </div>
-      </div>
-    </footer>
   </main>
 </Layout>
 
