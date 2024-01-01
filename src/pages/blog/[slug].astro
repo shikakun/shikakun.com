@@ -140,6 +140,17 @@ const { Content } = await article.render();
       margin-bottom: functions.get-spacing-size(l);
     }
 
+    h1 + h3,
+    h1 + h4,
+    h1 + h5,
+    h1 + h6,
+    h2 + h3,
+    h2 + h4,
+    h2 + h5,
+    h2 + h6 {
+      margin-top: 0;
+    }
+
     p {
       @include mixins.initialize(p);
       @include mixins.typography-role(body);
