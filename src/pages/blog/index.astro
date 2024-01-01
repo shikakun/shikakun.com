@@ -3,9 +3,9 @@ import { getCollection } from 'astro:content';
 import { getFormattedDate } from '@utils/view-helpers';
 import Layout from '@layouts/Layout.astro';
 
-const articles = (await getCollection('blog'))
-  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
-  .reverse();
+const articles = (await getCollection('blog')).sort(
+  (a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+);
 ---
 
 <Layout
