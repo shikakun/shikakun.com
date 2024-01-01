@@ -37,9 +37,9 @@ const { Content } = await article.render();
           </h1>
           <time
             class='date'
-            datetime={getFormattedDate(article.data.datetime, 'yyyy-mm-dd')}
+            datetime={getFormattedDate(article.data.pubDate, 'yyyy-mm-dd')}
           >
-            {getFormattedDate(article.data.datetime, 'yyyy-mm-dd')}
+            {getFormattedDate(article.data.pubDate, 'yyyy-mm-dd')}
           </time>
         </div>
       </div>
@@ -138,6 +138,17 @@ const { Content } = await article.render();
       @include mixins.typography-role(heading-2);
       margin-top: functions.get-spacing-size(4xl);
       margin-bottom: functions.get-spacing-size(l);
+    }
+
+    h1 + h3,
+    h1 + h4,
+    h1 + h5,
+    h1 + h6,
+    h2 + h3,
+    h2 + h4,
+    h2 + h5,
+    h2 + h6 {
+      margin-top: 0;
     }
 
     p {

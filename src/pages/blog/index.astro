@@ -3,9 +3,9 @@ import { getCollection } from 'astro:content';
 import { getFormattedDate } from '@utils/view-helpers';
 import Layout from '@layouts/Layout.astro';
 
-const articles = (await getCollection('blog')).sort(
-  (a, b) => a.data.date.valueOf() - b.data.date.valueOf()
-);
+const articles = (await getCollection('blog'))
+  .sort((a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf())
+  .reverse();
 ---
 
 <Layout
@@ -32,12 +32,12 @@ const articles = (await getCollection('blog')).sort(
                     <time
                       class='date'
                       datetime={getFormattedDate(
-                        article.data.datetime,
+                        article.data.pubDate,
                         'yyyy-mm-dd'
                       )}
                     >
                       <span>
-                        {getFormattedDate(article.data.datetime, 'yyyy-mm-dd')}
+                        {getFormattedDate(article.data.pubDate, 'yyyy-mm-dd')}
                       </span>
                     </time>
                   </a>
