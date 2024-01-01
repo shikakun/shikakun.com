@@ -37,9 +37,9 @@ const { Content } = await article.render();
           </h1>
           <time
             class='date'
-            datetime={getFormattedDate(article.data.datetime, 'yyyy-mm-dd')}
+            datetime={getFormattedDate(article.data.pubDate, 'yyyy-mm-dd')}
           >
-            {getFormattedDate(article.data.datetime, 'yyyy-mm-dd')}
+            {getFormattedDate(article.data.pubDate, 'yyyy-mm-dd')}
           </time>
         </div>
       </div>

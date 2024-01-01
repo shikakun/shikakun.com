@@ -31,7 +31,7 @@ const articles = (await getCollection('blog'))
                     <div class='title'>{article.data.title}</div>
                     <time
                       class='date'
-                      pubDate={getFormattedDate(
+                      datetime={getFormattedDate(
                         article.data.pubDate,
                         'yyyy-mm-dd'
                       )}
