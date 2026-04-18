@@ -1,0 +1,24 @@
+{
+  "name": "@shikakun/web",
+  "version": "0.0.1",
+  "type": "module",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "@astrojs/cloudflare": "13.1.10",
+    "@astrojs/mdx": "4.3.0",
+    "@shikakun/design-tokens": "workspace:*",
+    "@shikakun/react": "workspace:*",
+    "astro": "6.1.8",
+    "react": "19.2.5",
+    "react-dom": "19.2.5"
+  },
+  "devDependencies": {
+    "@types/react": "19.2.5",
+    "@types/react-dom": "19.2.5",
+    "typescript": "6.0.3"
+  }
+}
