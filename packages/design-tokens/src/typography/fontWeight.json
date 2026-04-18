@@ -1,0 +1,16 @@
+{
+  "typography": {
+    "fontWeight": {
+      "$type": "fontWeight",
+      "normal": {
+        "$value": "normal"
+      },
+      "bold": {
+        "$value": "bold"
+      },
+      "default": {
+        "$value": "{typography.fontWeight.normal}"
+      }
+    }
+  }
+}

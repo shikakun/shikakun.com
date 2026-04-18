@@ -1,0 +1,24 @@
+{
+  "name": "@shikakun/design-tokens",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./css": "./dist/tokens.css"
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "style-dictionary build --config style-dictionary.config.ts",
+    "dev": "style-dictionary build --config style-dictionary.config.ts --watch"
+  },
+  "devDependencies": {
+    "style-dictionary": "5.4.0",
+    "typescript": "6.0.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "typography": {
+    "fontFamily": {
+      "$type": "fontFamily",
+      "sansSerif": {
+        "$value": "-apple-system, BlinkMacSystemFont, 'Helvetica Neue', 'ヒラギノ角ゴ ProN', 'Hiragino Kaku Gothic ProN', Arial, メイリオ, Meiryo, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol'"
+      },
+      "monospace": {
+        "$value": "'Roboto Mono', SFMono-Regular, Consolas, 'Liberation Mono', Menlo, monospace"
+      },
+      "default": {
+        "$value": "{typography.fontFamily.sansSerif}"
+      }
+    }
+  }
+}

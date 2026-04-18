@@ -1,0 +1,13 @@
+{
+  "typography": {
+    "letterSpacing": {
+      "$type": "dimension",
+      "normal": {
+        "$value": "0"
+      },
+      "default": {
+        "$value": "{typography.letterSpacing.normal}"
+      }
+    }
+  }
+}

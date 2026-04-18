@@ -1,0 +1,164 @@
+{
+  "typography": {
+    "lineHeight": {
+      "$type": "dimension",
+      "2xs": {
+        "dense": {
+          "$value": "1rem",
+          "$description": "16px"
+        },
+        "normal": {
+          "$value": "1.25rem",
+          "$description": "20px"
+        },
+        "comfort": {
+          "$value": "1.25rem",
+          "$description": "20px"
+        }
+      },
+      "xs": {
+        "dense": {
+          "$value": "1rem",
+          "$description": "16px"
+        },
+        "normal": {
+          "$value": "1.25rem",
+          "$description": "20px"
+        },
+        "comfort": {
+          "$value": "1.5rem",
+          "$description": "24px"
+        }
+      },
+      "s": {
+        "dense": {
+          "$value": "1.25rem",
+          "$description": "20px"
+        },
+        "normal": {
+          "$value": "1.5rem",
+          "$description": "24px"
+        },
+        "comfort": {
+          "$value": "1.75rem",
+          "$description": "28px"
+        }
+      },
+      "m": {
+        "dense": {
+          "$value": "1.25rem",
+          "$description": "20px"
+        },
+        "normal": {
+          "$value": "1.5rem",
+          "$description": "24px"
+        },
+        "comfort": {
+          "$value": "1.75rem",
+          "$description": "28px"
+        }
+      },
+      "l": {
+        "dense": {
+          "$value": "1.5rem",
+          "$description": "24px"
+        },
+        "normal": {
+          "$value": "1.75rem",
+          "$description": "28px"
+        },
+        "comfort": {
+          "$value": "2rem",
+          "$description": "32px"
+        }
+      },
+      "xl": {
+        "dense": {
+          "$value": "1.75rem",
+          "$description": "28px"
+        },
+        "normal": {
+          "$value": "2rem",
+          "$description": "32px"
+        },
+        "comfort": {
+          "$value": "2.5rem",
+          "$description": "40px"
+        }
+      },
+      "2xl": {
+        "dense": {
+          "$value": "2.25rem",
+          "$description": "36px"
+        },
+        "normal": {
+          "$value": "2.5rem",
+          "$description": "40px"
+        },
+        "comfort": {
+          "$value": "3rem",
+          "$description": "48px"
+        }
+      },
+      "3xl": {
+        "dense": {
+          "$value": "2.5rem",
+          "$description": "40px"
+        },
+        "normal": {
+          "$value": "3rem",
+          "$description": "48px"
+        },
+        "comfort": {
+          "$value": "3.5rem",
+          "$description": "56px"
+        }
+      },
+      "4xl": {
+        "dense": {
+          "$value": "3.5rem",
+          "$description": "56px"
+        },
+        "normal": {
+          "$value": "4.25rem",
+          "$description": "68px"
+        },
+        "comfort": {
+          "$value": "4.75rem",
+          "$description": "76px"
+        }
+      },
+      "5xl": {
+        "dense": {
+          "$value": "5rem",
+          "$description": "80px"
+        },
+        "normal": {
+          "$value": "6rem",
+          "$description": "96px"
+        },
+        "comfort": {
+          "$value": "7rem",
+          "$description": "112px"
+        }
+      },
+      "6xl": {
+        "dense": {
+          "$value": "10rem",
+          "$description": "160px"
+        },
+        "normal": {
+          "$value": "12rem",
+          "$description": "192px"
+        },
+        "comfort": {
+          "$value": "14rem",
+          "$description": "224px"
+        }
+      },
+      "default": {
+        "$value": "{typography.lineHeight.m.normal}"
+      }
+    }
+  }
+}
