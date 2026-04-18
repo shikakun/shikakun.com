@@ -10,7 +10,7 @@
   },
   "files": ["dist"],
   "scripts": {
-    "build": "vite build && tsc --emitDeclarationOnly --declarationDir dist",
+    "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly --declarationDir dist",
     "dev": "vite build --watch",
     "storybook": "storybook dev --port 6006",
     "build-storybook": "storybook build"
@@ -23,9 +23,10 @@
     "@shikakun/design-tokens": "workspace:*"
   },
   "devDependencies": {
+    "@vitejs/plugin-react": "6.0.1",
     "@storybook/react-vite": "10.3.5",
-    "@types/react": "19.2.5",
-    "@types/react-dom": "19.2.5",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
     "react": "19.2.5",
     "react-dom": "19.2.5",
     "storybook": "10.3.5",

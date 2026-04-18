@@ -33,7 +33,7 @@ const config: Config = {
       files: [
         {
           destination: 'index.d.ts',
-          format: 'typescript/esm-declarations',
+          format: 'typescript/es6-declarations',
         },
       ],
     },
