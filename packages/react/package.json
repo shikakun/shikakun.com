@@ -8,7 +8,9 @@
       "types": "./dist/index.d.ts"
     }
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly --declarationDir dist",
     "dev": "vite build --watch",

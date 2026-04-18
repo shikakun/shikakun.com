@@ -10,7 +10,11 @@
     "storybook": "pnpm --filter @shikakun/react storybook"
   },
   "pnpm": {
-    "onlyBuiltDependencies": ["esbuild", "sharp", "workerd"]
+    "onlyBuiltDependencies": [
+      "esbuild",
+      "sharp",
+      "workerd"
+    ]
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.12",

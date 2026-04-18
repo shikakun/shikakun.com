@@ -9,7 +9,9 @@
     },
     "./css": "./dist/tokens.css"
   },
-  "files": ["dist"],
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build": "style-dictionary build --config style-dictionary.config.ts",
     "dev": "style-dictionary build --config style-dictionary.config.ts --watch"
