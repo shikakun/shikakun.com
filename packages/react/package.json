@@ -1,0 +1,38 @@
+{
+  "name": "@shikakun/react",
+  "version": "0.0.1",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "files": ["dist"],
+  "scripts": {
+    "build": "vite build && tsc --emitDeclarationOnly --declarationDir dist",
+    "dev": "vite build --watch",
+    "storybook": "storybook dev --port 6006",
+    "build-storybook": "storybook build"
+  },
+  "peerDependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "dependencies": {
+    "@shikakun/design-tokens": "workspace:*"
+  },
+  "devDependencies": {
+    "@storybook/react-vite": "10.3.5",
+    "@types/react": "19.2.5",
+    "@types/react-dom": "19.2.5",
+    "react": "19.2.5",
+    "react-dom": "19.2.5",
+    "storybook": "10.3.5",
+    "typescript": "6.0.3",
+    "vite": "8.0.8"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  }
+}
