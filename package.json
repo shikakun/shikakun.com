@@ -1,0 +1,19 @@
+{
+  "name": "shikakun.com",
+  "private": true,
+  "scripts": {
+    "build": "pnpm -r build",
+    "lint": "biome check .",
+    "format": "biome format --write .",
+    "lint:markup": "markuplint 'apps/web/src/**/*.astro' 'apps/web/src/**/*.mdx'",
+    "test": "playwright test",
+    "storybook": "pnpm --filter @shikakun/react storybook"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "2.4.12",
+    "@playwright/test": "1.59.1",
+    "@axe-core/playwright": "4.11.2",
+    "markuplint": "4.14.1",
+    "@markuplint/astro-parser": "4.14.1"
+  }
+}
