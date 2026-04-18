@@ -1,0 +1,32 @@
+name: Publish Packages
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    name: Publish to GitHub Packages
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: latest
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+          registry-url: 'https://npm.pkg.github.com'
+          scope: '@shikakun'
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm --filter @shikakun/design-tokens build
+      - run: pnpm --filter @shikakun/react build
+      - run: pnpm --filter @shikakun/design-tokens publish --no-git-checks
+      - run: pnpm --filter @shikakun/react publish --no-git-checks
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
