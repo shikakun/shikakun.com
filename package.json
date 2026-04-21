@@ -7,7 +7,10 @@
     "format": "biome format --write .",
     "lint:markup": "markuplint 'apps/web/src/**/*.astro' 'apps/web/src/**/*.mdx'",
     "test": "playwright test",
-    "storybook": "pnpm --filter @shikakun/react storybook"
+    "storybook": "pnpm --filter @shikakun/react storybook",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "pnpm build && changeset publish"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -22,6 +25,7 @@
     "@axe-core/playwright": "4.11.2",
     "markuplint": "4.14.1",
     "@markuplint/astro-parser": "4.6.23",
-    "wrangler": "4.84.0"
+    "wrangler": "4.84.0",
+    "@changesets/cli": "2.31.0"
   }
 }
