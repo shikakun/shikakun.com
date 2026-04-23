@@ -10,10 +10,7 @@ function getDate(page: (typeof allPages)[number]): string | undefined {
 }
 
 function getSortKey(page: (typeof allPages)[number]): string {
-  if (page.data.date) {
-    return page.data.date.toISOString().slice(0, 10);
-  }
-  return page.data.displayDate ?? '';
+  return page.data.displayDate ?? page.data.date?.toISOString().slice(0, 10) ?? '';
 }
 
 const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a)));
