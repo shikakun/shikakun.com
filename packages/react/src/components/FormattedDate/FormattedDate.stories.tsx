@@ -15,6 +15,12 @@ export default meta;
 
 type Story = StoryObj<typeof FormattedDate>;
 
+export const FullDateAndTime: Story = {
+  args: {
+    date: '2026-04-23 15:06',
+  },
+};
+
 export const FullDate: Story = {
   args: {
     date: '2026-04-23',
