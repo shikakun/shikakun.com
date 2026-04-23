@@ -38,6 +38,7 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @shikakun/design-tokens build
       - run: pnpm --filter @shikakun/react build
+      - run: pnpm --filter @shikakun/react test
       - run: npx playwright install --with-deps chromium
       - run: pnpm test
       - uses: actions/upload-artifact@v4
