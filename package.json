@@ -2,6 +2,7 @@
   "name": "shikakun.com",
   "private": true,
   "scripts": {
+    "dev": "pnpm --filter @shikakun/web dev",
     "build": "pnpm -r build",
     "lint": "biome check .",
     "format": "biome format --write .",
