@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import FormattedDate from '../components/FormattedDate.astro';
+import { FormattedDate } from '@shikakun/react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 const allPages = await getCollection('pages');
