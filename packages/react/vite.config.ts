@@ -3,6 +3,9 @@ import { defineConfig } from 'vite';
 
 export default defineConfig({
   plugins: [react()],
+  test: {
+    environment: 'node',
+  },
   build: {
     lib: {
       entry: 'src/index.ts',
