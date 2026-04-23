@@ -2,10 +2,11 @@
   "name": "shikakun.com",
   "private": true,
   "scripts": {
+    "dev": "pnpm --filter @shikakun/web dev",
     "build": "pnpm -r build",
     "lint": "biome check .",
-    "format": "biome format --write .",
     "lint:markup": "markuplint 'apps/web/src/**/*.astro' 'apps/web/src/**/*.mdx'",
+    "format": "biome format --write .",
     "test": "playwright test",
     "storybook": "pnpm --filter @shikakun/react storybook",
     "changeset": "changeset",

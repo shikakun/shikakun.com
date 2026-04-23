@@ -1,14 +1,12 @@
 # shikakun.com
 
-Personal website monorepo.
-
 ## Packages
 
 | Package | Description |
 |---------|-------------|
-| [`@shikakun/tokens`](./packages/tokens) | Design tokens (typography) |
+| [`apps/web`](./apps/web) | Website |
+| [`@shikakun/design-tokens`](./packages/design-tokens) | Design tokens |
 | [`@shikakun/react`](./packages/react) | React component library |
-| [`apps/web`](./apps/web) | Astro website |
 
 ## Development
 
@@ -21,6 +19,12 @@ Personal website monorepo.
 
 ```sh
 pnpm install
+```
+
+### Start the development server
+
+```sh
+pnpm dev
 ```
 
 ### Build all packages

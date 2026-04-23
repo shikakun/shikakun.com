@@ -13,8 +13,8 @@
     "dist"
   ],
   "scripts": {
-    "build": "style-dictionary build --config style-dictionary.config.ts",
-    "dev": "style-dictionary build --config style-dictionary.config.ts --watch"
+    "dev": "style-dictionary build --config style-dictionary.config.ts --watch",
+    "build": "style-dictionary build --config style-dictionary.config.ts"
   },
   "devDependencies": {
     "style-dictionary": "5.4.0",
