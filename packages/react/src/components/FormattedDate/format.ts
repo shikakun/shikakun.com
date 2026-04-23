@@ -1,9 +1,19 @@
 export const format = (date: string): string => {
+  if (!date || typeof date !== 'string') {
+    return '';
+  }
   const [datePart, timePart] = date.split(' ');
   const parts = datePart.split('-');
   const year = parseInt(parts[0], 10);
+  if (isNaN(year)) {
+    return '';
+  }
 
   if (timePart) {
+    if (parts.length < 3) {
+      return '';
+    }
+
     const [hours, minutes] = timePart.split(':').map(Number);
     const month = parseInt(parts[1], 10) - 1;
     const day = parseInt(parts[2], 10);
