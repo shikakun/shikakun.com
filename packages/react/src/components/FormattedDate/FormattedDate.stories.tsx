@@ -3,15 +3,21 @@ import { FormattedDate } from './FormattedDate';
 
 const meta: Meta<typeof FormattedDate> = {
   component: FormattedDate,
+  tags: ['autodocs'],
+  argTypes: {
+    date: {
+      control: 'text',
+    },
+  },
 };
 
 export default meta;
 
 type Story = StoryObj<typeof FormattedDate>;
 
-export const YearOnly: Story = {
+export const FullDate: Story = {
   args: {
-    date: '2026',
+    date: '2026-04-23',
   },
 };
 
@@ -21,8 +27,8 @@ export const YearAndMonth: Story = {
   },
 };
 
-export const FullDate: Story = {
+export const YearOnly: Story = {
   args: {
-    date: '2026-04-23',
+    date: '2026',
   },
 };
