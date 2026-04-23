@@ -21,19 +21,22 @@ const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a))
     <h1>shikakun</h1>
     <ul>
       {
-        pages.map((page) => (
-          <li>
-            <a href={`/${page.id}`}>
-              {page.data.title}
-              {getDate(page) && (
-                <>
-                  {" "}
-                  ─ <FormattedDate date={getDate(page)!} />
-                </>
-              )}
-            </a>
-          </li>
-        ))
+        pages.map((page) => {
+          const date = getDate(page);
+          return(
+            <li>
+              <a href={`/${page.id}`}>
+                {page.data.title}
+                {date && (
+                  <>
+                    {" "}
+                    ─ <FormattedDate date={date!} />
+                  </>
+                )}
+              </a>
+            </li>
+          )
+        })
       }
     </ul>
   </main>
