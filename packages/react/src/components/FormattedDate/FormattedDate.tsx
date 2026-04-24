@@ -8,9 +8,14 @@ type Props = {
   date: string;
 };
 
+const toDateTimeValue = (date: string): string => {
+  const [datePart, timePart] = date.split(' ');
+  return timePart ? `${datePart}T${timePart}` : datePart;
+};
+
 /**
  * 日付または日付と時刻をあらわす文字列を、英語表記へフォーマットします。
  */
 export const FormattedDate = ({ date }: Props) => {
-  return <time dateTime={date}>{format(date)}</time>;
+  return <time dateTime={toDateTimeValue(date)}>{format(date)}</time>;
 };
