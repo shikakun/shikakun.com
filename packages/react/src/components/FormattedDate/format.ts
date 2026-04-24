@@ -5,7 +5,7 @@ export const format = (date: string): string => {
   const [datePart, timePart] = date.split(' ');
   const parts = datePart.split('-');
   const year = parseInt(parts[0], 10);
-  if (isNaN(year)) {
+  if (Number.isNaN(year)) {
     return '';
   }
 
