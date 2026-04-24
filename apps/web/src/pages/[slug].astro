@@ -13,7 +13,7 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
-const date = page.data.displayDate ?? page.data.date?.toISOString().slice(0, 10);
+const date = page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
