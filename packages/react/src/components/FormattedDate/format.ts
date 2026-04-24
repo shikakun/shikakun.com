@@ -14,11 +14,7 @@ export const format = (date: string): string => {
 
   const isValidDate = (y: number, m: number, d: number): boolean => {
     const dt = new Date(y, m - 1, d);
-    return (
-      dt.getFullYear() === y &&
-      dt.getMonth() === m - 1 &&
-      dt.getDate() === d
-    );
+    return dt.getFullYear() === y && dt.getMonth() === m - 1 && dt.getDate() === d;
   };
 
   if (timePart) {
