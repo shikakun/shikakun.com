@@ -6,11 +6,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 const allPages = await getCollection('pages');
 
 function getDate(page: (typeof allPages)[number]): string | undefined {
-  return page.data.displayDate ?? page.data.date?.toISOString().slice(0, 10);
+  return page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
 }
 
 function getSortKey(page: (typeof allPages)[number]): string {
-  return page.data.displayDate ?? page.data.date?.toISOString().slice(0, 10) ?? '';
+  return page.data.displayDate || page.data.date?.toISOString().slice(0, 10) || '';
 }
 
 const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a)));
