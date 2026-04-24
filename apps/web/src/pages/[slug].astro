@@ -1,5 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
+import { FormattedDate } from '@shikakun/react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
 export async function getStaticPaths() {
@@ -12,6 +13,7 @@ export async function getStaticPaths() {
 
 const { page } = Astro.props;
 const { Content } = await render(page);
+const date = page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
 ---
 
 <BaseLayout title={page.data.title} description={page.data.description}>
@@ -19,6 +21,7 @@ const { Content } = await render(page);
     <article>
       <h1>{page.data.title}</h1>
       <Content />
+      {date && <FormattedDate date={date} />}
     </article>
   </main>
 </BaseLayout>

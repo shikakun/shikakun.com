@@ -1,1 +1,2 @@
-export { Text } from './components/Text/Text';
+export { FormattedDate } from './components/FormattedDate';
+export { Text } from './components/Text';

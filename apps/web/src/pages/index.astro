@@ -1,8 +1,19 @@
 ---
 import { getCollection } from 'astro:content';
+import { FormattedDate } from '@shikakun/react';
 import BaseLayout from '../layouts/BaseLayout.astro';
 
-const pages = await getCollection('pages');
+const allPages = await getCollection('pages');
+
+function getDate(page: (typeof allPages)[number]): string | undefined {
+  return page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
+}
+
+function getSortKey(page: (typeof allPages)[number]): string {
+  return page.data.displayDate || page.data.date?.toISOString().slice(0, 10) || '';
+}
+
+const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a)));
 ---
 
 <BaseLayout title="shikakun">
@@ -10,11 +21,22 @@ const pages = await getCollection('pages');
     <h1>shikakun</h1>
     <ul>
       {
-        pages.map((page) => (
-          <li>
-            <a href={`/${page.id}`}>{page.data.title}</a>
-          </li>
-        ))
+        pages.map((page) => {
+          const date = getDate(page);
+          return(
+            <li>
+              <a href={`/${page.id}`}>
+                {page.data.title}
+                {date && (
+                  <>
+                    {" "}
+                    ─ <FormattedDate date={date!} />
+                  </>
+                )}
+              </a>
+            </li>
+          )
+        })
       }
     </ul>
   </main>

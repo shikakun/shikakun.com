@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "@astrojs/mdx": "5.0.3",
+    "@astrojs/react": "^5.0.4",
     "@shikakun/design-tokens": "workspace:*",
     "@shikakun/react": "workspace:*",
     "astro": "6.1.8",
