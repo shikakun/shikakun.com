@@ -3,6 +3,7 @@ import { FormattedDate } from './FormattedDate';
 
 const meta: Meta<typeof FormattedDate> = {
   component: FormattedDate,
+  title: 'Components/FormattedDate',
   tags: ['autodocs'],
   argTypes: {
     date: {
