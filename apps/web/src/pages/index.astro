@@ -1,7 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
 import { FormattedDate } from '@shikakun/react';
-import BaseLayout from '../layouts/BaseLayout.astro';
+import Layout from '../layouts/Layout.astro';
 
 const allPages = await getCollection('pages');
 
@@ -16,7 +16,7 @@ function getSortKey(page: (typeof allPages)[number]): string {
 const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a)));
 ---
 
-<BaseLayout title="shikakun">
+<Layout title="shikakun">
   <main>
     <h1>shikakun</h1>
     <ul>
@@ -40,4 +40,4 @@ const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a))
       }
     </ul>
   </main>
-</BaseLayout>
+</Layout>
