@@ -222,9 +222,3 @@ dialog::backdrop {
   /* biome-ignore lint: oklchに非対応の環境へのフォールバックのため */
   background-color: oklch(0% 0 0deg / 50%);
 }
-
-[tabindex="-1"]:focus {
-  /* フォーカスできない要素にはアウトラインを表示しない */
-  /* biome-ignore lint: !importantを意図して使用しているため */
-  outline: none !important;
-}

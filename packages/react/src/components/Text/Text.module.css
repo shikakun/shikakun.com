@@ -1,0 +1,237 @@
+.text {
+  margin: unset;
+  padding: unset;
+  letter-spacing: var(--typography-letter-spacing-default);
+}
+
+/**
+ * font size
+ */
+.fontSize2xs {
+  font-size: var(--typography-font-size-2xs);
+}
+
+.fontSizeXs {
+  font-size: var(--typography-font-size-xs);
+}
+
+.fontSizeS {
+  font-size: var(--typography-font-size-s);
+}
+
+.fontSizeM {
+  font-size: var(--typography-font-size-m);
+}
+
+.fontSizeL {
+  font-size: var(--typography-font-size-l);
+}
+
+.fontSizeXl {
+  font-size: var(--typography-font-size-xl);
+}
+
+.fontSize2xl {
+  font-size: var(--typography-font-size-2xl);
+}
+
+.fontSize3xl {
+  font-size: var(--typography-font-size-3xl);
+}
+
+.fontSize4xl {
+  font-size: var(--typography-font-size-4xl);
+}
+
+.fontSize5xl {
+  font-size: var(--typography-font-size-5xl);
+}
+
+.fontSize6xl {
+  font-size: var(--typography-font-size-6xl);
+}
+
+.fontSizeDefault {
+  font-size: var(--typography-font-size-default);
+}
+
+.fontSizeInherit {
+  font-size: inherit;
+}
+
+/**
+ * font weight
+ */
+.fontWeightNormal {
+  font-weight: var(--typography-font-weight-normal);
+}
+
+.fontWeightBold {
+  font-weight: var(--typography-font-weight-bold);
+}
+
+.fontWeightDefault {
+  font-weight: var(--typography-font-weight-default);
+}
+
+.fontWeightInherit {
+  font-weight: inherit;
+}
+
+/**
+ * font family
+ */
+.fontFamilySansSerif {
+  font-family: var(--typography-font-family-sans-serif);
+}
+
+.fontFamilyMonospace {
+  font-family: var(--typography-font-family-monospace);
+}
+
+.fontFamilyDefault {
+  font-family: var(--typography-font-family-default);
+}
+
+.fontFamilyInherit {
+  font-family: inherit;
+}
+
+/**
+ * line height
+ */
+.lineHeight2xsDense {
+  line-height: var(--typography-line-height-2xs-dense);
+}
+
+.lineHeight2xsNormal {
+  line-height: var(--typography-line-height-2xs-normal);
+}
+
+.lineHeight2xsComfort {
+  line-height: var(--typography-line-height-2xs-comfort);
+}
+
+.lineHeightXsDense {
+  line-height: var(--typography-line-height-xs-dense);
+}
+
+.lineHeightXsNormal {
+  line-height: var(--typography-line-height-xs-normal);
+}
+
+.lineHeightXsComfort {
+  line-height: var(--typography-line-height-xs-comfort);
+}
+
+.lineHeightSDense {
+  line-height: var(--typography-line-height-s-dense);
+}
+
+.lineHeightSNormal {
+  line-height: var(--typography-line-height-s-normal);
+}
+
+.lineHeightSComfort {
+  line-height: var(--typography-line-height-s-comfort);
+}
+
+.lineHeightMDense {
+  line-height: var(--typography-line-height-m-dense);
+}
+
+.lineHeightMNormal {
+  line-height: var(--typography-line-height-m-normal);
+}
+
+.lineHeightMComfort {
+  line-height: var(--typography-line-height-m-comfort);
+}
+
+.lineHeightLDense {
+  line-height: var(--typography-line-height-l-dense);
+}
+
+.lineHeightLNormal {
+  line-height: var(--typography-line-height-l-normal);
+}
+
+.lineHeightLComfort {
+  line-height: var(--typography-line-height-l-comfort);
+}
+
+.lineHeightXlDense {
+  line-height: var(--typography-line-height-xl-dense);
+}
+
+.lineHeightXlNormal {
+  line-height: var(--typography-line-height-xl-normal);
+}
+
+.lineHeightXlComfort {
+  line-height: var(--typography-line-height-xl-comfort);
+}
+
+.lineHeight2xlDense {
+  line-height: var(--typography-line-height-2xl-dense);
+}
+
+.lineHeight2xlNormal {
+  line-height: var(--typography-line-height-2xl-normal);
+}
+
+.lineHeight2xlComfort {
+  line-height: var(--typography-line-height-2xl-comfort);
+}
+
+.lineHeight3xlDense {
+  line-height: var(--typography-line-height-3xl-dense);
+}
+
+.lineHeight3xlNormal {
+  line-height: var(--typography-line-height-3xl-normal);
+}
+
+.lineHeight3xlComfort {
+  line-height: var(--typography-line-height-3xl-comfort);
+}
+
+.lineHeight4xlDense {
+  line-height: var(--typography-line-height-4xl-dense);
+}
+
+.lineHeight4xlNormal {
+  line-height: var(--typography-line-height-4xl-normal);
+}
+
+.lineHeight4xlComfort {
+  line-height: var(--typography-line-height-4xl-comfort);
+}
+
+.lineHeight5xlDense {
+  line-height: var(--typography-line-height-5xl-dense);
+}
+
+.lineHeight5xlNormal {
+  line-height: var(--typography-line-height-5xl-normal);
+}
+
+.lineHeight5xlComfort {
+  line-height: var(--typography-line-height-5xl-comfort);
+}
+
+.lineHeight6xlDense {
+  line-height: var(--typography-line-height-6xl-dense);
+}
+
+.lineHeight6xlNormal {
+  line-height: var(--typography-line-height-6xl-normal);
+}
+
+.lineHeight6xlComfort {
+  line-height: var(--typography-line-height-6xl-comfort);
+}
+
+.lineHeightInherit {
+  line-height: inherit;
+}

@@ -28,8 +28,7 @@ const config: Config = {
         for (const token of dictionary.allTokens) {
           if (token.path[0] !== 'typography') continue;
           const [, category, ...rest] = token.path;
-          const type: LeafType =
-            typeof token.$value === 'number' ? 'number' : 'string';
+          const type: LeafType = typeof token.$value === 'number' ? 'number' : 'string';
 
           if (!categories.has(category)) categories.set(category, new Map());
           const catMap = categories.get(category)!;
@@ -45,8 +44,7 @@ const config: Config = {
           }
         }
 
-        const q = (key: string) =>
-          /^\d/.test(key) ? `'${key}'` : key;
+        const q = (key: string) => (/^\d/.test(key) ? `'${key}'` : key);
         const ind = '  ';
 
         lines.push('export declare const Typography: {');

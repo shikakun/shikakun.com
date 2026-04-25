@@ -78,6 +78,9 @@ importers:
       '@shikakun/design-tokens':
         specifier: workspace:*
         version: link:../design-tokens
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
     devDependencies:
       '@storybook/addon-docs':
         specifier: 10.3.5
