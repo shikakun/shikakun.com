@@ -5,7 +5,6 @@ const config: Config = {
   platforms: {
     css: {
       transformGroup: 'css',
-      prefix: 'sd',
       buildPath: 'dist/',
       files: [
         {
