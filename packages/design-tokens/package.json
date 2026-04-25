@@ -7,7 +7,10 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./css": "./dist/tokens.css"
+    "./css": {
+      "import": "./dist/tokens.css",
+      "types": "./types/css.d.ts"
+    }
   },
   "files": [
     "dist"
