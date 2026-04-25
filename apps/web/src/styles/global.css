@@ -7,6 +7,9 @@
  */
 
 :root {
+  /* デフォルトのフォントを指定 */
+  font-family: var(--typography-font-family-default);
+
   /* 約物が連続する場合のアキを詰め、行頭の余白も除去 */
   text-spacing-trim: trim-start;
 
@@ -44,14 +47,17 @@
   text-wrap: pretty;
 }
 
-body {
-  /* フッターを固定する場合などを想定し、最小の高さを指定 */
-  min-block-size: 100dvb;
+::placeholder {
+  /* プレースホルダーのテキストの不透明度を正規化 */
+  opacity: unset;
 }
 
-search {
-  /* search要素がSafari 17未満など未対応の環境でインライン要素として表示されるのを防ぐ */
-  display: block flow;
+body {
+  /* ユーザーエージェントスタイルの指定を無効化 */
+  margin: unset;
+
+  /* フッターを固定する場合などを想定し、最小の高さを指定 */
+  min-block-size: 100dvb;
 }
 
 ul,
@@ -146,6 +152,11 @@ table {
   border-collapse: collapse;
 }
 
+search {
+  /* search要素がSafari 17未満など未対応の環境でインライン要素として表示されるのを防ぐ */
+  display: block flow;
+}
+
 input[type="search" i] {
   /* macOSにて角丸や背景色をつけない */
   -webkit-appearance: textfield;
@@ -186,11 +197,6 @@ fieldset {
   min-inline-size: 0;
 }
 
-::placeholder {
-  /* プレースホルダーのテキストの不透明度を正規化 */
-  opacity: unset;
-}
-
 dialog,
 [popover] {
   /* 位置を固定した要素をスクロールする場合に、背面のページへのスクロールの伝播やモバイルでのバウンス効果を抑制 */
@@ -221,12 +227,4 @@ dialog::backdrop {
   /* フォーカスできない要素にはアウトラインを表示しない */
   /* biome-ignore lint: !importantを意図して使用しているため */
   outline: none !important;
-}
-
-@media (forced-colors: active) {
-  mark {
-    /* 強制カラーモードで背景色が反映されない場合がある事象への対応 */
-    background-color: Highlight;
-    color: HighlightText;
-  }
 }
