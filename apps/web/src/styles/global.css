@@ -6,220 +6,183 @@
  * とはいえ、まぁこうしたほうが美しいよね、便利だよねってものは、意思を持って変更しています。
  */
 
-:where(:root) {
-  /* 約物が連続する場合のアキを詰め、行頭の余白も除去する */
+:root {
+  /* 約物が連続する場合のアキを詰め、行頭の余白も除去 */
   text-spacing-trim: trim-start;
 
-  /* 和欧間に自動でスペースを挿入し、可読性を向上させる */
+  /* 和欧間に自動でスペースを挿入 */
   text-autospace: normal;
 
-  /* 禁則処理を厳密に適用する */
+  /* 禁則処理 */
   line-break: strict;
   hanging-punctuation: allow-end;
 
-  /**
-   * 英単語の途中でも折り返す
-   *
-   * `word-break: break-all` よりも、flexやgridレイアウトでのコンテンツはみ出しも防げるほか、
-   * 折り返し可能な位置がない場合のみ単語の途中で改行するため、より自然に読みやすくなる
-   */
+  /* 英単語の途中でも折り返す */
   overflow-wrap: anywhere;
 
-  /* テキストと下線の距離をすこし空けて可読性を高める */
+  /* テキストと下線の距離をすこし空ける */
   text-underline-offset: 0.1em;
 
   /* モバイルデバイスでディスプレイを回転させた場合に、意図せずテキストが拡大される挙動を防ぐ */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
 
-  /**
-   * スクロールバーの表示・非表示によるレイアウトシフトを防止
-   *
-   * Chrome 145以降では、`scrollbar-gutter: stable` を指定すると
-   * vwの計算にスクロールバー幅が含まれなくなり、横スクロールの発生も防げる
-   */
+  /* スクロールバーの表示・非表示によるレイアウトシフトを防止 */
   scrollbar-gutter: stable;
 
-  /* iOSでタップした場合にハイライトされないようにする */
+  /* iOSでタップした場合にハイライトしない */
   -webkit-tap-highlight-color: transparent;
 }
 
-:where(:lang(ja)) {
+:lang(ja) {
   /* 和文はカーニングしない */
   font-kerning: none;
 }
 
-:where(body) {
-  /**
-   * フッターを固定する場合などを想定し、最小の高さを指定
-   *
-   * 単位をdvbにすることで、モバイルブラウザのアドレスバーの表示の挙動にも対応できる
-   */
-  min-block-size: 100dvb;
-}
-
-:where(:is(h1, h2, h3, h4, h5, h6, p, caption):lang(en)) {
-  /* 欧文の見出しで最終行に1単語だけが残る、いわゆるorphanと呼ばれる現象を防ぐ */
+:lang(en) {
+  /* 欧文で最終行に1単語だけが残る、いわゆるorphanと呼ばれる現象を防ぐ */
   text-wrap: pretty;
 }
 
-:where(search) {
+body {
+  /* フッターを固定する場合などを想定し、最小の高さを指定 */
+  min-block-size: 100dvb;
+}
+
+search {
   /* search要素がSafari 17未満など未対応の環境でインライン要素として表示されるのを防ぐ */
   display: block flow;
 }
 
-:where(ul, ol, menu) {
-  /**
-   * デフォルトのリストのマーカーを空文字にする
-   *
-   * 一般的にユーザーエージェントスタイルのリストのマーカーはレイアウトの都合から非表示にされることが多い
-   * しかし、一部のブラウザや支援技術の組み合わせによっては `list-style: none` を指定すると
-   * リストとして扱われなくなる挙動が確認されている
-   * @see https://matuzo.at/blog/2023/removing-list-styles-without-affecting-semantics
-   */
+ul,
+ol,
+menu {
+  /* デフォルトのリストのマーカーを空文字で隠し、余白も詰める */
   list-style-type: "";
-
-  /* デフォルトのリストのマーカーを非表示にしたので、あわせて余白も詰める */
   padding: unset;
 }
 
-:where(pre) {
-  /* :where(:root)での指定がpre要素へ意図せず継承し、表示の崩れを引き起こさないように打ち消す */
+pre {
+  /* :rootの指定が継承して意図せず表示の崩れを引き起こさないように打ち消す */
   text-spacing-trim: space-all;
   text-autospace: no-autospace;
 }
 
-:where(em:lang(ja)) {
+em:lang(ja) {
   /* 和文では強調を斜体ではなく太字で表現する */
   font-style: unset;
   font-weight: bolder;
 }
 
-:where(code, kbd, samp) {
-  /* フォントの機能の指定が等幅フォントでの表示に意図せず継承し、表示の崩れを引き起こさないように打ち消す */
-  font-feature-settings: initial;
-  font-variation-settings: initial;
-
-  /* ユーザーエージェントスタイルの指定を無効化し、親要素の指定を継承する */
+code,
+kbd,
+samp {
+  /* ユーザーエージェントスタイルの指定を無効化 */
   font-size: unset;
 
-  /* 等幅フォントで表示するためリガチャの表示を無効化する */
+  /* 等幅フォントで表示するためリガチャの表示を無効化 */
   font-variant-ligatures: none;
+
+  /* フォントの機能の指定が継承し、意図せず等幅フォントの表示の崩れを引き起こさないように打ち消す */
+  font-feature-settings: initial;
+  font-variation-settings: initial;
 }
 
-:where(abbr[title]) {
-  /**
-   * abbr要素の見た目をブラウザ間で統一させる
-   *
-   * @see https://adrianroselli.com/2024/01/using-abbr-element-with-title-attribute.html
-   */
+abbr[title] {
+  /* abbr要素の見た目をブラウザ間で統一 */
   text-decoration-line: underline;
   text-decoration-style: dotted;
   cursor: help;
 }
 
-:where(time) {
-  /**
-   * :where(:root)での指定がtime要素へ意図せず継承し、表示の崩れを引き起こさないように打ち消す
-   *
-   * 日付の表記には和欧間に自動でスペースを挿入しない
-   */
+time {
+  /* :rootの指定が継承して意図せず表示の崩れを引き起こさないように打ち消す */
+  /* 日付の表記には和欧間に自動でスペースを挿入しない */
   text-autospace: no-autospace;
 }
 
-@media (forced-colors: active) {
-  :where(mark) {
-    /**
-     * 強制カラーモードでmark要素の背景色が反映されない場合がある現象への対応
-     *
-     * システムカラーを使用して、ハイコントラスト環境でも視認性を確保する
-     * @see https://adrianroselli.com/2017/12/tweaking-text-level-styles.html#MarkWHCM
-     */
-    background-color: Highlight;
-    color: HighlightText;
-  }
-}
-
-:where(a) {
-  /* リンクテキストのデフォルトの色は、ユーザーエージェントスタイルではなく親要素の色を継承する */
+a {
+  /* ユーザーエージェントスタイルの指定を無効化 */
   color: unset;
 }
 
-:where(img, svg, picture, video, audio, canvas, model, iframe, embed, object) {
-  /* 最大幅を親要素の幅に制限する */
+img,
+svg,
+picture,
+video,
+audio,
+canvas,
+model,
+iframe,
+embed,
+object {
+  /* 最大幅を親要素の幅に制限 */
   max-inline-size: 100%;
 
   /* インライン要素として配置された場合に下部に余白が空かないようにする */
   vertical-align: bottom;
 }
 
-:where(img, svg, picture, video, canvas, model, iframe, embed, object) {
-  /* コンテンツに応じてブロック方向のサイズを自動で調整する */
+img,
+svg,
+picture,
+video,
+canvas,
+model,
+iframe,
+embed,
+object {
+  /* コンテンツに応じて垂直方向のサイズを自動で調整 */
   block-size: auto;
 }
 
-:where(iframe) {
-  /* ユーザーエージェントスタイルによる境界線はつけない */
+iframe {
+  /* ユーザーエージェントスタイルの指定を無効化 */
   border: unset;
 }
 
-:where(table) {
-  /* テーブルのセルの境界線はデフォルトで結合する */
+table {
+  /* テーブルのセルの境界線はデフォルトで結合 */
   border-collapse: collapse;
 }
 
-:where(input[type="search" i]) {
-  /* macOSにて角丸を除去し、背景色を正規化する */
+input[type="search" i] {
+  /* macOSにて角丸や背景色をつけない */
   -webkit-appearance: textfield;
 }
 
 @supports (-webkit-touch-callout: none) {
   :where(input[type="search" i]) {
-    /* iOSにて背景色を正規化する */
+    /* iOSで背景色を正規化 */
     background-color: Canvas;
   }
 }
 
-:where(textarea) {
-  /* Firefoxで指定されている一般的でないユーザーエージェントスタイルを正規化する */
+textarea {
+  /* ユーザーエージェントスタイルの指定を無効化 */
   margin-block: unset;
-
-  /* リサイズを垂直方向のみに制限する */
-  resize: block;
 }
 
-:where(
-    input:not([type="button" i], [type="submit" i], [type="reset" i]),
-    textarea,
-    [contenteditable]
-  ) {
-  /**
-   * テキストフィールドのテキストには和欧間にスペースを挿入しない
-   *
-   * :where(:root)での指定によって、入力中に予期しない挙動を引き起こす可能性があるため無効化する
-   */
+input:not([type="button" i], [type="submit" i], [type="reset" i]),
+textarea,
+[contenteditable] {
+  /* :rootの指定が継承して意図せず表示の崩れを引き起こさないように打ち消す */
+  /* 入力中に予期しない挙動を引き起こす可能性があるため和欧間にスペースを挿入しない */
   text-autospace: no-autospace;
 }
 
-:where(
-    button,
-    input:is([type="button" i], [type="submit" i], [type="reset" i]),
-    [role="tab" i],
-    [role="button" i],
-    [role="option" i]
-  ),
+button,
+input:is([type="button" i], [type="submit" i], [type="reset" i]),
+[role="tab" i],
+[role="button" i],
+[role="option" i],
 ::file-selector-button {
   /* iOSでボタンをダブルタップするとズームが発生する挙動を無効化 */
   touch-action: manipulation;
 }
 
-:where(fieldset) {
-  /**
-   * `fieldset` のオーバーフローを防止
-   *
-   * デフォルトの `min-inline-size: min-content` により子要素が引き伸ばすのを防ぐ
-   * @see https://github.com/twbs/bootstrap/issues/12359
-   */
+fieldset {
+  /* デフォルトの `min-inline-size: min-content` により子要素が引き伸ばすのを防ぐ */
   min-inline-size: 0;
 }
 
@@ -228,33 +191,26 @@
   opacity: unset;
 }
 
-:where(dialog, [popover]) {
-  /**
-   * ダイアログやポップオーバーの垂直方向のスクロールチェーンを無効化して操作性を向上させる
-   *
-   * 位置を固定した要素をスクロールする場合に、背面のページへのスクロールの伝播やモバイルでのバウンス効果を抑制する
-   */
+dialog,
+[popover] {
+  /* 位置を固定した要素をスクロールする場合に、背面のページへのスクロールの伝播やモバイルでのバウンス効果を抑制 */
   overscroll-behavior-block: contain;
 }
 
-:where(dialog:not([open], [popover]), [popover]:not(:popover-open)) {
-  /**
-   * ダイアログやポップオーバーが意図せず表示されないようにする
-   *
-   * `display` プロパティを明示的に設定すると、閉じた状態でも要素が表示されてしまう
-   * 開いていない状態では強制的に非表示にする
-   */
+dialog:not([open], [popover]),
+[popover]:not(:popover-open) {
+  /* 閉じているダイアログやポップオーバーが意図せず表示されないようにする */
   /* biome-ignore lint: !importantを意図して使用しているため */
   display: none !important;
 }
 
-:where(dialog) {
-  /* dialog要素のサイズは指定することが多いためユーザーエージェントスタイルの値は無視する */
+dialog {
+  /* ユーザーエージェントスタイルの指定を無効化 */
   max-inline-size: unset;
   max-block-size: unset;
 }
 
-:where(dialog)::backdrop {
+dialog::backdrop {
   /* `::backdrop` の背景色を正規化 */
   background-color: rgba(0, 0, 0, 0.5);
   /* biome-ignore lint: oklchに非対応の環境へのフォールバックのため */
@@ -265,4 +221,12 @@
   /* フォーカスできない要素にはアウトラインを表示しない */
   /* biome-ignore lint: !importantを意図して使用しているため */
   outline: none !important;
+}
+
+@media (forced-colors: active) {
+  mark {
+    /* 強制カラーモードで背景色が反映されない場合がある事象への対応 */
+    background-color: Highlight;
+    color: HighlightText;
+  }
 }
