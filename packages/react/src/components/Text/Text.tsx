@@ -23,7 +23,10 @@ export const Text = ({
   ...htmlProps
 }: TextProps) => (
   <Component
-    className={clsx(getTextClassNames({ fontSize, fontWeight, fontFamily, lineHeight, kerning }), className)}
+    className={clsx(
+      getTextClassNames({ fontSize, fontWeight, fontFamily, lineHeight, kerning }),
+      className,
+    )}
     {...htmlProps}
   >
     {children}

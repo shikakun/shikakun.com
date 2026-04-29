@@ -14,7 +14,13 @@ type HeadingStyle = {
 export const getHeadingStyle = (level: HeadingLevel): HeadingStyle => {
   switch (level) {
     case 1:
-      return { as: 'h1', fontSize: '2xl', fontWeight: 'normal', lineHeight: 'dense', kerning: true };
+      return {
+        as: 'h1',
+        fontSize: '2xl',
+        fontWeight: 'normal',
+        lineHeight: 'dense',
+        kerning: true,
+      };
     case 2:
       return { as: 'h2', fontSize: 'l', fontWeight: 'bold', lineHeight: 'dense', kerning: true };
     case 3:

@@ -1,6 +1,6 @@
 ---
 import { getCollection, render } from 'astro:content';
-import { FormattedDate, Heading } from '@shikakun/react';
+import { FormattedDate, Heading, Prose } from '@shikakun/react';
 import Layout from '../layouts/Layout.astro';
 
 export async function getStaticPaths() {
@@ -20,7 +20,7 @@ const date = page.data.displayDate || page.data.date?.toISOString().slice(0, 10)
   <main>
     <article>
       <Heading level={1}>{page.data.title}</Heading>
-      <Content />
+      <Prose><Content /></Prose>
       {date && <FormattedDate date={date} />}
     </article>
   </main>
