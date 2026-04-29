@@ -26,14 +26,20 @@ describe('resolveStyle', () => {
     it('fontSizeに `xl` を指定してlineHeightに `inherit` を指定した場合は `inherit` になる', () => {
       expect(resolveStyle({ fontSize: 'xl', lineHeight: 'inherit' }).lineHeight).toBe('inherit');
     });
+
+    it('fontSizeに `inherit` を指定してlineHeightに `normal` を指定した場合は `inherit` になる', () => {
+      expect(resolveStyle({ fontSize: 'inherit', lineHeight: 'normal' }).lineHeight).toBe(
+        'inherit',
+      );
+    });
   });
 
   describe('resolvedStyleの生成', () => {
-    it('すべてのスタイルプロパティにデフォルト値が設定される', () => {
+    it('すべてのスタイルプロパティを指定しない場合はデフォルト値になる', () => {
       expect(resolveStyle({})).toEqual({
-        fontSize: 'default',
-        fontWeight: 'default',
-        fontFamily: 'default',
+        fontSize: 'm',
+        fontWeight: 'normal',
+        fontFamily: 'sansSerif',
         lineHeight: 'm-normal',
       });
     });

@@ -51,10 +51,6 @@
   font-size: var(--typography-font-size-6xl);
 }
 
-.fontSizeDefault {
-  font-size: var(--typography-font-size-default);
-}
-
 .fontSizeInherit {
   font-size: inherit;
 }
@@ -70,10 +66,6 @@
   font-weight: var(--typography-font-weight-bold);
 }
 
-.fontWeightDefault {
-  font-weight: var(--typography-font-weight-default);
-}
-
 .fontWeightInherit {
   font-weight: inherit;
 }
@@ -87,10 +79,6 @@
 
 .fontFamilyMonospace {
   font-family: var(--typography-font-family-monospace);
-}
-
-.fontFamilyDefault {
-  font-family: var(--typography-font-family-default);
 }
 
 .fontFamilyInherit {

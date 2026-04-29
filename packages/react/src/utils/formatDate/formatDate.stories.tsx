@@ -14,13 +14,16 @@ const meta: Meta<typeof FormatDateExample> = {
   parameters: {
     docs: {
       description: {
-        component:
-          '日付または日付と時刻をあらわす文字列を、英語表記へフォーマットします。`YYYY`, `YYYY-MM`, `YYYY-MM-DD`, `YYYY-MM-DD HH:MM` のいずれかの形式を受け取ります。',
+        component: '日付または日付と時刻をあらわす文字列を、英語表記へフォーマットします。',
       },
     },
   },
   argTypes: {
-    input: { control: 'text' },
+    input: {
+      control: 'text',
+      description:
+        '日付または日付と時刻をあらわす文字列。`YYYY`, `YYYY-MM`, `YYYY-MM-DD`, `YYYY-MM-DD HH:MM` のいずれかの形式を受け取ります。',
+    },
   },
 };
 

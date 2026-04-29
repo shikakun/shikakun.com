@@ -30,8 +30,11 @@ const config: Config = {
           const [, category, ...rest] = token.path;
           const type: LeafType = typeof token.$value === 'number' ? 'number' : 'string';
 
-          if (!categories.has(category)) categories.set(category, new Map());
-          const catMap = categories.get(category)!;
+          let catMap = categories.get(category);
+          if (!catMap) {
+            catMap = new Map();
+            categories.set(category, catMap);
+          }
 
           if (rest.length === 1) {
             catMap.set(rest[0], type);
@@ -65,7 +68,7 @@ const config: Config = {
         }
         lines.push('};');
 
-        return lines.join('\n') + '\n';
+        return `${lines.join('\n')}\n`;
       },
     },
   },

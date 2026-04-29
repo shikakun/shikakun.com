@@ -13,53 +13,51 @@ export type FontSize =
   | '4xl'
   | '5xl'
   | '6xl'
-  | 'default';
+  | 'inherit';
 
-export type FontWeight = 'normal' | 'bold' | 'default';
+export type FontWeight = 'normal' | 'bold' | 'inherit';
 
-export type FontFamily = 'sansSerif' | 'monospace' | 'default';
+export type FontFamily = 'sansSerif' | 'monospace' | 'inherit';
 
 export type LineHeightDensity = 'dense' | 'normal' | 'comfort';
 
 export type TextStyle = {
   /**
-   * フォントサイズ。`default` は `m`（16px）と同じです。
+   * フォントのサイズ
    */
   readonly fontSize?: FontSize;
   /**
-   * フォントウェイト。`default` は `normal` と同じです。
+   * フォントのウェイト
    */
   readonly fontWeight?: FontWeight;
   /**
-   * フォントファミリー。`default` は `sansSerif` と同じです。
+   * フォントの種類
    */
   readonly fontFamily?: FontFamily;
   /**
-   * 行の高さの密度。`fontSize` に連動して対応するサイズの行の高さが選ばれます。
-   * `default` は `normal` と同じです。`inherit` は親要素の値を引き継ぎます。
+   * 行間のサイズ
    */
-  readonly lineHeight?: LineHeightDensity | 'inherit' | 'default';
+  readonly lineHeight?: LineHeightDensity | 'inherit';
 };
 
 const cls = (key: string) => styles[key as keyof typeof styles] ?? '';
 
 const lineHeightClass = (lineHeight: string) => {
   if (lineHeight === 'inherit') return styles.lineHeightInherit ?? '';
-  const [size, density] = lineHeight.split('-');
-  return cls(`lineHeight${capitalize(size!)}${capitalize(density!)}`);
+  const [size = '', density = ''] = lineHeight.split('-');
+  return cls(`lineHeight${capitalize(size)}${capitalize(density)}`);
 };
 
 export const resolveStyle = (style: TextStyle) => {
-  const fontSize = style.fontSize ?? 'default';
-  const actualSize = fontSize === 'default' ? 'm' : fontSize;
+  const fontSize = style.fontSize ?? 'm';
   const lineHeight =
-    style.lineHeight === 'inherit'
+    fontSize === 'inherit' || style.lineHeight === 'inherit'
       ? 'inherit'
-      : `${actualSize}-${style.lineHeight === undefined || style.lineHeight === 'default' ? 'normal' : style.lineHeight}`;
+      : `${fontSize}-${style.lineHeight ?? 'normal'}`;
   return {
     fontSize,
-    fontWeight: style.fontWeight ?? 'default',
-    fontFamily: style.fontFamily ?? 'default',
+    fontWeight: style.fontWeight ?? 'normal',
+    fontFamily: style.fontFamily ?? 'sansSerif',
     lineHeight,
   };
 };

@@ -14,12 +14,12 @@ const meta: Meta<typeof CapitalizeExample> = {
   parameters: {
     docs: {
       description: {
-        component: '文字列の先頭の1文字目を大文字にします。',
+        component: '半角英数の文字列の先頭の1文字目を大文字にします。',
       },
     },
   },
   argTypes: {
-    input: { control: 'text' },
+    input: { control: 'text', description: '半角英数の文字列' },
   },
 };
 
