@@ -1,4 +1,4 @@
-import { format } from './format';
+import { formatDate } from '../../utils/formatDate';
 
 type Props = {
   /**
@@ -17,5 +17,5 @@ const toDateTimeValue = (date: string): string => {
  * 日付または日付と時刻をあらわす文字列を、英語表記へフォーマットします。
  */
 export const FormattedDate = ({ date }: Props) => {
-  return <time dateTime={toDateTimeValue(date)}>{format(date)}</time>;
+  return <time dateTime={toDateTimeValue(date)}>{formatDate(date)}</time>;
 };
