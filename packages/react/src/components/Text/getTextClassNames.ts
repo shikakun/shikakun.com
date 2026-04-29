@@ -38,6 +38,10 @@ export type TextStyle = {
    * 行間のサイズ
    */
   readonly lineHeight?: LineHeightDensity | 'inherit';
+  /**
+   * プロポーショナルメトリクスとカーニングを有効にする
+   */
+  readonly kerning?: boolean;
 };
 
 const cls = (key: string) => styles[key as keyof typeof styles] ?? '';
@@ -59,16 +63,18 @@ export const resolveStyle = (style: TextStyle) => {
     fontWeight: style.fontWeight ?? 'normal',
     fontFamily: style.fontFamily ?? 'sansSerif',
     lineHeight,
+    kerning: style.kerning ?? false,
   };
 };
 
 export const getTextClassNames = (style: TextStyle): string[] => {
-  const { fontSize, fontWeight, fontFamily, lineHeight } = resolveStyle(style);
+  const { fontSize, fontWeight, fontFamily, lineHeight, kerning } = resolveStyle(style);
   return [
     styles.text,
     cls(`fontSize${capitalize(fontSize)}`),
     cls(`fontWeight${capitalize(fontWeight)}`),
     cls(`fontFamily${capitalize(fontFamily)}`),
     lineHeightClass(lineHeight),
+    kerning ? styles.kerning : '',
   ].filter(Boolean) as string[];
 };

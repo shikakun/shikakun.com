@@ -41,6 +41,7 @@ describe('resolveStyle', () => {
         fontWeight: 'normal',
         fontFamily: 'sansSerif',
         lineHeight: 'm-normal',
+        kerning: false,
       });
     });
 
@@ -57,7 +58,22 @@ describe('resolveStyle', () => {
         fontWeight: 'bold',
         fontFamily: 'monospace',
         lineHeight: 'xl-dense',
+        kerning: false,
       });
+    });
+  });
+
+  describe('kerning', () => {
+    it('kerningを指定しない場合は false になる', () => {
+      expect(resolveStyle({}).kerning).toBe(false);
+    });
+
+    it('kerningに true を指定した場合は true になる', () => {
+      expect(resolveStyle({ kerning: true }).kerning).toBe(true);
+    });
+
+    it('kerningに false を指定した場合は false になる', () => {
+      expect(resolveStyle({ kerning: false }).kerning).toBe(false);
     });
   });
 });

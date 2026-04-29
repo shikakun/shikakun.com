@@ -223,3 +223,11 @@
 .lineHeightInherit {
   line-height: inherit;
 }
+
+/**
+ * kerning
+ */
+.kerning {
+  font-feature-settings: "palt" 1;
+  font-kerning: normal;
+}

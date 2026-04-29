@@ -18,11 +18,12 @@ export const Text = ({
   fontWeight = 'normal',
   fontFamily = 'sansSerif',
   lineHeight = 'normal',
+  kerning = false,
   className,
   ...htmlProps
 }: TextProps) => (
   <Component
-    className={clsx(getTextClassNames({ fontSize, fontWeight, fontFamily, lineHeight }), className)}
+    className={clsx(getTextClassNames({ fontSize, fontWeight, fontFamily, lineHeight, kerning }), className)}
     {...htmlProps}
   >
     {children}
