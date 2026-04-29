@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { FormattedDate } from '@shikakun/react';
+import { FormattedDate, Text } from '@shikakun/react';
 import Layout from '../layouts/Layout.astro';
 
 const allPages = await getCollection('pages');
@@ -18,7 +18,7 @@ const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a))
 
 <Layout title="shikakun">
   <main>
-    <h1>shikakun</h1>
+    <Text as="h1" fontSize="m" lineHeight='dense'>shikakun</Text>
     <ul>
       {
         pages.map((page) => {
@@ -26,6 +26,7 @@ const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a))
           return(
             <li>
               <a href={`/${page.id}`}>
+                <Text fontSize="m">
                 {page.data.title}
                 {date && (
                   <>
@@ -33,6 +34,7 @@ const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a))
                     ─ <FormattedDate date={date!} />
                   </>
                 )}
+                </Text>
               </a>
             </li>
           )
