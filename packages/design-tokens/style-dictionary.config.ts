@@ -59,7 +59,7 @@ const config: Config = {
             } else {
               lines.push(`${ind}${ind}readonly ${q(key)}: {`);
               for (const [subKey, subType] of value) {
-                lines.push(`${ind}${ind}${ind}readonly ${subKey}: ${subType};`);
+                lines.push(`${ind}${ind}${ind}readonly ${q(subKey)}: ${subType};`);
               }
               lines.push(`${ind}${ind}};`);
             }
