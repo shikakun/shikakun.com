@@ -2,9 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { formatDate } from './formatDate';
 
 const FormatDateExample = ({ input }: { input: string }) => (
-  <code>
-    formatDate("{input}") → "{formatDate(input)}"
-  </code>
+  <code>{`formatDate("${input}") → "${formatDate(input)}"`}</code>
 );
 
 const meta: Meta<typeof FormatDateExample> = {
