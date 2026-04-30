@@ -17,5 +17,9 @@ const toDateTimeValue = (date: string): string => {
  * 日付または日付と時刻をあらわす文字列を、英語表記へフォーマットします。
  */
 export const FormattedDate = ({ date }: Props) => {
-  return <time dateTime={toDateTimeValue(date)}>{formatDate(date)}</time>;
+  const formatted = formatDate(date);
+  if (!formatted) {
+    return null;
+  }
+  return <time dateTime={toDateTimeValue(date)}>{formatted}</time>;
 };
