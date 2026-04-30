@@ -25,5 +25,9 @@ export const getHeadingStyle = (level: HeadingLevel): HeadingStyle => {
       return { as: 'h2', fontSize: 'l', fontWeight: 'bold', lineHeight: 'dense', kerning: true };
     case 3:
       return { as: 'h3', fontSize: 'm', fontWeight: 'bold', lineHeight: 'dense', kerning: true };
+    default: {
+      const _exhaustive: never = level;
+      throw new Error(`getHeadingStyle: invalid level: ${_exhaustive}`);
+    }
   }
 };

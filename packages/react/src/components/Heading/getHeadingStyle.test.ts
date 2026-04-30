@@ -31,4 +31,10 @@ describe('getHeadingStyle', () => {
       kerning: true,
     });
   });
+
+  it('無効な level のとき Error を投げる', () => {
+    expect(() => getHeadingStyle(0 as unknown as 1)).toThrow(
+      'getHeadingStyle: invalid level: 0',
+    );
+  });
 });
