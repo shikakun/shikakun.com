@@ -48,4 +48,4 @@ export const FullDateAndTime: Story = {
     date: '2026-04-23 15:06',
   },
 };
-FullDateAndTime.storyName = 'YYYY-MM-DD HH:HH';
+FullDateAndTime.storyName = 'YYYY-MM-DD HH:MM';
