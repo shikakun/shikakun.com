@@ -6,10 +6,15 @@
     ".": {
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
+    },
+    "./css": {
+      "import": "./dist/index.css",
+      "types": "./types/css.d.ts"
     }
   },
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "dev": "vite build --watch",
@@ -24,7 +29,8 @@
     "react-dom": "^19.0.0"
   },
   "dependencies": {
-    "@shikakun/design-tokens": "workspace:*"
+    "@shikakun/design-tokens": "workspace:*",
+    "clsx": "^2.1.1"
   },
   "devDependencies": {
     "@storybook/addon-docs": "10.3.5",

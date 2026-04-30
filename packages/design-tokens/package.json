@@ -7,10 +7,14 @@
       "import": "./dist/index.js",
       "types": "./dist/index.d.ts"
     },
-    "./css": "./dist/tokens.css"
+    "./css": {
+      "import": "./dist/tokens.css",
+      "types": "./types/css.d.ts"
+    }
   },
   "files": [
-    "dist"
+    "dist",
+    "types"
   ],
   "scripts": {
     "dev": "style-dictionary build --config style-dictionary.config.ts --watch",

@@ -1,4 +1,8 @@
-export const format = (date: string): string => {
+/**
+ * 日付または日付と時刻をあらわす文字列を、英語表記へフォーマットします。
+ * `YYYY`, `YYYY-MM`, `YYYY-MM-DD`, `YYYY-MM-DD HH:MM` のいずれかの形式を受け取ります。
+ */
+export const formatDate = (date: string): string => {
   if (!date || typeof date !== 'string') {
     return '';
   }
