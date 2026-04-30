@@ -2,9 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { capitalize } from './capitalize';
 
 const CapitalizeExample = ({ input }: { input: string }) => (
-  <code>
-    capitalize("{input}") → "{capitalize(input)}"
-  </code>
+  <code>{`capitalize("${input}") → "${capitalize(input)}"`}</code>
 );
 
 const meta: Meta<typeof CapitalizeExample> = {
