@@ -47,12 +47,13 @@ const config: Config = {
           }
         }
 
-        const q = (key: string) => (/^\d/.test(key) ? `'${key}'` : key);
+        const q = (key: string) =>
+          /^[a-zA-Z_$][a-zA-Z0-9_$]*$/.test(key) ? key : JSON.stringify(key);
         const ind = '  ';
 
         lines.push('export declare const Typography: {');
         for (const [category, catMap] of categories) {
-          lines.push(`${ind}readonly ${category}: {`);
+          lines.push(`${ind}readonly ${q(category)}: {`);
           for (const [key, value] of catMap) {
             if (typeof value === 'string') {
               lines.push(`${ind}${ind}readonly ${q(key)}: ${value};`);
