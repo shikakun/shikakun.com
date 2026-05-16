@@ -1,0 +1,60 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "color": {
+    "semantic": {
+      "$type": "color",
+      "primary": {
+        "50":  { "$value": "{color.palette.green.50}" },
+        "100": { "$value": "{color.palette.green.100}" },
+        "200": { "$value": "{color.palette.green.200}" },
+        "300": { "$value": "{color.palette.green.300}" },
+        "400": { "$value": "{color.palette.green.400}" },
+        "500": { "$value": "{color.palette.green.500}" },
+        "600": { "$value": "{color.palette.green.600}" },
+        "700": { "$value": "{color.palette.green.700}" },
+        "800": { "$value": "{color.palette.green.800}" },
+        "900": { "$value": "{color.palette.green.900}" },
+        "950": { "$value": "{color.palette.green.950}" }
+      },
+      "neutral": {
+        "50":  { "$value": "{color.palette.gray.50}" },
+        "100": { "$value": "{color.palette.gray.100}" },
+        "200": { "$value": "{color.palette.gray.200}" },
+        "300": { "$value": "{color.palette.gray.300}" },
+        "400": { "$value": "{color.palette.gray.400}" },
+        "500": { "$value": "{color.palette.gray.500}" },
+        "600": { "$value": "{color.palette.gray.600}" },
+        "700": { "$value": "{color.palette.gray.700}" },
+        "800": { "$value": "{color.palette.gray.800}" },
+        "900": { "$value": "{color.palette.gray.900}" },
+        "950": { "$value": "{color.palette.gray.950}" }
+      },
+      "informative": {
+        "50":  { "$value": "{color.palette.blue.50}" },
+        "100": { "$value": "{color.palette.blue.100}" },
+        "200": { "$value": "{color.palette.blue.200}" },
+        "300": { "$value": "{color.palette.blue.300}" },
+        "400": { "$value": "{color.palette.blue.400}" },
+        "500": { "$value": "{color.palette.blue.500}" },
+        "600": { "$value": "{color.palette.blue.600}" },
+        "700": { "$value": "{color.palette.blue.700}" },
+        "800": { "$value": "{color.palette.blue.800}" },
+        "900": { "$value": "{color.palette.blue.900}" },
+        "950": { "$value": "{color.palette.blue.950}" }
+      },
+      "negative": {
+        "50":  { "$value": "{color.palette.red.50}" },
+        "100": { "$value": "{color.palette.red.100}" },
+        "200": { "$value": "{color.palette.red.200}" },
+        "300": { "$value": "{color.palette.red.300}" },
+        "400": { "$value": "{color.palette.red.400}" },
+        "500": { "$value": "{color.palette.red.500}" },
+        "600": { "$value": "{color.palette.red.600}" },
+        "700": { "$value": "{color.palette.red.700}" },
+        "800": { "$value": "{color.palette.red.800}" },
+        "900": { "$value": "{color.palette.red.900}" },
+        "950": { "$value": "{color.palette.red.950}" }
+      }
+    }
+  }
+}
