@@ -1,0 +1,43 @@
+---
+import { Image } from 'astro:assets';
+import { Text } from '@shikakun/react';
+import shikakun from '../assets/brand/shikakun.png';
+import styles from './SiteNavigation.module.css';
+
+type Props = {
+  label?: string;
+};
+
+const { label = 'サイトナビゲーション' } = Astro.props;
+const { pathname } = Astro.url;
+
+const items = [
+  { href: '/', label: 'Home' },
+  { href: '/poetry', label: 'Poetry' },
+];
+---
+
+<nav class={styles.nav} aria-label={label}>
+  <a class={styles.icon} href="/" aria-hidden="true" tabindex="-1">
+    <Image src={shikakun} class={styles.shikakun} alt="shikakunのアイコン" />
+  </a>
+  <ul class={styles.list}>
+    {items.map(({ href, label }) => (
+      <li>
+        <a
+          class={styles.link}
+          href={href}
+          aria-current={
+            pathname === href || pathname.startsWith(href + '/')
+              ? 'page'
+              : undefined
+          }
+        >
+          <Text fontSize='m' lineHeight='dense'>
+            {label}
+          </Text>
+        </a>
+      </li>
+    ))}
+  </ul>
+</nav>

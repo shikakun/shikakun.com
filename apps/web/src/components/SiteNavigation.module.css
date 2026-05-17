@@ -1,0 +1,42 @@
+.nav {
+  display: flex;
+  align-items: center;
+  background-color: white;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 4rem;
+  height: 4rem;
+}
+
+.shikakun {
+  display: block;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: 9999rem;
+}
+
+.list {
+  display: flex;
+  gap: 1rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2.5rem;
+  text-decoration: unset;
+}
+
+/*
+.link[aria-current="page"] {
+  text-decoration: underline;
+}
+*/

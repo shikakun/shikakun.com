@@ -3,6 +3,10 @@
   background-color: var(--color-semantic-neutral-100);
 }
 
+.wrapper {
+  min-height: 100vh;
+}
+
 .container {
   padding: 1rem;
   max-width: 48rem;
