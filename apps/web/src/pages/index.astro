@@ -13,7 +13,9 @@ function getSortKey(page: (typeof allPages)[number]): string {
   return page.data.displayDate || page.data.date?.toISOString().slice(0, 10) || '';
 }
 
-const pages = allPages.sort((a, b) => getSortKey(b).localeCompare(getSortKey(a)));
+const pages = allPages
+  .filter((page) => !page.data.unlisted)
+  .sort((a, b) => getSortKey(b).localeCompare(getSortKey(a)));
 ---
 
 <Layout title="shikakun">
