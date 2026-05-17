@@ -5,9 +5,7 @@ import TagPage from '../components/TagPage.astro';
 
 type Page = Awaited<ReturnType<typeof getCollection<'pages'>>>[number];
 
-type Props =
-  | { type: 'page'; page: Page }
-  | { type: 'tag'; tag: string; tagPages: Page[] };
+type Props = { type: 'page'; page: Page } | { type: 'tag'; tag: string; tagPages: Page[] };
 
 export async function getStaticPaths() {
   const allPages = await getCollection('pages');
