@@ -3,6 +3,28 @@
   "color": {
     "palette": {
       "$type": "color",
+      "white": {
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [1, 0, 0],
+          "hex": "#ffffff"
+        }
+      },
+      "black": {
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [0, 0, 0],
+          "hex": "#000000"
+        }
+      },
+      "transparent": {
+        "$value": {
+          "colorSpace": "oklch",
+          "components": [0, 0, 0],
+          "alpha": 0,
+          "hex": "#00000000"
+        }
+      },
       "gray": {
         "50": {
           "$value": {

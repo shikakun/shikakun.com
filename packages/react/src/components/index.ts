@@ -1,3 +1,5 @@
+export type { ButtonProps } from './Button';
+export { Button } from './Button';
 export { FormattedDate } from './FormattedDate';
 export type { HeadingProps } from './Heading';
 export { Heading } from './Heading';

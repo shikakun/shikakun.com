@@ -1,0 +1,537 @@
+.root {
+  position: relative;
+  display: inline-flex;
+  flex-wrap: nowrap;
+  align-items: center;
+  gap: var(--size-scale-2);
+  box-sizing: border-box;
+  max-width: 100%;
+  font-family: var(--typography-font-family-sans-serif);
+  font-weight: var(--typography-font-weight-normal);
+  font-size: var(--typography-font-size-m);
+  line-height: var(--typography-line-height-m-dense);
+  text-decoration: unset;
+  background: unset;
+  border: unset;
+  transition-property: background-color, box-shadow;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+}
+
+.root::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: multiply;
+  border-radius: inherit;
+  opacity: 0;
+  transition-property: opacity, background;
+  transition-duration: 0.2s;
+  transition-timing-function: ease;
+  pointer-events: none;
+}
+
+.root:hover::after,
+.root:active::after {
+  opacity: 1;
+}
+
+/**
+ * appearance
+ */
+.appearanceText {
+  background-color: transparent;
+}
+
+/**
+ * appearance: text
+ */
+.appearanceTextColorPrimary {
+  color: var(--color-semantic-primary-700);
+}
+
+.appearanceTextColorPrimary:hover {
+  color: var(--color-semantic-primary-800);
+}
+
+.appearanceTextColorPrimary:hover::after {
+  background-color: var(--color-semantic-primary-100);
+}
+
+.appearanceTextColorPrimary:active {
+  color: var(--color-semantic-primary-900);
+}
+
+.appearanceTextColorPrimary:active::after {
+  background-color: var(--color-semantic-primary-200);
+}
+
+.appearanceTextColorNeutral {
+  color: var(--color-semantic-neutral-700);
+}
+
+.appearanceTextColorNeutral:hover {
+  color: var(--color-semantic-neutral-800);
+}
+
+.appearanceTextColorNeutral:hover::after {
+  background-color: var(--color-semantic-neutral-100);
+}
+
+.appearanceTextColorNeutral:active {
+  color: var(--color-semantic-neutral-900);
+}
+
+.appearanceTextColorNeutral:active::after {
+  background-color: var(--color-semantic-neutral-200);
+}
+
+.appearanceTextColorInformative {
+  color: var(--color-semantic-informative-700);
+}
+
+.appearanceTextColorInformative:hover {
+  color: var(--color-semantic-informative-800);
+}
+
+.appearanceTextColorInformative:hover::after {
+  background-color: var(--color-semantic-informative-100);
+}
+
+.appearanceTextColorInformative:active {
+  color: var(--color-semantic-informative-900);
+}
+
+.appearanceTextColorInformative:active::after {
+  background-color: var(--color-semantic-informative-200);
+}
+
+.appearanceTextColorNegative {
+  color: var(--color-semantic-negative-700);
+}
+
+.appearanceTextColorNegative:hover {
+  color: var(--color-semantic-negative-800);
+}
+
+.appearanceTextColorNegative:hover::after {
+  background-color: var(--color-semantic-negative-100);
+}
+
+.appearanceTextColorNegative:active {
+  color: var(--color-semantic-negative-900);
+}
+
+.appearanceTextColorNegative:active::after {
+  background-color: var(--color-semantic-negative-200);
+}
+
+/**
+ * appearance: outlined
+ */
+.appearanceOutlinedColorPrimary {
+  color: var(--color-semantic-primary-700);
+  background-color: var(--color-palette-white);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-primary-300);
+}
+
+.appearanceOutlinedColorPrimary:hover {
+  color: var(--color-semantic-primary-800);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-primary-400);
+}
+
+.appearanceOutlinedColorPrimary:hover::after {
+  background-color: var(--color-semantic-primary-100);
+}
+
+.appearanceOutlinedColorPrimary:active {
+  color: var(--color-semantic-primary-900);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-primary-500);
+}
+
+.appearanceOutlinedColorPrimary:active::after {
+  background-color: var(--color-semantic-primary-200);
+}
+
+.appearanceOutlinedColorNeutral {
+  color: var(--color-semantic-neutral-700);
+  background-color: var(--color-palette-white);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-neutral-300);
+}
+
+.appearanceOutlinedColorNeutral:hover {
+  color: var(--color-semantic-neutral-800);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-neutral-400);
+}
+
+.appearanceOutlinedColorNeutral:hover::after {
+  background-color: var(--color-semantic-neutral-100);
+}
+
+.appearanceOutlinedColorNeutral:active {
+  color: var(--color-semantic-neutral-900);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-neutral-500);
+}
+
+.appearanceOutlinedColorNeutral:active::after {
+  background-color: var(--color-semantic-neutral-200);
+}
+
+.appearanceOutlinedColorInformative {
+  color: var(--color-semantic-informative-700);
+  background-color: var(--color-palette-white);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-informative-300);
+}
+
+.appearanceOutlinedColorInformative:hover {
+  color: var(--color-semantic-informative-800);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-informative-400);
+}
+
+.appearanceOutlinedColorInformative:hover::after {
+  background-color: var(--color-semantic-informative-100);
+}
+
+.appearanceOutlinedColorInformative:active {
+  color: var(--color-semantic-informative-900);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-informative-500);
+}
+
+.appearanceOutlinedColorInformative:active::after {
+  background-color: var(--color-semantic-informative-200);
+}
+
+.appearanceOutlinedColorNegative {
+  color: var(--color-semantic-negative-700);
+  background-color: var(--color-palette-white);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-negative-300);
+}
+
+.appearanceOutlinedColorNegative:hover {
+  color: var(--color-semantic-negative-800);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-negative-400);
+}
+
+.appearanceOutlinedColorNegative:hover::after {
+  background-color: var(--color-semantic-negative-100);
+}
+
+.appearanceOutlinedColorNegative:active {
+  color: var(--color-semantic-negative-900);
+  box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-negative-500);
+}
+
+.appearanceOutlinedColorNegative:active::after {
+  background-color: var(--color-semantic-negative-200);
+}
+
+/**
+ * appearance: tinted
+ */
+.appearanceTintedColorPrimary {
+  color: var(--color-semantic-primary-800);
+  background-color: var(--color-semantic-primary-100);
+}
+
+.appearanceTintedColorPrimary:hover {
+  color: var(--color-semantic-primary-900);
+}
+
+.appearanceTintedColorPrimary:hover::after {
+  background-color: var(--color-semantic-primary-100);
+}
+
+.appearanceTintedColorPrimary:active {
+  color: var(--color-palette-black);
+}
+
+.appearanceTintedColorPrimary:active::after {
+  background-color: var(--color-semantic-primary-200);
+}
+
+.appearanceTintedColorNeutral {
+  color: var(--color-semantic-neutral-800);
+  background-color: var(--color-semantic-neutral-100);
+}
+
+.appearanceTintedColorNeutral:hover {
+  color: var(--color-semantic-neutral-900);
+}
+
+.appearanceTintedColorNeutral:hover::after {
+  background-color: var(--color-semantic-neutral-100);
+}
+
+.appearanceTintedColorNeutral:active {
+  color: var(--color-palette-black);
+}
+
+.appearanceTintedColorNeutral:active::after {
+  background-color: var(--color-semantic-neutral-200);
+}
+
+.appearanceTintedColorInformative {
+  color: var(--color-semantic-informative-800);
+  background-color: var(--color-semantic-informative-100);
+}
+
+.appearanceTintedColorInformative:hover {
+  color: var(--color-semantic-informative-900);
+}
+
+.appearanceTintedColorInformative:hover::after {
+  background-color: var(--color-semantic-informative-100);
+}
+
+.appearanceTintedColorInformative:active {
+  color: var(--color-palette-black);
+}
+
+.appearanceTintedColorInformative:active::after {
+  background-color: var(--color-semantic-informative-200);
+}
+
+.appearanceTintedColorNegative {
+  color: var(--color-semantic-negative-800);
+  background-color: var(--color-semantic-negative-100);
+}
+
+.appearanceTintedColorNegative:hover {
+  color: var(--color-semantic-negative-900);
+}
+
+.appearanceTintedColorNegative:hover::after {
+  background-color: var(--color-semantic-negative-100);
+}
+
+.appearanceTintedColorNegative:active {
+  color: var(--color-palette-black);
+}
+
+.appearanceTintedColorNegative:active::after {
+  background-color: var(--color-semantic-negative-200);
+}
+
+/**
+ * appearance: filled
+ */
+.appearanceFilledColorPrimary {
+  color: var(--color-palette-white);
+  background-color: var(--color-semantic-primary-700);
+}
+
+.appearanceFilledColorPrimary:hover {
+  background-color: var(--color-semantic-primary-600);
+}
+
+.appearanceFilledColorPrimary:active {
+  background-color: var(--color-semantic-primary-500);
+}
+
+.appearanceFilledColorNeutral {
+  color: var(--color-palette-white);
+  background-color: var(--color-semantic-neutral-700);
+}
+
+.appearanceFilledColorNeutral:hover {
+  background-color: var(--color-semantic-neutral-600);
+}
+
+.appearanceFilledColorNeutral:active {
+  background-color: var(--color-semantic-neutral-500);
+}
+
+.appearanceFilledColorInformative {
+  color: var(--color-palette-white);
+  background-color: var(--color-semantic-informative-700);
+}
+
+.appearanceFilledColorInformative:hover {
+  background-color: var(--color-semantic-informative-600);
+}
+
+.appearanceFilledColorInformative:active {
+  background-color: var(--color-semantic-informative-500);
+}
+
+.appearanceFilledColorNegative {
+  color: var(--color-palette-white);
+  background-color: var(--color-semantic-negative-700);
+}
+
+.appearanceFilledColorNegative:hover {
+  background-color: var(--color-semantic-negative-600);
+}
+
+.appearanceFilledColorNegative:active {
+  background-color: var(--color-semantic-negative-500);
+}
+
+/**
+ * shape
+ */
+.shapeSquare {
+  border-radius: var(--size-radius-m);
+}
+
+.shapeCircle {
+  border-radius: var(--size-radius-full);
+}
+
+/**
+ * size
+ */
+.sizeS {
+  min-height: var(--size-interactive-component-s);
+  padding: calc(calc(var(--size-interactive-component-s) - var(--size-scale-24)) / 2);
+}
+
+.sizeM {
+  min-height: var(--size-interactive-component-m);
+  padding: calc(calc(var(--size-interactive-component-m) - var(--size-scale-24)) / 2);
+}
+
+/**
+ * width
+ */
+.widthAuto {
+  width: fit-content;
+}
+
+.widthFull {
+  width: 100%;
+}
+
+.widthHalf {
+  width: 50%;
+}
+
+.widthThird {
+  width: 33.333%;
+}
+
+/**
+ * layout
+ */
+.layoutCenter {
+  justify-content: center;
+}
+
+/**
+ * icon padding adjustments
+ */
+.withoutLeadingIcon.sizeS {
+  padding-inline-start: var(--size-scale-8);
+}
+
+.withoutLeadingIcon.sizeM {
+  padding-inline-start: var(--size-scale-16);
+}
+
+.withoutTrailingIcon.sizeS {
+  padding-inline-end: var(--size-scale-8);
+}
+
+.withoutTrailingIcon.sizeM {
+  padding-inline-end: var(--size-scale-16);
+}
+
+/**
+ * focus
+ */
+.root:focus-visible {
+  outline: var(--size-border-l) solid var(--color-semantic-neutral-900);
+  outline-offset: calc(-1 * var(--size-border-l));
+  box-shadow: inset 0 0 0 calc(var(--size-border-l) * 2) var(--color-palette-white);
+}
+
+.appearanceTextColorPrimary:focus-visible,
+.appearanceOutlinedColorPrimary:focus-visible,
+.appearanceTintedColorPrimary:focus-visible,
+.appearanceFilledColorPrimary:focus-visible {
+  outline-color: var(--color-semantic-primary-700);
+}
+
+.appearanceTextColorInformative:focus-visible,
+.appearanceOutlinedColorInformative:focus-visible,
+.appearanceTintedColorInformative:focus-visible,
+.appearanceFilledColorInformative:focus-visible {
+  outline-color: var(--color-semantic-informative-700);
+}
+
+.appearanceTextColorNegative:focus-visible,
+.appearanceOutlinedColorNegative:focus-visible,
+.appearanceTintedColorNegative:focus-visible,
+.appearanceFilledColorNegative:focus-visible {
+  outline-color: var(--color-semantic-negative-700);
+}
+
+@media (forced-colors: active) {
+  .root:focus-visible {
+    outline: var(--size-border-l) solid Highlight;
+    outline-offset: 0;
+    box-shadow: none;
+  }
+}
+
+@media (prefers-contrast: more) {
+  .root:focus-visible {
+    outline-width: calc(var(--size-border-l) * 2);
+    outline-offset: calc(-2 * var(--size-border-l));
+    box-shadow: inset 0 0 0 calc(var(--size-border-l) * 4) var(--color-palette-white);
+  }
+}
+
+/**
+ * disabled
+ */
+.disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.disabled:hover::after,
+.disabled:active::after {
+  opacity: 0;
+}
+
+/**
+ * body / label / media
+ */
+.body {
+  display: flex;
+  align-items: center;
+  gap: var(--size-scale-2);
+  max-width: 100%;
+  min-height: var(--size-scale-24);
+}
+
+.bodyLayoutCenter {
+  justify-content: center;
+}
+
+.bodyLayoutStart {
+  justify-content: flex-start;
+}
+
+.bodyLayoutSpaceBetween {
+  flex: 1;
+  min-width: 0;
+}
+
+.label {
+  display: block;
+  max-width: 100%;
+  overflow: hidden;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.media {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: var(--size-scale-24);
+  min-height: var(--size-scale-24);
+}
