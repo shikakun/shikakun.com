@@ -14,4 +14,12 @@ const pages = defineCollection({
   }),
 });
 
-export const collections = { pages };
+const tags = defineCollection({
+  loader: glob({ pattern: '**/*.yaml', base: './src/content/tags' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string().optional(),
+  }),
+});
+
+export const collections = { pages, tags };

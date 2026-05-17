@@ -1,5 +1,5 @@
 ---
-import { type getCollection, render } from 'astro:content';
+import { getCollection, render } from 'astro:content';
 import { FormattedDate, Heading, Prose } from '@shikakun/react';
 import Layout from '../layouts/Layout.astro';
 
@@ -12,6 +12,9 @@ interface Props {
 const { page } = Astro.props;
 const { Content } = await render(page);
 const date = page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
+
+const allTagMetas = await getCollection('tags');
+const tagMetaMap = Object.fromEntries(allTagMetas.map((t) => [t.id, t.data]));
 ---
 
 <Layout title={page.data.title} description={page.data.description}>
@@ -22,9 +25,14 @@ const date = page.data.displayDate || page.data.date?.toISOString().slice(0, 10)
       {date && <FormattedDate date={date} />}
       {page.data.tags && page.data.tags.length > 0 && (
         <ul>
-          {page.data.tags.map((tag) => (
-            <li><a href={`/${tag}`}>{tag}</a></li>
-          ))}
+          {page.data.tags.map((tag) => {
+            const meta = tagMetaMap[tag];
+            return (
+              <li>
+                <a href={`/${tag}`}>{meta?.title ?? tag}</a>
+              </li>
+            );
+          })}
         </ul>
       )}
     </article>

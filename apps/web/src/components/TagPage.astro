@@ -1,5 +1,5 @@
 ---
-import type { getCollection } from 'astro:content';
+import { getCollection } from 'astro:content';
 import { FormattedDate, Heading, Text } from '@shikakun/react';
 import Layout from '../layouts/Layout.astro';
 
@@ -12,14 +12,18 @@ interface Props {
 
 const { tag, tagPages } = Astro.props;
 
+const allTagMetas = await getCollection('tags');
+const tagMeta = allTagMetas.find((t) => t.id === tag);
+
 function getDate(page: Page): string | undefined {
   return page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
 }
 ---
 
-<Layout title={tag}>
+<Layout title={tagMeta?.data.title ?? tag} description={tagMeta?.data.description}>
   <main>
-    <Heading level={1}>{tag}</Heading>
+    <Heading level={1}>{tagMeta?.data.title ?? tag}</Heading>
+    {tagMeta?.data.description && <p>{tagMeta.data.description}</p>}
     <ul>
       {tagPages.map((page) => {
         const date = getDate(page);
