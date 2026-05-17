@@ -1,4 +1,5 @@
 ---
+import styles from './Layout.module.css';
 import '@shikakun/design-tokens/css';
 import '@shikakun/react/css';
 import '~/styles/global.css';
@@ -20,7 +21,9 @@ const { title, description } = Astro.props;
     {description && <meta name="description" content={description} />}
     <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   </head>
-  <body>
-    <slot />
+  <body class={styles.body}>
+    <div class={styles.container}>
+      <slot />
+    </div>
   </body>
 </html>
