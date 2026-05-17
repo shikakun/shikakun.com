@@ -1,0 +1,42 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "size": {
+    "scale": {
+      "$type": "dimension",
+      "minus1": { "$value": "-0.0625rem", "$description": "-1px" },
+      "0": { "$value": "0", "$description": "0px" },
+      "1": { "$value": "0.0625rem", "$description": "1px" },
+      "2": { "$value": "0.125rem", "$description": "2px" },
+      "4": { "$value": "0.25rem", "$description": "4px" },
+      "8": { "$value": "0.5rem", "$description": "8px" },
+      "12": { "$value": "0.75rem", "$description": "12px" },
+      "16": { "$value": "1rem", "$description": "16px" },
+      "20": { "$value": "1.25rem", "$description": "20px" },
+      "24": { "$value": "1.5rem", "$description": "24px" },
+      "28": { "$value": "1.75rem", "$description": "28px" },
+      "32": { "$value": "2rem", "$description": "32px" },
+      "40": { "$value": "2.5rem", "$description": "40px" },
+      "48": { "$value": "3rem", "$description": "48px" },
+      "56": { "$value": "3.5rem", "$description": "56px" },
+      "64": { "$value": "4rem", "$description": "64px" },
+      "72": { "$value": "4.5rem", "$description": "72px" },
+      "80": { "$value": "5rem", "$description": "80px" },
+      "96": { "$value": "6rem", "$description": "96px" },
+      "112": { "$value": "7rem", "$description": "112px" },
+      "120": { "$value": "7.5rem", "$description": "120px" },
+      "128": { "$value": "8rem", "$description": "128px" },
+      "144": { "$value": "9rem", "$description": "144px" },
+      "160": { "$value": "10rem", "$description": "160px" },
+      "168": { "$value": "10.5rem", "$description": "168px" },
+      "176": { "$value": "11rem", "$description": "176px" },
+      "192": { "$value": "12rem", "$description": "192px" },
+      "216": { "$value": "13.5rem", "$description": "216px" },
+      "240": { "$value": "15rem", "$description": "240px" },
+      "256": { "$value": "16rem", "$description": "256px" },
+      "264": { "$value": "16.5rem", "$description": "264px" },
+      "288": { "$value": "18rem", "$description": "288px" },
+      "312": { "$value": "19.5rem", "$description": "312px" },
+      "9999": { "$value": "624.9375rem", "$description": "9999px" }
+    }
+  }
+}

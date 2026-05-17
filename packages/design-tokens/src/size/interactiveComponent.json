@@ -1,0 +1,10 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "size": {
+    "interactiveComponent": {
+      "$type": "dimension",
+      "s": { "$value": "{size.scale.32}" },
+      "m": { "$value": "{size.scale.40}" }
+    }
+  }
+}

@@ -1,0 +1,10 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "size": {
+    "outline": {
+      "$type": "dimension",
+      "offset": { "$value": "{size.scale.minus1}" },
+      "size": { "$value": "{size.scale.1}" }
+    }
+  }
+}

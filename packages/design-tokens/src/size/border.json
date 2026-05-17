@@ -1,0 +1,11 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "size": {
+    "border": {
+      "$type": "dimension",
+      "m": { "$value": "{size.scale.1}" },
+      "l": { "$value": "{size.scale.2}" },
+      "xl": { "$value": "{size.scale.4}" }
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "size": {
+    "radius": {
+      "$type": "dimension",
+      "m": { "$value": "{size.scale.4}" },
+      "l": { "$value": "{size.scale.8}" },
+      "xl": { "$value": "{size.scale.12}" },
+      "full": { "$value": "{size.scale.9999}" }
+    }
+  }
+}
