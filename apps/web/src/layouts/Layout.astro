@@ -4,6 +4,11 @@ import styles from './Layout.module.css';
 import '@shikakun/design-tokens/css';
 import '@shikakun/react/css';
 import '~/styles/global.css';
+import appleTouchIcon from '~/assets/apple-touch-icon.png';
+import favicon16 from '~/assets/favicon-16.png';
+import favicon32 from '~/assets/favicon-32.png';
+import favicon192 from '~/assets/favicon-192.png';
+import favicon512 from '~/assets/favicon-512.png';
 
 type Props = {
   title: string;
@@ -20,7 +25,11 @@ const { title, description } = Astro.props;
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
-    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon.src} />
+    <link rel="icon" type="image/png" sizes="512x512" href={favicon512.src} />
+    <link rel="icon" type="image/png" sizes="192x192" href={favicon192.src} />
+    <link rel="icon" type="image/png" sizes="32x32" href={favicon32.src} />
+    <link rel="icon" type="image/png" sizes="16x16" href={favicon16.src} />
   </head>
   <body class={styles.body}>
     <div class={styles.wrapper}>
