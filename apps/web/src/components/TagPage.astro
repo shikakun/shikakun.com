@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import { FormattedDate, Heading, Text } from '@shikakun/react';
+import Layout from '../layouts/Layout.astro';
+
+type Page = Awaited<ReturnType<typeof getCollection<'pages'>>>[number];
+
+interface Props {
+  tag: string;
+  tagPages: Page[];
+}
+
+const { tag, tagPages } = Astro.props;
+
+function getDate(page: Page): string | undefined {
+  return page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
+}
+---
+
+<Layout title={tag}>
+  <main>
+    <Heading level={1}>{tag}</Heading>
+    <ul>
+      {tagPages.map((page) => {
+        const date = getDate(page);
+        return (
+          <li>
+            <a href={`/${page.id}`}>
+              <Text fontSize="m">
+                {page.data.title}
+                {date && (
+                  <>
+                    {" "}
+                    ─ <FormattedDate date={date} />
+                  </>
+                )}
+              </Text>
+            </a>
+          </li>
+        );
+      })}
+    </ul>
+  </main>
+</Layout>

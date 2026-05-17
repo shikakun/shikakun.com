@@ -1,27 +1,43 @@
 ---
-import { getCollection, render } from 'astro:content';
-import { FormattedDate, Heading, Prose } from '@shikakun/react';
-import Layout from '../layouts/Layout.astro';
+import { getCollection } from 'astro:content';
+import ArticlePage from '../components/ArticlePage.astro';
+import TagPage from '../components/TagPage.astro';
+
+type Page = Awaited<ReturnType<typeof getCollection<'pages'>>>[number];
+
+type Props =
+  | { type: 'page'; page: Page }
+  | { type: 'tag'; tag: string; tagPages: Page[] };
 
 export async function getStaticPaths() {
-  const pages = await getCollection('pages');
-  return pages.map((page) => ({
-    params: { slug: page.id },
-    props: { page },
-  }));
+  const allPages = await getCollection('pages');
+  const tags = [...new Set(allPages.flatMap((p) => p.data.tags ?? []))];
+
+  function sortKey(page: Page): string {
+    return page.data.displayDate || page.data.date?.toISOString().slice(0, 10) || '';
+  }
+
+  return [
+    ...allPages.map((page) => ({
+      params: { slug: page.id },
+      props: { type: 'page' as const, page },
+    })),
+    ...tags.map((tag) => ({
+      params: { slug: tag },
+      props: {
+        type: 'tag' as const,
+        tag,
+        tagPages: allPages
+          .filter((p) => p.data.tags?.includes(tag))
+          .sort((a, b) => sortKey(b).localeCompare(sortKey(a))),
+      },
+    })),
+  ];
 }
 
-const { page } = Astro.props;
-const { Content } = await render(page);
-const date = page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
+const props = Astro.props as Props;
 ---
 
-<Layout title={page.data.title} description={page.data.description}>
-  <main>
-    <article>
-      <Heading level={1}>{page.data.title}</Heading>
-      <Prose><Content /></Prose>
-      {date && <FormattedDate date={date} />}
-    </article>
-  </main>
-</Layout>
+{props.type === 'page'
+  ? <ArticlePage page={props.page} />
+  : <TagPage tag={props.tag} tagPages={props.tagPages} />}
