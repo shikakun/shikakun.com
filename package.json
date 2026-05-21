@@ -1,6 +1,7 @@
 {
   "name": "shikakun.com",
   "private": true,
+  "packageManager": "pnpm@10.19.0",
   "scripts": {
     "dev": "pnpm --filter @shikakun/web dev",
     "build": "pnpm -r build",
