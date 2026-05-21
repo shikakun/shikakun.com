@@ -1,6 +1,7 @@
 {
   "name": "shikakun.com",
   "private": true,
+  "packageManager": "pnpm@10.19.0",
   "scripts": {
     "dev": "pnpm --filter @shikakun/web dev",
     "build": "pnpm -r build",
@@ -13,13 +14,6 @@
     "changeset": "changeset",
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish"
-  },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp",
-      "workerd"
-    ]
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.12",
