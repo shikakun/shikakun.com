@@ -14,13 +14,6 @@
     "version-packages": "changeset version",
     "release": "pnpm build && changeset publish"
   },
-  "pnpm": {
-    "onlyBuiltDependencies": [
-      "esbuild",
-      "sharp",
-      "workerd"
-    ]
-  },
   "devDependencies": {
     "@biomejs/biome": "2.4.12",
     "@playwright/test": "1.59.1",
