@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import type { MouseEvent, ReactNode, Ref } from 'react';
 import { forwardRef } from 'react';
 import { capitalize } from '../../utils/capitalize';
+import { Interactive } from '../Interactive';
 import styles from './Button.module.css';
 
 export type ButtonAppearance = 'text' | 'outlined' | 'tinted' | 'filled';
@@ -83,6 +84,8 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
 
     const bodyClassName = clsx(styles.body, cls(`body${layoutClassMap[layout]}`));
     const visualClassName = styles.visual;
+    // filled は background-color を直接変化させるため、オーバーレイが二重にかからないよう color を渡さない
+    const interactiveColor = appearance === 'filled' ? undefined : color;
 
     const resolvedAriaLabel =
       ariaLabel ?? (icon && typeof children === 'string' ? children : undefined);
@@ -102,8 +105,10 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
     if (href !== undefined) {
       const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
       return (
-        <a
+        <Interactive
+          as="a"
           ref={ref as Ref<HTMLAnchorElement>}
+          color={interactiveColor}
           className={rootClassName}
           href={href}
           target={target}
@@ -119,13 +124,15 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
           }}
         >
           {content}
-        </a>
+        </Interactive>
       );
     }
 
     return (
-      <button
+      <Interactive
+        as="button"
         ref={ref as Ref<HTMLButtonElement>}
+        color={interactiveColor}
         className={rootClassName}
         type={type}
         aria-label={resolvedAriaLabel}
@@ -133,7 +140,7 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
         onClick={onClick}
       >
         {content}
-      </button>
+      </Interactive>
     );
   },
 );

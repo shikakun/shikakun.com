@@ -3,6 +3,8 @@ export { Button } from './Button';
 export { FormattedDate } from './FormattedDate';
 export type { HeadingProps } from './Heading';
 export { Heading } from './Heading';
+export type { InteractiveColor, InteractiveProps } from './Interactive';
+export { Interactive } from './Interactive';
 export type { PageListItem, PageListProps } from './PageList';
 export { PageList } from './PageList';
 export type { ProseProps } from './Prose';

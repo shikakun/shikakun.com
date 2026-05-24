@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-import type { CSSProperties } from 'react';
 import {
   LuChevronDown,
   LuChevronRight,
@@ -9,6 +8,7 @@ import {
   LuPlus,
   LuSearch,
 } from 'react-icons/lu';
+import { rowStyle, sectionStyle, stackStyle } from '../../storyHelpers';
 import { Text } from '../Text';
 import { Button } from './Button';
 
@@ -29,25 +29,6 @@ const sizes = ['s', 'm'] as const;
 const shapes = ['square', 'circle'] as const;
 const widths = ['auto', 'full', 'half', 'third'] as const;
 const layouts = ['center', 'start', 'space-between'] as const;
-
-const stackStyle: CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '1.25rem',
-};
-
-const sectionStyle: CSSProperties = {
-  display: 'flex',
-  flexDirection: 'column',
-  gap: '0.5rem',
-};
-
-const rowStyle: CSSProperties = {
-  display: 'flex',
-  flexWrap: 'wrap',
-  gap: '0.5rem',
-  alignItems: 'center',
-};
 
 const meta = {
   title: 'Components/Button',
