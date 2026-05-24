@@ -1,6 +1,7 @@
 ---
 import { getCollection } from 'astro:content';
-import { Heading, PageList } from '@shikakun/react';
+import { PageList } from '@shikakun/react';
+import PageHeader from '../components/PageHeader.astro';
 import Layout from '../layouts/Layout.astro';
 
 const allPages = await getCollection('pages');
@@ -20,7 +21,7 @@ const pages = allPages
 
 <Layout title="shikakun">
   <main>
-    <Heading level={1}>shikakun</Heading>
+    <PageHeader title="shikakun" />
     <PageList
       items={pages.map((page) => ({
         href: `/${page.id}`,

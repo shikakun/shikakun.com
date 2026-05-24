@@ -1,7 +1,8 @@
 ---
 import { getCollection } from 'astro:content';
-import { FormattedDate, Heading, Text } from '@shikakun/react';
+import { PageList } from '@shikakun/react';
 import Layout from '../layouts/Layout.astro';
+import PageHeader from './PageHeader.astro';
 
 type Page = Awaited<ReturnType<typeof getCollection<'pages'>>>[number];
 
@@ -22,27 +23,13 @@ function getDate(page: Page): string | undefined {
 
 <Layout title={tagMeta?.data.title ?? tag} description={tagMeta?.data.description}>
   <main>
-    <Heading level={1}>{tagMeta?.data.title ?? tag}</Heading>
-    {tagMeta?.data.description && <p>{tagMeta.data.description}</p>}
-    <ul>
-      {tagPages.map((page) => {
-        const date = getDate(page);
-        return (
-          <li>
-            <a href={`/${page.id}`}>
-              <Text fontSize="m">
-                {page.data.title}
-                {date && (
-                  <>
-                    {" "}
-                    ─ <FormattedDate date={date} />
-                  </>
-                )}
-              </Text>
-            </a>
-          </li>
-        );
-      })}
-    </ul>
+    <PageHeader title={tagMeta?.data.title ?? tag} description={tagMeta?.data.description} />
+    <PageList
+      items={tagPages.map((page) => ({
+        href: `/${page.id}`,
+        title: page.data.title,
+        date: getDate(page),
+      }))}
+    />
   </main>
 </Layout>

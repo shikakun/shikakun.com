@@ -8,7 +8,6 @@ type HeadingStyle = {
   readonly fontSize: Extract<FontSize, '2xl' | 'l' | 'm'>;
   readonly fontWeight: Extract<FontWeight, 'normal' | 'bold'>;
   readonly lineHeight: 'dense';
-  readonly kerning: true;
 };
 
 export const getHeadingStyle = (level: HeadingLevel): HeadingStyle => {
@@ -19,12 +18,11 @@ export const getHeadingStyle = (level: HeadingLevel): HeadingStyle => {
         fontSize: '2xl',
         fontWeight: 'normal',
         lineHeight: 'dense',
-        kerning: true,
       };
     case 2:
-      return { as: 'h2', fontSize: 'l', fontWeight: 'bold', lineHeight: 'dense', kerning: true };
+      return { as: 'h2', fontSize: 'l', fontWeight: 'bold', lineHeight: 'dense' };
     case 3:
-      return { as: 'h3', fontSize: 'm', fontWeight: 'bold', lineHeight: 'dense', kerning: true };
+      return { as: 'h3', fontSize: 'm', fontWeight: 'bold', lineHeight: 'dense' };
     default: {
       const _exhaustive: never = level;
       throw new Error(`getHeadingStyle: invalid level: ${_exhaustive}`);

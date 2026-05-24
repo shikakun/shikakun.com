@@ -1,0 +1,9 @@
+.footer {
+  padding-block: var(--size-spacing-2xl);
+}
+
+@media (min-width: 1400px) {
+  .content {
+    padding-inline-start: var(--size-spacing-m);
+  }
+}
