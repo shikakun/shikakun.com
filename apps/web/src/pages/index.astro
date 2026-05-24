@@ -1,6 +1,6 @@
 ---
 import { getCollection } from 'astro:content';
-import { FormattedDate, Heading, Text } from '@shikakun/react';
+import { Heading, PageList } from '@shikakun/react';
 import Layout from '../layouts/Layout.astro';
 
 const allPages = await getCollection('pages');
@@ -21,27 +21,12 @@ const pages = allPages
 <Layout title="shikakun">
   <main>
     <Heading level={1}>shikakun</Heading>
-    <ul>
-      {
-        pages.map((page) => {
-          const date = getDate(page);
-          return(
-            <li>
-              <a href={`/${page.id}`}>
-                <Text fontSize="m">
-                {page.data.title}
-                {date && (
-                  <>
-                    {" "}
-                    ─ <FormattedDate date={date!} />
-                  </>
-                )}
-                </Text>
-              </a>
-            </li>
-          )
-        })
-      }
-    </ul>
+    <PageList
+      items={pages.map((page) => ({
+        href: `/${page.id}`,
+        title: page.data.title,
+        date: getDate(page),
+      }))}
+    />
   </main>
 </Layout>
