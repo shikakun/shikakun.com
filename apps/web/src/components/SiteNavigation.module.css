@@ -21,22 +21,8 @@
 
 .list {
   display: flex;
-  gap: 1rem;
+  gap: var(--size-spacing-2xs);
   list-style: none;
   margin: 0;
   padding: 0;
 }
-
-.link {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 2.5rem;
-  text-decoration: unset;
-}
-
-/*
-.link[aria-current="page"] {
-  text-decoration: underline;
-}
-*/

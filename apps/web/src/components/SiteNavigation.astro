@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { Text } from '@shikakun/react';
+import { Button } from '@shikakun/react';
 import shikakun from '../assets/brand/shikakun.png';
 import styles from './SiteNavigation.module.css';
 
@@ -22,22 +22,19 @@ const items = [
     <Image src={shikakun} class={styles.shikakun} alt="shikakunのアイコン" />
   </a>
   <ul class={styles.list}>
-    {items.map(({ href, label }) => (
-      <li>
-        <a
-          class={styles.link}
-          href={href}
-          aria-current={
-            pathname === href || pathname.startsWith(href + '/')
-              ? 'page'
-              : undefined
-          }
-        >
-          <Text fontSize='m' lineHeight='dense'>
+    {items.map(({ href, label }) => {
+      const isCurrent = pathname === href || pathname.startsWith(href + '/');
+      return (
+        <li>
+          <Button
+            href={href}
+            appearance={isCurrent ? 'tinted' : 'text'}
+            aria-current={isCurrent ? 'page' : undefined}
+          >
             {label}
-          </Text>
-        </a>
-      </li>
-    ))}
+          </Button>
+        </li>
+      );
+    })}
   </ul>
 </nav>
