@@ -10,7 +10,16 @@ const pages = defineCollection({
     displayDate: z.string().optional(),
     publishedAt: z.coerce.date().optional(),
     updatedAt: z.coerce.date().optional(),
-    tags: z.array(z.string()).optional(),
+    tags: z
+      .array(
+        z
+          .string()
+          .regex(
+            /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+            'tag must be a kebab-case slug (lowercase letters, digits, and single hyphens only)',
+          ),
+      )
+      .optional(),
     unlisted: z.boolean().optional(),
   }),
 });
