@@ -1,0 +1,25 @@
+.body {
+  color: var(--color-semantic-primary-800);
+  background-color: var(--color-semantic-neutral-100);
+}
+
+.wrapper {
+  min-height: 100vh;
+}
+
+.container {
+  padding: 1rem;
+  max-width: 48rem;
+}
+
+@media (min-width: 800px) {
+  .container {
+    padding: 2rem;
+  }
+}
+
+@media (min-width: 1400px) {
+  .container {
+    padding: 4rem;
+  }
+}

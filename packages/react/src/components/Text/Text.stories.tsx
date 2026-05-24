@@ -42,6 +42,7 @@ const meta: Meta<typeof Text> = {
     fontWeight: 'normal',
     fontFamily: 'sansSerif',
     lineHeight: 'normal',
+    lineClamp: false,
   },
   argTypes: {
     children: { control: { type: 'text' } },
@@ -50,6 +51,7 @@ const meta: Meta<typeof Text> = {
     fontWeight: { control: { type: 'radio' }, options: fontWeightOptions },
     fontFamily: { control: { type: 'radio' }, options: fontFamilyOptions },
     lineHeight: { control: { type: 'radio' }, options: lineHeightOptions },
+    lineClamp: { control: { type: 'radio' }, options: [false, 1, 3] },
   },
 };
 

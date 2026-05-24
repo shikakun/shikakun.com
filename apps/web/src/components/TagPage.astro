@@ -1,0 +1,35 @@
+---
+import { getCollection } from 'astro:content';
+import { PageList } from '@shikakun/react';
+import Layout from '../layouts/Layout.astro';
+import PageHeader from './PageHeader.astro';
+
+type Page = Awaited<ReturnType<typeof getCollection<'pages'>>>[number];
+
+interface Props {
+  tag: string;
+  tagPages: Page[];
+}
+
+const { tag, tagPages } = Astro.props;
+
+const allTagMetas = await getCollection('tags');
+const tagMeta = allTagMetas.find((t) => t.id === tag);
+
+function getDate(page: Page): string | undefined {
+  return page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
+}
+---
+
+<Layout title={tagMeta?.data.title ?? tag} description={tagMeta?.data.description}>
+  <main>
+    <PageHeader title={tagMeta?.data.title ?? tag} description={tagMeta?.data.description} />
+    <PageList
+      items={tagPages.map((page) => ({
+        href: `/${page.id}`,
+        title: page.data.title,
+        date: getDate(page),
+      }))}
+    />
+  </main>
+</Layout>

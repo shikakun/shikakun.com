@@ -1,0 +1,16 @@
+---
+import { Heading, Text } from '@shikakun/react';
+import styles from './PageHeader.module.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+---
+
+<header class={styles.header}>
+  <Heading level={1}>{title}</Heading>
+  {description && <Text as="p" fontSize="m" lineHeight="normal">{description}</Text>}
+</header>

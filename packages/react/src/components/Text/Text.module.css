@@ -231,3 +231,13 @@
   font-feature-settings: "palt" 1;
   font-kerning: normal;
 }
+
+/**
+ * line clamp
+ */
+.lineClamp {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  -webkit-line-clamp: var(--line-clamp);
+}

@@ -1,0 +1,8 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "motion": {
+    "easing": {
+      "default": { "$type": "cubicBezier", "$value": [0.25, 0.1, 0.25, 1.0] }
+    }
+  }
+}

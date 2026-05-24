@@ -1,0 +1,15 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "size": {
+    "spacing": {
+      "$type": "dimension",
+      "2xs": { "$value": "{size.scale.4}" },
+      "xs": { "$value": "{size.scale.8}" },
+      "s": { "$value": "{size.scale.12}" },
+      "m": { "$value": "{size.scale.16}" },
+      "l": { "$value": "{size.scale.24}" },
+      "xl": { "$value": "{size.scale.32}" },
+      "2xl": { "$value": "{size.scale.48}" }
+    }
+  }
+}

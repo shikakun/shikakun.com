@@ -1,0 +1,12 @@
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacing-m);
+  padding-block: var(--size-spacing-2xl);
+}
+
+@media (min-width: 1400px) {
+  .header {
+    padding-inline-start: var(--size-spacing-m);
+  }
+}

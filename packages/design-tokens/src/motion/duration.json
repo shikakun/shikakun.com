@@ -1,0 +1,8 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "motion": {
+    "duration": {
+      "default": { "$type": "duration", "$value": "0.2s" }
+    }
+  }
+}

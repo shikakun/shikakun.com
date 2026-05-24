@@ -8,7 +8,6 @@ describe('getHeadingStyle', () => {
       fontSize: '2xl',
       fontWeight: 'normal',
       lineHeight: 'dense',
-      kerning: true,
     });
   });
 
@@ -18,7 +17,6 @@ describe('getHeadingStyle', () => {
       fontSize: 'l',
       fontWeight: 'bold',
       lineHeight: 'dense',
-      kerning: true,
     });
   });
 
@@ -28,7 +26,6 @@ describe('getHeadingStyle', () => {
       fontSize: 'm',
       fontWeight: 'bold',
       lineHeight: 'dense',
-      kerning: true,
     });
   });
 
