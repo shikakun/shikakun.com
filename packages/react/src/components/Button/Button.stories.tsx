@@ -39,7 +39,7 @@ const meta = {
       control: 'radio',
       options: ['text', 'outlined', 'tinted', 'filled'],
     },
-    ariaLabel: { control: 'text' },
+    'aria-label': { control: 'text' },
     children: { control: 'text' },
     color: {
       control: 'radio',
@@ -71,7 +71,7 @@ const meta = {
   },
   args: {
     appearance: 'text',
-    ariaLabel: undefined,
+    'aria-label': undefined,
     children: '送信',
     color: 'neutral',
     disabled: false,

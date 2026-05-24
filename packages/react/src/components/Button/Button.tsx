@@ -13,6 +13,7 @@ export type ButtonWidth = 'auto' | 'full' | 'half' | 'third';
 export type ButtonLayout = 'center' | 'start' | 'space-between';
 
 interface BaseButtonProps {
+  readonly 'aria-current'?: 'page' | 'step' | 'location' | 'date' | 'time' | boolean;
   readonly appearance?: ButtonAppearance;
   readonly color?: ButtonColor;
   readonly disabled?: boolean;
@@ -26,9 +27,9 @@ interface BaseButtonProps {
 }
 
 type ButtonContentProps =
-  | { readonly icon: ReactNode; readonly ariaLabel: string; readonly children?: ReactNode }
-  | { readonly icon: ReactNode; readonly ariaLabel?: undefined; readonly children: string }
-  | { readonly icon?: undefined; readonly ariaLabel?: string; readonly children?: ReactNode };
+  | { readonly icon: ReactNode; readonly 'aria-label': string; readonly children?: ReactNode }
+  | { readonly icon: ReactNode; readonly 'aria-label'?: undefined; readonly children: string }
+  | { readonly icon?: undefined; readonly 'aria-label'?: string; readonly children?: ReactNode };
 
 type ButtonElementProps =
   | { readonly href: string; readonly target?: string; readonly type?: never }
@@ -51,8 +52,9 @@ const cls = (key: string) => styles[key as keyof typeof styles] ?? '';
 export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonProps>(
   (
     {
+      'aria-current': ariaCurrent,
+      'aria-label': ariaLabel,
       appearance = 'text',
-      ariaLabel,
       children,
       color = 'neutral',
       disabled = false,
@@ -113,6 +115,7 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
           href={href}
           target={target}
           rel={rel}
+          aria-current={ariaCurrent}
           aria-label={resolvedAriaLabel}
           aria-disabled={disabled || undefined}
           onClick={(event: MouseEvent<HTMLAnchorElement>) => {
@@ -135,6 +138,7 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
         color={interactiveColor}
         className={rootClassName}
         type={type}
+        aria-current={ariaCurrent}
         aria-label={resolvedAriaLabel}
         disabled={disabled}
         onClick={onClick}
