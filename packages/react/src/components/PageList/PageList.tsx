@@ -17,7 +17,7 @@ export type PageListProps = {
 export const PageList = ({ items, titleLineClamp = false }: PageListProps) => (
   <ul className={styles.list}>
     {items.map((item) => (
-      <li key={item.href} className={styles.item}>
+      <li key={item.href}>
         <Interactive as="a" href={item.href} color="neutral" className={styles.link}>
           <span className={styles.title}>
             <Text fontSize="m" lineHeight="normal" lineClamp={titleLineClamp}>
