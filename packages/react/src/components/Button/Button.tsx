@@ -13,11 +13,8 @@ export type ButtonLayout = 'center' | 'start' | 'space-between';
 
 interface BaseButtonProps {
   readonly appearance?: ButtonAppearance;
-  readonly ariaLabel?: string;
-  readonly children?: ReactNode;
   readonly color?: ButtonColor;
   readonly disabled?: boolean;
-  readonly icon?: ReactNode;
   readonly layout?: ButtonLayout;
   readonly leadingIcon?: ReactNode;
   readonly onClick?: () => void;
@@ -27,19 +24,20 @@ interface BaseButtonProps {
   readonly width?: ButtonWidth;
 }
 
-interface AnchorButtonProps extends BaseButtonProps {
-  readonly href: string;
-  readonly target?: string;
-  readonly type?: never;
-}
+type ButtonContentProps =
+  | { readonly icon: ReactNode; readonly ariaLabel: string; readonly children?: ReactNode }
+  | { readonly icon: ReactNode; readonly ariaLabel?: undefined; readonly children: string }
+  | { readonly icon?: undefined; readonly ariaLabel?: string; readonly children?: ReactNode };
 
-interface NativeButtonProps extends BaseButtonProps {
-  readonly href?: never;
-  readonly target?: never;
-  readonly type?: 'button' | 'submit' | 'reset';
-}
+type ButtonElementProps =
+  | { readonly href: string; readonly target?: string; readonly type?: never }
+  | {
+      readonly href?: undefined;
+      readonly target?: never;
+      readonly type?: 'button' | 'submit' | 'reset';
+    };
 
-export type ButtonProps = AnchorButtonProps | NativeButtonProps;
+export type ButtonProps = BaseButtonProps & ButtonContentProps & ButtonElementProps;
 
 const layoutClassMap = {
   center: 'LayoutCenter',
@@ -73,7 +71,6 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
   ) => {
     const rootClassName = clsx(
       styles.root,
-      cls(`appearance${capitalize(appearance)}`),
       cls(`appearance${capitalize(appearance)}Color${capitalize(color)}`),
       cls(`size${capitalize(size)}`),
       cls(`shape${capitalize(shape)}`),
@@ -85,30 +82,32 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
     );
 
     const bodyClassName = clsx(styles.body, cls(`body${layoutClassMap[layout]}`));
-    const mediaClassName = clsx(styles.media, cls(`mediaSize${capitalize(size)}`));
+    const visualClassName = styles.visual;
 
     const resolvedAriaLabel =
       ariaLabel ?? (icon && typeof children === 'string' ? children : undefined);
 
     const content = icon ? (
-      <span className={mediaClassName}>{icon}</span>
+      <span className={visualClassName}>{icon}</span>
     ) : (
       <>
         <span className={bodyClassName}>
-          {leadingIcon ? <span className={mediaClassName}>{leadingIcon}</span> : null}
+          {leadingIcon ? <span className={visualClassName}>{leadingIcon}</span> : null}
           <span className={styles.label}>{children}</span>
         </span>
-        {trailingIcon ? <span className={mediaClassName}>{trailingIcon}</span> : null}
+        {trailingIcon ? <span className={visualClassName}>{trailingIcon}</span> : null}
       </>
     );
 
     if (href !== undefined) {
+      const rel = target === '_blank' ? 'noopener noreferrer' : undefined;
       return (
         <a
           ref={ref as Ref<HTMLAnchorElement>}
           className={rootClassName}
           href={href}
           target={target}
+          rel={rel}
           aria-label={resolvedAriaLabel}
           aria-disabled={disabled || undefined}
           onClick={(event: MouseEvent<HTMLAnchorElement>) => {

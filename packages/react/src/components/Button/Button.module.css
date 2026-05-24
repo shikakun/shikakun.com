@@ -31,16 +31,9 @@
   pointer-events: none;
 }
 
-.root:hover::after,
-.root:active::after {
+.root:not(.disabled):hover::after,
+.root:not(.disabled):active::after {
   opacity: 1;
-}
-
-/**
- * appearance
- */
-.appearanceText {
-  background-color: transparent;
 }
 
 /**
@@ -50,19 +43,19 @@
   color: var(--color-semantic-primary-700);
 }
 
-.appearanceTextColorPrimary:hover {
+.appearanceTextColorPrimary:not(.disabled):hover {
   color: var(--color-semantic-primary-800);
 }
 
-.appearanceTextColorPrimary:hover::after {
+.appearanceTextColorPrimary:not(.disabled):hover::after {
   background-color: var(--color-semantic-primary-100);
 }
 
-.appearanceTextColorPrimary:active {
+.appearanceTextColorPrimary:not(.disabled):active {
   color: var(--color-semantic-primary-900);
 }
 
-.appearanceTextColorPrimary:active::after {
+.appearanceTextColorPrimary:not(.disabled):active::after {
   background-color: var(--color-semantic-primary-200);
 }
 
@@ -70,19 +63,19 @@
   color: var(--color-semantic-neutral-700);
 }
 
-.appearanceTextColorNeutral:hover {
+.appearanceTextColorNeutral:not(.disabled):hover {
   color: var(--color-semantic-neutral-800);
 }
 
-.appearanceTextColorNeutral:hover::after {
+.appearanceTextColorNeutral:not(.disabled):hover::after {
   background-color: var(--color-semantic-neutral-100);
 }
 
-.appearanceTextColorNeutral:active {
+.appearanceTextColorNeutral:not(.disabled):active {
   color: var(--color-semantic-neutral-900);
 }
 
-.appearanceTextColorNeutral:active::after {
+.appearanceTextColorNeutral:not(.disabled):active::after {
   background-color: var(--color-semantic-neutral-200);
 }
 
@@ -90,19 +83,19 @@
   color: var(--color-semantic-informative-700);
 }
 
-.appearanceTextColorInformative:hover {
+.appearanceTextColorInformative:not(.disabled):hover {
   color: var(--color-semantic-informative-800);
 }
 
-.appearanceTextColorInformative:hover::after {
+.appearanceTextColorInformative:not(.disabled):hover::after {
   background-color: var(--color-semantic-informative-100);
 }
 
-.appearanceTextColorInformative:active {
+.appearanceTextColorInformative:not(.disabled):active {
   color: var(--color-semantic-informative-900);
 }
 
-.appearanceTextColorInformative:active::after {
+.appearanceTextColorInformative:not(.disabled):active::after {
   background-color: var(--color-semantic-informative-200);
 }
 
@@ -110,19 +103,19 @@
   color: var(--color-semantic-negative-700);
 }
 
-.appearanceTextColorNegative:hover {
+.appearanceTextColorNegative:not(.disabled):hover {
   color: var(--color-semantic-negative-800);
 }
 
-.appearanceTextColorNegative:hover::after {
+.appearanceTextColorNegative:not(.disabled):hover::after {
   background-color: var(--color-semantic-negative-100);
 }
 
-.appearanceTextColorNegative:active {
+.appearanceTextColorNegative:not(.disabled):active {
   color: var(--color-semantic-negative-900);
 }
 
-.appearanceTextColorNegative:active::after {
+.appearanceTextColorNegative:not(.disabled):active::after {
   background-color: var(--color-semantic-negative-200);
 }
 
@@ -135,21 +128,21 @@
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-primary-300);
 }
 
-.appearanceOutlinedColorPrimary:hover {
+.appearanceOutlinedColorPrimary:not(.disabled):hover {
   color: var(--color-semantic-primary-800);
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-primary-400);
 }
 
-.appearanceOutlinedColorPrimary:hover::after {
+.appearanceOutlinedColorPrimary:not(.disabled):hover::after {
   background-color: var(--color-semantic-primary-100);
 }
 
-.appearanceOutlinedColorPrimary:active {
+.appearanceOutlinedColorPrimary:not(.disabled):active {
   color: var(--color-semantic-primary-900);
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-primary-500);
 }
 
-.appearanceOutlinedColorPrimary:active::after {
+.appearanceOutlinedColorPrimary:not(.disabled):active::after {
   background-color: var(--color-semantic-primary-200);
 }
 
@@ -159,21 +152,21 @@
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-neutral-300);
 }
 
-.appearanceOutlinedColorNeutral:hover {
+.appearanceOutlinedColorNeutral:not(.disabled):hover {
   color: var(--color-semantic-neutral-800);
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-neutral-400);
 }
 
-.appearanceOutlinedColorNeutral:hover::after {
+.appearanceOutlinedColorNeutral:not(.disabled):hover::after {
   background-color: var(--color-semantic-neutral-100);
 }
 
-.appearanceOutlinedColorNeutral:active {
+.appearanceOutlinedColorNeutral:not(.disabled):active {
   color: var(--color-semantic-neutral-900);
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-neutral-500);
 }
 
-.appearanceOutlinedColorNeutral:active::after {
+.appearanceOutlinedColorNeutral:not(.disabled):active::after {
   background-color: var(--color-semantic-neutral-200);
 }
 
@@ -183,21 +176,21 @@
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-informative-300);
 }
 
-.appearanceOutlinedColorInformative:hover {
+.appearanceOutlinedColorInformative:not(.disabled):hover {
   color: var(--color-semantic-informative-800);
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-informative-400);
 }
 
-.appearanceOutlinedColorInformative:hover::after {
+.appearanceOutlinedColorInformative:not(.disabled):hover::after {
   background-color: var(--color-semantic-informative-100);
 }
 
-.appearanceOutlinedColorInformative:active {
+.appearanceOutlinedColorInformative:not(.disabled):active {
   color: var(--color-semantic-informative-900);
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-informative-500);
 }
 
-.appearanceOutlinedColorInformative:active::after {
+.appearanceOutlinedColorInformative:not(.disabled):active::after {
   background-color: var(--color-semantic-informative-200);
 }
 
@@ -207,21 +200,21 @@
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-negative-300);
 }
 
-.appearanceOutlinedColorNegative:hover {
+.appearanceOutlinedColorNegative:not(.disabled):hover {
   color: var(--color-semantic-negative-800);
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-negative-400);
 }
 
-.appearanceOutlinedColorNegative:hover::after {
+.appearanceOutlinedColorNegative:not(.disabled):hover::after {
   background-color: var(--color-semantic-negative-100);
 }
 
-.appearanceOutlinedColorNegative:active {
+.appearanceOutlinedColorNegative:not(.disabled):active {
   color: var(--color-semantic-negative-900);
   box-shadow: inset 0 0 0 var(--size-border-l) var(--color-semantic-negative-500);
 }
 
-.appearanceOutlinedColorNegative:active::after {
+.appearanceOutlinedColorNegative:not(.disabled):active::after {
   background-color: var(--color-semantic-negative-200);
 }
 
@@ -233,19 +226,19 @@
   background-color: var(--color-semantic-primary-100);
 }
 
-.appearanceTintedColorPrimary:hover {
+.appearanceTintedColorPrimary:not(.disabled):hover {
   color: var(--color-semantic-primary-900);
 }
 
-.appearanceTintedColorPrimary:hover::after {
+.appearanceTintedColorPrimary:not(.disabled):hover::after {
   background-color: var(--color-semantic-primary-100);
 }
 
-.appearanceTintedColorPrimary:active {
+.appearanceTintedColorPrimary:not(.disabled):active {
   color: var(--color-palette-black);
 }
 
-.appearanceTintedColorPrimary:active::after {
+.appearanceTintedColorPrimary:not(.disabled):active::after {
   background-color: var(--color-semantic-primary-200);
 }
 
@@ -254,19 +247,19 @@
   background-color: var(--color-semantic-neutral-100);
 }
 
-.appearanceTintedColorNeutral:hover {
+.appearanceTintedColorNeutral:not(.disabled):hover {
   color: var(--color-semantic-neutral-900);
 }
 
-.appearanceTintedColorNeutral:hover::after {
+.appearanceTintedColorNeutral:not(.disabled):hover::after {
   background-color: var(--color-semantic-neutral-100);
 }
 
-.appearanceTintedColorNeutral:active {
+.appearanceTintedColorNeutral:not(.disabled):active {
   color: var(--color-palette-black);
 }
 
-.appearanceTintedColorNeutral:active::after {
+.appearanceTintedColorNeutral:not(.disabled):active::after {
   background-color: var(--color-semantic-neutral-200);
 }
 
@@ -275,19 +268,19 @@
   background-color: var(--color-semantic-informative-100);
 }
 
-.appearanceTintedColorInformative:hover {
+.appearanceTintedColorInformative:not(.disabled):hover {
   color: var(--color-semantic-informative-900);
 }
 
-.appearanceTintedColorInformative:hover::after {
+.appearanceTintedColorInformative:not(.disabled):hover::after {
   background-color: var(--color-semantic-informative-100);
 }
 
-.appearanceTintedColorInformative:active {
+.appearanceTintedColorInformative:not(.disabled):active {
   color: var(--color-palette-black);
 }
 
-.appearanceTintedColorInformative:active::after {
+.appearanceTintedColorInformative:not(.disabled):active::after {
   background-color: var(--color-semantic-informative-200);
 }
 
@@ -296,19 +289,19 @@
   background-color: var(--color-semantic-negative-100);
 }
 
-.appearanceTintedColorNegative:hover {
+.appearanceTintedColorNegative:not(.disabled):hover {
   color: var(--color-semantic-negative-900);
 }
 
-.appearanceTintedColorNegative:hover::after {
+.appearanceTintedColorNegative:not(.disabled):hover::after {
   background-color: var(--color-semantic-negative-100);
 }
 
-.appearanceTintedColorNegative:active {
+.appearanceTintedColorNegative:not(.disabled):active {
   color: var(--color-palette-black);
 }
 
-.appearanceTintedColorNegative:active::after {
+.appearanceTintedColorNegative:not(.disabled):active::after {
   background-color: var(--color-semantic-negative-200);
 }
 
@@ -320,11 +313,11 @@
   background-color: var(--color-semantic-primary-700);
 }
 
-.appearanceFilledColorPrimary:hover {
+.appearanceFilledColorPrimary:not(.disabled):hover {
   background-color: var(--color-semantic-primary-600);
 }
 
-.appearanceFilledColorPrimary:active {
+.appearanceFilledColorPrimary:not(.disabled):active {
   background-color: var(--color-semantic-primary-500);
 }
 
@@ -333,11 +326,11 @@
   background-color: var(--color-semantic-neutral-700);
 }
 
-.appearanceFilledColorNeutral:hover {
+.appearanceFilledColorNeutral:not(.disabled):hover {
   background-color: var(--color-semantic-neutral-600);
 }
 
-.appearanceFilledColorNeutral:active {
+.appearanceFilledColorNeutral:not(.disabled):active {
   background-color: var(--color-semantic-neutral-500);
 }
 
@@ -346,11 +339,11 @@
   background-color: var(--color-semantic-informative-700);
 }
 
-.appearanceFilledColorInformative:hover {
+.appearanceFilledColorInformative:not(.disabled):hover {
   background-color: var(--color-semantic-informative-600);
 }
 
-.appearanceFilledColorInformative:active {
+.appearanceFilledColorInformative:not(.disabled):active {
   background-color: var(--color-semantic-informative-500);
 }
 
@@ -359,11 +352,11 @@
   background-color: var(--color-semantic-negative-700);
 }
 
-.appearanceFilledColorNegative:hover {
+.appearanceFilledColorNegative:not(.disabled):hover {
   background-color: var(--color-semantic-negative-600);
 }
 
-.appearanceFilledColorNegative:active {
+.appearanceFilledColorNegative:not(.disabled):active {
   background-color: var(--color-semantic-negative-500);
 }
 
@@ -403,11 +396,11 @@
 }
 
 .widthHalf {
-  width: 50%;
+  width: calc(100% / 2);
 }
 
 .widthThird {
-  width: 33.333%;
+  width: calc(100% / 3);
 }
 
 /**
@@ -490,13 +483,8 @@
   opacity: 0.5;
 }
 
-.disabled:hover::after,
-.disabled:active::after {
-  opacity: 0;
-}
-
 /**
- * body / label / media
+ * contents
  */
 .body {
   display: flex;
@@ -523,12 +511,11 @@
   display: block;
   max-width: 100%;
   overflow: hidden;
-  word-break: break-all;
   text-overflow: ellipsis;
   white-space: nowrap;
 }
 
-.media {
+.visual {
   display: flex;
   align-items: center;
   justify-content: center;
