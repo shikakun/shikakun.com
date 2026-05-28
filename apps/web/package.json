@@ -8,17 +8,17 @@
     "preview": "astro preview"
   },
   "dependencies": {
-    "@astrojs/mdx": "5.0.3",
-    "@astrojs/react": "^5.0.4",
+    "@astrojs/mdx": "6.0.0",
+    "@astrojs/react": "^5.0.6",
     "@shikakun/design-tokens": "workspace:*",
     "@shikakun/react": "workspace:*",
-    "astro": "6.1.8",
-    "react": "19.2.5",
-    "react-dom": "19.2.5",
+    "astro": "6.4.0",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
     "sharp": "^0.34.5"
   },
   "devDependencies": {
-    "@types/react": "19.2.14",
+    "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3",
     "typescript": "6.0.3"
   }

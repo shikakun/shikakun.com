@@ -21,7 +21,7 @@
     "build": "style-dictionary build --config style-dictionary.config.ts"
   },
   "devDependencies": {
-    "style-dictionary": "5.4.0",
+    "style-dictionary": "5.4.1",
     "typescript": "6.0.3"
   },
   "publishConfig": {

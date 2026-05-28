@@ -2,9 +2,25 @@ packages:
   - 'apps/*'
   - 'packages/*'
 
-onlyBuiltDependencies:
-  - "@swc/core"
-  - esbuild
-  - sharp
-  - unrs-resolver
-  - workerd
+allowBuilds:
+  '@swc/core': true
+  esbuild: true
+  sharp: true
+  unrs-resolver: true
+  workerd: true
+
+minimumReleaseAgeExclude:
+  - '@astrojs/internal-helpers@0.10.0'
+  - '@astrojs/markdown-remark@7.2.0'
+  - '@astrojs/mdx@6.0.0'
+  - '@astrojs/react@5.0.6'
+  - '@biomejs/biome@2.4.16'
+  - '@biomejs/cli-darwin-arm64@2.4.16'
+  - '@biomejs/cli-darwin-x64@2.4.16'
+  - '@biomejs/cli-linux-arm64-musl@2.4.16'
+  - '@biomejs/cli-linux-arm64@2.4.16'
+  - '@biomejs/cli-linux-x64-musl@2.4.16'
+  - '@biomejs/cli-linux-x64@2.4.16'
+  - '@biomejs/cli-win32-arm64@2.4.16'
+  - '@biomejs/cli-win32-x64@2.4.16'
+  - astro@6.4.0
