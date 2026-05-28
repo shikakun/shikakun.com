@@ -56,7 +56,7 @@ jobs:
       - run: pnpm --filter @shikakun/design-tokens build
       - run: pnpm --filter @shikakun/react build-storybook
       - run: npx playwright install --with-deps chromium
-      - run: node node_modules/.pnpm/playwright@1.59.1/node_modules/playwright/cli.js install chromium
+      - run: node node_modules/.pnpm/playwright@1.59.1/node_modules/playwright/cli.js install --with-deps chromium
       - name: Run Storybook VRT
         run: |
           npx http-server packages/react/storybook-static --port 6006 &
