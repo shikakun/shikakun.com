@@ -1,6 +1,6 @@
 {
   "name": "shikakun.com",
-  "image": "mcr.microsoft.com/devcontainers/typescript-node:24-bookworm",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:26-bookworm",
   "customizations": {
     "vscode": {
       "extensions": [
@@ -25,5 +25,5 @@
     "4321": { "label": "Astro dev" },
     "6006": { "label": "Storybook" }
   },
-  "postCreateCommand": "corepack enable && corepack prepare pnpm@10.19.0 --activate && pnpm install --frozen-lockfile && pnpm exec playwright install --with-deps chromium"
+  "postCreateCommand": "corepack enable && corepack prepare pnpm@11.4.0 --activate && pnpm install --frozen-lockfile && pnpm exec playwright install --with-deps chromium"
 }
