@@ -19,6 +19,7 @@
   "scripts": {
     "dev": "vite build --watch",
     "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly --declarationDir dist",
+    "typecheck": "tsc --noEmit",
     "storybook": "storybook dev --port 6006",
     "build-storybook": "storybook build",
     "test-storybook": "test-storybook",
