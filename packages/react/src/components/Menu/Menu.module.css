@@ -1,0 +1,21 @@
+.popup {
+  min-width: var(--size-scale-128);
+  background-color: var(--color-palette-white);
+  border-radius: var(--size-radius-m);
+  box-shadow: var(--elevation-shadow-2);
+  outline: none;
+  overflow: hidden;
+}
+
+.list {
+  margin: unset;
+  padding: var(--size-spacing-2xs) 0;
+  list-style: none;
+}
+
+.divider {
+  border: none;
+  height: var(--size-border-m);
+  background-color: var(--color-semantic-neutral-200);
+  margin-block: var(--size-spacing-2xs);
+}

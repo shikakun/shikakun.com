@@ -248,6 +248,10 @@
 /**
  * shape
  */
+.shapeNone {
+  border-radius: 0;
+}
+
 .shapeSquare {
   border-radius: var(--size-radius-m);
 }
