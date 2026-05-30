@@ -7,8 +7,8 @@ on:
     branches: [main]
 
 jobs:
-  typecheck:
-    name: Typecheck
+  build:
+    name: Build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -20,6 +20,30 @@ jobs:
       - run: pnpm install --frozen-lockfile
       - run: pnpm --filter @shikakun/design-tokens build
       - run: pnpm --filter @shikakun/react build
+      - run: pnpm --filter @shikakun/react build-storybook
+      - uses: actions/upload-artifact@v4
+        with:
+          name: build-artifacts
+          path: |
+            packages/design-tokens/dist
+            packages/react/dist
+            packages/react/storybook-static
+
+  typecheck:
+    name: Typecheck
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: lts/*
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
       - run: pnpm typecheck
 
   lint:
@@ -37,6 +61,7 @@ jobs:
 
   test:
     name: Test (axe + VRT)
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -46,8 +71,13 @@ jobs:
           node-version: lts/*
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @shikakun/design-tokens build
-      - run: pnpm --filter @shikakun/react build
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
       - run: npx playwright install --with-deps chromium
       - run: pnpm test
       - uses: actions/upload-artifact@v4
@@ -59,6 +89,7 @@ jobs:
 
   storybook-vrt:
     name: Storybook VRT
+    needs: build
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -68,10 +99,14 @@ jobs:
           node-version: lts/*
           cache: pnpm
       - run: pnpm install --frozen-lockfile
-      - run: pnpm --filter @shikakun/design-tokens build
-      - run: pnpm --filter @shikakun/react build-storybook
+      - uses: actions/download-artifact@v4
+        with:
+          name: build-artifacts
+      - uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
       - run: npx playwright install --with-deps chromium
-      - run: node node_modules/.pnpm/playwright@1.59.1/node_modules/playwright/cli.js install --with-deps chromium
       - name: Run Storybook VRT
         run: |
           npx http-server packages/react/storybook-static --port 6006 &
