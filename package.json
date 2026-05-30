@@ -18,11 +18,17 @@
   },
   "devDependencies": {
     "@biomejs/biome": "2.4.16",
-    "@playwright/test": "1.59.1",
+    "@playwright/test": "1.60.0",
     "@axe-core/playwright": "4.11.3",
     "markuplint": "4.18.3",
     "@markuplint/astro-parser": "4.18.3",
     "wrangler": "4.95.0",
     "@changesets/cli": "2.31.0"
+  },
+  "pnpm": {
+    "//": "@storybook/test-runner@0.24.4 が playwright-core@1.59.1 に依存するため playwright-core を 1.60.0 に揃えたワークアラウンド。test-runner が playwright-core@1.60.0 に追従したら overrides ごと削除する",
+    "overrides": {
+      "playwright-core": "1.60.0"
+    }
   }
 }
