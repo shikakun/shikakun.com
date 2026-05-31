@@ -7,6 +7,8 @@ export type { InteractiveColor, InteractiveProps } from './Interactive';
 export { Interactive } from './Interactive';
 export type { MenuItemProps, MenuProps } from './Menu';
 export { Menu } from './Menu';
+export type { NavigationMenuItem, NavigationMenuProps } from './NavigationMenu';
+export { NavigationMenu } from './NavigationMenu';
 export type { PageListItem, PageListProps } from './PageList';
 export { PageList } from './PageList';
 export type { ProseProps } from './Prose';

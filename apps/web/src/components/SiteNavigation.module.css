@@ -18,11 +18,3 @@
   height: 2.5rem;
   border-radius: 9999rem;
 }
-
-.list {
-  display: flex;
-  gap: var(--size-spacing-2xs);
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}

@@ -199,10 +199,16 @@ function MenuPopup({ children }: MenuPopupProps) {
 MenuPopup.displayName = 'Menu.Popup';
 
 type MenuItemButtonProps = {
+  readonly href?: never;
   readonly onClick?: () => void;
 } & Omit<ButtonProps, 'onClick' | 'href' | 'target' | 'type' | 'appearance'>;
 
-export type MenuItemProps = MenuItemButtonProps;
+type MenuItemLinkProps = {
+  readonly href: string;
+  readonly target?: string;
+} & Omit<ButtonProps, 'href' | 'target' | 'onClick' | 'type' | 'appearance'>;
+
+export type MenuItemProps = MenuItemButtonProps | MenuItemLinkProps;
 
 function MenuItemButton({ onClick, disabled, ...buttonProps }: MenuItemButtonProps) {
   const { getItemProps, activeIndex, closeMenu } = useMenuContext();
@@ -235,6 +241,37 @@ function MenuItemButton({ onClick, disabled, ...buttonProps }: MenuItemButtonPro
   );
 }
 
+function MenuItemLink({ href, target, disabled, ...buttonProps }: MenuItemLinkProps) {
+  const { getItemProps, activeIndex, closeMenu } = useMenuContext();
+  const { ref, index } = useListItem();
+  const isActive = activeIndex === index;
+  const tabIndex = activeIndex === null ? (index === 0 ? 0 : -1) : isActive ? 0 : -1;
+
+  return (
+    <li className={styles.item} role="presentation">
+      <Button
+        width="full"
+        layout="space-between"
+        {...buttonProps}
+        ref={ref as Ref<HTMLAnchorElement>}
+        href={href}
+        target={target}
+        appearance="text"
+        shape="none"
+        disabled={disabled}
+        tabIndex={tabIndex}
+        {...(getItemProps({
+          onClick: () => {
+            if (!disabled) closeMenu();
+          },
+        }) as object)}
+      />
+    </li>
+  );
+}
+
+MenuItemLink.displayName = 'Menu.ItemLink';
+
 function MenuItemDivider() {
   return (
     <li className={styles.item} role="presentation">
@@ -246,7 +283,10 @@ function MenuItemDivider() {
 MenuItemDivider.displayName = 'Menu.Divider';
 
 function MenuItem(props: MenuItemProps) {
-  return <MenuItemButton {...props} />;
+  if (props.href !== undefined) {
+    return <MenuItemLink {...(props as MenuItemLinkProps)} />;
+  }
+  return <MenuItemButton {...(props as MenuItemButtonProps)} />;
 }
 
 MenuItem.displayName = 'Menu.Item';
