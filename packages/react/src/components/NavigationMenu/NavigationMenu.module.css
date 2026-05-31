@@ -5,6 +5,10 @@
   overflow: hidden;
 }
 
+.root:not([data-measured]) {
+  overflow: visible;
+}
+
 .ghost {
   position: absolute;
   top: 0;

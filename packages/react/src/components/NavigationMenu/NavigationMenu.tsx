@@ -20,7 +20,7 @@ export const NavigationMenu = ({ items }: NavigationMenuProps) => {
   const ghostRef = useRef<HTMLDivElement>(null);
   const measureItemRefs = useRef<(HTMLElement | null)[]>([]);
   const measureTriggerRef = useRef<HTMLElement | null>(null);
-  const [visibleCount, setVisibleCount] = useState(items.length);
+  const [visibleCount, setVisibleCount] = useState<number | null>(null);
 
   const compute = useCallback(() => {
     const container = containerRef.current;
@@ -69,12 +69,13 @@ export const NavigationMenu = ({ items }: NavigationMenuProps) => {
     return () => observer.disconnect();
   }, [compute]);
 
-  const visibleItems = items.slice(0, visibleCount);
-  const hiddenItems = items.slice(visibleCount);
+  const isMeasured = visibleCount !== null;
+  const visibleItems = isMeasured ? items.slice(0, visibleCount) : items;
+  const hiddenItems = isMeasured ? items.slice(visibleCount) : [];
   const hasHidden = hiddenItems.length > 0;
 
   return (
-    <div ref={containerRef} className={styles.root}>
+    <div ref={containerRef} className={styles.root} data-measured={isMeasured || undefined}>
       <div ref={ghostRef} aria-hidden="true" inert className={styles.ghost}>
         {items.map((item, i) => (
           <span
