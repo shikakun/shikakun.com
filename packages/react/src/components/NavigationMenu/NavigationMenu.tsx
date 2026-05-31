@@ -110,8 +110,8 @@ export const NavigationMenu = ({ items }: NavigationMenuProps) => {
             <Menu placement="bottom-end">
               <Menu.Trigger icon={<LuEllipsis size={18} />} aria-label="もっと見る" />
               <Menu.Popup>
-                {hiddenItems.map(({ href, label, target }) => (
-                  <Menu.Item key={href} href={href} target={target}>
+                {hiddenItems.map(({ href, label, target, isCurrent }) => (
+                  <Menu.Item key={href} href={href} target={target} aria-current={isCurrent ? 'page' : undefined}>
                     {label}
                   </Menu.Item>
                 ))}
