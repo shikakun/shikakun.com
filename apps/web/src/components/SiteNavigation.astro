@@ -1,6 +1,6 @@
 ---
 import { Image } from 'astro:assets';
-import { Button } from '@shikakun/react';
+import { NavigationMenu } from '@shikakun/react';
 import shikakun from '../assets/brand/shikakun.png';
 import styles from './SiteNavigation.module.css';
 
@@ -11,30 +11,21 @@ type Props = {
 const { label = 'サイトナビゲーション' } = Astro.props;
 const { pathname } = Astro.url;
 
-const items = [
+const rawItems = [
   { href: '/', label: 'Home' },
   { href: '/poetry', label: 'Poetry' },
 ];
+
+const items = rawItems.map(({ href, label }) => ({
+  href,
+  label,
+  isCurrent: pathname === href || pathname.startsWith(`${href}/`),
+}));
 ---
 
 <nav class={styles.nav} aria-label={label}>
   <a class={styles.icon} href="/" aria-hidden="true" tabindex="-1">
     <Image src={shikakun} class={styles.shikakun} alt="shikakunのアイコン" />
   </a>
-  <ul class={styles.list}>
-    {items.map(({ href, label }) => {
-      const isCurrent = pathname === href || pathname.startsWith(href + '/');
-      return (
-        <li>
-          <Button
-            href={href}
-            appearance={isCurrent ? 'tinted' : 'text'}
-            aria-current={isCurrent ? 'page' : undefined}
-          >
-            {label}
-          </Button>
-        </li>
-      );
-    })}
-  </ul>
+  <NavigationMenu client:load items={items} />
 </nav>
