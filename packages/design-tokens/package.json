@@ -19,7 +19,9 @@
   "scripts": {
     "dev": "style-dictionary build --config style-dictionary.config.ts --watch",
     "build": "style-dictionary build --config style-dictionary.config.ts",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write ."
   },
   "devDependencies": {
     "style-dictionary": "5.4.1",
