@@ -20,6 +20,8 @@
     "dev": "vite build --watch",
     "build": "vite build && tsc --project tsconfig.build.json --emitDeclarationOnly --declarationDir dist",
     "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
     "storybook": "storybook dev --port 6006",
     "build-storybook": "storybook build",
     "test-storybook": "test-storybook",
@@ -33,6 +35,7 @@
     "@floating-ui/react": "0.27.19",
     "@shikakun/design-tokens": "workspace:*",
     "aria-attribute-types": "1.0.0",
+    "budoux": "0.8.4",
     "clsx": "^2.1.1"
   },
   "devDependencies": {

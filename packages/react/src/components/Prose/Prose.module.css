@@ -18,6 +18,8 @@
 /* p */
 .prose p {
   margin-block: calc(20em / 16);
+  text-align: justify;
+  text-justify: inter-character;
 }
 
 /* 見出し共通 */
@@ -27,6 +29,8 @@
 .prose h4 {
   font-feature-settings: "palt" 1;
   font-kerning: normal;
+  word-break: keep-all;
+  overflow-wrap: anywhere;
 }
 
 .prose h1 {
