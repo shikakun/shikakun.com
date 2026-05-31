@@ -26,7 +26,8 @@ export const Heading = ({ children, as, level, className, ...htmlProps }: Headin
     typeof children === 'string'
       ? parser
           .parse(children)
-          .flatMap((seg, i) => (i === 0 ? [seg] : [<wbr key={`wbr-${seg}`} />, seg]))
+          // biome-ignore lint/suspicious/noArrayIndexKey: BudouXの分割結果は同じ入力に対して常に同順
+          .flatMap((seg, i) => (i === 0 ? [seg] : [<wbr key={`wbr-${i}`} />, seg]))
       : children;
 
   return (
