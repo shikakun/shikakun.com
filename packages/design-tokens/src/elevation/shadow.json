@@ -1,0 +1,78 @@
+{
+  "$schema": "https://www.designtokens.org/schemas/2025.10/format.json",
+  "elevation": {
+    "shadow": {
+      "$type": "shadow",
+      "0": {
+        "$value": {
+          "offsetX": "0",
+          "offsetY": "0",
+          "blur": "0",
+          "spread": "0",
+          "color": "rgba(0, 0, 0, 0)"
+        }
+      },
+      "1": {
+        "$value": [
+          {
+            "offsetX": "0",
+            "offsetY": "-0.00625rem",
+            "blur": "0.0625rem",
+            "spread": "0",
+            "color": "rgba(0, 0, 0, 0.12)"
+          },
+          {
+            "offsetX": "0",
+            "offsetY": "0.0625rem",
+            "blur": "0.125rem",
+            "spread": "0",
+            "color": "rgba(0, 0, 0, 0.12)"
+          }
+        ]
+      },
+      "2": {
+        "$value": [
+          {
+            "offsetX": "0",
+            "offsetY": "0",
+            "blur": "0.25rem",
+            "spread": "0",
+            "color": "rgba(0, 0, 0, 0.12)"
+          },
+          {
+            "offsetX": "0",
+            "offsetY": "0.25rem",
+            "blur": "0.375rem",
+            "spread": "-0.125rem",
+            "color": "rgba(0, 0, 0, 0.12)"
+          }
+        ]
+      },
+      "3": {
+        "$value": [
+          {
+            "offsetX": "0",
+            "offsetY": "0.125rem",
+            "blur": "0.375rem",
+            "spread": "0",
+            "color": "rgba(0, 0, 0, 0.08)"
+          },
+          {
+            "offsetX": "0",
+            "offsetY": "0.5rem",
+            "blur": "2rem",
+            "spread": "-0.75rem",
+            "color": "rgba(0, 0, 0, 0.12)"
+          },
+          {
+            "offsetX": "0",
+            "offsetY": "0.625rem",
+            "blur": "1.75rem",
+            "spread": "0.25rem",
+            "color": "rgba(0, 0, 0, 0.12)"
+          }
+        ]
+      }
+    }
+  }
+}

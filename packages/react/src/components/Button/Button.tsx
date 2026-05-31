@@ -1,3 +1,4 @@
+import type { KebabCaseAria } from 'aria-attribute-types';
 import clsx from 'clsx';
 import type { MouseEvent, ReactNode, Ref } from 'react';
 import { forwardRef } from 'react';
@@ -8,12 +9,11 @@ import styles from './Button.module.css';
 export type ButtonAppearance = 'text' | 'outlined' | 'tinted' | 'filled';
 export type ButtonColor = 'primary' | 'neutral' | 'informative' | 'negative';
 export type ButtonSize = 's' | 'm';
-export type ButtonShape = 'square' | 'circle';
+export type ButtonShape = 'square' | 'circle' | 'none';
 export type ButtonWidth = 'auto' | 'full' | 'half' | 'third';
 export type ButtonLayout = 'center' | 'start' | 'space-between';
 
-interface BaseButtonProps {
-  readonly 'aria-current'?: 'page' | 'step' | 'location' | 'date' | 'time' | boolean;
+interface BaseButtonProps extends Omit<KebabCaseAria<'button'>, 'aria-label' | 'aria-disabled'> {
   readonly appearance?: ButtonAppearance;
   readonly color?: ButtonColor;
   readonly disabled?: boolean;
@@ -22,6 +22,7 @@ interface BaseButtonProps {
   readonly onClick?: () => void;
   readonly shape?: ButtonShape;
   readonly size?: ButtonSize;
+  readonly tabIndex?: number;
   readonly trailingIcon?: ReactNode;
   readonly width?: ButtonWidth;
 }
@@ -29,7 +30,7 @@ interface BaseButtonProps {
 type ButtonContentProps =
   | { readonly icon: ReactNode; readonly 'aria-label': string; readonly children?: ReactNode }
   | { readonly icon: ReactNode; readonly 'aria-label'?: undefined; readonly children: string }
-  | { readonly icon?: undefined; readonly 'aria-label'?: string; readonly children?: ReactNode };
+  | { readonly icon?: ReactNode; readonly 'aria-label'?: string; readonly children?: ReactNode };
 
 type ButtonElementProps =
   | { readonly href: string; readonly target?: string; readonly type?: never }
@@ -52,7 +53,6 @@ const cls = (key: string) => styles[key as keyof typeof styles] ?? '';
 export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonProps>(
   (
     {
-      'aria-current': ariaCurrent,
       'aria-label': ariaLabel,
       appearance = 'text',
       children,
@@ -65,10 +65,12 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
       onClick,
       shape = 'square',
       size = 'm',
+      tabIndex,
       target,
       trailingIcon,
       type = 'button',
       width = 'auto',
+      ...ariaProps
     },
     ref,
   ) => {
@@ -115,9 +117,9 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
           href={href}
           target={target}
           rel={rel}
-          aria-current={ariaCurrent}
           aria-label={resolvedAriaLabel}
           aria-disabled={disabled || undefined}
+          tabIndex={tabIndex}
           onClick={(event: MouseEvent<HTMLAnchorElement>) => {
             if (disabled) {
               event.preventDefault();
@@ -125,6 +127,7 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
             }
             onClick?.();
           }}
+          {...(ariaProps as object)}
         >
           {content}
         </Interactive>
@@ -138,10 +141,11 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
         color={interactiveColor}
         className={rootClassName}
         type={type}
-        aria-current={ariaCurrent}
         aria-label={resolvedAriaLabel}
         disabled={disabled}
+        tabIndex={tabIndex}
         onClick={onClick}
+        {...(ariaProps as object)}
       >
         {content}
       </Interactive>
