@@ -116,7 +116,7 @@ export const mono: MethodHandler = (expression, file) => {
 
 /**
  * 圏点の番号（1〜10）とtext-emphasis-styleの対応。
- * 出典の見た目との突き合わせは未実施（docs/bracket-syntax.mdの未決事項）。
+ * 出典の見た目との突き合わせは未実施のため、対応は変更される可能性がある（docs/bracket-syntax.md）。
  */
 const EMPHASIS_STYLES = [
   'filled dot',

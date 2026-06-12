@@ -4,7 +4,7 @@ description: このウェブサイト独自のMarkdown記法「角括弧構文�
 unlisted: true
 ---
 
-このページは、角括弧構文（docs/bracket-syntax.md）のフェーズ1で使えるメソッドの動作確認用です。
+このページは、角括弧構文（docs/bracket-syntax.md）で使えるメソッドの動作確認用です。
 
 ## 改行
 
