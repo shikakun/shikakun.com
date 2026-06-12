@@ -53,6 +53,9 @@ importers:
       astro:
         specifier: 6.4.0
         version: 6.4.0(@types/node@25.6.0)(lightningcss@1.32.0)(rollup@4.60.1)(yaml@2.9.0)
+      mdast-util-to-string:
+        specifier: ^4.0.0
+        version: 4.0.0
       react:
         specifier: 19.2.6
         version: 19.2.6
@@ -68,6 +71,9 @@ importers:
       sharp:
         specifier: ^0.34.5
         version: 0.34.5
+      unist-util-visit:
+        specifier: ^5.1.0
+        version: 5.1.0
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.9
@@ -86,6 +92,9 @@ importers:
         version: 19.2.3(@types/react@19.2.15)
       typescript:
         specifier: 6.0.3
+        version: 6.0.3
+      vfile:
+        specifier: ^6.0.3
         version: 6.0.3
       vitest:
         specifier: ^4.1.7

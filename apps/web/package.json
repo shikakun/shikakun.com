@@ -18,11 +18,13 @@
     "@shikakun/design-tokens": "workspace:*",
     "@shikakun/react": "workspace:*",
     "astro": "6.4.0",
+    "mdast-util-to-string": "^4.0.0",
     "react": "19.2.6",
     "react-dom": "19.2.6",
     "rehype-budoux": "1.1.4",
     "remark-breaks": "^4.0.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "unist-util-visit": "^5.1.0"
   },
   "devDependencies": {
     "@astrojs/check": "^0.9.9",
@@ -31,6 +33,7 @@
     "@types/react": "19.2.15",
     "@types/react-dom": "19.2.3",
     "typescript": "6.0.3",
+    "vfile": "^6.0.3",
     "vitest": "^4.1.7"
   }
 }

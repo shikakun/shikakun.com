@@ -1,4 +1,5 @@
 import type { ElementContent, Properties } from 'hast';
+import type { VFile } from 'vfile';
 
 /**
  * 角括弧構文の式。
@@ -35,6 +36,16 @@ export interface BracketSyntaxNode {
     hChildren?: ElementContent[];
   };
 }
+
+/**
+ * メソッドの変換関数。
+ * nullを返すと「変換しない」（ソースをそのまま出力する）。
+ * 無視する理由はハンドラー自身がfile.message()で警告する。
+ */
+export type MethodHandler = (
+  expression: BracketExpression,
+  file: VFile,
+) => BracketSyntaxNode | null;
 
 declare module 'mdast' {
   interface PhrasingContentMap {
