@@ -5,7 +5,7 @@ import { requireText, textElement } from './helpers';
  * キーシンボルのプリセット。記号だけでは読み上げで伝わらないため、
  * aria-labelを必ず付ける（title引数で上書きできる）。
  */
-const KEY_PRESETS: Record<string, { symbol: string; label: string }> = {
+const KBD_PRESETS: Record<string, { symbol: string; label: string }> = {
   control: { symbol: '⌃', label: 'Control' },
   option: { symbol: '⌥', label: 'Option' },
   shift: { symbol: '⇧', label: 'Shift' },
@@ -22,21 +22,21 @@ const KEY_PRESETS: Record<string, { symbol: string; label: string }> = {
 };
 
 /**
- * `[Command(key)]` → `<kbd>Command</kbd>`
- * `[(key.command)]` → `<kbd aria-label="Command">⌘</kbd>`
- * `[(key.delete,title="Backspace")]` → `<kbd aria-label="Backspace">⌫</kbd>`
+ * `[Command(kbd)]` → `<kbd>Command</kbd>`
+ * `[(kbd.command)]` → `<kbd aria-label="Command">⌘</kbd>`
+ * `[(kbd.delete,title="Backspace")]` → `<kbd aria-label="Backspace">⌫</kbd>`
  */
-export const key: MethodHandler = (expression, file) => {
+export const kbd: MethodHandler = (expression, file) => {
   if (expression.preset !== null) {
     if (expression.text !== null) {
       file.message(
-        `bracket-syntax: keyのプリセットは[(key.${expression.preset})]の形で使うため無視しました`,
+        `bracket-syntax: kbdのプリセットは[(kbd.${expression.preset})]の形で使うため無視しました`,
       );
       return null;
     }
-    const preset = KEY_PRESETS[expression.preset];
+    const preset = KBD_PRESETS[expression.preset];
     if (!preset) {
-      file.message(`bracket-syntax: keyの未知のプリセットのため無視しました: ${expression.preset}`);
+      file.message(`bracket-syntax: kbdの未知のプリセットのため無視しました: ${expression.preset}`);
       return null;
     }
     return textElement(

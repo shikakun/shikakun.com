@@ -25,60 +25,10 @@ describe('テキストスタイル', () => {
     expect(await render('[誤り(stroke)]')).toContain('<s>誤り</s>');
   });
 
-  it('strokeの太さ指定を変換する', async () => {
-    expect(await render('[誤り(stroke,4)]')).toContain(
-      '<s style="text-decoration-thickness: 4px">誤り</s>',
-    );
-  });
-
-  it('doublestrokeを変換する', async () => {
-    expect(await render('[誤り(doublestroke,2)]')).toContain(
-      '<s style="text-decoration-style: double; text-decoration-thickness: 2px">誤り</s>',
-    );
-  });
-
-  it('weightを変換する', async () => {
-    expect(await render('[細い(weight,200)]')).toContain(
-      '<span style="font-weight: 200">細い</span>',
-    );
-  });
-
-  it('obliqueを変換する', async () => {
-    expect(await render('[斜め(oblique)]')).toContain(
-      '<span style="font-style: oblique">斜め</span>',
-    );
-  });
-
-  it('obliqueの角度指定を変換する', async () => {
-    expect(await render('[斜め(oblique,30)]')).toContain(
-      '<span style="font-style: oblique 30deg">斜め</span>',
-    );
-  });
-
-  it('scaleを変換する', async () => {
-    expect(await render('[大きい(scale, 1.5)]')).toContain(
-      '<span style="font-size: 1.5em">大きい</span>',
-    );
-  });
-
-  it('monoを変換する', async () => {
-    expect(await render('[code(mono)]')).toContain('<span class="bracket-mono">code</span>');
-  });
-
-  it('monoのウェイト指定を変換する', async () => {
-    expect(await render('[code(mono,800)]')).toContain(
-      '<span class="bracket-mono" style="font-weight: 800">code</span>',
-    );
-  });
-
   it('emphasizeを変換する', async () => {
-    expect(await render('[けんてん(emphasize,3)]')).toContain(
-      '<span style="text-emphasis: filled sesame">けんてん</span>',
+    expect(await render('[けんてん(emphasize)]')).toContain(
+      '<strong style="text-emphasis: filled triangle">けんてん</strong>',
     );
-  });
-
-  it('不正な引数は変換しない', async () => {
-    expect(await render('[太さ(weight,abc)]')).toContain('[太さ(weight,abc)]');
   });
 });
 
@@ -102,29 +52,29 @@ describe('ruby', () => {
   });
 });
 
-describe('key', () => {
+describe('kbd', () => {
   it('テキスト適用形を変換する', async () => {
-    expect(await render('[Command(key)]')).toContain('<kbd>Command</kbd>');
+    expect(await render('[Command(kbd)]')).toContain('<kbd>Command</kbd>');
   });
 
   it('プリセットを記号とaria-labelに変換する', async () => {
-    expect(await render('[(key.command)]')).toContain('<kbd aria-label="Command">⌘</kbd>');
+    expect(await render('[(kbd.command)]')).toContain('<kbd aria-label="Command">⌘</kbd>');
   });
 
   it('title引数でaria-labelを上書きする', async () => {
-    expect(await render('[(key.delete,title="Backspace")]')).toContain(
+    expect(await render('[(kbd.delete,title="Backspace")]')).toContain(
       '<kbd aria-label="Backspace">⌫</kbd>',
     );
   });
 
   it('カーリークォートのtitle引数も解釈する', async () => {
-    expect(await render('[(key.delete,title=“Backspace”)]')).toContain(
+    expect(await render('[(kbd.delete,title=“Backspace”)]')).toContain(
       '<kbd aria-label="Backspace">⌫</kbd>',
     );
   });
 
   it('未知のプリセットは変換しない', async () => {
-    expect(await render('[(key.unknown)]')).toContain('[(key.unknown)]');
+    expect(await render('[(kbd.unknown)]')).toContain('[(kbd.unknown)]');
   });
 });
 
@@ -147,16 +97,20 @@ describe('divider', () => {
     expect(code).not.toContain('<p><hr');
   });
 
-  it('サブタイプと引数をクラスとカスタムプロパティに変換する', async () => {
-    expect(await render('[(divider:dash,length=5px,gap=3px)]')).toContain(
-      '<hr class="bracket-divider bracket-divider--dash" style="--divider-length: 5px; --divider-gap: 3px">',
+  it('doubleを変換する', async () => {
+    expect(await render('[(divider, double)]')).toContain(
+      '<hr class="bracket-divider bracket-divider--double">',
     );
   });
 
-  it('reversedフラグをクラスに変換する', async () => {
-    expect(await render('[(divider:slash,height=1em,gap=10px,reversed)]')).toContain(
-      'bracket-divider--slash bracket-divider--reversed',
+  it('dashを変換する', async () => {
+    expect(await render('[(divider, dash)]')).toContain(
+      '<hr class="bracket-divider bracket-divider--dash">',
     );
+  });
+
+  it('不明なバリアントは変換しない', async () => {
+    expect(await render('[(divider, slash)]')).toContain('[(divider, slash)]');
   });
 
   it('段落の途中では変換しない', async () => {
@@ -200,9 +154,9 @@ describe('youtube', () => {
 
 describe('Markdown標準記法との衝突回避', () => {
   it('リンク記法を変換しない', async () => {
-    expect(await render('[テキスト](https://example.com)')).toContain(
-      '<a href="https://example.com">テキスト</a>',
-    );
+    const code = await render('[テキスト](https://example.com)');
+    expect(code).toContain('href="https://example.com"');
+    expect(code).toContain('テキスト');
   });
 
   it('メソッド括弧のないただの角括弧を変換しない', async () => {
@@ -239,9 +193,9 @@ describe('エスケープと異常系', () => {
 
 describe('複合', () => {
   it('1つの段落の複数の式を変換する', async () => {
-    const code = await render('[太(strong)]と[斜(oblique)]');
+    const code = await render('[太(strong)]と[消(stroke)]');
     expect(code).toContain('<strong>太</strong>');
-    expect(code).toContain('<span style="font-style: oblique">斜</span>');
+    expect(code).toContain('<s>消</s>');
   });
 
   it('remark-breaksの改行と共存する', async () => {

@@ -42,20 +42,20 @@ describe('parseBracketExpression', () => {
   });
 
   it('ドット記法のプリセットをパースする', () => {
-    const result = parseBracketExpression('[(key.command)]', 0);
+    const result = parseBracketExpression('[(kbd.command)]', 0);
     expect(result?.expression).toMatchObject({
-      method: 'key',
+      method: 'kbd',
       preset: 'command',
     });
   });
 
   it('引用符付きの名前付き引数から引用符を取り除く', () => {
-    const result = parseBracketExpression('[(key.delete,title="Backspace")]', 0);
+    const result = parseBracketExpression('[(kbd.delete,title="Backspace")]', 0);
     expect(result?.expression.namedArgs).toEqual({ title: 'Backspace' });
   });
 
   it('カーリークォートも引用符として受理する', () => {
-    const result = parseBracketExpression('[(key.delete,title=“Backspace”)]', 0);
+    const result = parseBracketExpression('[(kbd.delete,title=“Backspace”)]', 0);
     expect(result?.expression.namedArgs).toEqual({ title: 'Backspace' });
   });
 

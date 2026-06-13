@@ -2,18 +2,7 @@
  * 角括弧構文（docs/bracket-syntax.md）が生成する要素のスタイル。
  * remarkプラグインが生成するHTMLにはCSS Modulesのクラスを割り当てられないため、
  * bracket-プレフィックスのグローバルクラスで定義する。
- * --divider-gapなどのCSSカスタムプロパティは、記法の名前付き引数から渡される。
  */
-
-/* mono */
-.bracket-mono {
-  font-family: var(--typography-font-family-monospace);
-}
-
-/* spacer */
-.bracket-spacer {
-  display: inline-block;
-}
 
 /* key（キーシンボル） */
 kbd {
@@ -23,6 +12,11 @@ kbd {
   border-radius: var(--size-radius-m);
   font-family: var(--typography-font-family-monospace);
   font-size: 0.875em;
+}
+
+/* spacer */
+.bracket-spacer {
+  display: inline-block;
 }
 
 /* divider（区切り線） */
@@ -35,8 +29,8 @@ kbd {
   border-block-start: var(--size-border-m) solid currentcolor;
 }
 
-.bracket-divider--doublesolid {
-  block-size: var(--divider-gap, 3px);
+.bracket-divider--double {
+  block-size: 0.1875rem;
   border-block-start: var(--size-border-m) solid currentcolor;
   border-block-end: var(--size-border-m) solid currentcolor;
 }
@@ -45,26 +39,8 @@ kbd {
   block-size: var(--size-border-m);
   background: repeating-linear-gradient(
     to right,
-    currentcolor 0 var(--divider-length, 5px),
-    transparent var(--divider-length, 5px)
-      calc(var(--divider-length, 5px) + var(--divider-gap, 3px))
-  );
-}
-
-.bracket-divider--slash {
-  block-size: var(--divider-height, 1em);
-  background: repeating-linear-gradient(
-    -45deg,
-    currentcolor 0 var(--size-border-m),
-    transparent var(--size-border-m) var(--divider-gap, 10px)
-  );
-}
-
-.bracket-divider--slash.bracket-divider--reversed {
-  background: repeating-linear-gradient(
-    45deg,
-    currentcolor 0 var(--size-border-m),
-    transparent var(--size-border-m) var(--divider-gap, 10px)
+    currentcolor 0 0.3125rem,
+    transparent 0.3125rem 0.5rem
   );
 }
 

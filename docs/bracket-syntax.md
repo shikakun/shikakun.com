@@ -14,29 +14,24 @@ usagimaruさんの記事[Click and Magic「レイアウトシステムを作る�
 ```
 
 - メソッド名は小文字英字とハイフンで書く
-- `メソッド:サブタイプ`でバリエーションを選ぶ（例：`divider:dash`）
-- `メソッド.プリセット`でプリセットを呼び出す（例：`key.command`）
+- `メソッド.プリセット`でプリセットを呼び出す（例：`kbd.command`）
 - 式は行をまたげない
 
 ## 引数
 
 - カンマ区切りで並べる。前後の空白は無視される
-- `名前=値`の形式で名前付き引数を書ける（例：`gap=3px`）
-- カンマなどを含む値は引用符で囲む（例：`title="Me at the zoo"`）。カーリークォート（`“ ”`）も使える
+- `名前=値`の形式で名前付き引数を書ける（例：`title="Me at the zoo"`）
+- カンマなどを含む値は引用符で囲む。カーリークォート（`" "`）も使える
 
 ## メソッド一覧
 
 | メソッド | 機能 | 種別 |
 | --- | --- | --- |
 | `strong` | 太字（強い重要性） | インライン |
-| `stroke` / `doublestroke` | 打ち消し線 / 二重打ち消し線 | インライン |
-| `weight` | フォントウェイト | インライン |
-| `oblique` | 斜体 | インライン |
-| `scale` | 文字サイズの倍率 | インライン |
-| `mono` | 等幅フォント | インライン |
+| `stroke` | 打ち消し線 | インライン |
 | `ruby` | ルビ | インライン |
 | `emphasize` | 圏点（傍点） | インライン |
-| `key` | キーシンボル | インライン |
+| `kbd` | キーシンボル | インライン |
 | `spacer` | 水平方向の余白 | インライン |
 | `divider` | 区切り線 | ブロック |
 | `youtube` | YouTube動画の埋め込み（独自拡張） | ブロック |
@@ -49,14 +44,6 @@ usagimaruさんの記事[Click and Magic「レイアウトシステムを作る�
 | --- | --- |
 | `[テキスト(strong)]` | 太字（`<strong>`） |
 | `[テキスト(stroke)]` | 打ち消し線（`<s>`） |
-| `[テキスト(stroke,4)]` | 4px幅の打ち消し線 |
-| `[テキスト(doublestroke,2)]` | 2px幅の二重打ち消し線 |
-| `[テキスト(weight,200)]` | フォントウェイト200（1〜1000） |
-| `[テキスト(oblique)]` | 斜体 |
-| `[テキスト(oblique,30)]` | 30度の斜体（-90〜90。フォントの対応に依存） |
-| `[テキスト(scale, 1.5)]` | 文字サイズ1.5倍（em単位の正の数） |
-| `[テキスト(mono)]` | 等幅フォント |
-| `[テキスト(mono,800)]` | 等幅フォント＋ウェイト800 |
 
 ## ルビ（ruby）
 
@@ -72,25 +59,17 @@ usagimaruさんの記事[Click and Magic「レイアウトシステムを作る�
 ## 圏点（emphasize）
 
 ```
-[けんてん(emphasize,1)]
+[けんてん(emphasize)]
 ```
 
-番号（1〜10）で圏点の種類を選びます。省略すると1になります。番号と種類の対応は変更される可能性があります。
+黒三角の圏点（`text-emphasis: filled triangle`）を付けます。`<strong>`要素として出力されます。
 
-| 番号 | 種類 | 番号 | 種類 |
-| --- | --- | --- | --- |
-| 1 | 黒点 | 6 | 白丸 |
-| 2 | 白点 | 7 | 黒三角 |
-| 3 | 黒ゴマ | 8 | 白三角 |
-| 4 | 白ゴマ | 9 | 黒二重丸 |
-| 5 | 黒丸 | 10 | 白二重丸 |
-
-## キーシンボル（key）
+## キーシンボル（kbd）
 
 ```
-[Command(key)]                     テキストをそのまま<kbd>で表示する
-[(key.command)]                    プリセットの記号（⌘）で表示する
-[(key.delete,title="Backspace")]   title引数で読み上げ用のラベルを変える
+[Command(kbd)]                     テキストをそのまま<kbd>で表示する
+[(kbd.command)]                    プリセットの記号（⌘）で表示する
+[(kbd.delete,title="Backspace")]   title引数でaria-labelを変える
 ```
 
 プリセットの記号には読み上げ用の`aria-label`が自動で付きます。
@@ -120,15 +99,10 @@ usagimaruさんの記事[Click and Magic「レイアウトシステムを作る�
 単独の段落として書きます。
 
 ```
-[(divider)]                                 実線
-[(divider:solid)]                           実線（明示）
-[(divider:doublesolid,gap=3px)]             二重線（gapは線の間隔）
-[(divider:dash,length=5px,gap=3px)]         点線（lengthは線、gapは空白の長さ）
-[(divider:slash,height=1em,gap=10px)]       斜線の領域（heightは領域の高さ）
-[(divider:slash,height=1em,gap=10px,reversed)]   斜線の向きを反転
+[(divider)]             実線
+[(divider, double)]     二重線
+[(divider, dash)]       点線
 ```
-
-`gap`・`length`・`height`の単位は`em`・`rem`・`px`が使えます。
 
 ## YouTube動画の埋め込み（youtube）【このサイト独自の拡張】
 
@@ -143,6 +117,14 @@ usagimaruさんの記事[Click and Magic「レイアウトシステムを作る�
 - プライバシー強化モード（`youtube-nocookie.com`）のiframeで埋め込まれ、再生するまでCookieが保存されない
 - `title`引数はiframeの`title`属性（読み上げ用のラベル）になる。省略すると「YouTube動画」になるため、**動画のタイトルを書くことを推奨**
 - URLに`t=90`または`start=90`（秒数のみ）があれば、再生開始位置として引き継がれる
+
+## 外部リンク
+
+Markdownのリンク記法で、`http://`または`https://`で始まるURLは、`target="_blank" rel="noopener noreferrer"`が自動で付きます。
+
+```
+[リンクテキスト](https://example.com)
+```
 
 ## エスケープと変換されない場所
 
@@ -159,5 +141,5 @@ usagimaruさんの記事[Click and Magic「レイアウトシステムを作る�
 出典の仕様のうち、次の記法は未対応です。書いた場合は変換されず、そのまま表示されます。
 
 - 範囲オペレーター：`[(alignment:center)..]`〜`[..]`で複数の段落へ効果を適用する記法（`alignment`・`columns`）
-- ネスト：`[[テキスト(stroke)] (weight, 200)]`のように複数の効果を重ねる記法
+- ネスト：`[[テキスト(stroke)] (strong)]`のように複数の効果を重ねる記法
 - `pointer`（ポインターシンボル）・`disable`（機能の無効化マーカー）
