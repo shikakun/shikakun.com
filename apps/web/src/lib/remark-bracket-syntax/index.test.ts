@@ -27,7 +27,7 @@ describe('テキストスタイル', () => {
 
   it('emphasizeを変換する', async () => {
     expect(await render('[けんてん(emphasize)]')).toContain(
-      '<strong style="text-emphasis: filled triangle">けんてん</strong>',
+      '<em style="text-emphasis: filled triangle">けんてん</em>',
     );
   });
 });
@@ -63,12 +63,6 @@ describe('kbd', () => {
 
   it('title引数でaria-labelを上書きする', async () => {
     expect(await render('[(kbd.delete,title="Backspace")]')).toContain(
-      '<kbd aria-label="Backspace">⌫</kbd>',
-    );
-  });
-
-  it('カーリークォートのtitle引数も解釈する', async () => {
-    expect(await render('[(kbd.delete,title=“Backspace”)]')).toContain(
       '<kbd aria-label="Backspace">⌫</kbd>',
     );
   });

@@ -8,7 +8,7 @@ import type { BracketExpression, BracketSyntaxNode } from './types';
 
 /**
  * このウェブサイト独自の角括弧構文をHTMLへ変換するremarkプラグイン。
- * 仕様はdocs/bracket-syntax.mdを参照。
+ * 仕様はsrc/content/pages/markdown.mdx（公開ページ）を参照。
  * パースできない式や不正な引数は変換せずソースのまま出力し、file.message()で警告する。
  */
 export function remarkBracketSyntax() {

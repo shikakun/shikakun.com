@@ -4,7 +4,7 @@ import type { VFile } from 'vfile';
 /**
  * 角括弧構文の式。
  * `[TEXT(METHOD.PRESET:SUBTYPE, ARG1, name=value, ...)..]`をパースした結果を表す。
- * 仕様の詳細はdocs/bracket-syntax.mdを参照。
+ * 仕様の詳細はsrc/content/pages/markdown.mdx（公開ページ）を参照。
  */
 export interface BracketExpression {
   /** TEXT部。自己完結型（`[(divider)]`など）ではnull */

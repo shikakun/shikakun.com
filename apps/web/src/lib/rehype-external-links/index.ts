@@ -8,7 +8,13 @@ export function rehypeExternalLinks() {
       const href = node.properties?.href;
       if (typeof href === 'string' && (href.startsWith('http://') || href.startsWith('https://'))) {
         node.properties.target = '_blank';
-        node.properties.rel = ['noopener', 'noreferrer'];
+        const existingRel = Array.isArray(node.properties.rel)
+          ? node.properties.rel
+          : typeof node.properties.rel === 'string'
+            ? [node.properties.rel]
+            : [];
+        const relSet = new Set([...existingRel, 'noopener', 'noreferrer']);
+        node.properties.rel = Array.from(relSet);
       }
     });
   };

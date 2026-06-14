@@ -1,50 +1,40 @@
 /**
- * 角括弧構文（docs/bracket-syntax.md）が生成する要素のスタイル。
+ * このウェブサイト独自のMarkdown記法（src/content/pages/markdown.mdx）で生成する要素のスタイル。
  * remarkプラグインが生成するHTMLにはCSS Modulesのクラスを割り当てられないため、
- * bracket-プレフィックスのグローバルクラスで定義する。
+ * bracket接頭辞のクラスセレクタで定義する。
  */
-
-/* key（キーシンボル） */
-kbd {
-  padding-block: 0.1em;
-  padding-inline: 0.4em;
-  border: var(--size-border-m) solid var(--color-semantic-neutral-400);
-  border-radius: var(--size-radius-m);
-  font-family: var(--typography-font-family-monospace);
-  font-size: 0.875em;
-}
 
 /* spacer */
 .bracket-spacer {
   display: inline-block;
 }
 
-/* divider（区切り線） */
+/* divider */
 .bracket-divider {
   border: 0;
   margin-block: var(--size-spacing-xl);
 }
 
 .bracket-divider--solid {
-  border-block-start: var(--size-border-m) solid currentcolor;
+  border-block-start: var(--size-border-m) solid var(--color-semantic-neutral-400);
 }
 
 .bracket-divider--double {
   block-size: 0.1875rem;
-  border-block-start: var(--size-border-m) solid currentcolor;
-  border-block-end: var(--size-border-m) solid currentcolor;
+  border-block-start: var(--size-border-m) solid var(--color-semantic-neutral-400);
+  border-block-end: var(--size-border-m) solid var(--color-semantic-neutral-400);
 }
 
 .bracket-divider--dash {
   block-size: var(--size-border-m);
   background: repeating-linear-gradient(
     to right,
-    currentcolor 0 0.3125rem,
+    var(--color-semantic-neutral-400) 0 0.3125rem,
     transparent 0.3125rem 0.5rem
   );
 }
 
-/* youtube（動画埋め込み） */
+/* YouTube */
 .bracket-youtube iframe {
   inline-size: 100%;
   block-size: auto;

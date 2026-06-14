@@ -25,5 +25,5 @@ export const emphasize: MethodHandler = (expression, file) => {
   if (text === null) {
     return null;
   }
-  return textElement('strong', { style: 'text-emphasis: filled triangle' }, text);
+  return textElement('em', { style: 'text-emphasis: filled triangle' }, text);
 };
