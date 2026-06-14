@@ -6,7 +6,7 @@ import type { BracketExpression, BracketSyntaxNode } from '../types';
 export const CSS_LENGTH_PATTERN = /^\d+(\.\d+)?(em|rem|px)$/;
 
 /** 正の数値（小数可） */
-export const POSITIVE_NUMBER_PATTERN = /^\d+(\.\d+)?$/;
+export const POSITIVE_NUMBER_PATTERN = /^(?!0+(\.0+)?$)\d+(\.\d+)?$/;
 
 export function element(
   hName: string,
