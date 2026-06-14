@@ -11,7 +11,7 @@ export function rehypeExternalLinks() {
         const existingRel = Array.isArray(node.properties.rel)
           ? node.properties.rel
           : typeof node.properties.rel === 'string'
-            ? [node.properties.rel]
+            ? node.properties.rel.split(/\s+/)
             : [];
         const relSet = new Set([...existingRel, 'noopener', 'noreferrer']);
         node.properties.rel = Array.from(relSet);
