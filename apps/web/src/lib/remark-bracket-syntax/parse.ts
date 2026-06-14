@@ -121,7 +121,7 @@ function findCloseParen(source: string, from: number): number {
     const closer = QUOTE_PAIRS[char];
     if (closer) {
       const quoteEnd = source.indexOf(closer, i + 1);
-      if (quoteEnd === -1) {
+      if (quoteEnd === -1 || source.slice(i + 1, quoteEnd).includes('\n')) {
         return -1;
       }
       i = quoteEnd + 1;
