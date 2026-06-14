@@ -1,5 +1,5 @@
 .footer {
-  padding-block: var(--size-spacing-2xl);
+  padding-block: var(--size-spacing-3xl);
 }
 
 @media (min-width: 1400px) {

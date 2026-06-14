@@ -3,13 +3,15 @@
   "size": {
     "spacing": {
       "$type": "dimension",
+      "3xs": { "$value": "{size.scale.2}" },
       "2xs": { "$value": "{size.scale.4}" },
       "xs": { "$value": "{size.scale.8}" },
       "s": { "$value": "{size.scale.12}" },
       "m": { "$value": "{size.scale.16}" },
       "l": { "$value": "{size.scale.24}" },
       "xl": { "$value": "{size.scale.32}" },
-      "2xl": { "$value": "{size.scale.48}" }
+      "2xl": { "$value": "{size.scale.48}" },
+      "3xl": { "$value": "{size.scale.64}" }
     }
   }
 }

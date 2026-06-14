@@ -1,0 +1,43 @@
+/**
+ * このウェブサイト独自のMarkdown記法（src/content/pages/markdown.mdx）で生成する要素のスタイル。
+ * remarkプラグインが生成するHTMLにはCSS Modulesのクラスを割り当てられないため、
+ * bracket接頭辞のクラスセレクタで定義する。
+ */
+
+/* spacer */
+.bracket-spacer {
+  display: inline-block;
+}
+
+/* divider */
+.bracket-divider {
+  border: 0;
+  margin-block: var(--size-spacing-xl);
+}
+
+.bracket-divider--solid {
+  border-block-start: var(--size-border-m) solid var(--color-semantic-neutral-400);
+}
+
+.bracket-divider--double {
+  block-size: 0.1875rem;
+  border-block-start: var(--size-border-m) solid var(--color-semantic-neutral-400);
+  border-block-end: var(--size-border-m) solid var(--color-semantic-neutral-400);
+}
+
+.bracket-divider--dash {
+  block-size: var(--size-border-m);
+  background: repeating-linear-gradient(
+    to right,
+    var(--color-semantic-neutral-400) 0 0.3125rem,
+    transparent 0.3125rem 0.5rem
+  );
+}
+
+/* YouTube */
+.bracket-youtube iframe {
+  inline-size: 100%;
+  block-size: auto;
+  aspect-ratio: 16 / 9;
+  border: 0;
+}

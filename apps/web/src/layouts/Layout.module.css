@@ -20,6 +20,6 @@
 
 @media (min-width: 1400px) {
   .container {
-    padding: 4rem;
+    padding: var(--size-spacing-2xl) 4rem;
   }
 }
