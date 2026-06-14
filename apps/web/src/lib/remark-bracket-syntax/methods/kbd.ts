@@ -41,7 +41,7 @@ export const kbd: MethodHandler = (expression, file) => {
     }
     return textElement(
       'kbd',
-      { ariaLabel: expression.namedArgs.title ?? preset.label },
+      { ariaLabel: expression.namedArgs.title?.trim() || preset.label },
       preset.symbol,
     );
   }
