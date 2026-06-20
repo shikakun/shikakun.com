@@ -18,7 +18,7 @@ const meta = {
       control: 'select',
       options: ['text', 'email', 'password', 'number', 'tel', 'url', 'search'],
     },
-    width: { control: 'select', options: ['auto', 'full', 'half', 'third'] },
+    width: { control: 'select', options: ['full', 'half', 'third'] },
     rows: { control: 'number' },
     disabled: { control: 'boolean' },
     readOnly: { control: 'boolean' },
