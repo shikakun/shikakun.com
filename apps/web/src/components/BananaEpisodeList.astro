@@ -28,7 +28,8 @@ try {
   const xml = await response.text();
   const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' });
   const parsed = parser.parse(xml);
-  const items: unknown[] = parsed?.rss?.channel?.item ?? [];
+  const rawItems = parsed?.rss?.channel?.item ?? [];
+  const items: unknown[] = Array.isArray(rawItems) ? rawItems : [rawItems];
 
   episodes = items.slice(0, SHOW_EPISODES).map((item) => {
     const i = item as Record<string, unknown>;
