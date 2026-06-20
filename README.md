@@ -33,11 +33,17 @@ pnpm dev
 pnpm build
 ```
 
+### Type check
+
+```sh
+pnpm typecheck
+```
+
 ### Lint & format
 
 ```sh
 pnpm lint
-pnpm format
+pnpm lint:fix
 ```
 
 ### Start Storybook
@@ -50,4 +56,6 @@ pnpm storybook
 
 ```sh
 pnpm test
+pnpm test:unit
+pnpm test:e2e
 ```
