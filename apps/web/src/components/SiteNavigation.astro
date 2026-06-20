@@ -13,7 +13,8 @@ const { pathname } = Astro.url;
 
 const rawItems = [
   { href: '/', label: 'Home' },
-  { href: '/poetry', label: 'Poetry' },
+  { href: '/poetry/', label: 'Poetry' },
+  { href: '/banana/', label: 'Podcast' },
 ];
 
 const items = rawItems.map(({ href, label }) => ({

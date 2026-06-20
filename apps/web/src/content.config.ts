@@ -21,7 +21,8 @@ const pages = defineCollection({
           ),
       )
       .optional(),
-    unlisted: z.boolean().optional(),
+    listed: z.boolean().optional(),
+    prose: z.boolean().optional(),
   }),
 });
 

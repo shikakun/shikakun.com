@@ -1,0 +1,18 @@
+extends:
+  - markuplint:recommended
+
+parser:
+  \.astro$: "@markuplint/astro-parser"
+
+rules:
+  attr-duplication: true
+  landmark-roles: true
+  required-h1: true
+  no-refer-to-non-existent-id: true
+
+nodeRules:
+  - selector: "script[async]"
+    rules:
+      # markuplint:recommended は外部スクリプトに defer を要求するが、
+      # async も同様にレンダリングブロッキングを回避するため除外している
+      required-attr: false

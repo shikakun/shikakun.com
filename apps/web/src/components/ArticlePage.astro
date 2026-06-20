@@ -25,7 +25,7 @@ const tagMetaMap = Object.fromEntries(allTagMetas.map((t) => [t.id, t.data]));
     <article>
       <PageHeader title={page.data.title} />
       <div class={styles.content}>
-        <Prose><Content /></Prose>
+        {page.data.prose !== false ? <Prose><Content /></Prose> : <Content />}
         <footer class={styles.footer}>
           {date && <FormattedDate date={date} />}
           {page.data.tags && page.data.tags.length > 0 && (

@@ -1,11 +1,21 @@
 ---
 import SiteNavigation from '~/components/SiteNavigation.astro';
+import {
+  GA_MEASUREMENT_ID,
+  SITE_DESCRIPTION,
+  SITE_LANG,
+  SITE_REGION,
+  SITE_TITLE,
+  SITE_X_ID,
+} from '~/consts';
 import styles from './Layout.module.css';
 import '@shikakun/design-tokens/css';
 import '@shikakun/react/css';
 import '~/styles/global.css';
 import '~/styles/bracket-syntax.css';
 import appleTouchIcon from '~/assets/apple-touch-icon.png';
+// TODO: 1200×630のOGP用画像に差し替える
+import defaultOgImage from '~/assets/brand/shikakun.png';
 import favicon16 from '~/assets/favicon-16.png';
 import favicon32 from '~/assets/favicon-32.png';
 import favicon192 from '~/assets/favicon-192.png';
@@ -14,23 +24,83 @@ import favicon512 from '~/assets/favicon-512.png';
 type Props = {
   title: string;
   description?: string;
+  isHome?: boolean;
+  ogType?: 'website' | 'article';
+  ogImage?: string;
 };
 
-const { title, description } = Astro.props;
+const {
+  title,
+  description = SITE_DESCRIPTION,
+  isHome = false,
+  ogType = 'website',
+  ogImage = defaultOgImage.src,
+} = Astro.props;
+
+const pageTitle = isHome ? SITE_TITLE : `${title} — ${SITE_TITLE}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const resolvedOgImage = new URL(ogImage, Astro.site);
 ---
 
 <!doctype html>
-<html lang="ja">
+<html lang={SITE_LANG}>
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    {description && <meta name="description" content={description} />}
+    <meta name="generator" content={Astro.generator} />
+    <meta name="theme-color" content="#ffffff" />
+
+    <title>{pageTitle}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalURL} />
+
+    <meta property="og:title" content={pageTitle} />
+    <meta property="og:type" content={ogType} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={resolvedOgImage} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={SITE_TITLE} />
+    <meta property="og:locale" content={`${SITE_LANG}_${SITE_REGION}`} />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:site" content={`@${SITE_X_ID}`} />
+    <meta name="twitter:title" content={pageTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={resolvedOgImage} />
+
+    <link rel="icon" href="/favicon.ico" sizes="any" />
     <link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon.src} />
     <link rel="icon" type="image/png" sizes="512x512" href={favicon512.src} />
     <link rel="icon" type="image/png" sizes="192x192" href={favicon192.src} />
     <link rel="icon" type="image/png" sizes="32x32" href={favicon32.src} />
     <link rel="icon" type="image/png" sizes="16x16" href={favicon16.src} />
+
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title={SITE_TITLE}
+      href="/feed.xml"
+    />
+
+    {
+      import.meta.env.PROD && GA_MEASUREMENT_ID && (
+        <>
+          <script
+            is:inline
+            async
+            src={`https://www.googletagmanager.com/gtag/js?id=${GA_MEASUREMENT_ID}`}
+          />
+          <script is:inline define:vars={{ GA_MEASUREMENT_ID }}>
+            window.dataLayer = window.dataLayer || [];
+            function gtag() {
+              dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', GA_MEASUREMENT_ID);
+          </script>
+        </>
+      )
+    }
   </head>
   <body class={styles.body}>
     <div class={styles.wrapper}>

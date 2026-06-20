@@ -15,11 +15,11 @@ function getSortKey(page: (typeof allPages)[number]): string {
 }
 
 const pages = allPages
-  .filter((page) => !page.data.unlisted)
+  .filter((page) => page.data.listed !== false)
   .sort((a, b) => getSortKey(b).localeCompare(getSortKey(a)));
 ---
 
-<Layout title="shikakun">
+<Layout title="shikakun" isHome>
   <main>
     <PageHeader title="shikakun" />
     <PageList

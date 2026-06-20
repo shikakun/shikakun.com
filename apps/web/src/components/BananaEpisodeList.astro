@@ -1,0 +1,65 @@
+---
+import { FormattedDate } from '@shikakun/react';
+import { XMLParser } from 'fast-xml-parser';
+
+const RSS_URL = 'https://anchor.fm/s/2eefd458/podcast/rss';
+const SHOW_EPISODES = 6;
+
+const roundTimeToMinutes = (time: string): number => {
+  const match = time.match(/^(\d{2}):(\d{2}):(\d{2})$/);
+  if (!match) return 0;
+  const hours = parseInt(match[1], 10);
+  const minutes = parseInt(match[2], 10);
+  const seconds = parseInt(match[3], 10);
+  return hours * 60 + (seconds < 20 ? minutes : minutes + 1);
+};
+
+type Episode = {
+  title: string;
+  link: string;
+  pubDate: string;
+  duration: number;
+};
+
+let episodes: Episode[] = [];
+
+try {
+  const response = await fetch(RSS_URL);
+  const xml = await response.text();
+  const parser = new XMLParser({ ignoreAttributes: false, attributeNamePrefix: '@_' });
+  const parsed = parser.parse(xml);
+  const rawItems = parsed?.rss?.channel?.item ?? [];
+  const items: unknown[] = Array.isArray(rawItems) ? rawItems : [rawItems];
+
+  episodes = items.slice(0, SHOW_EPISODES).map((item) => {
+    const i = item as Record<string, unknown>;
+    const parsedDate = new Date(String(i.pubDate ?? ''));
+    const pubDate = Number.isNaN(parsedDate.getTime()) ? '' : parsedDate.toISOString().slice(0, 10);
+    return {
+      title: String(i.title ?? ''),
+      link: String(i.link ?? ''),
+      pubDate,
+      duration: roundTimeToMinutes(String(i['itunes:duration'] ?? '00:00:00')),
+    };
+  });
+} catch (e) {
+  console.warn('[BananaEpisodeList] RSSの取得に失敗しました:', e);
+}
+---
+
+{episodes.length > 0 ? (
+  <ul>
+    {episodes.map((episode) => (
+      <li>
+        <a href={episode.link} target="_blank" rel="noopener noreferrer">
+          {episode.title}
+        </a>
+        {episode.pubDate && episode.duration > 0 && (
+          <>（<FormattedDate date={episode.pubDate} />・{episode.duration}分）</>
+        )}
+      </li>
+    ))}
+  </ul>
+) : (
+  <p>エピソード一覧を取得できませんでした。</p>
+)}

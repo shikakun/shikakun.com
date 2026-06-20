@@ -1,7 +1,7 @@
 {
   "name": "shikakun.com",
   "private": true,
-  "packageManager": "pnpm@11.4.0",
+  "packageManager": "pnpm@11.8.0",
   "scripts": {
     "dev": "pnpm --filter @shikakun/web dev",
     "build": "pnpm -r build",
@@ -17,12 +17,12 @@
     "release": "pnpm build && changeset publish"
   },
   "devDependencies": {
-    "@biomejs/biome": "2.4.16",
-    "@playwright/test": "1.60.0",
+    "@biomejs/biome": "2.5.0",
+    "@playwright/test": "1.61.0",
     "@axe-core/playwright": "4.11.3",
     "markuplint": "4.18.3",
     "@markuplint/astro-parser": "4.18.3",
-    "wrangler": "4.95.0",
+    "wrangler": "4.103.0",
     "@changesets/cli": "2.31.0"
   }
 }

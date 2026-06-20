@@ -15,3 +15,11 @@ export type { ProseProps } from './Prose';
 export { Prose } from './Prose';
 export type { TextProps } from './Text';
 export { Text } from './Text';
+export type {
+  AutocompleteAttributeType,
+  TextFieldInputMode,
+  TextFieldProps,
+  TextFieldType,
+  TextFieldWidth,
+} from './TextField';
+export { TextField } from './TextField';

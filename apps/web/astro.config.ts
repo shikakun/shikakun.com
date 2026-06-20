@@ -1,7 +1,9 @@
+import cloudflare from '@astrojs/cloudflare';
 import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
-import { defineConfig } from 'astro/config';
+import sitemap from '@astrojs/sitemap';
+import { defineConfig, envField } from 'astro/config';
 import rehypeBudoux from 'rehype-budoux';
 import remarkBreaks from 'remark-breaks';
 import { rehypeExternalLinks } from './src/lib/rehype-external-links/index';
@@ -9,6 +11,8 @@ import { remarkBracketSyntax } from './src/lib/remark-bracket-syntax/index';
 
 export default defineConfig({
   output: 'static',
+  adapter: cloudflare(),
+  site: 'https://shikakun.com',
   markdown: {
     processor: unified({
       // 角括弧構文は、remark-breaksがtextノードを改行で分割する前に処理する
@@ -19,5 +23,11 @@ export default defineConfig({
       smartypants: false,
     }),
   },
-  integrations: [mdx(), react()],
+  integrations: [mdx(), react(), sitemap()],
+  env: {
+    schema: {
+      MESSAGE_FORM_API_URL: envField.string({ context: 'server', access: 'secret' }),
+      MESSAGE_FORM_API_TOKEN: envField.string({ context: 'server', access: 'secret' }),
+    },
+  },
 });

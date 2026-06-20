@@ -1,0 +1,36 @@
+---
+title: バナナブレッドのラジオ
+description: バナナブレッドのラジオなどと称して、会社員が最近あったことを日記のようにひとりで話す、静かなポッドキャストをお送りしています。
+listed: false
+prose: false
+---
+
+import BananaEpisodeList from '../../components/BananaEpisodeList.astro';
+import BananaMessageForm from '../../components/BananaMessageForm.tsx';
+import { ArticleButton } from '../../components/ArticleButton.tsx';
+import { Prose, Heading } from '@shikakun/react';
+
+<Prose>
+
+バナナブレッドのラジオなどと称して、会社員が最近あったことを日記のようにひとりで話す、静かなポッドキャストをお送りしています。
+
+- [Apple Podcast](https://podcasts.apple.com/jp/podcast/%E3%83%90%E3%83%8A%E3%83%8A%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%81%AE%E3%83%A9%E3%82%B8%E3%82%AA/id1526751678)
+- [Spotify](https://open.spotify.com/show/4uHjhnzdrB18oHveGbqXxJ)
+- [Amazon Music](https://music.amazon.co.jp/podcasts/3cbdbb93-dc34-4ba0-af75-9c9ca2d1a4bf/%E3%83%90%E3%83%8A%E3%83%8A%E3%83%96%E3%83%AC%E3%83%83%E3%83%89%E3%81%AE%E3%83%A9%E3%82%B8%E3%82%AA)
+- [LISTEN](https://listen.style/p/shikakun)
+- [RSS](https://anchor.fm/s/2eefd458/podcast/rss)
+
+## 最近のエピソード
+
+<BananaEpisodeList />
+
+<ArticleButton href="https://creators.spotify.com/pod/show/shikakun/">もっと聴く</ArticleButton>
+
+## おたより
+
+いつも聴いていただいて、ありがとうございます。「バナナブレッドのラジオ」などと称してやっている弊ポッドキャストでは、おたよりを募集しています。いただいたおたよりは、ラジオでご紹介することがあります。
+</Prose>
+
+<div style="margin-block: var(--size-spacing-xl);">
+<BananaMessageForm client:load />
+</div>
