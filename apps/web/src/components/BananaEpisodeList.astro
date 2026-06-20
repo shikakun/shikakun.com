@@ -32,10 +32,12 @@ try {
 
   episodes = items.slice(0, SHOW_EPISODES).map((item) => {
     const i = item as Record<string, unknown>;
+    const parsedDate = new Date(String(i.pubDate ?? ''));
+    const pubDate = Number.isNaN(parsedDate.getTime()) ? '' : parsedDate.toISOString().slice(0, 10);
     return {
       title: String(i.title ?? ''),
       link: String(i.link ?? ''),
-      pubDate: new Date(String(i.pubDate ?? '')).toISOString().slice(0, 10),
+      pubDate,
       duration: roundTimeToMinutes(String(i['itunes:duration'] ?? '00:00:00')),
     };
   });
