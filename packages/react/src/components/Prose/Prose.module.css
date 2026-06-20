@@ -29,8 +29,6 @@
 .prose h2,
 .prose h3,
 .prose h4 {
-  font-feature-settings: "palt" 1;
-  font-kerning: normal;
   word-break: keep-all;
   overflow-wrap: anywhere;
 }

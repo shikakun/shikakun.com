@@ -8,3 +8,6 @@ allowBuilds:
   sharp: true
   unrs-resolver: true
   workerd: true
+
+minimumReleaseAgeExclude:
+  - fast-xml-parser@5.9.3

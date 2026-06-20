@@ -1,0 +1,47 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacing-m);
+}
+
+.footer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--size-spacing-m);
+}
+
+@media (min-width: 640px) {
+  .footer {
+    flex-direction: row;
+    align-items: flex-end;
+    gap: var(--size-spacing-l);
+  }
+
+  .nameField {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .action {
+    width: 33.33%;
+  }
+}
+
+.feedback {
+  box-sizing: border-box;
+  padding: var(--size-spacing-m);
+  color: var(--color-semantic-neutral-900);
+  background-color: var(--color-semantic-neutral-50);
+  font-size: var(--typography-font-size-m);
+  line-height: var(--typography-line-height-m-comfort);
+}
+
+.feedback.success {
+  color: var(--color-semantic-informative-900);
+  background-color: var(--color-semantic-informative-50);
+}
+
+.feedback.error {
+  color: var(--color-semantic-negative-900);
+  background-color: var(--color-semantic-negative-50);
+}
