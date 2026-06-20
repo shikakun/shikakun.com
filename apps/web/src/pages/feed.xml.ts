@@ -14,7 +14,7 @@ export const GET: APIRoute = async (context) => {
     site: context.site ?? 'https://shikakun.com',
     items: pages.map((page) => ({
       title: page.data.title,
-      description: page.data.description,
+      description: page.data.description ?? '',
       pubDate: page.data.date,
       link: `/${page.id}/`,
     })),
