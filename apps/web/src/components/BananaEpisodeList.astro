@@ -54,7 +54,9 @@ try {
         <a href={episode.link} target="_blank" rel="noopener noreferrer">
           {episode.title}
         </a>
-        （<FormattedDate date={episode.pubDate} />・{episode.duration}分）
+        {episode.pubDate && episode.duration > 0 && (
+          <>（<FormattedDate date={episode.pubDate} />・{episode.duration}分）</>
+        )}
       </li>
     ))}
   </ul>
