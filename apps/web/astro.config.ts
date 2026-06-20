@@ -1,6 +1,7 @@
 import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
+import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 import rehypeBudoux from 'rehype-budoux';
 import remarkBreaks from 'remark-breaks';
@@ -9,6 +10,7 @@ import { remarkBracketSyntax } from './src/lib/remark-bracket-syntax/index';
 
 export default defineConfig({
   output: 'static',
+  site: 'https://shikakun.com',
   markdown: {
     processor: unified({
       // 角括弧構文は、remark-breaksがtextノードを改行で分割する前に処理する
@@ -19,5 +21,5 @@ export default defineConfig({
       smartypants: false,
     }),
   },
-  integrations: [mdx(), react()],
+  integrations: [mdx(), react(), sitemap()],
 });
