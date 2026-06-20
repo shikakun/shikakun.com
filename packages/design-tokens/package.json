@@ -24,7 +24,7 @@
     "lint:fix": "biome check --write ."
   },
   "devDependencies": {
-    "style-dictionary": "5.4.1",
+    "style-dictionary": "5.4.4",
     "typescript": "6.0.3"
   },
   "publishConfig": {
