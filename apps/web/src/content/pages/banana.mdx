@@ -6,7 +6,7 @@ prose: false
 ---
 
 import BananaEpisodeList from '../../components/BananaEpisodeList.astro';
-import BananaMessageFormWrapper from '../../components/BananaMessageFormWrapper.astro';
+import BananaMessageForm from '../../components/BananaMessageForm.tsx';
 import { ArticleButton } from '../../components/ArticleButton.tsx';
 import { Prose, Heading } from '@shikakun/react';
 
@@ -32,5 +32,5 @@ import { Prose, Heading } from '@shikakun/react';
 </Prose>
 
 <div style="margin-block: var(--size-spacing-xl);">
-<BananaMessageFormWrapper />
+<BananaMessageForm client:load />
 </div>

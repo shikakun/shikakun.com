@@ -7,34 +7,7 @@ type FeedbackType = {
   type: 'success' | 'error' | '';
 };
 
-type Props = {
-  apiUrl: string;
-  apiToken: string;
-};
-
-const sendMessage = async (
-  apiUrl: string,
-  payload: {
-    from: string;
-    message: string;
-    name?: string;
-    token: string;
-  },
-): Promise<boolean> => {
-  try {
-    const response = await fetch(apiUrl, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(payload),
-    });
-    return response.ok;
-  } catch (error) {
-    console.error('Failed to send message:', error);
-    return false;
-  }
-};
-
-const BananaMessageForm: React.FC<Props> = ({ apiUrl, apiToken }) => {
+const BananaMessageForm: React.FC = () => {
   const [feedback, setFeedback] = useState<FeedbackType>({ message: '', type: '' });
   const [formVisible, setFormVisible] = useState(true);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -55,23 +28,34 @@ const BananaMessageForm: React.FC<Props> = ({ apiUrl, apiToken }) => {
       return;
     }
 
-    const success = await sendMessage(apiUrl, {
-      from: 'バナナブレッドのラジオのおたより',
-      message,
-      name: name || undefined,
-      token: apiToken,
-    });
+    try {
+      const response = await fetch('/api/banana-message', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message, name: name || undefined }),
+      });
 
-    if (success) {
-      setFeedback({ message: '送信しました。おたより、ありがとうございました！', type: 'success' });
-      setFormVisible(false);
-    } else {
+      if (response.ok) {
+        setFeedback({
+          message: '送信しました。おたより、ありがとうございました！',
+          type: 'success',
+        });
+        setFormVisible(false);
+      } else {
+        setFeedback({
+          message:
+            'システムの不具合か、通信状況が悪くて送信できませんでした。せっかく書いてくれたのに、ごめんなさい…。お手数ですが、時間を置いてもういちど「送信」ボタンを押すか、メールまたはSNSのDMなど別の手段でお送りいただけると、うれしいです。',
+          type: 'error',
+        });
+      }
+    } catch {
       setFeedback({
         message:
           'システムの不具合か、通信状況が悪くて送信できませんでした。せっかく書いてくれたのに、ごめんなさい…。お手数ですが、時間を置いてもういちど「送信」ボタンを押すか、メールまたはSNSのDMなど別の手段でお送りいただけると、うれしいです。',
         type: 'error',
       });
     }
+
     setIsSubmitting(false);
   };
 
