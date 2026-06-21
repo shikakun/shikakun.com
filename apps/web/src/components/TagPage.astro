@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import { PageList } from '@shikakun/react';
 import Layout from '../layouts/Layout.astro';
 import PageHeader from './PageHeader.astro';
+import PageListContainer from './PageListContainer.astro';
 
 type Page = Awaited<ReturnType<typeof getCollection<'pages'>>>[number];
 
@@ -24,12 +25,14 @@ function getDate(page: Page): string | undefined {
 <Layout title={tagMeta?.data.title ?? tag} description={tagMeta?.data.description}>
   <main>
     <PageHeader title={tagMeta?.data.title ?? tag} description={tagMeta?.data.description} />
-    <PageList
-      items={tagPages.map((page) => ({
-        href: `/${page.id}`,
-        title: page.data.title,
-        date: getDate(page),
-      }))}
-    />
+    <PageListContainer>
+      <PageList
+        items={tagPages.map((page) => ({
+          href: `/${page.id}`,
+          title: page.data.title,
+          date: getDate(page),
+        }))}
+      />
+    </PageListContainer>
   </main>
 </Layout>

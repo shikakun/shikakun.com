@@ -2,6 +2,7 @@
 title: もし漫才コンビを突然組むことになってもコンビ名に困らないように思いついたらスマホにメモしてる
 listed: false
 prose: false
+header: false
 ---
 
 import { Text } from '@shikakun/react';
@@ -679,10 +680,14 @@ e得て妙
 イケメンゴリラ
 `.trim().split('\n');
 
+<header style="padding-block: var(--size-spacing-3xl)">
+<Text as="h1" fontSize="m" lineHeight="comfort">もし漫才コンビを突然組むことになってもコンビ名に困らないように思いついたらスマホにメモしてる</Text>
+</header>
+
 <ul>
   {names.map((name) => <Text key={name} as="li" fontSize="m" lineHeight="comfort">{name}</Text>)}
 </ul>
 
 <div style="margin-block-start: var(--size-spacing-3xl)">
-  <Text as="p">最終更新日：2026-06-21</Text>
+  <Text as="p" fontSize="m" lineHeight="comfort">最終更新日：2026-06-21</Text>
 </div>

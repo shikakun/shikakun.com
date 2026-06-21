@@ -63,10 +63,10 @@
 /* 見出し直後の余白の削除 */
 .prose h1 + *,
 .prose h2 + *:not(h1),
-.prose h3 + *:not(h1):not(h2),
-.prose h4 + *:not(h1):not(h2):not(h3),
-.prose h5 + *:not(h1):not(h2):not(h3):not(h4),
-.prose h6 + *:not(h1):not(h2):not(h3):not(h4):not(h5) {
+.prose h3 + *:not(h1, h2),
+.prose h4 + *:not(h1, h2, h3),
+.prose h5 + *:not(h1, h2, h3, h4),
+.prose h6 + *:not(h1, h2, h3, h4, h5) {
   margin-block-start: var(--size-spacing-m);
 }
 
@@ -244,7 +244,7 @@
   font-family: var(--typography-font-family-monospace);
 }
 
-.prose :not(pre) code {
+.prose :not(pre, h1, h2, h3, h4, h5, h6) code {
   padding-inline: var(--size-spacing-2xs);
   font-size: var(--typography-font-size-s);
   line-height: var(--typography-line-height-s-normal);

@@ -1,6 +1,8 @@
 ---
 import { getCollection, render } from 'astro:content';
-import { FormattedDate, Prose } from '@shikakun/react';
+import { Button, FormattedDate, Prose } from '@shikakun/react';
+import React from 'react';
+import { LuTag } from 'react-icons/lu';
 import Layout from '../layouts/Layout.astro';
 import PageHeader from './PageHeader.astro';
 import 'virtual:astro:image-styles.css';
@@ -34,7 +36,7 @@ const tagMetaMap = Object.fromEntries(allTagMetas.map((t) => [t.id, t.data]));
                 const meta = tagMetaMap[tag];
                 return (
                   <li>
-                    <a href={`/${tag}`}>#{meta?.title ?? tag}</a>
+                    <Button href={`/${tag}`} appearance="outlined" size="s" leadingIcon={React.createElement(LuTag, { size: 16 })}>{meta?.title ?? tag}</Button>
                   </li>
                 );
               })}

@@ -14,11 +14,10 @@ import '@shikakun/react/css';
 import '~/styles/global.css';
 import '~/styles/bracket-syntax.css';
 import appleTouchIcon from '~/assets/apple-touch-icon.png';
-// TODO: 1200×630のOGP用画像に差し替える
-import defaultOgImage from '~/assets/brand/shikakun.png';
 import favicon16 from '~/assets/favicon-16.png';
 import favicon32 from '~/assets/favicon-32.png';
 import favicon192 from '~/assets/favicon-192.png';
+import defaultOgImage from '~/assets/favicon-512.png';
 import favicon512 from '~/assets/favicon-512.png';
 
 type Props = {
@@ -47,7 +46,6 @@ const resolvedOgImage = new URL(ogImage, Astro.site);
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="generator" content={Astro.generator} />
     <meta name="theme-color" content="#ffffff" />
 
     <title>{pageTitle}</title>

@@ -1,0 +1,9 @@
+.container {
+  margin-inline: calc((var(--size-interactive-component-m) - var(--size-scale-24)) * -1);
+}
+
+@media (min-width: 1400px) {
+  .container {
+    margin-inline: 0;
+  }
+}

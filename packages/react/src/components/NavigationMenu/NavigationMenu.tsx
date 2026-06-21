@@ -99,6 +99,7 @@ export const NavigationMenu = ({ items }: NavigationMenuProps) => {
               href={href}
               target={target}
               appearance={isCurrent ? 'tinted' : 'text'}
+              color="primary"
               aria-current={isCurrent ? 'page' : undefined}
             >
               {label}

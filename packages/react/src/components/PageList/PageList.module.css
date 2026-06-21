@@ -17,7 +17,7 @@
   font-weight: var(--typography-font-weight-normal);
   font-size: var(--typography-font-size-m);
   line-height: var(--typography-line-height-m-dense);
-  color: var(--color-semantic-neutral-700);
+  color: var(--color-semantic-primary-800);
   text-decoration: unset;
   border-radius: var(--size-radius-m);
   transition-property: color;
