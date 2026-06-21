@@ -26,11 +26,11 @@
 }
 
 .link:hover {
-  color: var(--color-semantic-neutral-800);
+  color: var(--color-semantic-primary-700);
 }
 
 .link:active {
-  color: var(--color-semantic-neutral-900);
+  color: var(--color-semantic-primary-900);
 }
 
 .title {
