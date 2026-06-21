@@ -685,7 +685,7 @@ e得て妙
 </header>
 
 <ul>
-  {names.map((name) => <Text key={name} as="li" fontSize="m" lineHeight="comfort">{name}</Text>)}
+  {names.map((name, index) => <Text key={`${name}-${index}`} as="li" fontSize="m" lineHeight="comfort">{name}</Text>)}
 </ul>
 
 <div style="margin-block-start: var(--size-spacing-3xl)">
