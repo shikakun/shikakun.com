@@ -1,0 +1,58 @@
+---
+import { Button } from '@shikakun/react';
+import React from 'react';
+import {
+  FaBandcamp,
+  FaBluesky,
+  FaEarthAsia,
+  FaGithub,
+  FaInstagram,
+  FaPodcast,
+  FaSpotify,
+  FaXTwitter,
+  FaYoutube,
+} from 'react-icons/fa6';
+import { LuChevronRight } from 'react-icons/lu';
+import { SiApplemusic } from 'react-icons/si';
+import styles from './LinkList.module.css';
+
+const links = [
+  { label: 'Website', href: 'https://shikakun.com', Icon: FaEarthAsia },
+  { label: 'Podcast', href: 'https://shikakun.com/banana/', Icon: FaPodcast },
+  { label: 'Bluesky', href: 'https://bsky.app/profile/shikakun.bsky.social', Icon: FaBluesky },
+  { label: 'Instagram', href: 'https://instagram.com/shikakun/', Icon: FaInstagram },
+  { label: 'Twitter', href: 'https://x.com/shikakun', Icon: FaXTwitter },
+  { label: 'GitHub', href: 'https://github.com/shikakun/', Icon: FaGithub },
+  { label: 'YouTube', href: 'https://youtube.com/@shikakun1989', Icon: FaYoutube },
+  {
+    label: 'Apple Music',
+    href: 'https://music.apple.com/jp/artist/shikakun/1633864454',
+    Icon: SiApplemusic,
+  },
+  {
+    label: 'Spotify',
+    href: 'https://open.spotify.com/intl-ja/artist/6G7qFwbxvxGeZe1aAp0COH',
+    Icon: FaSpotify,
+  },
+  { label: 'Bandcamp', href: 'https://shikakun.bandcamp.com/', Icon: FaBandcamp },
+];
+---
+
+<ul class={styles.list}>
+  {links.map(({ label, href, Icon }) => (
+    <li>
+      <Button
+        href={href}
+        target={href.startsWith('https://shikakun.com') ? undefined : '_blank'}
+        appearance="tinted"
+        color="primary"
+        width="full"
+        layout="space-between"
+        leadingIcon={React.createElement(Icon)}
+        trailingIcon={React.createElement(LuChevronRight)}
+      >
+        {label}
+      </Button>
+    </li>
+  ))}
+</ul>
