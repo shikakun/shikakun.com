@@ -23,3 +23,5 @@ export type {
   TextFieldWidth,
 } from './TextField';
 export { TextField } from './TextField';
+export type { VisuallyHiddenProps } from './VisuallyHidden';
+export { VisuallyHidden } from './VisuallyHidden';
