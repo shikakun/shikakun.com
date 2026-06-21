@@ -23,7 +23,7 @@ const tagMetaMap = Object.fromEntries(allTagMetas.map((t) => [t.id, t.data]));
 <Layout title={page.data.title} description={page.data.description}>
   <main>
     <article>
-      <PageHeader title={page.data.title} />
+      {page.data.header !== false && <PageHeader title={page.data.title} />}
       <div class={styles.content}>
         {page.data.prose !== false ? <Prose><Content /></Prose> : <Content />}
         <footer class={styles.footer}>

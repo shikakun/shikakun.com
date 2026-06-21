@@ -23,6 +23,7 @@ const pages = defineCollection({
       .optional(),
     listed: z.boolean().optional(),
     prose: z.boolean().optional(),
+    header: z.boolean().optional(),
   }),
 });
 

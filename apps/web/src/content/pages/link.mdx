@@ -2,8 +2,12 @@
 title: Link
 listed: false
 prose: false
+header: false
 ---
 
+import { VisuallyHidden } from '@shikakun/react';
 import LinkList from '../../components/LinkList.astro';
+
+<VisuallyHidden as="h1">Link</VisuallyHidden>
 
 <LinkList />
