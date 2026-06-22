@@ -6,6 +6,7 @@ import sitemap from '@astrojs/sitemap';
 import { defineConfig, envField } from 'astro/config';
 import rehypeBudoux from 'rehype-budoux';
 import remarkBreaks from 'remark-breaks';
+import { contentWatchIntegration } from './scripts/sync-content.mjs';
 import { rehypeExternalLinks } from './src/lib/rehype-external-links/index';
 import { remarkBracketSyntax } from './src/lib/remark-bracket-syntax/index';
 
@@ -23,7 +24,7 @@ export default defineConfig({
       smartypants: false,
     }),
   },
-  integrations: [mdx(), react(), sitemap()],
+  integrations: [mdx(), react(), sitemap(), contentWatchIntegration()],
   env: {
     schema: {
       MESSAGE_FORM_API_URL: envField.string({ context: 'server', access: 'secret' }),

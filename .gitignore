@@ -34,3 +34,14 @@ playwright-report/
 
 # Storybook
 storybook-static/
+
+# Private content synced at build time
+/apps/web/.content-cache/
+
+# All content lives in the private repo; keep only the directories
+/apps/web/src/content/pages/*
+!/apps/web/src/content/pages/.gitkeep
+/apps/web/src/content/tags/*
+!/apps/web/src/content/tags/.gitkeep
+/apps/web/src/assets/pages/*
+!/apps/web/src/assets/pages/.gitkeep
