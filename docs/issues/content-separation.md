@@ -93,20 +93,20 @@
 
 以下がすべて満たされること。
 
-- [ ] **AC-1**: 公開リポジトリの `src/content/pages/`・`src/content/tags/`・`src/assets/pages/` に、追跡されるコンテンツが存在しない（各ディレクトリの `.gitkeep` のみ）
-- [ ] **AC-2**: 非公開リポジトリの `pages/` に置いた `.md` / `.mdx` が、移行前と同じ slug で出力される
-- [ ] **AC-3**: 非公開リポジトリの `assets/` に置いた画像が、公開ビルドで `astro:assets` により最適化されて表示される
-- [ ] **AC-4**: 非公開リポジトリの `tags/*.yaml` がビルドに反映される
-- [ ] **AC-5**: 非公開コンテンツは公開リポジトリに commit されない（`git status` / `git check-ignore` で無視されることを確認）
-- [ ] **AC-6**: 毎日0時（JST）の定期実行でビルド・デプロイが走る（`schedule` トリガー）
-- [ ] **AC-7**: `main` への code push、および手動実行（`workflow_dispatch`）でもビルド・デプロイが走る
-- [ ] **AC-8**: 非公開リポジトリの `main` に新規ページを push した翌0時すぎ、そのページが公開される
-- [ ] **AC-9**: 非公開リポジトリへアクセスできない CI（Pull request など）でも、ビルドがエラーで落ちない
-- [ ] **AC-10**: CI が非公開リポジトリへアクセスするための認証情報は、対象リポジトリの読み取り専用に限定されている
-- [ ] **AC-11**: ローカルで `pnpm dev` を実行すると、全ページ・タグページが表示される
-- [ ] **AC-12**: 非公開コンテンツの取得に失敗しても、ローカルの既存ビルドツリーが消されない（オフライン時に直前の状態が保たれる）
-- [ ] **AC-13**: コンテンツを増減しても公開リポジトリ側の設定変更が不要である（`.gitignore` などの追記が発生しない）
-- [ ] **AC-14**: `pnpm dev` 実行中に作業クローンの Markdown を保存すると、サイトがホットリロードされる
+- [x] **AC-1**: 公開リポジトリの `src/content/pages/`・`src/content/tags/`・`src/assets/pages/` に、追跡されるコンテンツが存在しない（各ディレクトリの `.gitkeep` のみ）
+- [x] **AC-2**: 非公開リポジトリの `pages/` に置いた `.md` / `.mdx` が、移行前と同じ slug で出力される
+- [x] **AC-3**: 非公開リポジトリの `assets/` に置いた画像が、公開ビルドで `astro:assets` により最適化されて表示される
+- [x] **AC-4**: 非公開リポジトリの `tags/*.yaml` がビルドに反映される
+- [x] **AC-5**: 非公開コンテンツは公開リポジトリに commit されない（`git status` / `git check-ignore` で無視されることを確認）
+- [ ] **AC-6**: 毎日0時（JST）の定期実行でビルド・デプロイが走る（`schedule` トリガー） ※実装済み・main 反映後に検証
+- [ ] **AC-7**: `main` への code push、および手動実行（`workflow_dispatch`）でもビルド・デプロイが走る ※実装済み・main 反映後に検証
+- [ ] **AC-8**: 非公開リポジトリの `main` に新規ページを push した翌0時すぎ、そのページが公開される ※実装済み・main 反映後に検証
+- [x] **AC-9**: 非公開リポジトリへアクセスできない CI（Pull request など）でも、ビルドがエラーで落ちない
+- [x] **AC-10**: CI が非公開リポジトリへアクセスするための認証情報は、対象リポジトリの読み取り専用に限定されている
+- [x] **AC-11**: ローカルで `pnpm dev` を実行すると、全ページ・タグページが表示される
+- [x] **AC-12**: 非公開コンテンツの取得に失敗しても、ローカルの既存ビルドツリーが消されない（オフライン時に直前の状態が保たれる）
+- [x] **AC-13**: コンテンツを増減しても公開リポジトリ側の設定変更が不要である（`.gitignore` などの追記が発生しない）
+- [x] **AC-14**: `pnpm dev` 実行中に作業クローンの Markdown を保存すると、サイトがホットリロードされる
 
 ---
 
@@ -362,16 +362,16 @@ web ビルド周辺の step（既存の design-tokens / react ビルドの後に
 
 このファイルを計画の中心とし、必要に応じて作業を分割する。
 
-- [ ] 非公開リポジトリ `shikakun.com-content` を作成し、`pages/`（フラット）`tags/` `assets/` に全コンテンツを配置・push
-- [ ] Deploy key を発行・登録（非公開リポジトリ公開鍵 / 公開リポジトリ secret）
-- [ ] sync スクリプト（`apps/web/scripts/sync-content.mjs`）を実装（取得時のみ clean+copy・失敗時は非破壊・リモートと完全一致・3ディレクトリのミラー）
-- [ ] 執筆用 watcher を実装（dev 限定の Astro 統合。Vite の `server.watcher` を再利用。コピー処理は sync と共通化）し `pnpm dev` に統合
-- [ ] `.gitignore` を更新（各コンテンツディレクトリを無視 + `.gitkeep`・キャッシュ無視）
-- [ ] `apps/web/package.json` に `content:sync` / `predev` を追加
-- [ ] `deploy.yml` を更新（`schedule` / `workflow_dispatch` / `concurrency` / `ssh-agent` / 明示の `content:sync` step）
-- [ ] 公開リポジトリから全コンテンツを削除し、各コンテンツディレクトリに `.gitkeep` を追加
-- [ ] `remark-bracket-syntax` のコメントの `markdown.mdx` 参照を公開URLへ更新
-- [ ] ローカルで `pnpm dev` の動作確認（ページ・タグページ・HMR・オフライン時の非破壊）
+- [x] 非公開リポジトリ `shikakun.com-content` を作成し、`pages/`（フラット）`tags/` `assets/` に全コンテンツを配置・push
+- [x] Deploy key を発行・登録（非公開リポジトリ公開鍵 / 公開リポジトリ secret）
+- [x] sync スクリプト（`apps/web/scripts/sync-content.mjs`）を実装（取得時のみ clean+copy・失敗時は非破壊・リモートと完全一致・3ディレクトリのミラー）
+- [x] 執筆用 watcher を実装（dev 限定の Astro 統合。Vite の `server.watcher` を再利用。コピー処理は sync と共通化）し `pnpm dev` に統合
+- [x] `.gitignore` を更新（各コンテンツディレクトリを無視 + `.gitkeep`・キャッシュ無視）
+- [x] `apps/web/package.json` に `content:sync` / `predev` を追加
+- [x] `deploy.yml` を更新（`schedule` / `workflow_dispatch` / `concurrency` / `ssh-agent` / 明示の `content:sync` step）
+- [x] 公開リポジトリから全コンテンツを削除し、各コンテンツディレクトリに `.gitkeep` を追加
+- [x] `remark-bracket-syntax` のコメントの `markdown.mdx` 参照を公開URLへ更新
+- [x] ローカルで `pnpm dev` の動作確認（ページ・タグページ・HMR・オフライン時の非破壊）
 - [ ] カットオーバー（1ブランチをまとめてマージ）→ 手動デプロイ・定期デプロイの動作確認
 
 ---
