@@ -10,6 +10,9 @@
 //   CONTENT_REF        取り込むブランチ／参照（既定: main）
 //   CONTENT_SOURCE_DIR 既存のローカルクローンを使う場合のパス（指定時は clone せずここを参照）
 //   CONTENT_REQUIRED   'true' のとき、取得失敗をエラーにする（デプロイ用）
+//
+// CONTENT_SOURCE_DIR も CONTENT_REPO_URL も無いときは、公開リポジトリと並列の作業クローン
+// （<リポジトリroot>/../shikakun.com-content）が在ればそれを使う。ローカルでは env を付けずに pnpm dev だけで動く。
 
 import { execFileSync } from 'node:child_process';
 import fs from 'node:fs';
@@ -20,6 +23,11 @@ const SCRIPT_DIR = path.dirname(fileURLToPath(import.meta.url));
 // apps/web のルート（scripts/ の1つ上）。cwd に依存せずパスを解決する。
 const WEB_ROOT = path.resolve(SCRIPT_DIR, '..');
 const CACHE_DIR = path.join(WEB_ROOT, '.content-cache');
+// 公開リポジトリのルート（apps/web の2つ上）。
+const REPO_ROOT = path.resolve(WEB_ROOT, '..', '..');
+// CONTENT_SOURCE_DIR / CONTENT_REPO_URL のどちらも無いときに使う、規約上の作業クローン。
+// 公開リポジトリと並列に clone した非公開リポジトリ（shikakun.com-content）を指す。
+const DEFAULT_SOURCE_DIR = path.resolve(REPO_ROOT, '..', 'shikakun.com-content');
 
 const PREFIX = '[content:sync]';
 const log = {
@@ -126,6 +134,19 @@ function resolveSource({ sourceDir, repoUrl, ref, cacheDir }) {
       return null;
     }
   }
+  // 明示指定が無ければ、公開リポジトリと並列の作業クローン（規約パス）が在ればそれを使う。
+  if (fs.existsSync(DEFAULT_SOURCE_DIR)) {
+    log.info(`既定の作業クローンを使用します: ${DEFAULT_SOURCE_DIR}`);
+    return DEFAULT_SOURCE_DIR;
+  }
+  return null;
+}
+
+// dev の watcher 用にローカルのソースディレクトリを解決する。
+// 明示の CONTENT_SOURCE_DIR を優先し、無ければ規約パスが在ればそれを返す。
+function resolveLocalSourceDir(env) {
+  if (env.CONTENT_SOURCE_DIR) return path.resolve(env.CONTENT_SOURCE_DIR);
+  if (fs.existsSync(DEFAULT_SOURCE_DIR)) return DEFAULT_SOURCE_DIR;
   return null;
 }
 
@@ -170,13 +191,14 @@ export function contentWatchIntegration() {
     hooks: {
       'astro:server:setup': ({ server, logger }) => {
         const out = logger ?? console;
-        const sourceDir = process.env.CONTENT_SOURCE_DIR;
-        if (!sourceDir) {
-          out.info('CONTENT_SOURCE_DIR が未設定のため、コンテンツのホットリロードは無効です');
+        const sourceRoot = resolveLocalSourceDir(process.env);
+        if (!sourceRoot) {
+          out.info(
+            'CONTENT_SOURCE_DIR が未設定で既定の作業クローンも無いため、コンテンツのホットリロードは無効です',
+          );
           return;
         }
 
-        const sourceRoot = path.resolve(sourceDir);
         // Vite（chokidar）の watcher を再利用し、作業クローンの各サブディレクトリを監視する。
         const watchDirs = MAPPINGS.map((m) => path.join(sourceRoot, m.sourceSubdir)).filter((dir) =>
           fs.existsSync(dir),
