@@ -172,10 +172,30 @@ export function runSync(env = process.env) {
     return { synced: false };
   }
 
+  // ソースに当該サブディレクトリが在るマッピングだけを clean+copy する。
+  // ソースを取得できても目的のサブディレクトリが無い場合に target を空にして、
+  // 空のビルドツリーを「同期済み」と誤認することを防ぐ（破壊的操作の前に存在を確認する）。
+  let copiedAny = false;
   for (const mapping of MAPPINGS) {
+    if (!fs.existsSync(path.join(source, mapping.sourceSubdir))) {
+      log.warn(`ソースに ${mapping.sourceSubdir}/ が無いため ${mapping.name} はスキップします`);
+      continue;
+    }
     cleanTarget(mapping.targetDir);
     copyMapping(source, mapping);
+    copiedAny = true;
   }
+
+  if (!copiedAny) {
+    if (required) {
+      throw new Error(
+        'ソースに pages/ tags/ assets/ のいずれも無く、コンテンツを sync できませんでした（CONTENT_REQUIRED=true）',
+      );
+    }
+    log.warn('ソースに取り込み対象が無いため、既存のビルドツリーを保持して終了します（no-op）');
+    return { synced: false };
+  }
+
   log.info(`コンテンツを sync しました: ${source}`);
   return { synced: true, source };
 }
