@@ -3,6 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
+    "content:sync": "node scripts/sync-content.mjs",
+    "predev": "pnpm content:sync",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
