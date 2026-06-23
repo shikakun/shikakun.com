@@ -107,6 +107,8 @@ function git(args, cwd) {
 // 非公開リポジトリをキャッシュへ取得し、リモートの CONTENT_REF と完全一致させる（削除も反映）。
 function fetchRepo(repoUrl, ref, cacheDir) {
   if (fs.existsSync(path.join(cacheDir, '.git'))) {
+    // CONTENT_REPO_URL が前回実行時と変わっている場合に備え、origin を現在の URL に揃えてから取得する。
+    git(['remote', 'set-url', 'origin', repoUrl], cacheDir);
     git(['fetch', '--depth', '1', 'origin', ref], cacheDir);
     git(['reset', '--hard', 'FETCH_HEAD'], cacheDir);
     git(['clean', '-fd'], cacheDir);
