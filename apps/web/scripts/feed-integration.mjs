@@ -100,14 +100,29 @@ export function feedIntegration({ title, description }) {
             format === 'file'
               ? path.join(clientDir, `${entry.slug}.html`)
               : path.join(clientDir, entry.slug, 'index.html');
-          const pageHtml = fs.existsSync(pagePath) ? fs.readFileSync(pagePath, 'utf-8') : '';
-          const article = extractArticleBody(pageHtml);
+
+          // 本文の取得に失敗してもその item の配信は続けるが、パスやテンプレートの不具合に
+          // 気づけるよう、失敗の種類（HTML が無い / <article> を抽出できない）を warn で残す。
+          let content;
+          if (!fs.existsSync(pagePath)) {
+            logger.warn(
+              `記事HTMLが見つからないため本文を配信できません: ${entry.slug}（${pagePath}）`,
+            );
+          } else {
+            const article = extractArticleBody(fs.readFileSync(pagePath, 'utf-8'));
+            if (article) {
+              content = sanitize(toAbsoluteUrls(article, origin));
+            } else {
+              logger.warn(`本文（<article>）を抽出できませんでした: ${entry.slug}`);
+            }
+          }
+
           return {
             title: entry.title,
             description: entry.description || undefined,
             pubDate: entry.pubDate ? new Date(entry.pubDate) : undefined,
             link: `/${entry.slug}/`,
-            content: article ? sanitize(toAbsoluteUrls(article, origin)) : undefined,
+            content,
           };
         });
 
