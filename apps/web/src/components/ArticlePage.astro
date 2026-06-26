@@ -1,9 +1,11 @@
 ---
 import { getCollection, render } from 'astro:content';
 import { Button, FormattedDate, Prose } from '@shikakun/react';
+import type { ImageMetadata } from 'astro';
 import React from 'react';
 import { LuTag } from 'react-icons/lu';
 import Layout from '../layouts/Layout.astro';
+import { extractExcerpt } from '../lib/excerpt';
 import PageHeader from './PageHeader.astro';
 import 'virtual:astro:image-styles.css';
 import styles from './ArticlePage.module.css';
@@ -14,15 +16,36 @@ interface Props {
   page: Page;
 }
 
+// ページ個別の og 画像を規約パスから収集する。
+// 非公開リポジトリの assets/<slug>/og.png が sync で src/assets/pages/<slug>/og.png に入る。
+const perPageOgImages = import.meta.glob<{ default: ImageMetadata }>('/src/assets/pages/*/og.png', {
+  eager: true,
+});
+
 const { page } = Astro.props;
 const { Content } = await render(page);
 const date = page.data.displayDate || page.data.date?.toISOString().slice(0, 10);
+
+const ogImage = perPageOgImages[`/src/assets/pages/${page.id}/og.png`]?.default;
+// frontmatter の description を最優先し、無ければ本文冒頭を抽出、それも空なら Layout の既定文言に委ねる。
+const description = page.data.description ?? (extractExcerpt(page.body) || undefined);
+const publishedTime = (page.data.publishedAt ?? page.data.date)?.toISOString();
+const modifiedTime = page.data.updatedAt?.toISOString();
 
 const allTagMetas = await getCollection('tags');
 const tagMetaMap = Object.fromEntries(allTagMetas.map((t) => [t.id, t.data]));
 ---
 
-<Layout title={page.data.title} description={page.data.description}>
+<Layout
+  title={page.data.title}
+  description={description}
+  ogType="article"
+  ogImage={ogImage}
+  ogImageAlt={ogImage ? page.data.title : undefined}
+  publishedTime={publishedTime}
+  modifiedTime={modifiedTime}
+  tags={page.data.tags}
+>
   <main>
     <article>
       {page.data.header !== false && <PageHeader title={page.data.title} />}
