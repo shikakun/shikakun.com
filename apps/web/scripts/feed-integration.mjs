@@ -32,20 +32,15 @@ function toAbsoluteUrls(html, origin) {
 // script やレイアウト由来のクラス属性など、配信に不要なものは落とす。
 function sanitize(html) {
   return sanitizeHtml(html, {
+    // 見出しや ruby・kbd・wbr などはデフォルトで許可されている。画像と埋め込みのタグだけ補う。
+    // span は非セマンティックで、RSS ではサイトの CSS が効かず装飾の意味を持たない。
+    // 特にコードブロックのシンタックスハイライトが大量の入れ子 span を生むため、除外して
+    // 中身のテキストだけ残す（コードはプレーンテキストになる）。
     allowedTags: [
-      ...sanitizeHtml.defaults.allowedTags,
-      'h1',
-      'h2',
+      ...sanitizeHtml.defaults.allowedTags.filter((tag) => tag !== 'span'),
       'img',
       'picture',
       'source',
-      'figure',
-      'figcaption',
-      'ruby',
-      'rt',
-      'rp',
-      'kbd',
-      'wbr',
       'iframe',
     ],
     allowedAttributes: {
@@ -60,12 +55,16 @@ function sanitize(html) {
   });
 }
 
-// ビルド済み記事ページの HTML から <article> の中身を取り出す。
+// ビルド済み記事ページの HTML から本文だけを取り出す。
 // 記事ページの <article> は1ページにつき1つで、コードブロック内の山括弧はエスケープ済みのため、
-// 単純な抽出で安全に取り出せる。
-function extractArticle(html) {
+// 単純な抽出で安全に取り出せる。<header>（タイトル見出し）と <footer>（日付・タグ）は、
+// それぞれ RSS の <title> や item のメタデータと重複するため、本文からは取り除く。
+function extractArticleBody(html) {
   const match = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/);
-  return match ? match[1] : '';
+  if (!match) return '';
+  return match[1]
+    .replace(/<header\b[^>]*>[\s\S]*?<\/header>/g, '')
+    .replace(/<footer\b[^>]*>[\s\S]*?<\/footer>/g, '');
 }
 
 export function feedIntegration({ title, description }) {
@@ -102,7 +101,7 @@ export function feedIntegration({ title, description }) {
               ? path.join(clientDir, `${entry.slug}.html`)
               : path.join(clientDir, entry.slug, 'index.html');
           const pageHtml = fs.existsSync(pagePath) ? fs.readFileSync(pagePath, 'utf-8') : '';
-          const article = extractArticle(pageHtml);
+          const article = extractArticleBody(pageHtml);
           return {
             title: entry.title,
             description: entry.description || undefined,
