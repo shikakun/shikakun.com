@@ -4,6 +4,7 @@
   "packageManager": "pnpm@11.8.0",
   "scripts": {
     "dev": "pnpm --filter @shikakun/web dev",
+    "og:generate": "pnpm --filter @shikakun/og generate",
     "build": "pnpm -r build",
     "typecheck": "pnpm -r typecheck",
     "lint": "pnpm -r lint",
