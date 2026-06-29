@@ -348,11 +348,3 @@
 .prose [data-footnote-ref] {
   scroll-margin-block-start: var(--size-spacing-xl);
 }
-
-.prose [data-footnote-ref] {
-  margin-inline: var(--size-spacing-3xs);
-}
-
-.prose [data-footnote-ref]::before {
-  content: "^";
-}

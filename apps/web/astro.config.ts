@@ -10,6 +10,7 @@ import { feedIntegration } from './scripts/feed-integration.mjs';
 import { contentWatchIntegration } from './scripts/sync-content.mjs';
 import { SITE_DESCRIPTION, SITE_TITLE } from './src/consts';
 import { rehypeExternalLinks } from './src/lib/rehype-external-links/index';
+import { rehypeFootnoteReference } from './src/lib/rehype-footnote-reference/index';
 import { remarkBracketSyntax } from './src/lib/remark-bracket-syntax/index';
 
 export default defineConfig({
@@ -21,7 +22,7 @@ export default defineConfig({
       // 角括弧構文は、remark-breaksがtextノードを改行で分割する前に処理する
       remarkPlugins: [remarkBracketSyntax, remarkBreaks],
       // biome-ignore lint: rehype-budouxの型がPlugin<[Options?], Parent>のためRoot型と合わない
-      rehypePlugins: [rehypeBudoux as any, rehypeExternalLinks],
+      rehypePlugins: [rehypeBudoux as any, rehypeExternalLinks, rehypeFootnoteReference],
       // 日本語中心のサイトでは英文タイポグラフィ変換の恩恵がなく、角括弧構文の引数の引用符を壊すため無効化
       smartypants: false,
       // GFMの脚注のラベルを日本語にする
