@@ -45,9 +45,13 @@ function sanitize(html) {
     ],
     allowedAttributes: {
       ...sanitizeHtml.defaults.allowedAttributes,
+      // 脚注（GFM）の参照と定義のあいだのジャンプリンクを成立させるため、id を全要素で残す。
+      // 既定では id が落ち、#user-content-fn-1 などの飛び先が失われてリーダー上でジャンプできない。
+      '*': ['id'],
       img: ['src', 'srcset', 'sizes', 'alt', 'width', 'height', 'loading', 'decoding'],
       source: ['src', 'srcset', 'sizes', 'type', 'media', 'width', 'height'],
-      a: ['href', 'name', 'target', 'rel'],
+      // 脚注リンクの読み上げ用ラベル・説明（aria-*）も残す。
+      a: ['href', 'name', 'target', 'rel', 'aria-label', 'aria-describedby'],
       iframe: ['src', 'width', 'height', 'allow', 'allowfullscreen', 'title', 'loading'],
     },
     // YouTube 埋め込みの iframe を許可する。

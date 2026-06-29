@@ -24,6 +24,14 @@ export default defineConfig({
       rehypePlugins: [rehypeBudoux as any, rehypeExternalLinks],
       // 日本語中心のサイトでは英文タイポグラフィ変換の恩恵がなく、角括弧構文の引数の引用符を壊すため無効化
       smartypants: false,
+      // GFMの脚注のラベルを日本語にする
+      remarkRehype: {
+        footnoteLabel: '脚注',
+        footnoteBackLabel: (referenceIndex: number, rereferenceIndex: number) =>
+          `参照${referenceIndex + 1}${rereferenceIndex > 1 ? `の${rereferenceIndex}` : ''}に戻る`,
+        // ↩（U+21A9）は環境により絵文字表示になるため、異体字セレクタ U+FE0E でテキスト表示に固定する
+        footnoteBackContent: '↩\uFE0E',
+      },
     }),
   },
   integrations: [
