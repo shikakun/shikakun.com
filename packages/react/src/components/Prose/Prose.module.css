@@ -315,3 +315,36 @@
 .prose tfoot td:last-child {
   padding-inline-end: 0;
 }
+
+/* footnotes（GFMの脚注。本文の末尾に出力される脚注セクション） */
+.prose [data-footnotes] {
+  margin-block-start: var(--size-spacing-3xl);
+  border-block-start: var(--size-border-m) solid var(--color-semantic-neutral-300);
+  font-size: var(--typography-font-size-s);
+  line-height: var(--typography-line-height-s-normal);
+}
+
+/* 見出しは自明なので隠す */
+.prose [data-footnotes] > h2 {
+  border: 0;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  white-space: nowrap;
+}
+
+.prose [data-footnotes] p {
+  font-size: var(--typography-font-size-s);
+  line-height: var(--typography-line-height-s-normal);
+}
+
+/* 参照と定義を行き来したとき、飛び先がビューポート上端に貼りつかないようにする */
+.prose [data-footnotes] li,
+.prose [data-footnote-ref] {
+  scroll-margin-block-start: var(--size-spacing-xl);
+}
