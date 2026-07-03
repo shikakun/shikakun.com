@@ -1,0 +1,27 @@
+{
+  "name": "@shikakun/og",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "description": "記事タイトルから OG 画像を生成するローカル CLI",
+  "scripts": {
+    "generate": "tsx src/cli.ts",
+    "typecheck": "tsc --noEmit",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@resvg/resvg-js": "2.6.2",
+    "budoux": "0.8.4",
+    "gray-matter": "4.0.3",
+    "satori": "0.26.0"
+  },
+  "devDependencies": {
+    "@types/node": "26.0.1",
+    "@types/react": "19.2.17",
+    "tsx": "4.22.4",
+    "typescript": "6.0.3",
+    "vitest": "4.1.9"
+  }
+}
