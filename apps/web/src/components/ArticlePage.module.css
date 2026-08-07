@@ -2,7 +2,7 @@
   padding-block: var(--size-spacing-3xl);
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 57.5rem) {
   .content {
     padding-inline-start: var(--size-spacing-m);
   }
