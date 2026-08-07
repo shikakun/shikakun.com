@@ -18,10 +18,15 @@
 /* p */
 .prose p {
   margin-block: var(--size-spacing-m);
-  text-align: justify;
   text-justify: inter-character;
   font-size: var(--typography-font-size-m);
   line-height: var(--typography-line-height-m-comfort);
+}
+
+@media (min-width: 57.5rem) {
+  .prose p {
+    text-align: justify;
+  }
 }
 
 /* heading */
