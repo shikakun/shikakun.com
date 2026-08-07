@@ -18,6 +18,8 @@ export default defineConfig({
   adapter: cloudflare(),
   site: 'https://shikakun.com',
   markdown: {
+    // コードブロックを横スクロールさせず、右端で折り返す
+    shikiConfig: { wrap: true },
     processor: unified({
       // 角括弧構文は、remark-breaksがtextノードを改行で分割する前に処理する
       remarkPlugins: [remarkBracketSyntax, remarkBreaks],
