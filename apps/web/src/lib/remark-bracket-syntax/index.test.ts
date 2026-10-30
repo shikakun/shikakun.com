@@ -57,13 +57,15 @@ describe('kbd', () => {
     expect(await render('[Command(kbd)]')).toContain('<kbd>Command</kbd>');
   });
 
-  it('プリセットを記号とaria-labelに変換する', async () => {
-    expect(await render('[(kbd.command)]')).toContain('<kbd aria-label="Command">⌘</kbd>');
+  it('プリセットを読み上げない記号と視覚的に隠したキー名に変換する', async () => {
+    expect(await render('[(kbd.command)]')).toContain(
+      '<kbd><span aria-hidden="true">⌘</span><span class="bracket-kbd-label">Command</span></kbd>',
+    );
   });
 
-  it('title引数でaria-labelを上書きする', async () => {
+  it('title引数でキー名を上書きする', async () => {
     expect(await render('[(kbd.delete,title="Backspace")]')).toContain(
-      '<kbd aria-label="Backspace">⌫</kbd>',
+      '<kbd><span aria-hidden="true">⌫</span><span class="bracket-kbd-label">Backspace</span></kbd>',
     );
   });
 

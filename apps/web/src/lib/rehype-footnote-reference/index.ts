@@ -15,7 +15,7 @@ export function rehypeFootnoteReference() {
           child.properties != null &&
           'dataFootnoteRef' in child.properties,
       );
-      if (!anchor || anchor.type !== 'element') return;
+      if (anchor?.type !== 'element') return;
       const first = anchor.children[0];
       const number = first?.type === 'text' ? first.value : '';
       anchor.children = [{ type: 'text', value: `*${number}` }];

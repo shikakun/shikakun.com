@@ -1,4 +1,3 @@
-import cloudflare from '@astrojs/cloudflare';
 import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
@@ -15,7 +14,6 @@ import { remarkBracketSyntax } from './src/lib/remark-bracket-syntax/index';
 
 export default defineConfig({
   output: 'static',
-  adapter: cloudflare(),
   site: 'https://shikakun.com',
   markdown: {
     // コードブロックを横スクロールさせず、右端で折り返す

@@ -4,15 +4,16 @@ GitHub Actionsのワークフローは`.github/workflows/`に3つある。
 
 ## CI（ci.yml）
 
-`main`へのpushとPull requestで実行する。Node.jsはLTS、pnpmのキャッシュを使う。
+`main`へのpushとPull requestで実行する。Node.jsはリポジトリ直下の`.node-version`（メジャーバージョンのみ指定）に従い、pnpmのキャッシュを使う。
 
 | ジョブ | 内容 |
 | --- | --- |
-| `build` | `@shikakun/design-tokens`と`@shikakun/react`のビルド、Storybookのビルド。成果物（`dist`と`storybook-static`）をartifactとして後続ジョブへ渡す |
+| `build` | `@shikakun/design-tokens`と`@shikakun/react`のビルド、Storybookのビルド（ビルドが通ることの確認）。成果物（`dist`）をartifactとして後続ジョブへ渡す |
 | `typecheck` | buildのartifactを展開して`pnpm typecheck`（webは`astro check`のため、依存パッケージのdistが必要） |
+| `web` | buildのartifactを展開して`@shikakun/web`をビルドし、`lint:html`で出力されたHTMLをmarkuplintで検査する（デプロイと同じビルドが通ることもここで確かめる） |
 | `lint` | `pnpm lint`（Biome＋markuplint） |
 | `test` | `pnpm test`＝ユニットテスト（Vitest）→e2eテスト（Playwright）。Playwrightのブラウザ（chromium）はキャッシュし、レポートをartifactに保存する |
-| `storybook-vrt` | ビルド済みStorybookをhttp-serverで配信し、`test-storybook`（Storybook test-runner）を実行 |
+| `storybook-test` | buildのartifactを展開し、Playwrightのブラウザ（chromium）を用意して`@shikakun/react`の`test-storybook`（`@storybook/addon-vitest`）を実行 |
 
 Pull requestのCIでは非公開コンテンツリポジトリへアクセスしないため、コンテンツは空のままビルド・テストされる。
 
@@ -34,7 +35,7 @@ Pull requestのCIでは非公開コンテンツリポジトリへアクセスし
 2. Deploy key（secret `CONTENT_REPO_DEPLOY_KEY`）をssh-agentへ登録
 3. `pnpm --filter @shikakun/web content:sync`を`CONTENT_REPO_URL=git@github.com:shikakun/shikakun.com-content.git`・`CONTENT_REF=main`・`CONTENT_REQUIRED='true'`で実行（取得失敗はエラー）
 4. `pnpm --filter @shikakun/web build`（`astro build`。この中でsitemap・feed.xmlも生成される）
-5. `cloudflare/wrangler-action`で`deploy --config apps/web/dist/server/wrangler.json --name web`を実行しCloudflareへデプロイ（wrangler設定ファイルはCloudflareアダプタがビルド時に生成する）
+5. `cloudflare/wrangler-action`で`deploy --config apps/web/wrangler.jsonc`を実行し、`apps/web/dist`をCloudflare Workersの静的アセットとしてデプロイ（Worker名`web`などの設定は`apps/web/wrangler.jsonc`に書く）
 
 必要なsecrets：`CONTENT_REPO_DEPLOY_KEY`・`CLOUDFLARE_API_TOKEN`・`CLOUDFLARE_ACCOUNT_ID`。
 
@@ -51,7 +52,7 @@ Pull requestのCIでは非公開コンテンツリポジトリへアクセスし
 
 | ファイル | 役割 |
 | --- | --- |
-| `.github/workflows/ci.yml` | ビルド・型チェック・lint・テスト・VRT |
+| `.github/workflows/ci.yml` | ビルド・型チェック・lint・テスト・Storybookのテスト |
 | `.github/workflows/deploy.yml` | Cloudflareへのデプロイ（push・定期・手動） |
 | `.github/workflows/publish.yml` | changesetsによるバージョニングとGitHub Packagesへの公開 |
 | `playwright.config.ts`・`e2e/` | e2eテスト |

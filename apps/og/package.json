@@ -13,15 +13,15 @@
   },
   "dependencies": {
     "@resvg/resvg-js": "2.6.2",
-    "budoux": "0.8.4",
+    "budoux": "0.10.0",
     "gray-matter": "4.0.3",
-    "satori": "0.26.0"
+    "satori": "0.63.2"
   },
   "devDependencies": {
-    "@types/node": "26.0.1",
-    "@types/react": "19.2.17",
-    "tsx": "4.22.4",
+    "@types/node": "26.6.5",
+    "@types/react": "19.3.0",
+    "tsx": "4.23.15",
     "typescript": "6.0.3",
-    "vitest": "4.1.9"
+    "vitest": "5.0.5"
   }
 }

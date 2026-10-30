@@ -149,6 +149,13 @@
   list-style-type: circle;
 }
 
+.prose ul ul,
+.prose ul ol,
+.prose ol ul,
+.prose ol ol {
+  margin-block: 0;
+}
+
 .prose ul ul ul,
 .prose ul ol ul,
 .prose ol ul ul,
@@ -163,13 +170,6 @@
 .prose ol > li,
 .prose ul > li {
   padding-inline-start: 0;
-}
-
-.prose ul ul,
-.prose ul ol,
-.prose ol ul,
-.prose ol ol {
-  margin-block: 0;
 }
 
 /* dl */

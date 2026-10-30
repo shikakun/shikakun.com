@@ -1,9 +1,10 @@
 import type { MethodHandler } from '../types';
-import { requireText, textElement } from './helpers';
+import { element, requireText, textElement } from './helpers';
 
 /**
  * キーシンボルのプリセット。記号だけでは読み上げで伝わらないため、
- * aria-labelを必ず付ける（title引数で上書きできる）。
+ * キー名を視覚的に隠したテキストとして必ず添える（title引数で上書きできる）。
+ * kbdは名前を付けられないロールのため、aria-labelは使わない。
  */
 const KBD_PRESETS: Record<string, { symbol: string; label: string }> = {
   control: { symbol: '⌃', label: 'Control' },
@@ -23,8 +24,8 @@ const KBD_PRESETS: Record<string, { symbol: string; label: string }> = {
 
 /**
  * `[Command(kbd)]` → `<kbd>Command</kbd>`
- * `[(kbd.command)]` → `<kbd aria-label="Command">⌘</kbd>`
- * `[(kbd.delete,title="Backspace")]` → `<kbd aria-label="Backspace">⌫</kbd>`
+ * `[(kbd.command)]` → `<kbd><span aria-hidden="true">⌘</span><span class="bracket-kbd-label">Command</span></kbd>`
+ * `[(kbd.delete,title="Backspace")]` → `<kbd><span aria-hidden="true">⌫</span><span class="bracket-kbd-label">Backspace</span></kbd>`
  */
 export const kbd: MethodHandler = (expression, file) => {
   if (expression.preset !== null) {
@@ -39,11 +40,21 @@ export const kbd: MethodHandler = (expression, file) => {
       file.message(`bracket-syntax: kbdの未知のプリセットのため無視しました: ${expression.preset}`);
       return null;
     }
-    return textElement(
-      'kbd',
-      { ariaLabel: expression.namedArgs.title?.trim() || preset.label },
-      preset.symbol,
-    );
+    const label = expression.namedArgs.title?.trim() || preset.label;
+    return element('kbd', {}, [
+      {
+        type: 'element',
+        tagName: 'span',
+        properties: { ariaHidden: 'true' },
+        children: [{ type: 'text', value: preset.symbol }],
+      },
+      {
+        type: 'element',
+        tagName: 'span',
+        properties: { className: ['bracket-kbd-label'] },
+        children: [{ type: 'text', value: label }],
+      },
+    ]);
   }
   const text = requireText(expression, file);
   if (text === null) {

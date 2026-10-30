@@ -9,5 +9,4 @@ allowBuilds:
   unrs-resolver: true
   workerd: true
 
-minimumReleaseAgeExclude:
-  - fast-xml-parser@5.9.3
+minimumReleaseAge: 10080

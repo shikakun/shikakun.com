@@ -6,24 +6,24 @@
 
 このサイトは独自の角括弧構文（[markdown-pipeline.md](./markdown-pipeline.md)）や`astro:assets`の画像を使うため、生のMarkdownではなく、**Astroが実際に静的生成した記事ページのHTMLから本文を取り出して配信する**。これによりフィードの本文はサイト本体とまったく同じレンダリング結果になる。
 
-`/feed.xml`はAstroのルートではない。ビルド後フックがファイルを直接`dist/client/feed.xml`へ書き出し、静的ホスティングでそのまま配信される。`Layout.astro`が全ページで`<link rel="alternate" type="application/rss+xml" href="/feed.xml">`を出力する。
+`/feed.xml`はAstroのルートではない。ビルド後フックがファイルを直接`dist/feed.xml`へ書き出し、静的ホスティングでそのまま配信される。`Layout.astro`が全ページで`<link rel="alternate" type="application/rss+xml" href="/feed.xml">`を出力する。
 
 ## 全体の流れ
 
-実装は「中間エンドポイント」と「ビルド後フック」の2段構成になっている。Cloudflareアダプタのprerenderランタイム（workerd相当）ではContainer APIが`node:path`を解決できず、エンドポイント内でMDXをHTMLへ描画できないため、メタデータの出力と本文の取得を分けている（各ソースの冒頭コメントに記載）。
+実装は「中間エンドポイント」と「ビルド後フック」の2段構成になっている。Cloudflareアダプタを使っていた頃、そのprerenderランタイム（workerd相当）ではContainer APIが`node:path`を解決できず、エンドポイント内でMDXをHTMLへ描画できなかったため、メタデータの出力と本文の取得を分けている（各ソースの冒頭コメントに記載）。
 
 ```text
 astro build
   1. src/pages/feed-data.json.ts（中間エンドポイント）
        listedな記事のメタデータ（slug・title・description・公開日）を
-       JSONで出力 → dist/client/feed-data.json
+       JSONで出力 → dist/feed-data.json
   2. 各記事ページを通常どおり静的生成
-       dist/client/<slug>/index.html（角括弧構文・画像が展開済みの本文を含む）
+       dist/<slug>/index.html（角括弧構文・画像が展開済みの本文を含む）
   3. scripts/feed-integration.mjs（astro:build:doneフック。Nodeで実行）
        - feed-data.jsonを読む
        - 各記事のHTMLから<article>の本文を取り出す
        - 相対URLを絶対URLへ書き換え、sanitize-htmlで整形
-       - @astrojs/rssでfeed.xmlを組み立てdist/client/feed.xmlへ書き出す
+       - @astrojs/rssでfeed.xmlを組み立てdist/feed.xmlへ書き出す
        - 中間ファイルfeed-data.jsonを削除
 ```
 
@@ -44,7 +44,7 @@ astro build
 
 `astro.config.ts`で`feedIntegration({ title, description })`として登録され、チャンネルのtitle/descriptionには`src/consts.ts`の`SITE_TITLE`・`SITE_DESCRIPTION`が渡る。
 
-- 出力先パスはハードコードせず、`astro:config:done`で`config.build.client`（クライアント出力ディレクトリ）・`config.site`・`config.build.format`を取得する。記事HTMLの場所は`format`（既定`directory`→`<slug>/index.html`、`file`→`<slug>.html`）で解決する。
+- 出力先パスはハードコードせず、`astro:build:done`が受け取る`dir`（ビルドの出力ディレクトリ）を使う。`config.site`・`config.build.format`は`astro:config:done`で取得する。記事HTMLの場所は`format`（既定`directory`→`<slug>/index.html`、`file`→`<slug>.html`）で解決する。
 - `site`未設定や`feed-data.json`が無い場合は警告して生成をスキップする。記事単位の失敗（HTMLが無い・`<article>`を抽出できない）は警告を残しつつ、そのitemは本文なしで配信を続ける。
 - itemの`link`は`/<slug>/`。
 
@@ -66,7 +66,7 @@ astro build
 
 ## 検証の観点
 
-ビルド後の`dist/client/feed.xml`で次を確認する。
+ビルド後の`dist/feed.xml`で次を確認する。
 
 - XMLが整形式である（パースできる）。
 - `listed: false`の記事が含まれない。

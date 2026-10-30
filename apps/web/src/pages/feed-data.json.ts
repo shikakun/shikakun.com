@@ -3,8 +3,8 @@ import type { APIRoute } from 'astro';
 import { extractExcerpt } from '../lib/excerpt';
 
 // feed.xml をビルド後に生成するための中間データ。
-// Cloudflare アダプタの prerender ランタイムでは Container API が使えず、エンドポイント内で
-// MDX をHTMLへ描画できない。そこで、記事のメタデータだけをここで出力し、実際のRSSは
+// Cloudflare アダプタを使っていた頃、その prerender ランタイムでは Container API が使えず、
+// エンドポイント内で MDX をHTMLへ描画できなかった。そこで、記事のメタデータだけをここで出力し、実際のRSSは
 // feed-integration.mjs（astro:build:done）が、このデータとビルド済み記事HTMLを突き合わせて生成する。
 // このファイルはビルド後に削除されるため、公開サイトには残らない。
 export const GET: APIRoute = async () => {

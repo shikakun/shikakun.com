@@ -12,7 +12,7 @@
 
 .requiredIcon {
   display: inline-block;
-  color: var(--color-semantic-informative-600);
+  color: var(--color-semantic-informative-700);
   font-size: var(--typography-font-size-s);
   line-height: var(--typography-line-height-m-dense);
 }
@@ -26,7 +26,7 @@
 
 .description {
   margin: 0;
-  color: var(--color-semantic-neutral-600);
+  color: var(--color-semantic-neutral-700);
 }
 
 .errorMessage {

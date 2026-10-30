@@ -1,0 +1,36 @@
+extends:
+  - markuplint:recommended
+
+parser:
+  \.astro$: "@markuplint/astro-parser"
+
+rules:
+  no-duplicate-attr: true
+  no-nested-top-level-landmark: true
+  require-landmark-label: true
+  require-h1: true
+  no-duplicate-h1: true
+  no-refer-to-non-existent-id: true
+  no-broken-fragment-link: true
+  head-element-order: false
+  meta-charset-position: false
+  no-pseudo-list: false
+
+nodeRules:
+  - selector: "script[async]"
+    rules:
+      # markuplint:recommended は外部スクリプトに defer を要求するが、
+      # async も同様にレンダリングブロッキングを回避するため除外している
+      require-attr: false
+  - selector: "Text"
+    rules:
+      case-sensitive-attr-name: false
+  - selector: "time"
+    rules:
+      case-sensitive-attr-name: false
+  - selector: "a[data-footnote-backref]"
+    rules:
+      no-redundant-accessible-name: false
+  - selector: "nav:has(> style)"
+    rules:
+      permitted-contents: false

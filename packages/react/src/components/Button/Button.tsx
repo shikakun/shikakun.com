@@ -99,10 +99,18 @@ export const Button = forwardRef<HTMLAnchorElement | HTMLButtonElement, ButtonPr
     ) : (
       <>
         <span className={bodyClassName}>
-          {leadingIcon ? <span className={visualClassName}>{leadingIcon}</span> : null}
+          {leadingIcon ? (
+            <span className={visualClassName} aria-hidden="true">
+              {leadingIcon}
+            </span>
+          ) : null}
           <span className={styles.label}>{children}</span>
         </span>
-        {trailingIcon ? <span className={visualClassName}>{trailingIcon}</span> : null}
+        {trailingIcon ? (
+          <span className={visualClassName} aria-hidden="true">
+            {trailingIcon}
+          </span>
+        ) : null}
       </>
     );
 

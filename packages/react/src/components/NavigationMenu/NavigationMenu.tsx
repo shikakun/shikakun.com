@@ -76,7 +76,7 @@ export const NavigationMenu = ({ items }: NavigationMenuProps) => {
 
   return (
     <div ref={containerRef} className={styles.root} data-measured={isMeasured || undefined}>
-      <div ref={ghostRef} aria-hidden="true" inert className={styles.ghost}>
+      <div ref={ghostRef} inert className={styles.ghost}>
         {items.map((item, i) => (
           <span
             key={item.href}

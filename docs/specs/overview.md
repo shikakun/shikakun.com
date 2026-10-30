@@ -23,12 +23,12 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 
 ## 技術スタック
 
-- **サイト**：Astro 6（`output: 'static'`＋Cloudflareアダプタ）、React 19（アイランド）、MDX
+- **サイト**：Astro 7（`output: 'static'`。アダプタなしの静的生成）、React 19（アイランド）、MDX
 - **言語**：TypeScript（`tsconfig.base.json`で`strict`、`moduleResolution: bundler`、`verbatimModuleSyntax`、`jsx: react-jsx`を共有）
 - **スタイル**：CSS Modules＋デザイントークン（CSS変数）
-- **lint/format**：Biome（インデント2スペース・行幅100・シングルクォート・セミコロンあり。`.astro`では未使用変数系ルールを無効化）、markuplint（`.astro`/`.mdx`対象。`markuplint:recommended`に`landmark-roles`・`required-h1`などを追加。`script[async]`は`required-attr`を除外）
-- **テスト**：Vitest（ユニット）、Playwright（e2e。axeによるアクセシビリティ検査）、Storybook test-runner（VRT）
-- **デプロイ**：GitHub ActionsからCloudflareへ（詳細は[ci-cd.md](./ci-cd.md)）
+- **lint/format**：Biome（インデント2スペース・行幅100・シングルクォート・セミコロンあり。`.astro`では未使用変数系ルールを無効化）、markuplint（`apps/web`の`.astro`対象。`markuplint:recommended`に`no-nested-top-level-landmark`・`require-h1`などを追加し、`head-element-order`・`meta-charset-position`を無効化。`script[async]`は`require-attr`を除外。`Text`コンポーネントはSVGの`text`要素と誤認されるため`case-sensitive-attr-name`を除外。ビルド後のHTMLに対しては、ReactのSSRが出力する`time`の`dateTime`、GFMの脚注の戻りリンクの`aria-label`、Astroが`nav`内に挿入する`style`、文中の「・」（`no-pseudo-list`）を除外）
+- **テスト**：Vitest（ユニット）、Playwright（e2e。axeによるアクセシビリティ検査）、Storybookのストーリーのテスト（`@storybook/addon-vitest`。Vitestのブラウザモード）
+- **デプロイ**：GitHub ActionsからCloudflare Workersの静的アセットへ（詳細は[ci-cd.md](./ci-cd.md)）
 
 ## ルートのコマンド
 
@@ -41,19 +41,19 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 | `pnpm build` | 全パッケージのビルド |
 | `pnpm typecheck` | 全パッケージの型チェック（webは`astro check`） |
 | `pnpm lint` / `pnpm lint:fix` | Biome＋markuplint |
+| `pnpm --filter @shikakun/web lint:html` | ビルド後の`apps/web/dist`のHTMLをmarkuplintで検査（事前に`build`が必要） |
 | `pnpm test` | `test:unit`（Vitest）→`test:e2e`（Playwright）の順に実行 |
 | `pnpm storybook` | `packages/react`のStorybook（ポート6006） |
 | `pnpm changeset` / `version-packages` / `release` | changesetsによるバージョニングと公開 |
 
 ## 依存パッケージの管理
 
-- パッケージマネージャーはpnpm（`packageManager: pnpm@11.8.0`）。
-- `.npmrc`で`minimum-release-age=7 days`を設定しており、リリースから7日未満のバージョンはインストールしない。例外は`pnpm-workspace.yaml`の`minimumReleaseAgeExclude`に列挙する。
+- パッケージマネージャーはpnpm（`packageManager: pnpm@12.15.0`）。
+- `pnpm-workspace.yaml`で`minimumReleaseAge: 10080`（7日を分で指定）を設定しており、リリースから7日未満のバージョンはインストールしない。例外は同じファイルの`minimumReleaseAgeExclude`に列挙する。
 - ビルドスクリプトの実行を許可するパッケージは`pnpm-workspace.yaml`の`allowBuilds`で明示する（`@swc/core`・`esbuild`・`sharp`・`unrs-resolver`・`workerd`）。
 
 ## 開発環境
 
-- `.devcontainer/devcontainer.json`：`typescript-node:26-bookworm`イメージ。ポート4321（Astro dev）と6006（Storybook）をフォワード。`postCreateCommand`でcorepack有効化・`pnpm install`・Playwright（chromium）のインストールを行う。VS Code拡張（Biome・Astro・Playwright・markuplint）と保存時フォーマットを設定。
 - `.coderabbit.yaml`：コードレビューの言語を`ja-JP`に設定。
 
 ## ドキュメント
@@ -66,10 +66,9 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 | ファイル | 役割 |
 | --- | --- |
 | `package.json` | ルートのscriptsと開発ツールの依存 |
-| `pnpm-workspace.yaml` | ワークスペース定義・allowBuilds・minimumReleaseAgeExclude |
-| `.npmrc` | minimum-release-age |
+| `pnpm-workspace.yaml` | ワークスペース定義・allowBuilds・minimumReleaseAge・minimumReleaseAgeExclude |
 | `tsconfig.base.json` | 全パッケージ共通のTypeScript設定 |
 | `biome.json` | lint/formatの設定 |
-| `.markuplintrc.yaml` | HTMLのlint設定 |
+| `apps/web/.markuplintrc.yaml` | HTMLのlint設定 |
 | `playwright.config.ts` | e2eテストの設定 |
 | `.changeset/config.json` | changesetsの設定 |

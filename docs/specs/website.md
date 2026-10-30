@@ -2,7 +2,7 @@
 
 ## 概要
 
-`apps/web`は https://shikakun.com を生成するAstroアプリケーション。`output: 'static'`で静的生成し、Cloudflareアダプタ（`@astrojs/cloudflare`）でCloudflareへデプロイする。
+`apps/web`は https://shikakun.com を生成するAstroアプリケーション。`output: 'static'`で静的生成し、アダプタは使わない。生成した`dist`をCloudflare Workersの静的アセットとして配信する（`wrangler.jsonc`。デプロイは[ci-cd.md](./ci-cd.md)）。`/_astro/*`を長期キャッシュさせる`Cache-Control`は`public/_headers`で指定する。
 
 Astro統合として`@astrojs/mdx`・`@astrojs/react`・`@astrojs/sitemap`に加え、自前の`contentWatchIntegration`（[content-sync.md](./content-sync.md)）と`feedIntegration`（[feed.md](./feed.md)）を登録している（`astro.config.ts`）。
 
