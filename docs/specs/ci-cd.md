@@ -8,12 +8,12 @@ GitHub Actionsのワークフローは`.github/workflows/`に3つある。
 
 | ジョブ | 内容 |
 | --- | --- |
-| `build` | `@shikakun/design-tokens`と`@shikakun/react`のビルド、Storybookのビルド。成果物（`dist`と`storybook-static`）をartifactとして後続ジョブへ渡す |
+| `build` | `@shikakun/design-tokens`と`@shikakun/react`のビルド、Storybookのビルド（ビルドが通ることの確認）。成果物（`dist`）をartifactとして後続ジョブへ渡す |
 | `typecheck` | buildのartifactを展開して`pnpm typecheck`（webは`astro check`のため、依存パッケージのdistが必要） |
 | `web` | buildのartifactを展開して`@shikakun/web`をビルドし、`lint:html`で出力されたHTMLをmarkuplintで検査する（デプロイと同じビルドが通ることもここで確かめる） |
 | `lint` | `pnpm lint`（Biome＋markuplint） |
 | `test` | `pnpm test`＝ユニットテスト（Vitest）→e2eテスト（Playwright）。Playwrightのブラウザ（chromium）はキャッシュし、レポートをartifactに保存する |
-| `storybook-vrt` | ビルド済みStorybookをhttp-serverで配信し、`test-storybook`（Storybook test-runner）を実行 |
+| `storybook-test` | buildのartifactを展開し、Playwrightのブラウザ（chromium）を用意して`@shikakun/react`の`test-storybook`（`@storybook/addon-vitest`）を実行 |
 
 Pull requestのCIでは非公開コンテンツリポジトリへアクセスしないため、コンテンツは空のままビルド・テストされる。
 
@@ -52,7 +52,7 @@ Pull requestのCIでは非公開コンテンツリポジトリへアクセスし
 
 | ファイル | 役割 |
 | --- | --- |
-| `.github/workflows/ci.yml` | ビルド・型チェック・lint・テスト・VRT |
+| `.github/workflows/ci.yml` | ビルド・型チェック・lint・テスト・Storybookのテスト |
 | `.github/workflows/deploy.yml` | Cloudflareへのデプロイ（push・定期・手動） |
 | `.github/workflows/publish.yml` | changesetsによるバージョニングとGitHub Packagesへの公開 |
 | `playwright.config.ts`・`e2e/` | e2eテスト |

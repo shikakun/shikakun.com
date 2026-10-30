@@ -27,7 +27,6 @@ jobs:
           path: |
             packages/design-tokens/dist
             packages/react/dist
-            packages/react/storybook-static
 
   typecheck:
     name: Typecheck
@@ -108,8 +107,8 @@ jobs:
           path: playwright-report/
           retention-days: 30
 
-  storybook-vrt:
-    name: Storybook VRT
+  storybook-test:
+    name: Storybook test
     needs: build
     runs-on: ubuntu-latest
     steps:
@@ -129,8 +128,4 @@ jobs:
           path: ~/.cache/ms-playwright
           key: playwright-${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
       - run: pnpm exec playwright install --with-deps chromium
-      - name: Run Storybook VRT
-        run: |
-          npx http-server packages/react/storybook-static --port 6006 &
-          npx wait-on http://localhost:6006
-          pnpm --filter @shikakun/react test-storybook
+      - run: pnpm --filter @shikakun/react test-storybook

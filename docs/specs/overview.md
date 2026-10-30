@@ -27,7 +27,7 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 - **言語**：TypeScript（`tsconfig.base.json`で`strict`、`moduleResolution: bundler`、`verbatimModuleSyntax`、`jsx: react-jsx`を共有）
 - **スタイル**：CSS Modules＋デザイントークン（CSS変数）
 - **lint/format**：Biome（インデント2スペース・行幅100・シングルクォート・セミコロンあり。`.astro`では未使用変数系ルールを無効化）、markuplint（`apps/web`の`.astro`対象。`markuplint:recommended`に`no-nested-top-level-landmark`・`require-h1`などを追加し、`head-element-order`・`meta-charset-position`を無効化。`script[async]`は`require-attr`を除外。`Text`コンポーネントはSVGの`text`要素と誤認されるため`case-sensitive-attr-name`を除外。ビルド後のHTMLに対しては、ReactのSSRが出力する`time`の`dateTime`、GFMの脚注の戻りリンクの`aria-label`、Astroが`nav`内に挿入する`style`、文中の「・」（`no-pseudo-list`）を除外）
-- **テスト**：Vitest（ユニット）、Playwright（e2e。axeによるアクセシビリティ検査）、Storybook test-runner（VRT）
+- **テスト**：Vitest（ユニット）、Playwright（e2e。axeによるアクセシビリティ検査）、Storybookのストーリーのテスト（`@storybook/addon-vitest`。Vitestのブラウザモード）
 - **デプロイ**：GitHub ActionsからCloudflare Workersの静的アセットへ（詳細は[ci-cd.md](./ci-cd.md)）
 
 ## ルートのコマンド
