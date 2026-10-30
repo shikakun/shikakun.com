@@ -2,7 +2,7 @@
 
 ## 概要
 
-`apps/web`は https://shikakun.com を生成するAstroアプリケーション。`output: 'static'`で静的生成し、Cloudflareアダプタ（`@astrojs/cloudflare`）でCloudflareへデプロイする。おたよりフォームのAPIルートだけがサーバーで実行される。
+`apps/web`は https://shikakun.com を生成するAstroアプリケーション。`output: 'static'`で静的生成し、Cloudflareアダプタ（`@astrojs/cloudflare`）でCloudflareへデプロイする。
 
 Astro統合として`@astrojs/mdx`・`@astrojs/react`・`@astrojs/sitemap`に加え、自前の`contentWatchIntegration`（[content-sync.md](./content-sync.md)）と`feedIntegration`（[feed.md](./feed.md)）を登録している（`astro.config.ts`）。
 
@@ -15,7 +15,6 @@ Astro統合として`@astrojs/mdx`・`@astrojs/react`・`@astrojs/sitemap`に加
 | `/llms.txt` | `src/pages/llms.txt.ts` | `listed: false`を除く全ページの一覧をMarkdown形式のプレーンテキストで出力 |
 | `/feed-data.json` | `src/pages/feed-data.json.ts` | RSS生成用の中間データ。ビルド後に削除され公開サイトには残らない |
 | `/feed.xml` | `scripts/feed-integration.mjs` | 全文RSS。Astroのルートではなくビルド後フックが直接書き出す |
-| `/api/banana-message` | `src/pages/api/banana-message.ts` | おたよりフォームの送信先。`prerender = false`のサーバールート |
 | `/sitemap-index.xml` | `@astrojs/sitemap` | サイトマップ。`public/robots.txt`から参照される |
 
 `/[slug]`の`getStaticPaths`は次の2種類のパスを返す。
@@ -94,11 +93,6 @@ Astro統合として`@astrojs/mdx`・`@astrojs/react`・`@astrojs/sitemap`に加
 | `LinkList.astro` | 外部プロフィール（SNS・音楽サービスなど）へのリンクボタン一覧。リンク先はこのファイルにハードコード |
 | `ArticleButton.tsx` | MDX本文内で使うリンクボタン。`http(s)`始まりなら外部リンク扱いで`target="_blank"`とアイコンを切り替える |
 | `BananaEpisodeList.astro` | PodcastのRSS（anchor.fm）をビルド時にfetchし、最新6件のエピソードをタイトル・日付・分数（秒は20秒未満で切り捨て、以上で切り上げ）で一覧表示。取得失敗時は代替メッセージを出す |
-| `BananaMessageForm.tsx` | おたよりフォーム（Reactアイランド）。`/api/banana-message`へJSONをPOSTし、成否のフィードバックを表示する |
-
-## おたよりフォームAPI
-
-`/api/banana-message`（POST）は、受け取った`message`（必須）と`name`を、環境変数`MESSAGE_FORM_API_URL`のエンドポイントへ`MESSAGE_FORM_API_TOKEN`を添えて転送するプロキシ。バリデーションエラーは400、転送失敗は502を返す。環境変数は`astro.config.ts`の`env.schema`で`context: 'server'`・`access: 'secret'`として定義されており、リポジトリには値を持たない。
 
 ## グローバルスタイル
 
