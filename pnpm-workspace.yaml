@@ -10,6 +10,3 @@ allowBuilds:
   workerd: true
 
 minimumReleaseAge: 10080
-
-minimumReleaseAgeExclude:
-  - fast-xml-parser@5.9.3

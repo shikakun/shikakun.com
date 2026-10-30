@@ -53,7 +53,6 @@ pnpm og:generate --check
 ## 手動画像の扱い
 
 生成画像には PNG の tEXt チャンクに生成 marker（`Software=@shikakun/og`）を埋め込む。CLI はこの marker で手動画像と生成画像を見分ける。
-
 - `og.png` が無い → 新規描画
 - marker あり（生成物）→ 再描画して上書き
 - marker なし（手動画像）→ **一切触らない**
