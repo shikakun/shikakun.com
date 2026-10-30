@@ -53,7 +53,6 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 
 ## 開発環境
 
-- `.devcontainer/devcontainer.json`：`typescript-node:26-bookworm`イメージ。ポート4321（Astro dev）と6006（Storybook）をフォワード。`postCreateCommand`でcorepack有効化・`pnpm install`・Playwright（chromium）のインストールを行う。VS Code拡張（Biome・Astro・Playwright・markuplint）と保存時フォーマットを設定。
 - `.coderabbit.yaml`：コードレビューの言語を`ja-JP`に設定。
 
 ## ドキュメント
