@@ -23,7 +23,7 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 
 ## 技術スタック
 
-- **サイト**：Astro 6（`output: 'static'`。アダプタなしの静的生成）、React 19（アイランド）、MDX
+- **サイト**：Astro 7（`output: 'static'`。アダプタなしの静的生成）、React 19（アイランド）、MDX
 - **言語**：TypeScript（`tsconfig.base.json`で`strict`、`moduleResolution: bundler`、`verbatimModuleSyntax`、`jsx: react-jsx`を共有）
 - **スタイル**：CSS Modules＋デザイントークン（CSS変数）
 - **lint/format**：Biome（インデント2スペース・行幅100・シングルクォート・セミコロンあり。`.astro`では未使用変数系ルールを無効化）、markuplint（`.astro`/`.mdx`対象。`markuplint:recommended`に`landmark-roles`・`required-h1`などを追加。`script[async]`は`required-attr`を除外）
