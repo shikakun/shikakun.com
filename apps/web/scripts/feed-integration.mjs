@@ -1,12 +1,8 @@
-// ビルド後に feed.xml（全文RSS）を生成する Astro 統合。
+// ビルド後にfeed.xml（全文RSS）を生成するAstro integration
 //
-// Cloudflare アダプタを使っていた頃、その prerender ランタイム（workerd 相当）では Container API が
-// node:path を解決できず、エンドポイント内で MDX を HTML へ描画できなかった。そこで、通常どおり
-// 静的生成された記事ページの HTML から本文（<article> の中身）を取り出し、Node で動く
-// astro:build:done フックの中で全文 RSS を組み立てる。
-//
-// 記事のメタデータ（タイトル・説明・公開日）は、astro:content を使う中間エンドポイント
-// （feed-data.json）が出力したものを読む。RSS 生成後、その中間ファイルは削除する。
+// サイトと同じ表示の本文を配信するため、静的生成した記事ページのHTMLから本文を取り出している。
+// 記事のタイトルや公開日などは、中間エンドポイント（feed-data.json）が書き出したものを読む。
+// この中間ファイルは、RSSを生成したあとで削除する。
 
 import fs from 'node:fs';
 import path from 'node:path';
@@ -16,8 +12,7 @@ import sanitizeHtml from 'sanitize-html';
 
 const DATA_FILENAME = 'feed-data.json';
 
-// root 相対の URL（/_astro/... や /slug）を絶対 URL へ書き換える。
-// RSS は外部のリーダーで読まれるため、画像やリンクは絶対 URL である必要がある。
+// RSSはRSSリーダーで読まれるので、ルート相対のURLを絶対URLに書き換える。
 function toAbsoluteUrls(html, origin) {
   return html
     .replace(/(\b(?:href|src)=")\/(?!\/)/g, `$1${origin}/`)
@@ -28,41 +23,48 @@ function toAbsoluteUrls(html, origin) {
     );
 }
 
-// RSS の content:encoded 用に、記事本文として意味のあるタグだけを許可する。
-// script やレイアウト由来のクラス属性など、配信に不要なものは落とす。
-function sanitize(html) {
+// 見出しやruby、kbd、wbrなどはデフォルトで許可されているので、画像と埋め込みのタグだけを足す。
+// spanはRSSでは見た目の役割を果たさず、シンタックスハイライトで大量に入れ子になるため、
+// 外して中のテキストだけを残す。
+const ALLOWED_TAGS = [
+  ...sanitizeHtml.defaults.allowedTags.filter((tag) => tag !== 'span'),
+  'img',
+  'picture',
+  'source',
+  'iframe',
+];
+
+// RSSではCSSが効かないので、視覚的に隠したテキストもそのまま表示されてしまう。
+// そこで、aria-hidden="true"の装飾（記号やアイコン）を中身ごと取り除き、読み上げ用のテキストのほうを残す。
+// exclusiveFilterは許可したタグにしか効かないため、spanも許可した前処理として、本処理の前に行う。
+function removeAriaHidden(html) {
   return sanitizeHtml(html, {
-    // 見出しや ruby・kbd・wbr などはデフォルトで許可されている。画像と埋め込みのタグだけ補う。
-    // span は非セマンティックで、RSS ではサイトの CSS が効かず装飾の意味を持たない。
-    // 特にコードブロックのシンタックスハイライトが大量の入れ子 span を生むため、除外して
-    // 中身のテキストだけ残す（コードはプレーンテキストになる）。
-    allowedTags: [
-      ...sanitizeHtml.defaults.allowedTags.filter((tag) => tag !== 'span'),
-      'img',
-      'picture',
-      'source',
-      'iframe',
-    ],
+    allowedTags: [...ALLOWED_TAGS, 'span'],
+    allowedAttributes: false,
+    exclusiveFilter: (frame) => frame.attribs['aria-hidden'] === 'true',
+  });
+}
+
+// RSSのcontent:encodedに入れるため、記事の本文として意味のあるタグと属性だけを残す。
+export function sanitize(html) {
+  return sanitizeHtml(removeAriaHidden(html), {
+    allowedTags: ALLOWED_TAGS,
     allowedAttributes: {
       ...sanitizeHtml.defaults.allowedAttributes,
-      // 脚注（GFM）の参照と定義のあいだのジャンプリンクを成立させるため、id を全要素で残す。
-      // 既定では id が落ち、#user-content-fn-1 などの飛び先が失われてリーダー上でジャンプできない。
+      // 脚注（GFM）のリンク先が失われないよう、idはすべての要素で残す。
       '*': ['id'],
       img: ['src', 'srcset', 'sizes', 'alt', 'width', 'height', 'loading', 'decoding'],
       source: ['src', 'srcset', 'sizes', 'type', 'media', 'width', 'height'],
-      // 脚注リンクの読み上げ用ラベル・説明（aria-*）も残す。
+      // 脚注リンクの読み上げ用のラベルと説明（aria-*）も残す。
       a: ['href', 'name', 'target', 'rel', 'aria-label', 'aria-describedby'],
       iframe: ['src', 'width', 'height', 'allow', 'allowfullscreen', 'title', 'loading'],
     },
-    // YouTube 埋め込みの iframe を許可する。
     allowedIframeHostnames: ['www.youtube.com', 'www.youtube-nocookie.com'],
   });
 }
 
-// ビルド済み記事ページの HTML から本文だけを取り出す。
-// 記事ページの <article> は1ページにつき1つで、コードブロック内の山括弧はエスケープ済みのため、
-// 単純な抽出で安全に取り出せる。<header>（タイトル見出し）と <footer>（日付・タグ）は、
-// それぞれ RSS の <title> や item のメタデータと重複するため、本文からは取り除く。
+// <article>は1ページに1つだけで、コードブロック内の山括弧もエスケープ済みなので、正規表現で安全に取り出せる。
+// <header>（タイトル）と<footer>（日付とタグ）は、RSSのtitleやitemの情報と重複するので取り除く。
 function extractArticleBody(html) {
   const match = html.match(/<article\b[^>]*>([\s\S]*?)<\/article>/);
   if (!match) return '';
@@ -104,8 +106,8 @@ export function feedIntegration({ title, description }) {
               ? path.join(outDir, `${entry.slug}.html`)
               : path.join(outDir, entry.slug, 'index.html');
 
-          // 本文の取得に失敗してもその item の配信は続けるが、パスやテンプレートの不具合に
-          // 気づけるよう、失敗の種類（HTML が無い / <article> を抽出できない）を warn で残す。
+          // 本文が取れなくても、そのitemは配信する。ただし、パスやテンプレートの不具合に気づけるよう、
+          // 原因（HTMLがない、<article>を取り出せない）を警告として残す。
           let content;
           if (!fs.existsSync(pagePath)) {
             logger.warn(
@@ -133,7 +135,6 @@ export function feedIntegration({ title, description }) {
         const xml = await response.text();
         fs.writeFileSync(path.join(outDir, 'feed.xml'), xml, 'utf-8');
 
-        // 中間データは公開サイトに不要なため削除する。
         fs.rmSync(dataPath, { force: true });
 
         logger.info(`feed.xml を生成しました（${items.length} 件）`);
