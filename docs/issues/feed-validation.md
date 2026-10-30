@@ -39,7 +39,7 @@
 ## 受け入れ条件
 
 - [ ] 本文抽出・URL絶対化・sanitizeの各規則が単体テストで検証される。少なくとも：`<header>`/`<footer>`の除去、`span`の除去とテキストの保持、`id`属性の保持、`iframe`の許可ドメイン、`srcset`を含む相対URLの絶対化
-- [ ] フィクスチャコンテンツでビルドした`dist/client/feed.xml`に対して、specs/feed.mdの検証の観点が自動検査される。少なくとも：XMLとして整形式・`listed: false`の除外・全itemの`content:encoded`が非空・root相対URLの不在・`feed-data.json`の削除
+- [ ] フィクスチャコンテンツでビルドした`dist/feed.xml`に対して、specs/feed.mdの検証の観点が自動検査される。少なくとも：XMLとして整形式・`listed: false`の除外・全itemの`content:encoded`が非空・root相対URLの不在・`feed-data.json`の削除
 - [ ] これらのテストがCIで実行される
 
 ## 実装方針の選択肢

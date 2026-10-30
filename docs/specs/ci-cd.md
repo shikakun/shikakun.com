@@ -34,7 +34,7 @@ Pull requestのCIでは非公開コンテンツリポジトリへアクセスし
 2. Deploy key（secret `CONTENT_REPO_DEPLOY_KEY`）をssh-agentへ登録
 3. `pnpm --filter @shikakun/web content:sync`を`CONTENT_REPO_URL=git@github.com:shikakun/shikakun.com-content.git`・`CONTENT_REF=main`・`CONTENT_REQUIRED='true'`で実行（取得失敗はエラー）
 4. `pnpm --filter @shikakun/web build`（`astro build`。この中でsitemap・feed.xmlも生成される）
-5. `cloudflare/wrangler-action`で`deploy --config apps/web/dist/server/wrangler.json --name web`を実行しCloudflareへデプロイ（wrangler設定ファイルはCloudflareアダプタがビルド時に生成する）
+5. `cloudflare/wrangler-action`で`deploy --config apps/web/wrangler.jsonc`を実行し、`apps/web/dist`をCloudflare Workersの静的アセットとしてデプロイ（Worker名`web`などの設定は`apps/web/wrangler.jsonc`に書く）
 
 必要なsecrets：`CONTENT_REPO_DEPLOY_KEY`・`CLOUDFLARE_API_TOKEN`・`CLOUDFLARE_ACCOUNT_ID`。
 

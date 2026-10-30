@@ -1,9 +1,9 @@
 // ビルド後に feed.xml（全文RSS）を生成する Astro 統合。
 //
-// Cloudflare アダプタの prerender ランタイム（workerd 相当）では Container API が node:path を
-// 解決できず、エンドポイント内で MDX を HTML へ描画できない。そこで、通常どおり静的生成された
-// 記事ページの HTML から本文（<article> の中身）を取り出し、Node で動く astro:build:done フックの
-// 中で全文 RSS を組み立てる。
+// Cloudflare アダプタを使っていた頃、その prerender ランタイム（workerd 相当）では Container API が
+// node:path を解決できず、エンドポイント内で MDX を HTML へ描画できなかった。そこで、通常どおり
+// 静的生成された記事ページの HTML から本文（<article> の中身）を取り出し、Node で動く
+// astro:build:done フックの中で全文 RSS を組み立てる。
 //
 // 記事のメタデータ（タイトル・説明・公開日）は、astro:content を使う中間エンドポイント
 // （feed-data.json）が出力したものを読む。RSS 生成後、その中間ファイルは削除する。
@@ -72,7 +72,6 @@ function extractArticleBody(html) {
 }
 
 export function feedIntegration({ title, description }) {
-  let clientDir;
   let site;
   let format = 'directory';
 
@@ -80,17 +79,17 @@ export function feedIntegration({ title, description }) {
     name: 'feed',
     hooks: {
       'astro:config:done': ({ config }) => {
-        clientDir = fileURLToPath(config.build.client);
         site = config.site;
         format = config.build.format;
       },
-      'astro:build:done': async ({ logger }) => {
+      'astro:build:done': async ({ dir, logger }) => {
+        const outDir = fileURLToPath(dir);
         if (!site) {
           logger.warn('site が未設定のため feed.xml の生成をスキップします');
           return;
         }
 
-        const dataPath = path.join(clientDir, DATA_FILENAME);
+        const dataPath = path.join(outDir, DATA_FILENAME);
         if (!fs.existsSync(dataPath)) {
           logger.warn(`${DATA_FILENAME} が見つからないため feed.xml を生成できません`);
           return;
@@ -102,8 +101,8 @@ export function feedIntegration({ title, description }) {
         const items = entries.map((entry) => {
           const pagePath =
             format === 'file'
-              ? path.join(clientDir, `${entry.slug}.html`)
-              : path.join(clientDir, entry.slug, 'index.html');
+              ? path.join(outDir, `${entry.slug}.html`)
+              : path.join(outDir, entry.slug, 'index.html');
 
           // 本文の取得に失敗してもその item の配信は続けるが、パスやテンプレートの不具合に
           // 気づけるよう、失敗の種類（HTML が無い / <article> を抽出できない）を warn で残す。
@@ -132,7 +131,7 @@ export function feedIntegration({ title, description }) {
 
         const response = await rss({ title, description, site, items });
         const xml = await response.text();
-        fs.writeFileSync(path.join(clientDir, 'feed.xml'), xml, 'utf-8');
+        fs.writeFileSync(path.join(outDir, 'feed.xml'), xml, 'utf-8');
 
         // 中間データは公開サイトに不要なため削除する。
         fs.rmSync(dataPath, { force: true });
