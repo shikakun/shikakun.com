@@ -38,8 +38,6 @@ Pull requestのCIでは非公開コンテンツリポジトリへアクセスし
 
 必要なsecrets：`CONTENT_REPO_DEPLOY_KEY`・`CLOUDFLARE_API_TOKEN`・`CLOUDFLARE_ACCOUNT_ID`。
 
-おたよりフォームAPIが使う`MESSAGE_FORM_API_URL`・`MESSAGE_FORM_API_TOKEN`（[website.md](./website.md)）はワークフローでは渡しておらず、リポジトリ内に設定箇所はない（実行環境側で設定される）。
-
 ## パッケージ公開（publish.yml）
 
 `main`へのpushで`changesets/action`を実行する。

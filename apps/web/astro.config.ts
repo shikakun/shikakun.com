@@ -3,7 +3,7 @@ import { unified } from '@astrojs/markdown-remark';
 import mdx from '@astrojs/mdx';
 import react from '@astrojs/react';
 import sitemap from '@astrojs/sitemap';
-import { defineConfig, envField } from 'astro/config';
+import { defineConfig } from 'astro/config';
 import rehypeBudoux from 'rehype-budoux';
 import remarkBreaks from 'remark-breaks';
 import { feedIntegration } from './scripts/feed-integration.mjs';
@@ -44,12 +44,6 @@ export default defineConfig({
     contentWatchIntegration(),
     feedIntegration({ title: SITE_TITLE, description: SITE_DESCRIPTION }),
   ],
-  env: {
-    schema: {
-      MESSAGE_FORM_API_URL: envField.string({ context: 'server', access: 'secret' }),
-      MESSAGE_FORM_API_TOKEN: envField.string({ context: 'server', access: 'secret' }),
-    },
-  },
   vite: {
     // 開発サーバーの初回アクセス時にReactが「Invalid hook call」で壊れる不具合（ページをリロードすると直る）への対処。
     //
