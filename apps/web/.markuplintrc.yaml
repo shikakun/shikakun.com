@@ -5,14 +5,22 @@ parser:
   \.astro$: "@markuplint/astro-parser"
 
 rules:
-  attr-duplication: true
-  landmark-roles: true
-  required-h1: true
+  no-duplicate-attr: true
+  no-nested-top-level-landmark: true
+  require-landmark-label: true
+  require-h1: true
+  no-duplicate-h1: true
   no-refer-to-non-existent-id: true
+  no-broken-fragment-link: true
+  head-element-order: false
+  meta-charset-position: false
 
 nodeRules:
   - selector: "script[async]"
     rules:
       # markuplint:recommended は外部スクリプトに defer を要求するが、
       # async も同様にレンダリングブロッキングを回避するため除外している
-      required-attr: false
+      require-attr: false
+  - selector: "Text"
+    rules:
+      case-sensitive-attr-name: false

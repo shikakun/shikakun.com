@@ -9,8 +9,8 @@
     "build": "astro build",
     "preview": "astro preview",
     "typecheck": "astro check",
-    "lint": "biome check . && markuplint 'src/**/*.astro' 'src/**/*.mdx'",
-    "lint:fix": "biome check --write . && markuplint --fix 'src/**/*.astro' 'src/**/*.mdx'",
+    "lint": "biome check . && markuplint 'src/**/*.astro'",
+    "lint:fix": "biome check --write . && markuplint --fix 'src/**/*.astro'",
     "test": "vitest run"
   },
   "dependencies": {

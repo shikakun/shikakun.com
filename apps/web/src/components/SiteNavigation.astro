@@ -28,8 +28,8 @@ const items = rawItems.map(({ href, label }) => ({
 ---
 
 <nav class={styles.nav} aria-label={label}>
-  <a class={styles.icon} href="/" aria-hidden="true" tabindex="-1">
-    <Image src={shikakun} class={styles.shikakun} alt="shikakunのアイコン" />
+  <a class={styles.icon} href="/">
+    <Image src={shikakun} class={styles.shikakun} alt="Home" />
   </a>
   <NavigationMenu client:load items={items} />
 </nav>
