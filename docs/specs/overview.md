@@ -47,7 +47,7 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 
 ## 依存パッケージの管理
 
-- パッケージマネージャーはpnpm（`packageManager: pnpm@11.8.0`）。
+- パッケージマネージャーはpnpm（`packageManager: pnpm@12.15.0`）。
 - `pnpm-workspace.yaml`で`minimumReleaseAge: 10080`（7日を分で指定）を設定しており、リリースから7日未満のバージョンはインストールしない。例外は同じファイルの`minimumReleaseAgeExclude`に列挙する。
 - ビルドスクリプトの実行を許可するパッケージは`pnpm-workspace.yaml`の`allowBuilds`で明示する（`@swc/core`・`esbuild`・`sharp`・`unrs-resolver`・`workerd`）。
 

@@ -1,7 +1,7 @@
 {
   "name": "shikakun.com",
   "private": true,
-  "packageManager": "pnpm@11.8.0",
+  "packageManager": "pnpm@12.15.0",
   "scripts": {
     "dev": "pnpm --filter @shikakun/web dev",
     "og:generate": "pnpm --filter @shikakun/og generate",
