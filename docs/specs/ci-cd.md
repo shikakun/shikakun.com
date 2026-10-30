@@ -4,7 +4,7 @@ GitHub Actionsのワークフローは`.github/workflows/`に3つある。
 
 ## CI（ci.yml）
 
-`main`へのpushとPull requestで実行する。Node.jsはLTS、pnpmのキャッシュを使う。
+`main`へのpushとPull requestで実行する。Node.jsはリポジトリ直下の`.node-version`（メジャーバージョンのみ指定）に従い、pnpmのキャッシュを使う。
 
 | ジョブ | 内容 |
 | --- | --- |
