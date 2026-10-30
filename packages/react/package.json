@@ -35,7 +35,7 @@
     "@floating-ui/react": "0.27.20",
     "@shikakun/design-tokens": "workspace:*",
     "aria-attribute-types": "1.0.0",
-    "budoux": "0.8.4",
+    "budoux": "0.10.0",
     "clsx": "^2.1.1"
   },
   "devDependencies": {

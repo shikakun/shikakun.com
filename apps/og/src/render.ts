@@ -161,6 +161,7 @@ function frame(titleDisplay: string, rawText: string, avatar: string): VNode {
       left: 0,
       width: C.IMAGE_WIDTH,
       height: C.IMAGE_HEIGHT,
+      boxSizing: 'border-box',
       border: `${C.BORDER_WIDTH}px solid ${C.COLOR_BORDER}`,
     },
   });
