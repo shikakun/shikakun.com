@@ -48,7 +48,7 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 ## 依存パッケージの管理
 
 - パッケージマネージャーはpnpm（`packageManager: pnpm@11.8.0`）。
-- `.npmrc`で`minimum-release-age=7 days`を設定しており、リリースから7日未満のバージョンはインストールしない。例外は`pnpm-workspace.yaml`の`minimumReleaseAgeExclude`に列挙する。
+- `pnpm-workspace.yaml`で`minimumReleaseAge: 10080`（7日を分で指定）を設定しており、リリースから7日未満のバージョンはインストールしない。例外は同じファイルの`minimumReleaseAgeExclude`に列挙する。
 - ビルドスクリプトの実行を許可するパッケージは`pnpm-workspace.yaml`の`allowBuilds`で明示する（`@swc/core`・`esbuild`・`sharp`・`unrs-resolver`・`workerd`）。
 
 ## 開発環境
@@ -66,8 +66,7 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 | ファイル | 役割 |
 | --- | --- |
 | `package.json` | ルートのscriptsと開発ツールの依存 |
-| `pnpm-workspace.yaml` | ワークスペース定義・allowBuilds・minimumReleaseAgeExclude |
-| `.npmrc` | minimum-release-age |
+| `pnpm-workspace.yaml` | ワークスペース定義・allowBuilds・minimumReleaseAge・minimumReleaseAgeExclude |
 | `tsconfig.base.json` | 全パッケージ共通のTypeScript設定 |
 | `biome.json` | lint/formatの設定 |
 | `.markuplintrc.yaml` | HTMLのlint設定 |
