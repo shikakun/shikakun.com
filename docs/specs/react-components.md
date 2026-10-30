@@ -37,10 +37,10 @@
 
 ## Storybookとテスト
 
-- Storybook 10（`@storybook/react-vite`＋addon-docs・addon-vitest）。storyは`src/**/*.stories.tsx`。`.storybook/preview.ts`で`@shikakun/design-tokens/css`を読み込む。`pnpm storybook`でポート6006。
+- Storybook 10（`@storybook/react-vite`＋addon-docs・addon-vitest・addon-a11y）。storyは`src/**/*.stories.tsx`。`.storybook/preview.ts`で`@shikakun/design-tokens/css`を読み込む。`pnpm storybook`でポート6006。
 - `vite.config.ts`でVitestの`projects`を`unit`と`storybook`に分けている。
 - ユニットテスト（`unit`、`pnpm test`）はVitest（jsdom環境）。`getHeadingStyle`・`getTextClassNames`・`getTextFieldClassNames`・`formatDate`などロジック部分に`*.test.ts`がある。
-- ストーリーのテスト（`storybook`、`pnpm test-storybook`）は`@storybook/addon-vitest`で各storyをテストとして実行する。Vitestのブラウザモード（Playwright・chromium）で描画し、`play`関数も実行する。Storybookのビルドや配信は不要（[ci-cd.md](./ci-cd.md)）。
+- ストーリーのテスト（`storybook`、`pnpm test-storybook`）は`@storybook/addon-vitest`で各storyをテストとして実行する。Vitestのブラウザモード（Playwright・chromium）で描画し、`play`関数も実行する。`.storybook/preview.ts`で`a11y.test: 'error'`を指定しており、axeによるアクセシビリティ違反があるとテストが失敗する。Storybookのビルドや配信は不要（[ci-cd.md](./ci-cd.md)）。
 
 ## 関連ファイル
 
