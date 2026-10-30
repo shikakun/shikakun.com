@@ -10,6 +10,7 @@ GitHub Actionsのワークフローは`.github/workflows/`に3つある。
 | --- | --- |
 | `build` | `@shikakun/design-tokens`と`@shikakun/react`のビルド、Storybookのビルド。成果物（`dist`と`storybook-static`）をartifactとして後続ジョブへ渡す |
 | `typecheck` | buildのartifactを展開して`pnpm typecheck`（webは`astro check`のため、依存パッケージのdistが必要） |
+| `web` | buildのartifactを展開して`@shikakun/web`をビルドし、`lint:html`で出力されたHTMLをmarkuplintで検査する（デプロイと同じビルドが通ることもここで確かめる） |
 | `lint` | `pnpm lint`（Biome＋markuplint） |
 | `test` | `pnpm test`＝ユニットテスト（Vitest）→e2eテスト（Playwright）。Playwrightのブラウザ（chromium）はキャッシュし、レポートをartifactに保存する |
 | `storybook-vrt` | ビルド済みStorybookをhttp-serverで配信し、`test-storybook`（Storybook test-runner）を実行 |

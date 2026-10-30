@@ -14,28 +14,29 @@ export type PageListProps = {
   titleLineClamp?: number | false;
 };
 
-export const PageList = ({ items, titleLineClamp = false }: PageListProps) => (
-  <ul className={styles.list}>
-    {items.map((item) => (
-      <li key={item.href}>
-        <Interactive as="a" href={item.href} color="primary" className={styles.link}>
-          <span className={styles.title}>
-            <Text fontSize="m" lineHeight="normal" lineClamp={titleLineClamp}>
-              {item.title}
-            </Text>
-          </span>
-          {item.date && (
-            <>
-              <span className={styles.leader} aria-hidden="true" />
-              <span className={styles.date}>
-                <Text fontSize="s" lineHeight="dense">
-                  <FormattedDate date={item.date} />
-                </Text>
-              </span>
-            </>
-          )}
-        </Interactive>
-      </li>
-    ))}
-  </ul>
-);
+export const PageList = ({ items, titleLineClamp = false }: PageListProps) =>
+  items.length === 0 ? null : (
+    <ul className={styles.list}>
+      {items.map((item) => (
+        <li key={item.href}>
+          <Interactive as="a" href={item.href} color="primary" className={styles.link}>
+            <span className={styles.title}>
+              <Text fontSize="m" lineHeight="normal" lineClamp={titleLineClamp}>
+                {item.title}
+              </Text>
+            </span>
+            {item.date && (
+              <>
+                <span className={styles.leader} aria-hidden="true" />
+                <span className={styles.date}>
+                  <Text fontSize="s" lineHeight="dense">
+                    <FormattedDate date={item.date} />
+                  </Text>
+                </span>
+              </>
+            )}
+          </Interactive>
+        </li>
+      ))}
+    </ul>
+  );

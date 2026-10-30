@@ -14,6 +14,7 @@ rules:
   no-broken-fragment-link: true
   head-element-order: false
   meta-charset-position: false
+  no-pseudo-list: false
 
 nodeRules:
   - selector: "script[async]"
@@ -24,3 +25,12 @@ nodeRules:
   - selector: "Text"
     rules:
       case-sensitive-attr-name: false
+  - selector: "time"
+    rules:
+      case-sensitive-attr-name: false
+  - selector: "a[data-footnote-backref]"
+    rules:
+      no-redundant-accessible-name: false
+  - selector: "nav:has(> style)"
+    rules:
+      permitted-contents: false

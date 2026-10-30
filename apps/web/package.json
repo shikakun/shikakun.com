@@ -11,6 +11,7 @@
     "typecheck": "astro check",
     "lint": "biome check . && markuplint 'src/**/*.astro'",
     "lint:fix": "biome check --write . && markuplint --fix 'src/**/*.astro'",
+    "lint:html": "markuplint 'dist/**/*.html'",
     "test": "vitest run"
   },
   "dependencies": {

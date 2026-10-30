@@ -26,7 +26,7 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 - **サイト**：Astro 7（`output: 'static'`。アダプタなしの静的生成）、React 19（アイランド）、MDX
 - **言語**：TypeScript（`tsconfig.base.json`で`strict`、`moduleResolution: bundler`、`verbatimModuleSyntax`、`jsx: react-jsx`を共有）
 - **スタイル**：CSS Modules＋デザイントークン（CSS変数）
-- **lint/format**：Biome（インデント2スペース・行幅100・シングルクォート・セミコロンあり。`.astro`では未使用変数系ルールを無効化）、markuplint（`apps/web`の`.astro`対象。`markuplint:recommended`に`no-nested-top-level-landmark`・`require-h1`などを追加し、`head-element-order`・`meta-charset-position`を無効化。`script[async]`は`require-attr`を除外。`Text`コンポーネントはSVGの`text`要素と誤認されるため`case-sensitive-attr-name`を除外）
+- **lint/format**：Biome（インデント2スペース・行幅100・シングルクォート・セミコロンあり。`.astro`では未使用変数系ルールを無効化）、markuplint（`apps/web`の`.astro`対象。`markuplint:recommended`に`no-nested-top-level-landmark`・`require-h1`などを追加し、`head-element-order`・`meta-charset-position`を無効化。`script[async]`は`require-attr`を除外。`Text`コンポーネントはSVGの`text`要素と誤認されるため`case-sensitive-attr-name`を除外。ビルド後のHTMLに対しては、ReactのSSRが出力する`time`の`dateTime`、GFMの脚注の戻りリンクの`aria-label`、Astroが`nav`内に挿入する`style`、文中の「・」（`no-pseudo-list`）を除外）
 - **テスト**：Vitest（ユニット）、Playwright（e2e。axeによるアクセシビリティ検査）、Storybook test-runner（VRT）
 - **デプロイ**：GitHub ActionsからCloudflare Workersの静的アセットへ（詳細は[ci-cd.md](./ci-cd.md)）
 
@@ -41,6 +41,7 @@ pnpm workspaceによるmonorepoで、`apps/*`と`packages/*`をワークスペ�
 | `pnpm build` | 全パッケージのビルド |
 | `pnpm typecheck` | 全パッケージの型チェック（webは`astro check`） |
 | `pnpm lint` / `pnpm lint:fix` | Biome＋markuplint |
+| `pnpm --filter @shikakun/web lint:html` | ビルド後の`apps/web/dist`のHTMLをmarkuplintで検査（事前に`build`が必要） |
 | `pnpm test` | `test:unit`（Vitest）→`test:e2e`（Playwright）の順に実行 |
 | `pnpm storybook` | `packages/react`のStorybook（ポート6006） |
 | `pnpm changeset` / `version-packages` / `release` | changesetsによるバージョニングと公開 |
